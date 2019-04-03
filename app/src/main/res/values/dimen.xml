@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--...............................Login Screen..................................-->
+    <dimen name="loginScreenWidthOfImage">120dp</dimen>
+    <dimen name="loginScreenHeightOfImage">120dp</dimen>
+    <dimen name="loginScreenMarginTopLinearLayoutContent">10dp</dimen>
+    <dimen name="loginScreenBorderWidthOfImage">1dp</dimen>
+    <dimen name="loginScreenPaddingLinearLayoutContainContent">10dp</dimen>
+    <dimen name="loginScreenTextSizeOfTextViewAccountAndPassword">15sp</dimen>
+    <dimen name="loginScreenHeightOfEditText">40dp</dimen>
+    <dimen name="loginScreenMarginTopOfEditText">8dp</dimen>
+    <dimen name="loginScreenPaddingLeftOfEditText">10dp</dimen>
+    <dimen name="loginScreenMarginLinearLayout">10dp</dimen>
+    <dimen name="loginScreenPaddingTopLinearLayoutContainContent">10dp</dimen>
+    <dimen name="loginScreenElevationOfEditText">15dp</dimen>
+    <dimen name="loginScreenHeightOfButtonLogin">50dp</dimen>
+    <dimen name="loginScreenMarginTopOfButtonLogin">15dp</dimen>
+    <dimen name="loginScreenTextSizeOfButtonLogin">17sp</dimen>
+    <dimen name="loginScreenPaddingLinearLayoutOfTextViewAndEditText">15dp</dimen>
+    <dimen name="loginScreenElevationLinearLayoutOfTextViewAndEditText">10dp</dimen>
+</resources>

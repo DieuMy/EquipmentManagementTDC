@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ManagementEquipmentTDC</string>
+    
+    <!--..............................Login Screen................................-->
+    <string name="loginScreenNameScreen">Quản lý thiết bị phòng thực hành</string>
+    <string name="loginScreenTxtAccount">Tài khoản đăng nhập</string>
+    <string name="loginScreenTxtPassword">Mật khẩu</string>
+    <string name="loginScreenHintTxtAccount">Nhập tài khoản đăng nhập...</string>
+    <string name="loginScreenHintTxtPassword">Nhập mật khẩu...</string>
+    <string name="loginScreenBtnLoginText">Đăng nhập</string>
+    <string name="loginScreenBtnForgetPaswordText">Quên mật khẩu</string>
+    <string name="loginScreenBottomNaviHelpText">Trợ giúp</string>
+    <string name="loginScreenBottomNaviExitText">Thoát</string>
 </resources>

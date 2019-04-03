@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorCivBorderImage">#749AC7</color>
+    <color name="colorBackgroundButtonLogin">#1591EB</color>
+    <color name="colorTextButtonLogin">#FFF</color>
+    <color name="colorAppBarLayoutText">#FFF</color>
+    <color name="colorTextViewHelpAndExit">#FFF</color>
 </resources>

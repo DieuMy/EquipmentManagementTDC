@@ -1,11 +1,72 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--.....................Style of AppBarLayout for all screen of Management Equipment TDC app........................-->
+    <style name="AppBarActionStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@drawable/login_screen_appbarlayout_background</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!--.................................Login Screen.................................-->
+    <style name="LoginScreenLinearLayoutComponent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="LoginScreenLinearLayoutOfTextViewAndEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/login_screen_linearlayout_content_background</item>
+        <item name="android:padding">@dimen/loginScreenPaddingLinearLayoutOfTextViewAndEditText</item>
+        <item name="android:elevation">@dimen/loginScreenElevationLinearLayoutOfTextViewAndEditText</item>
+        <item name="android:layout_marginTop">@dimen/loginScreenMarginTopLinearLayoutContent</item>
+    </style>
+
+    <style name="LoginScreenTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/loginScreenTextSizeOfTextViewAccountAndPassword</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="LoginScreenEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/loginScreenHeightOfEditText</item>
+        <item name="android:layout_marginTop">@dimen/loginScreenMarginTopOfEditText</item>
+        <item name="android:background">@drawable/login_screen_edittext_background</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:paddingLeft">@dimen/loginScreenPaddingLeftOfEditText</item>
+        <item name="android:elevation">@dimen/loginScreenElevationOfEditText</item>
+        <item name="android:textSize">@dimen/loginScreenTextSizeOfTextViewAccountAndPassword</item>
+    </style>
+
+    <style name="LoginScreenButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/loginScreenHeightOfButtonLogin</item>
+        <item name="android:layout_marginTop">@dimen/loginScreenMarginTopOfButtonLogin</item>
+        <item name="android:background">@drawable/login_screen_selector_btnlogin_btnforgetpassowrd</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">@color/colorTextButtonLogin</item>
+        <item name="android:textSize">@dimen/loginScreenTextSizeOfButtonLogin</item>
+    </style>
+    
+    <style name="LoginScreenButtonOfHelpAndExit">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/loginScreenHeightOfButtonLogin</item>
+        <item name="android:textColor">@color/colorTextViewHelpAndExit</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/login_screen_btnhelp_exit_background_pressed</item>
+    </style>
 </resources>

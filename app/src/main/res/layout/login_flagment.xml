@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/login_screen_background"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!--<com.google.android.material.appbar.AppBarLayout-->
+    <!--style="@style/AppBarActionStyle">-->
+    <!--<TextView-->
+    <!--style="@style/LoginScreenTextView"-->
+    <!--android:text="@string/loginScreenNameScreen"-->
+    <!--android:textColor="@color/colorAppBarLayoutText"-->
+    <!--android:gravity="center"-->
+    <!--android:textStyle="bold"/>-->
+    <!--</com.google.android.material.appbar.AppBarLayout>-->
+
+    <LinearLayout
+        style="@style/LoginScreenLinearLayoutComponent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/loginScreenMarginLinearLayout"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/loginScreenWidthOfImage"
+            android:layout_height="@dimen/loginScreenHeightOfImage"
+            android:layout_gravity="center"
+            android:src="@drawable/teamwork"
+            app:civ_border_color="@color/colorCivBorderImage"
+            app:civ_border_width="@dimen/loginScreenBorderWidthOfImage" />
+
+        <LinearLayout style="@style/LoginScreenLinearLayoutOfTextViewAndEditText">
+
+            <TextView
+                style="@style/LoginScreenTextView"
+                android:text="@string/loginScreenTxtAccount" />
+
+            <EditText
+                style="@style/LoginScreenEditText"
+                android:hint="@string/loginScreenHintTxtAccount" />
+
+            <TextView
+                style="@style/LoginScreenTextView"
+                android:layout_marginTop="20dp"
+                android:text="@string/loginScreenTxtPassword" />
+
+            <EditText
+                style="@style/LoginScreenEditText"
+                android:hint="@string/loginScreenHintTxtPassword"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <Button
+            style="@style/LoginScreenButton"
+            android:elevation="10dp"
+            android:text="@string/loginScreenBtnLoginText"/>
+
+        <Button
+            style="@style/LoginScreenButton"
+            android:elevation="10dp"
+            android:text="@string/loginScreenBtnForgetPaswordText"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LoginScreenLinearLayoutComponent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            style="@style/LoginScreenButtonOfHelpAndExit"
+            android:text="@string/loginScreenBottomNaviHelpText"
+            />
+
+        <Button
+            style="@style/LoginScreenButtonOfHelpAndExit"
+            android:text="@string/loginScreenBottomNaviExitText"
+            android:layout_marginLeft="230dp"/>
+    </LinearLayout>
+</LinearLayout>
