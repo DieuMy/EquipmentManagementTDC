@@ -11,4 +11,6 @@
     <string name="loginScreenBtnForgetPaswordText">Quên mật khẩu</string>
     <string name="loginScreenBottomNaviHelpText">Trợ giúp</string>
     <string name="loginScreenBottomNaviExitText">Thoát</string>
+
+    <!--.........................Home Screen............................... -->
 </resources>

@@ -42,6 +42,7 @@
                 android:text="@string/loginScreenTxtAccount" />
 
             <EditText
+                android:id="@+id/loginScreenEdtAccount"
                 style="@style/LoginScreenEditText"
                 android:hint="@string/loginScreenHintTxtAccount" />
 
@@ -51,17 +52,20 @@
                 android:text="@string/loginScreenTxtPassword" />
 
             <EditText
+                android:id="@+id/loginScreenEdtPassword"
                 style="@style/LoginScreenEditText"
                 android:hint="@string/loginScreenHintTxtPassword"
                 android:inputType="textPassword" />
         </LinearLayout>
 
         <Button
+            android:id="@+id/loginScreenBtnLogin"
             style="@style/LoginScreenButton"
             android:elevation="10dp"
             android:text="@string/loginScreenBtnLoginText"/>
 
         <Button
+            android:id="@+id/loginScreenBtnForgetPassword"
             style="@style/LoginScreenButton"
             android:elevation="10dp"
             android:text="@string/loginScreenBtnForgetPaswordText"/>
@@ -74,11 +78,12 @@
         android:gravity="center">
 
         <Button
+            android:id="@+id/loginScreenBtnHelp"
             style="@style/LoginScreenButtonOfHelpAndExit"
-            android:text="@string/loginScreenBottomNaviHelpText"
-            />
+            android:text="@string/loginScreenBottomNaviHelpText" />
 
         <Button
+            android:id="@+id/loginScreenBtnExit"
             style="@style/LoginScreenButtonOfHelpAndExit"
             android:text="@string/loginScreenBottomNaviExitText"
             android:layout_marginLeft="230dp"/>
