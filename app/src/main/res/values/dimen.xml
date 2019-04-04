@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--................................AppBar layout................................-->
+    <dimen name="appBarLayoutPaddingLeft">30dp</dimen>
+
     <!--...............................Login Screen..................................-->
     <dimen name="loginScreenWidthOfImage">120dp</dimen>
     <dimen name="loginScreenHeightOfImage">120dp</dimen>
@@ -18,4 +22,15 @@
     <dimen name="loginScreenTextSizeOfButtonLogin">17sp</dimen>
     <dimen name="loginScreenPaddingLinearLayoutOfTextViewAndEditText">15dp</dimen>
     <dimen name="loginScreenElevationLinearLayoutOfTextViewAndEditText">10dp</dimen>
+
+    <!--...............................Home Screen..................................-->
+    <dimen name="homeScreenWidthOfImage">90dp</dimen>
+    <dimen name="homeScreenHeightOfImage">90dp</dimen>
+    <dimen name="homeScreenBorderWidthOfImage">1dp</dimen>
+    <dimen name="homeScreenElevationOfImage">10dp</dimen>
+
+    <dimen name="homeScreenCardViewMarginTopTextView">10dp</dimen>
+    <dimen name="homeScreenCardViewTextSizeOfTextView">15sp</dimen>
+    <dimen name="homeScreenPaddingCardView">10dp</dimen>
+    <dimen name="homeScreenPaddingTopRecycleViewCardView">10dp</dimen>
 </resources>

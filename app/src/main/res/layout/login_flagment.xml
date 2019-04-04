@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/login_screen_background"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <!--<com.google.android.material.appbar.AppBarLayout-->
-    <!--style="@style/AppBarActionStyle">-->
-    <!--<TextView-->
-    <!--style="@style/LoginScreenTextView"-->
-    <!--android:text="@string/loginScreenNameScreen"-->
-    <!--android:textColor="@color/colorAppBarLayoutText"-->
-    <!--android:gravity="center"-->
-    <!--android:textStyle="bold"/>-->
-    <!--</com.google.android.material.appbar.AppBarLayout>-->
+    android:orientation="vertical">
 
     <LinearLayout
         style="@style/LoginScreenLinearLayoutComponent"
@@ -27,7 +16,6 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
             android:layout_width="@dimen/loginScreenWidthOfImage"
             android:layout_height="@dimen/loginScreenHeightOfImage"
             android:layout_gravity="center"
@@ -86,6 +74,6 @@
             android:id="@+id/loginScreenBtnExit"
             style="@style/LoginScreenButtonOfHelpAndExit"
             android:text="@string/loginScreenBottomNaviExitText"
-            android:layout_marginLeft="230dp"/>
+            android:layout_marginLeft="230dp" />
     </LinearLayout>
 </LinearLayout>

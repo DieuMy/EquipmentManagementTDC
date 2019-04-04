@@ -2,7 +2,6 @@
     <string name="app_name">ManagementEquipmentTDC</string>
     
     <!--..............................Login Screen................................-->
-    <string name="loginScreenNameScreen">Quản lý thiết bị phòng thực hành</string>
     <string name="loginScreenTxtAccount">Tài khoản đăng nhập</string>
     <string name="loginScreenTxtPassword">Mật khẩu</string>
     <string name="loginScreenHintTxtAccount">Nhập tài khoản đăng nhập...</string>
@@ -13,4 +12,6 @@
     <string name="loginScreenBottomNaviExitText">Thoát</string>
 
     <!--.........................Home Screen............................... -->
+    <string name="homeScreenNameScreen">Trang chủ</string>
+    <string name="homeScreenTxtFunctionName">Tên chức năng</string>
 </resources>

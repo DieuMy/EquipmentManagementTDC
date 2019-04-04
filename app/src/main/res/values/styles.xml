@@ -12,11 +12,21 @@
     <style name="AppBarActionStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">@drawable/login_screen_appbarlayout_background</item>
+        <item name="android:background">@drawable/appbarlayout_background</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/appBarLayoutPaddingLeft</item>
+    </style>
+
+    <style name="AppBarLayoutTextViewScreenName">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">@color/colorAppBarLayoutText</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!--.................................Login Screen.................................-->
+
     <style name="LoginScreenLinearLayoutComponent">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
@@ -68,5 +78,37 @@
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/login_screen_btnhelp_exit_background_pressed</item>
+    </style>
+
+    <!--..................................Home Screen.............................................-->
+    <style name="HomeScreenLinearLayout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="HomeScreenRecycleView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">@dimen/homeScreenPaddingTopRecycleViewCardView</item>
+    </style>
+
+    <style name="HomeScreenCardViewLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">@dimen/homeScreenPaddingCardView</item>
+    </style>
+
+    <style name="HomeScreenCardViewTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/homeScreenTxtFunctionName</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/homeScreenCardViewMarginTopTextView</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/homeScreenCardViewTextSizeOfTextView</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

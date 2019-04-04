@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        style="@style/HomeScreenCardViewLinearLayout">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/homeScreenImageFunction"
+            android:layout_width="@dimen/homeScreenWidthOfImage"
+            android:layout_height="@dimen/homeScreenHeightOfImage"
+            android:layout_gravity="center"
+            android:src="@drawable/teamwork"
+            android:elevation="@dimen/homeScreenElevationOfImage"/>
+
+        <TextView
+            android:id="@+id/homeScreenTxtFunctionName"
+          style="@style/HomeScreenCardViewTextView"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
