@@ -111,4 +111,55 @@
         <item name="android:textSize">@dimen/homeScreenCardViewTextSizeOfTextView</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!--......................................List Equipment Screen.......................................................-->
+    <style name="ListEquipmentScreenLinearLayout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="ListEquipmentScreenRecycleView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">@dimen/ListEquipmentScreenPaddingTopRecycleViewCardView</item>
+    </style>
+
+    <style name="ListEquipmentScreenCardViewLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">@dimen/ListEquipmentScreenPaddingCardView</item>
+    </style>
+
+    <style name="ListEquipmentScreenCardViewTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/ListEquipmentScreenCardViewMarginTopTextView</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/ListEquipmentScreenCardViewTextSizeOfTextView</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--.......................................Report MalFunction.......................................-->
+    <style name="ReportMalfunctionLinerlayout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="ReportMalfunctionConstraint_Linerlayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+    <style name="ReportMalfunctionScreenCheckbox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/ReportMalfunctionScreenMarginBottomCheckbox</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="ReportMalfunctionScreenEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Dinh nghia hinh cua action bar-->
+    android:shape="rectangle"
+    <!--Mau nen-->
+    <gradient
+        android:angle="90"
+        android:endColor="#CED2DD"
+        android:startColor="#FFF"
+        android:type="linear" />
+</shape>

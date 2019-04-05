@@ -14,4 +14,16 @@
     <!--.........................Home Screen............................... -->
     <string name="homeScreenNameScreen">Trang chủ</string>
     <string name="homeScreenTxtFunctionName">Tên chức năng</string>
+    <!--.........................List Equipment Screen............................... -->
+    <string name="ListEquipmentScreenNameScreen">Danh sách thiết bị</string>
+    <!--.........................Report Malfunction Screen............................... -->
+    <string name="ReportMulfuntionScreenNameScreen">Phiếu báo cáo sự cố</string>
+    <string name="ReportMulfuntionScreen_CheckboxMouse">Hư chuột</string>
+    <string name="ReportMulfuntionScreen_CheckboxKeyBoard">Bàn phím không hoạt động</string>
+    <string name="ReportMulfuntionScreen_CheckboxPower">Mất Nguồn</string>
+    <string name="ReportMulfuntionScreen_CheckboxScreen">Bàn phím không hoạt động</string>
+    <string name="ReportMulfuntionScreen_CheckboxSoftware">Thiếu phần mềm</string>
+    <string name="ReportMulfuntionScreen_CheckboxAll">Tất cả</string>
+    <string name="ReportMulfuntionScreen_EdittextHintSoftware">(Vui lòng ghi rõ tên phần mềm)</string>
+    <string name="ReportMulfuntionScreen_EdittextHintOther">Khác...</string>
 </resources>
