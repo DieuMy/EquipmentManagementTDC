@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
+        <androidx.appcompat.widget.Toolbar style="@style/ToolBarApp">
+            <TextView
+                style="@style/AppBarLayoutTextViewScreenName"
+                android:text="@string/editProfileScreenName" />
+            <ImageView
+                android:id="@+id/editProfileToolBarSave"
+                style="@style/ToolBarRightOfAppBar"
+                android:src="@drawable/ic_tick" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--Display avatar and full name-->
+    <LinearLayout
+        style="@style/EditProfileLinearLayout"
+        android:layout_weight="2"
+        android:background="@color/colorBackgroundLinearLayoutContainAvatarAndFullNameOfEditProfile"
+        android:orientation="vertical"
+        android:elevation="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/editProfileScreenImageUsers"
+            style="@style/EditProfileScreenImageViewAvatar"
+            app:civ_border_color="@color/colorCivBorderImage"
+            app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar" />
+
+        <TextView
+            android:id="@+id/editProfileTxtFullName"
+            style="@style/EditProfileTextViewFullName"
+            android:text="@string/personalScreenFullName" />
+
+    </LinearLayout>
+
+    <!--Content-->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/editProfilePaddingLinearLayoutContainContent">
+
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="@string/editProfileTextLabelAccount" />
+
+                <TextView
+                    android:id="@+id/editProfileTxtAccountName"
+                    style="@style/EditProfileTextViewDisplayAccountName"
+                    android:text="@string/editProfileTextAccount" />
+            </LinearLayout>
+
+            <!--Tao thanh ngang-->
+            <View style="@style/EditProfileView" />
+
+            <LinearLayout
+                style="@style/EditProfileLinearLayoutContainContent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_lock" />
+
+                <Button
+                    android:id="@+id/editProfileBtnChangePassword"
+                    style="@style/EditProfileButtonChangePassword" />
+            </LinearLayout>
+
+            <!--Tao thanh ngang-->
+            <View style="@style/EditProfileView" />
+
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="@string/editProfileTextViewGenderLabel" />
+
+                <Spinner style="@style/EditProfileEditText"></Spinner>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="@string/editProfileTextViewAddressLabel" />
+
+                <EditText
+                    android:id="@+id/editProfileEdtAddress"
+                    style="@style/EditProfileEditText"
+                    android:text="@string/editProfileTextViewAddressContent"></EditText>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="@string/editProfileTextViewPhoneLabel" />
+
+                <EditText
+                    android:id="@+id/editProfileEdtNumberPhone"
+                    style="@style/EditProfileEditText"
+                    android:text="@string/editProfileTextViewPhoneContent"></EditText>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="@string/editProfileTextViewEmailLabel" />
+
+                <EditText
+                    android:id="@+id/editProfileEdtEmail"
+                    style="@style/EditProfileEditText"
+                    android:text="@string/editProfileTextViewEmailContent"></EditText>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

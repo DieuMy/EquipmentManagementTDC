@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/PersonalSceenScrollview">
+
+    <LinearLayout
+        style="@style/PersonalSceenLinearLayout"
+        android:orientation="vertical">
+
+        <!--Anh dai dien va ho ten , chuc vu-->
+        <LinearLayout
+            style="@style/PersonalScreenLinearLayoutContainAvatarAndFullNameRole">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/personalScreenImageUsers"
+                style="@style/PersonalSceenImageViewAvatar"
+                app:civ_border_color="@color/colorCivBorderImage"
+                app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar" />
+
+            <LinearLayout
+                style="@style/PersonalScreenLinearLayoutContainFullNameAndRole">
+
+                <TextView
+                    android:id="@+id/personalScreenTxtFullName"
+                    style="@style/PersonalSceenTextViewFullNameAndRole"
+                    android:text="@string/personalScreenFullName" />
+
+                <TextView
+                    android:id="@+id/personalScreenTxtRole"
+                    style="@style/PersonalSceenTextViewFullNameAndRole"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/personalScreenRole" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--Phan chuc nang-->
+        <LinearLayout
+            style="@style/PersonalScreenLinearLayoutContainListFunctions">
+
+            <LinearLayout
+                style="@style/PersonalScreenLinearLayoutContainOneFunction">
+
+                <ImageView
+                    style="@style/PersonalScreenImageViewIconFunction"
+                    android:src="@drawable/ic_setting" />
+
+                <TextView
+                    android:id="@+id/personalScreenTxtSettingProfile"
+                  style="@style/PersonalScreenTextViewFunctionName"
+                    android:text="@string/personalScreenSettingProfile" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/PersonalScreenLinearLayoutContainOneFunction">
+
+                <ImageView
+                    style="@style/PersonalScreenImageViewIconFunction"
+                    android:src="@drawable/ic_setting" />
+
+                <TextView
+                    android:id="@+id/personalScreenSettingNotifycation"
+                    style="@style/PersonalScreenTextViewFunctionName"
+                    android:text="@string/personalScreenSettingNotifycation" />
+
+            </LinearLayout>
+
+            <!--Tao thanh ngang-->
+            <View
+              style="@style/PersonalScreenView"/>
+
+            <LinearLayout
+                style="@style/PersonalScreenLinearLayoutContainOneFunction">
+
+                <ImageView
+                    style="@style/PersonalScreenImageViewIconFunction"
+                    android:src="@drawable/ic_star" />
+
+                <TextView
+                    android:id="@+id/personalScreenTxtReviewsApp"
+                    style="@style/PersonalScreenTextViewFunctionName"
+                    android:text="@string/personalScreenTxtReviewsApp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/PersonalScreenLinearLayoutContainOneFunction">
+
+                <ImageView
+                    style="@style/PersonalScreenImageViewIconFunction"
+                    android:src="@drawable/ic_help" />
+
+                <TextView
+                    android:id="@+id/personalScreenTxtHelp"
+                    style="@style/PersonalScreenTextViewFunctionName"
+                    android:text="@string/personalScreenTxtHelp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/PersonalScreenLinearLayoutContainOneFunction">
+
+                <ImageView
+                    style="@style/PersonalScreenImageViewIconFunction"
+                    android:src="@drawable/ic_information" />
+
+                <TextView
+                    android:id="@+id/personalScreenTxtInformationApp"
+                    style="@style/PersonalScreenTextViewFunctionName"
+                    android:text="@string/personalScreenTxtInformationApp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/PersonalScreenLinearLayoutContainOneFunction">
+
+                <ImageView
+                    style="@style/PersonalScreenImageViewIconFunction"
+                    android:src="@drawable/ic_language" />
+
+                <TextView
+                    android:id="@+id/personalScreenTxtLanguage"
+                    style="@style/PersonalScreenTextViewFunctionName"
+                    android:text="@string/personalScreenTxtLanguage" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/PersonalScreenLinearLayoutContainOneFunction">
+
+                <ImageView
+                    style="@style/PersonalScreenImageViewIconFunction"
+                    android:src="@drawable/ic_logout" />
+
+                <TextView
+                    android:id="@+id/personalScreenTxtLogout"
+                    style="@style/PersonalScreenTextViewFunctionName"
+                    android:text="@string/personalScreenTxtLogout" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

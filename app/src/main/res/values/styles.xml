@@ -18,13 +18,24 @@
     </style>
 
     <style name="AppBarLayoutTextViewScreenName">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
         <item name="android:textColor">@color/colorAppBarLayoutText</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="ToolBarApp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ToolBarRightOfAppBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">220dp</item>
+    </style>
     <!--.................................Login Screen.................................-->
 
     <style name="LoginScreenLinearLayoutComponent">
@@ -36,9 +47,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:background">@drawable/login_screen_linearlayout_content_background</item>
-        <item name="android:padding">@dimen/loginScreenPaddingLinearLayoutOfTextViewAndEditText</item>
-        <item name="android:elevation">@dimen/loginScreenElevationLinearLayoutOfTextViewAndEditText</item>
+        <item name="android:background">@drawable/login_screen_linearlayout_content_background
+        </item>
+        <item name="android:padding">@dimen/loginScreenPaddingLinearLayoutOfTextViewAndEditText
+        </item>
+        <item name="android:elevation">
+            @dimen/loginScreenElevationLinearLayoutOfTextViewAndEditText
+        </item>
         <item name="android:layout_marginTop">@dimen/loginScreenMarginTopLinearLayoutContent</item>
     </style>
 
@@ -53,7 +68,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/loginScreenHeightOfEditText</item>
         <item name="android:layout_marginTop">@dimen/loginScreenMarginTopOfEditText</item>
-        <item name="android:background">@drawable/login_screen_edittext_background</item>
+        <item name="android:background">@drawable/edittext_background</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:paddingLeft">@dimen/loginScreenPaddingLeftOfEditText</item>
         <item name="android:elevation">@dimen/loginScreenElevationOfEditText</item>
@@ -64,12 +79,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/loginScreenHeightOfButtonLogin</item>
         <item name="android:layout_marginTop">@dimen/loginScreenMarginTopOfButtonLogin</item>
-        <item name="android:background">@drawable/login_screen_selector_btnlogin_btnforgetpassowrd</item>
+        <item name="android:background">@drawable/login_screen_selector_btnlogin_btnforgetpassowrd
+        </item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textColor">@color/colorTextButtonLogin</item>
         <item name="android:textSize">@dimen/loginScreenTextSizeOfButtonLogin</item>
     </style>
-    
+
     <style name="LoginScreenButtonOfHelpAndExit">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/loginScreenHeightOfButtonLogin</item>
@@ -77,7 +93,8 @@
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/login_screen_btnhelp_exit_background_pressed</item>
+        <item name="android:background">@drawable/login_screen_btnhelp_exit_background_pressed
+        </item>
     </style>
 
     <!--..................................Home Screen.............................................-->
@@ -161,5 +178,195 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
+    </style>
+    <!--............................Personal page Screen...................................-->
+    <style name="PersonalSceenScrollview">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="PersonalSceenLinearLayout">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="PersonalSceenImageViewAvatar">
+        <item name="android:layout_width">@dimen/personalScreenWidthOfImageViewAvatar</item>
+        <item name="android:layout_height">@dimen/personalScreenHeightOfImageViewAvatar</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">@dimen/personalScreenMarginLeftOfImageViewAvatar
+        </item>
+        <item name="android:src">@drawable/teamwork</item>
+    </style>
+
+    <style name="PersonalSceenTextViewFullNameAndRole">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">@color/colorTextViewFullNameAndRolePersonalScreen</item>
+        <item name="android:textSize">@dimen/personalScreenTextSizeFullNameAndRole</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="PersonalScreenLinearLayoutContainFullNameAndRole">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">
+            @dimen/personalScreenMarginLeftLinearLayoutContainFullNameAndRole
+        </item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">
+            @dimen/personalScreenPaddingLeftLinearLayoutContainFullNameAndRole
+        </item>
+    </style>
+
+    <style name="PersonalScreenLinearLayoutContainListFunctions">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">
+            @dimen/personalScreenPaddingTopLinearLayoutContainListFunctions
+        </item>
+    </style>
+
+    <style name="PersonalScreenLinearLayoutContainOneFunction">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">
+            @dimen/personalScreenElevationLinearLayoutContainOneFunctions
+        </item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">
+            @dimen/personalScreenPaddingLeftLinearLayoutContainOneFunctions
+        </item>
+        <item name="android:layout_marginTop">
+            @dimen/personalScreenMarginTopLinearLayoutContainOneFunctions
+        </item>
+    </style>
+
+    <style name="PersonalScreenImageViewIconFunction">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="PersonalScreenTextViewFunctionName">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/personalScreenMarginLeftTextViewFunctionName
+        </item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/personalScreenTextSizeOfTextViewFunctionName</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PersonalScreenView">
+        <item name="android:layout_width">@dimen/personalScreenWidthOfView</item>
+        <item name="android:layout_height">@dimen/personalScreenHeightOfView</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/personalScreenMarginTopOfView</item>
+        <item name="android:background">@color/colorViewPersonalScreen</item>
+        <item name="android:elevation">@dimen/personalScreenElevationOfView</item>
+    </style>
+
+    <style name="PersonalScreenLinearLayoutContainAvatarAndFullNameRole">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">
+            @dimen/personalScreenHeightLinearLayoutContainAvatarAndFullNameRole
+        </item>
+        <item name="android:background">@color/colorBackgroundLinearLayoutContainAvatarAndFullNamePersonal</item>
+        <item name="android:elevation">
+            @dimen/personalScreenEvelationLinearLayoutContainAvatarAndFullNameRole
+        </item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">
+            @dimen/personalScreenPaddingLinearLayoutContainAvatarAndFullNameRole
+        </item>
+    </style>
+
+    <!--..............................Edit profile Screen........................-->
+    <style name="EditProfileScreenImageViewAvatar">
+        <item name="android:layout_width">@dimen/editProfileWidthOfImageViewAvatar</item>
+        <item name="android:layout_height">@dimen/editProfileHeightOfImageViewAvatar</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:src">@drawable/teamwork</item>
+        <item name="android:layout_marginTop">@dimen/editProfileMarginTopOfImageAvtar</item>
+        <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
+    </style>
+
+    <style name="EditProfileTextViewFullName">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:layout_marginTop">@dimen/editProfileMarginTopOfFullName</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/editProfileTextSizeFullName</item>
+        <item name="android:textColor">@color/colorTextViewFullNameOfEditProfile</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
+    </style>
+
+    <style name="EditProfileLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="EditProfileTextViewDisplayLabel">
+        <item name="android:layout_width">@dimen/editProfileWidthOfTextView</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/editProfileTextSizeOfTextView</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
+    </style>
+
+    <style name="EditProfileLinearLayoutContainContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/editProfileMarginTopLinearLayoutContainContent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="EditProfileEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/editProfileHeighttEditText</item>
+        <item name="android:background">@drawable/edittext_background</item>
+        <item name="android:layout_marginLeft">@dimen/editProfileMarginLeftEditText</item>
+        <item name="android:paddingLeft">@dimen/editProfilePaddingLeftEditText</item>
+        <item name="android:textSize">@dimen/editProfileTextSizetEditText</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
+    </style>
+
+    <style name="EditProfileView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/personalScreenHeightOfView</item>
+        <item name="android:layout_marginTop">@dimen/editProfileMarginTopOfView</item>
+        <item name="android:background">@color/colorViewEditProfile</item>
+        <item name="android:elevation">@dimen/editProfileElevationOfView</item>
+        <item name="android:layout_marginBottom">@dimen/editProfileMarginBottomOfView</item>
+    </style>
+
+    <style name="EditProfileTextViewDisplayAccountName">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/editProfileHeighttEditText</item>
+        <item name="android:layout_marginLeft">@dimen/editProfileMarginLeftEditText</item>
+        <item name="android:paddingLeft">@dimen/editProfilePaddingLeftEditText</item>
+        <item name="android:textSize">@dimen/editProfileTextSizetEditText</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="EditProfileButtonChangePassword">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorBackgroundBtnChangePaawordEditProfile</item>
+        <item name="android:text">@string/editProfileTextButtonChangePassword</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">@color/colorBtnChangePaawordEditProfile</item>
+        <item name="android:textSize">@dimen/editProfileTextSizeButtonChangePassword</item>
+        <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
     </style>
 </resources>

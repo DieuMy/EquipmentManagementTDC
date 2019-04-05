@@ -26,4 +26,33 @@
     <string name="ReportMulfuntionScreen_CheckboxAll">Tất cả</string>
     <string name="ReportMulfuntionScreen_EdittextHintSoftware">(Vui lòng ghi rõ tên phần mềm)</string>
     <string name="ReportMulfuntionScreen_EdittextHintOther">Khác...</string>
+    <!--........................Personal Screen.............................-->
+    <string name="personalScreenFullName">Nguyễn Văn A</string>
+    <string name="personalScreenRole">Giảng viên</string>
+    <string name="personalScreenSettingProfile">Thiết lập tài khoản</string>
+    <string name="personalScreenSettingNotifycation">Cài đặt thông báo</string>
+    <string name="personalScreenTxtReviewsApp">Đánh giá ứng dụng</string>
+    <string name="personalScreenTxtHelp">Trợ giúp</string>
+    <string name="personalScreenTxtInformationApp">Thông tin ứng dụng</string>
+    <string name="personalScreenTxtLanguage">Ngôn ngữ</string>
+    <string name="personalScreenTxtLogout">Đăng xuất</string>
+
+    <!--.........................Edit profile screen..........................-->
+    <string name="editProfileScreenName">Chỉnh sửa tiểu sử</string>
+    <string name="editProfileTextLabelAccount">Tên tài khoản</string>
+    <string name="editProfileTextAccount">78GBA-GHFI-455</string>
+    <string name="editProfileTextButtonChangePassword">Thay đổi mật khẩu</string>
+    <string name="editProfileTextViewGenderLabel">Giới tính</string>
+    <string name="editProfileSpinnerItemIsMale">Nam</string>
+    <string name="editProfileSpinnerItemIsFemale">Nữ</string>
+    <string name="editProfileSpinnerItemIsOther">Khác</string>
+    <string name="editProfileTextViewAddressLabel">Địa chỉ</string>
+    <string name="editProfileTextViewPhoneLabel">SĐT</string>
+    <string name="editProfileTextViewEmailLabel">Email</string>
+    <string name="editProfileTextViewEmailContent">nguyenvana@gmail.com</string>
+    <string name="editProfileTextViewAddressContent">Thủ Đức, TP.HCM</string>
+    <string name="editProfileTextViewPhoneContent">0978988999</string>
+
+    <!--.........................Display list notifycation......................-->
+    <string name="displayNotifycationScreenName">Thông báo</string>
 </resources>
