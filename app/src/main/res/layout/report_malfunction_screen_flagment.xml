@@ -58,11 +58,9 @@
             android:id="@+id/reportmalfunctioncheckboxsoftware"/>
         <EditText
             style="@style/ReportMalfunctionScreenEditText"
-            android:hint="@string/ReportMulfuntionScreen_EdittextHintSoftware"
-            android:id="@+id/reportmalfunctionedittextsoftware"/>
+            android:hint="@string/ReportMulfuntionScreen_EdittextHintSoftware"/>
         <EditText
             style="@style/ReportMalfunctionScreenEditText"
-            android:hint="@string/ReportMulfuntionScreen_EdittextHintOther"
-            android:id="@+id/reportmalfuntionedittextother"/>
+            android:hint="@string/ReportMulfuntionScreen_EdittextHintOther"/>
     </LinearLayout>
 </LinearLayout>

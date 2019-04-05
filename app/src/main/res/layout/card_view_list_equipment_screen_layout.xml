@@ -15,6 +15,6 @@
             android:id="@+id/listequipmentscreentextviewNameEquipment"
             style="@style/ListEquipmentScreenCardViewTextView"/>
     </LinearLayout>
-    
+
 
 </androidx.cardview.widget.CardView>

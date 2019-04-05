@@ -14,8 +14,6 @@
     <!--.........................Home Screen............................... -->
     <string name="homeScreenNameScreen">Trang chủ</string>
     <string name="homeScreenTxtFunctionName">Tên chức năng</string>
-    <!--.........................List Equipment Screen............................... -->
-    <string name="ListEquipmentScreenNameScreen">Danh sách thiết bị</string>
     <!--.........................Report Malfunction Screen............................... -->
     <string name="ReportMulfuntionScreenNameScreen">Phiếu báo cáo sự cố</string>
     <string name="ReportMulfuntionScreen_CheckboxMouse">Hư chuột</string>
@@ -71,4 +69,14 @@
     <string name="viewreportmalfunctionHintTextview_Tennhanvien">(Hiển thị tên nhân viên)</string>
     <string name="viewreportmalfunctionHintTextview_Thoigian">(Hiển thị thời gian)</string>
     <string name="viewreportmalfunctionHintTextview_Noidung">(Nội dung sự cố)</string>
+
+    <!--.........................Change pasword screen..........................-->
+    <string name="changePasswordScreenName">Bảo mật và đăng nhập</string>
+    <string name="changePasswordOldPass">Mật khẩu hiện tại...</string>
+    <string name="changePasswordNewPass">Mật khẩu mới...</string>
+    <string name="changePasswordConfirmPass">Gõ lại mật khẩu...</string>
+    <string name="changePasswordBtnChangePass">Lưu thay đổi</string>
+    <string name="changePasswordBtnCancelChangePass">Hủy</string>
+    <!--.........................List Equipment Screen............................... -->
+    <string name="ListEquipmentScreenNameScreen">Danh sách thiết bị</string>
 </resources>

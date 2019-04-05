@@ -10,7 +10,7 @@
             style="@style/AppBarLayoutTextViewScreenName"
             android:text="@string/ListEquipmentScreenNameScreen"/>
     </com.google.android.material.appbar.AppBarLayout>
-    
+
     <androidx.recyclerview.widget.RecyclerView
         android:background="@drawable/list_equipment_screen_background"
         android:id="@+id/ListEquipmentScreenRecycleViewFunction"
