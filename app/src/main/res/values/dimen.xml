@@ -33,4 +33,47 @@
     <dimen name="homeScreenCardViewTextSizeOfTextView">15sp</dimen>
     <dimen name="homeScreenPaddingCardView">10dp</dimen>
     <dimen name="homeScreenPaddingTopRecycleViewCardView">10dp</dimen>
+
+    <!--...............................Pesonal Screen..................................-->
+    <dimen name="personalScreenWidthOfImageViewAvatar">100dp</dimen>
+    <dimen name="personalScreenHeightOfImageViewAvatar">100dp</dimen>
+    <dimen name="personalScreenMarginLeftOfImageViewAvatar">10dp</dimen>
+    <dimen name="personalScreenTextSizeFullNameAndRole">17sp</dimen>
+    <dimen name="personalScreenMarginLeftLinearLayoutContainFullNameAndRole">20dp</dimen>
+    <dimen name="personalScreenPaddingLeftLinearLayoutContainFullNameAndRole">15dp</dimen>
+    <dimen name="personalScreenPaddingTopLinearLayoutContainListFunctions">10dp</dimen>
+    <dimen name="personalScreenElevationLinearLayoutContainOneFunctions">20dp</dimen>
+    <dimen name="personalScreenPaddingLeftLinearLayoutContainOneFunctions">15dp</dimen>
+    <dimen name="personalScreenMarginTopLinearLayoutContainOneFunctions">10dp</dimen>
+    <dimen name="personalScreenMarginLeftTextViewFunctionName">20dp</dimen>
+    <dimen name="personalScreenTextSizeOfTextViewFunctionName">17sp</dimen>
+    <dimen name="personalScreenWidthOfView">350dp</dimen>
+    <dimen name="personalScreenHeightOfView">1dp</dimen>
+    <dimen name="personalScreenMarginTopOfView">10dp</dimen>
+    <dimen name="personalScreenElevationOfView">8dp</dimen>
+    <dimen name="personalScreenBorderWidthOfAvartar">1dp</dimen>
+    <dimen name="personalScreenHeightLinearLayoutContainAvatarAndFullNameRole">125dp</dimen>
+    <dimen name="personalScreenEvelationLinearLayoutContainAvatarAndFullNameRole">2dp</dimen>
+    <dimen name="personalScreenPaddingLinearLayoutContainAvatarAndFullNameRole">8dp</dimen>
+
+    <!--........................Edit profile screen..........................-->
+    <dimen name="editProfilePaddingLinearLayoutContainContent">8dp</dimen>
+    <dimen name="editProfileWidthOfImageViewAvatar">100dp</dimen>
+    <dimen name="editProfileHeightOfImageViewAvatar">100dp</dimen>
+    <dimen name="editProfileMarginLeftOfImageViewAvatar">10dp</dimen>
+    <dimen name="editProfileTextSizeFullName">17sp</dimen>
+    <dimen name="editProfileMarginTopOfFullName">10dp</dimen>
+    <dimen name="editProfileMarginTopOfImageAvtar">5dp</dimen>
+    <dimen name="editProfileMarginTopLinearLayoutContainContent">10dp</dimen>
+    <dimen name="editProfileTextSizeOfTextView">15sp</dimen>
+    <dimen name="editProfileMarginTopOfView">10dp</dimen>
+    <dimen name="editProfileMarginBottomOfView">2dp</dimen>
+    <dimen name="editProfileElevationOfView">4dp</dimen>
+    <dimen name="editProfileWidthOfTextView">60dp</dimen>
+    <dimen name="editProfilePaddingLeftEditText">15dp</dimen>
+    <dimen name="editProfileTextSizetEditText">15sp</dimen>
+    <dimen name="editProfileMarginLeftEditText">10dp</dimen>
+    <dimen name="editProfileHeighttEditText">40dp</dimen>
+    <dimen name="editProfileTextSizeButtonChangePassword">15sp</dimen>
+    <dimen name="editProfileEvelationComponent">10dp</dimen>
 </resources>

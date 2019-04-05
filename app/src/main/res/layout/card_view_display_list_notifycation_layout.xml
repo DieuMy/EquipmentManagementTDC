@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="horizontal"
+       android:gravity="center"
+       android:paddingLeft="15dp">
+
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/ic_notifications"/>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="10dp"
+           android:orientation="vertical"
+           android:gravity="center">
+
+           <TextView
+               android:id="@+id/displayNotifycationTxtNotifycationContent"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Nội dung thông báo"
+               android:textSize="17sp"
+               android:fontFamily="sans-serif-condensed"/>
+
+           <TextView
+               android:id="@+id/displayNotifycationTxtNotifycationDate"
+               android:layout_marginTop="10dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="01/04/2019"
+               android:textSize="17sp"
+               android:fontFamily="sans-serif-condensed"/>
+
+
+       </LinearLayout>
+   </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

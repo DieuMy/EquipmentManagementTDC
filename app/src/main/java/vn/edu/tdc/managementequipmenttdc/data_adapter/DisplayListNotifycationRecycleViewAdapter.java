@@ -1,10 +1,8 @@
 package vn.edu.tdc.managementequipmenttdc.data_adapter;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Vector;
@@ -13,29 +11,29 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.tdc.managementequipmenttdc.R;
-import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 
-public class HomeScreenRecycleViewFunctionAdapter extends RecyclerView.Adapter<HomeScreenRecycleViewFunctionAdapter.MyViewHolder>{
+public class DisplayListNotifycationRecycleViewAdapter extends RecyclerView.Adapter<DisplayListNotifycationRecycleViewAdapter.MyViewHolder> {
     private int layoutID;
-    private Vector<HomeScreenCardViewModel> listData;
+    private Vector<DisplayListNotifycationCardViewModel> listData;
 
-    //Contructor
-    public HomeScreenRecycleViewFunctionAdapter(int layoutID, Vector<HomeScreenCardViewModel> data) {
+    public DisplayListNotifycationRecycleViewAdapter(int layoutID, Vector<DisplayListNotifycationCardViewModel> listData) {
         this.layoutID = layoutID;
-        this.listData = data;
+        this.listData = listData;
     }
 
     //Define class MyViewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         //Properties of class MyViewHolder
-        private ImageView imageViewFunction;
-        private TextView txtFunctionName;
+        private TextView txtNotifycationContent;
+        private TextView txtNotifycationDate;
 
         //Contructor
         public MyViewHolder(View itemView) {
             super(itemView);
-            imageViewFunction = (ImageView) itemView.findViewById(R.id.homeScreenImageFunction);
-            txtFunctionName = (TextView) itemView.findViewById(R.id.homeScreenTxtFunctionName);
+
+            txtNotifycationContent = (TextView) itemView.findViewById(R.id.displayNotifycationTxtNotifycationContent);
+            txtNotifycationDate = (TextView) itemView.findViewById(R.id.displayNotifycationTxtNotifycationDate);
         }
     }
 
@@ -51,14 +49,15 @@ public class HomeScreenRecycleViewFunctionAdapter extends RecyclerView.Adapter<H
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //gắn datasource vị trí thứ i vào viewholer
-        HomeScreenCardViewModel cardViewModel = listData.get(position);
-        Drawable drawable = holder.imageViewFunction.getResources().getDrawable(cardViewModel.getImgFunctionID());//lấy ảnh từ id
-        holder.imageViewFunction.setImageDrawable(drawable);//set lại ảnh trong viewHolder
-        holder.txtFunctionName.setText(cardViewModel.getFunctionName());
+        DisplayListNotifycationCardViewModel cardViewModel = listData.get(position);
+        holder.txtNotifycationContent.setText(cardViewModel.getNotifycationCotent());
+        holder.txtNotifycationDate.setText(cardViewModel.getNodtifycationDate());
     }
 
     @Override
     public int getItemCount() {
         return listData.size();
     }
+
+
 }
