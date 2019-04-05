@@ -3,6 +3,7 @@
 
     <!--................................AppBar layout................................-->
     <dimen name="appBarLayoutPaddingLeft">30dp</dimen>
+    <dimen name="appBarLayoutTextSizeScreenName">15sp</dimen>
 
     <!--...............................Login Screen..................................-->
     <dimen name="loginScreenWidthOfImage">120dp</dimen>
@@ -34,20 +35,6 @@
     <dimen name="homeScreenPaddingCardView">10dp</dimen>
     <dimen name="homeScreenPaddingTopRecycleViewCardView">10dp</dimen>
 
-    <!--...........................List Equipment Screen..................................-->
-    <dimen name="ListEquipmentScreenWidthOfImage">90dp</dimen>
-    <dimen name="ListEquipmentScreenHeightOfImage">90dp</dimen>
-    <dimen name="ListEquipmentScreenBorderWidthOfImage">1dp</dimen>
-
-    <dimen name="ListEquipmentScreenCardViewMarginTopTextView">10dp</dimen>
-    <dimen name="ListEquipmentScreenCardViewTextSizeOfTextView">15sp</dimen>
-    <dimen name="ListEquipmentScreenPaddingCardView">20dp</dimen>
-    <dimen name="ListEquipmentScreenPaddingTopRecycleViewCardView">10dp</dimen>
-    <dimen name="CardViewListEquipmentScreenLayoutMargin">5dp</dimen>
-    <dimen name="CardViewListEquipmentScreenCardCornerRadius">15dp</dimen>
-    <dimen name="CardViewListEquipmentScreenCardElevation">10dp</dimen>
-    <!--.............................Report Malfunction Screen.....................................-->
-    <dimen name="ReportMalfunctionScreenMarginBottomCheckbox">40dp</dimen>
     <!--...............................Pesonal Screen..................................-->
     <dimen name="personalScreenWidthOfImageViewAvatar">100dp</dimen>
     <dimen name="personalScreenHeightOfImageViewAvatar">100dp</dimen>

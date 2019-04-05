@@ -14,43 +14,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.HomeScreenRecycleViewFunctionAdapter;
-import vn.edu.tdc.managementequipmenttdc.data_adapter.ListEquipmentRecycleViewFunctionAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
-import vn.edu.tdc.managementequipmenttdc.data_models.ListEquipmentCardViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    Home Screen
+//    Home Screen
     private Vector<HomeScreenCardViewModel> homeScreenListFunctions;
     RecyclerView homeScreenrecyclerViewFunctions;
 
     //Display list notifycation
     private  Vector<DisplayListNotifycationCardViewModel> displayListNotifycationCardViewModels;
     RecyclerView displayListNotifycationRecycleView;
-    //List Equipment
-    private Vector<ListEquipmentCardViewModel> listEquipmentCardViewModels;
-    RecyclerView listequipmentrecycleview;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_equipment_screen_flagment);
-//        setContentView(R.layout.display_list_notifycation_flagment);
-//        displayListNotifycationOfDispayListNotifycationScreen();
+        setContentView(R.layout.edit_profile_flagment);
 
-        ///////////////////////////////Start List Equipment Screen/////////////////////////
-        listequipmentrecycleview = (RecyclerView) findViewById(R.id.ListEquipmentScreenRecycleViewFunction);
-        listEquipmentCardViewModels = new Vector<ListEquipmentCardViewModel>();
-        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy tính"));
-        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy lạnh"));
-        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Đèn"));
-        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy chiếu"));
+
     }
-
 
     private void displayListFunctionOfUsersAtHomePage(){
         //Get views layout
@@ -101,5 +84,4 @@ public class MainActivity extends AppCompatActivity {
         displayListNotifycationRecycleView.setAdapter(adapter);
 
     }
-
 }

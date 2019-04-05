@@ -14,18 +14,7 @@
     <!--.........................Home Screen............................... -->
     <string name="homeScreenNameScreen">Trang chủ</string>
     <string name="homeScreenTxtFunctionName">Tên chức năng</string>
-    <!--.........................List Equipment Screen............................... -->
-    <string name="ListEquipmentScreenNameScreen">Danh sách thiết bị</string>
-    <!--.........................Report Malfunction Screen............................... -->
-    <string name="ReportMulfuntionScreenNameScreen">Phiếu báo cáo sự cố</string>
-    <string name="ReportMulfuntionScreen_CheckboxMouse">Hư chuột</string>
-    <string name="ReportMulfuntionScreen_CheckboxKeyBoard">Bàn phím không hoạt động</string>
-    <string name="ReportMulfuntionScreen_CheckboxPower">Mất Nguồn</string>
-    <string name="ReportMulfuntionScreen_CheckboxScreen">Bàn phím không hoạt động</string>
-    <string name="ReportMulfuntionScreen_CheckboxSoftware">Thiếu phần mềm</string>
-    <string name="ReportMulfuntionScreen_CheckboxAll">Tất cả</string>
-    <string name="ReportMulfuntionScreen_EdittextHintSoftware">(Vui lòng ghi rõ tên phần mềm)</string>
-    <string name="ReportMulfuntionScreen_EdittextHintOther">Khác...</string>
+
     <!--........................Personal Screen.............................-->
     <string name="personalScreenFullName">Nguyễn Văn A</string>
     <string name="personalScreenRole">Giảng viên</string>
@@ -55,4 +44,12 @@
 
     <!--.........................Display list notifycation......................-->
     <string name="displayNotifycationScreenName">Thông báo</string>
+
+    <!--.........................Change pasword screen..........................-->
+    <string name="changePasswordScreenName">Bảo mật và đăng nhập</string>
+    <string name="changePasswordOldPass">Mật khẩu hiện tại...</string>
+    <string name="changePasswordNewPass">Mật khẩu mới...</string>
+    <string name="changePasswordConfirmPass">Gõ lại mật khẩu...</string>
+    <string name="changePasswordBtnChangePass">Lưu thay đổi</string>
+    <string name="changePasswordBtnCancelChangePass">Hủy</string>
 </resources>
