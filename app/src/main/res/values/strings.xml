@@ -14,7 +14,16 @@
     <!--.........................Home Screen............................... -->
     <string name="homeScreenNameScreen">Trang chủ</string>
     <string name="homeScreenTxtFunctionName">Tên chức năng</string>
-
+    <!--.........................Report Malfunction Screen............................... -->
+    <string name="ReportMulfuntionScreenNameScreen">Phiếu báo cáo sự cố</string>
+    <string name="ReportMulfuntionScreen_CheckboxMouse">Hư chuột</string>
+    <string name="ReportMulfuntionScreen_CheckboxKeyBoard">Bàn phím không hoạt động</string>
+    <string name="ReportMulfuntionScreen_CheckboxPower">Mất Nguồn</string>
+    <string name="ReportMulfuntionScreen_CheckboxScreen">Màn hình không hoạt động</string>
+    <string name="ReportMulfuntionScreen_CheckboxSoftware">Thiếu phần mềm</string>
+    <string name="ReportMulfuntionScreen_CheckboxAll">Tất cả</string>
+    <string name="ReportMulfuntionScreen_EdittextHintSoftware">(Vui lòng ghi rõ tên phần mềm)</string>
+    <string name="ReportMulfuntionScreen_EdittextHintOther">Khác...</string>
     <!--........................Personal Screen.............................-->
     <string name="personalScreenFullName">Nguyễn Văn A</string>
     <string name="personalScreenRole">Giảng viên</string>
@@ -44,6 +53,22 @@
 
     <!--.........................Display list notifycation......................-->
     <string name="displayNotifycationScreenName">Thông báo</string>
+    <!--.........................View Report Malfuntion Screen......................-->
+    <string name="viewreportmalfunctionScreenName">Xem phiếu báo cáo sự cố</string>
+    <string name="viewreportmalfunctionHolderTextview_Masuco">Mã sự cố : </string>
+    <string name="viewreportmalfunctionHolderTextview_Maphong">Mã phòng : </string>
+    <string name="viewreportmalfunctionHolderTextview_Mathietbi">Mã thiết bị : </string>
+    <string name="viewreportmalfunctionHolderTextview_Manhanvien">Mã nhân viên : </string>
+    <string name="viewreportmalfunctionHolderTextview_Tennhanvien">Tên nhân viên : </string>
+    <string name="viewreportmalfunctionHolderTextview_Noidung">Nội dung : </string>
+    <string name="viewreportmalfunctionHolderTextview_Thoigian">Thời gian : </string>
+    <string name="viewreportmalfunctionHintTextview_Masuco">(Hiển thị mã sự cố)</string>
+    <string name="viewreportmalfunctionHintTextview_Maphong">(Hiển thị mã phòng)</string>
+    <string name="viewreportmalfunctionHintTextview_Mathietbi">(Hiển thị mã thiết bị)</string>
+    <string name="viewreportmalfunctionHintTextview_Manhanvien">(Hiển thị mã nhân viên)</string>
+    <string name="viewreportmalfunctionHintTextview_Tennhanvien">(Hiển thị tên nhân viên)</string>
+    <string name="viewreportmalfunctionHintTextview_Thoigian">(Hiển thị thời gian)</string>
+    <string name="viewreportmalfunctionHintTextview_Noidung">(Nội dung sự cố)</string>
 
     <!--.........................Change pasword screen..........................-->
     <string name="changePasswordScreenName">Bảo mật và đăng nhập</string>
@@ -59,4 +84,6 @@
     <!--........................List room screen..............................-->
     <string name="listRoomScreenName">Danh sách phòng học</string>
 
+    <!--.........................List Equipment Screen............................... -->
+    <string name="ListEquipmentScreenNameScreen">Danh sách thiết bị</string>
 </resources>

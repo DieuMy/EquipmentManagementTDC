@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/viewreportmalfunctionLinerlayout">
+
+    <com.google.android.material.appbar.AppBarLayout
+        style="@style/AppBarActionStyle">
+        <TextView
+            style="@style/AppBarLayoutTextViewScreenName"
+            android:text="@string/viewreportmalfunctionScreenName"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/viewreportmalfunctionLinerlayout">
+
+        <LinearLayout style="@style/viewreportmalfunctionLinerlayout_Textview">
+
+            <TextView
+                style="@style/viewreportmalfunctionTextview"
+                android:text="@string/viewreportmalfunctionHolderTextview_Masuco" />
+
+            <TextView
+                android:id="@+id/viewreportmalfunctiontextview_masuco"
+                style="@style/viewreportmalfunctionTextviewContent"
+                android:hint="@string/viewreportmalfunctionHintTextview_Masuco" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/viewreportmalfunctionLinerlayout_Textview">
+            <TextView
+                style="@style/viewreportmalfunctionTextview"
+                android:text="@string/viewreportmalfunctionHolderTextview_Maphong"/>
+            <TextView
+                style="@style/viewreportmalfunctionTextviewContent"
+                android:id="@+id/viewreportmalfunctionTextviewContent"
+                android:hint="@string/viewreportmalfunctionHintTextview_Maphong"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/viewreportmalfunctionLinerlayout_Textview">
+            <TextView
+                style="@style/viewreportmalfunctionTextview"
+                android:text="@string/viewreportmalfunctionHolderTextview_Mathietbi"/>
+            <TextView
+                style="@style/viewreportmalfunctionTextviewContent"
+                android:id="@+id/viewreportmalfunctiontextview_mathietbi"
+                android:hint="@string/viewreportmalfunctionHintTextview_Mathietbi"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/viewreportmalfunctionLinerlayout_Textview">
+            <TextView
+                style="@style/viewreportmalfunctionTextview"
+                android:text="@string/viewreportmalfunctionHolderTextview_Manhanvien"/>
+            <TextView
+                style="@style/viewreportmalfunctionTextviewContent"
+                android:id="@+id/viewreportmalfunctiontextview_manhanvien"
+                android:hint="@string/viewreportmalfunctionHintTextview_Manhanvien"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/viewreportmalfunctionLinerlayout_Textview">
+            <TextView
+                style="@style/viewreportmalfunctionTextview"
+                android:text="@string/viewreportmalfunctionHolderTextview_Tennhanvien"/>
+            <TextView
+                style="@style/viewreportmalfunctionTextviewContent"
+                android:id="@+id/viewreportmalfunctiontextview_tennhanvien"
+                android:hint="@string/viewreportmalfunctionHintTextview_Tennhanvien"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/viewreportmalfunctionLinerlayout_Textview">
+            <TextView
+                style="@style/viewreportmalfunctionTextview"
+                android:text="@string/viewreportmalfunctionHolderTextview_Noidung"/>
+            <TextView
+                style="@style/viewreportmalfunctionTextviewContent"
+                android:hint="@string/viewreportmalfunctionHintTextview_Noidung"
+                />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/viewreportmalfunctionLinerlayout_Textview">
+            <TextView
+                style="@style/viewreportmalfunctionTextview"
+                android:text="@string/viewreportmalfunctionHolderTextview_Thoigian"/>
+            <TextView
+                style="@style/viewreportmalfunctionTextviewContent"
+                android:id="@+id/viewreportmalfunctiontextview_thoigian"
+                android:hint="@string/viewreportmalfunctionHintTextview_Thoigian"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

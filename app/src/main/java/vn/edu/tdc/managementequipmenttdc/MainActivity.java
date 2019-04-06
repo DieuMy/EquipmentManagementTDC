@@ -16,35 +16,42 @@ import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuildingCardviewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.data_adapter.ListEquipmentRecycleViewFunctionAdapter;
+import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.data_models.ListEquipmentCardViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-//    Home Screen
+    //    Home Screen
     private Vector<HomeScreenCardViewModel> homeScreenListFunctions;
     RecyclerView homeScreenrecyclerViewFunctions;
 
     //Display list notifycation
-    private  Vector<DisplayListNotifycationCardViewModel> list_displayListNotifycationCardViewModels;
+    private Vector<DisplayListNotifycationCardViewModel> list_displayListNotifycationCardViewModels;
     RecyclerView displayListNotifycationRecycleView;
 
     //Display list area
-    private  Vector<AreaBuildingCardviewModel> list_areaBuildingCardviewModels;
+    private Vector<AreaBuildingCardviewModel> list_areaBuildingCardviewModels;
     RecyclerView areaBuildingRecycleView;
 
     //Display room
     private Vector<ListRoomCardViewModel> listRoomCardViewModels;
     RecyclerView listRoomRecycleView;
+    //List Equipment
+    private Vector<ListEquipmentCardViewModel> listEquipmentCardViewModels;
+    RecyclerView listequipmentrecycleview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_room_flagment);
-            displayListRooms();
+        setContentView(R.layout.view_report_malfuntion_screen_flagment);
+
 
     }
 
     //Hien thi danh sach cac phong
-    private void displayListRooms(){
+    private void displayListRooms() {
         //Get views layout
         listRoomRecycleView = (RecyclerView) findViewById(R.id.listRoomRecycleView);
 
@@ -101,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
         listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
 
         //Setup RecycleView
-        GridLayoutManager gridLayoutManager =  new GridLayoutManager(this, 3);//chia recycleview thanh cot
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);//chia recycleview thanh cot
         listRoomRecycleView.setLayoutManager(gridLayoutManager);
         ListRoomRecycleAdapter adapter = new ListRoomRecycleAdapter(R.layout.card_view_list_room_layout, listRoomCardViewModels);
         listRoomRecycleView.setAdapter(adapter);
     }
 
     //Hien thi danh sach cac khu vuc/toa nha
-    private void displayListAreaBuilding(){
+    private void displayListAreaBuilding() {
         //Get views layout
         areaBuildingRecycleView = (RecyclerView) findViewById(R.id.areaBuildingRecycleView);
 
@@ -129,8 +136,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Hien thi danh sach cac chuc nang(man hinh trang chu)
-    private void displayListFunctionOfUsersAtHomePage(){
+    private void displayListEquipment() {
+        listequipmentrecycleview = (RecyclerView) findViewById(R.id.ListEquipmentScreenRecycleViewFunction);
+        listEquipmentCardViewModels = new Vector<ListEquipmentCardViewModel>();
+        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy tính"));
+        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy lạnh"));
+        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Đèn"));
+        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy chiếu"));
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);//chia recycleview thanh cot
+        listequipmentrecycleview.setLayoutManager(gridLayoutManager);
+        ListEquipmentRecycleViewFunctionAdapter adapter = new ListEquipmentRecycleViewFunctionAdapter(R.layout.card_view_list_equipment_screen_layout, listEquipmentCardViewModels);
+        listequipmentrecycleview.setAdapter(adapter);
+    }
+
+    private void displayListFunctionOfUsersAtHomePage() {
         //Get views layout
         homeScreenrecyclerViewFunctions = (RecyclerView) findViewById(R.id.homeScreenRecycleViewFunctions);
 
@@ -144,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         homeScreenListFunctions.add(new HomeScreenCardViewModel(R.drawable.teamwork, "Đăng xuất"));
 
         //Setup RecycleView
-        GridLayoutManager gridLayoutManager =  new GridLayoutManager(this, 3);//chia recycleview thanh cot
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);//chia recycleview thanh cot
         homeScreenrecyclerViewFunctions.setLayoutManager(gridLayoutManager);
         HomeScreenRecycleViewFunctionAdapter adapter = new HomeScreenRecycleViewFunctionAdapter(R.layout.card_view_home_screen_layout, homeScreenListFunctions);
         homeScreenrecyclerViewFunctions.setAdapter(adapter);
@@ -152,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Hien thi danh sach thong bao
-    private void displayListNotifycationOfDispayListNotifycationScreen(){
+    private void displayListNotifycationOfDispayListNotifycationScreen() {
         //Get views layout
         displayListNotifycationRecycleView = (RecyclerView) findViewById(R.id.displayNotifycationRecycleView);
 

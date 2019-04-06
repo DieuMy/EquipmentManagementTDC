@@ -77,4 +77,26 @@
     <dimen name="editProfileHeighttEditText">40dp</dimen>
     <dimen name="editProfileTextSizeButtonChangePassword">15sp</dimen>
     <dimen name="editProfileEvelationComponent">10dp</dimen>
+
+    <!--.....................................View report Malfunction Screen............................................-->
+    <dimen name="viewreportmalfunctionMarginTopTextView">30dp</dimen>
+    <dimen name="viewreportmalfunctionTextsizeTextview">20dp</dimen>
+    <dimen name="viewreportmalfunctionMarginLeftTextview_Noidung">100dp</dimen>
+    <dimen name="viewreportmalfunctionMarginRightTextview_Noidung">100dp</dimen>
+
+    <!--...........................List Equipment Screen..................................-->
+    <dimen name="ListEquipmentScreenWidthOfImage">90dp</dimen>
+    <dimen name="ListEquipmentScreenHeightOfImage">90dp</dimen>
+    <dimen name="ListEquipmentScreenBorderWidthOfImage">1dp</dimen>
+
+    <dimen name="ListEquipmentScreenCardViewMarginTopTextView">10dp</dimen>
+    <dimen name="ListEquipmentScreenCardViewTextSizeOfTextView">15sp</dimen>
+    <dimen name="ListEquipmentScreenPaddingCardView">20dp</dimen>
+    <dimen name="ListEquipmentScreenPaddingTopRecycleViewCardView">10dp</dimen>
+    <dimen name="CardViewListEquipmentScreenLayoutMargin">7dp</dimen>
+    <dimen name="CardViewListEquipmentScreenCardCornerRadius">5dp</dimen>
+    <dimen name="CardViewListEquipmentScreenCardElevation">10dp</dimen>
+
+    <!--.............................Report Malfunction Screen.....................................-->
+    <dimen name="ReportMalfunctionScreenMarginBottomCheckbox">40dp</dimen>
 </resources>

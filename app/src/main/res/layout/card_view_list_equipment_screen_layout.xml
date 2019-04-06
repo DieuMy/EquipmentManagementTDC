@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/CardViewListEquipmentScreenLayoutMargin"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/CardViewListEquipmentScreenCardCornerRadius"
+    app:cardElevation="@dimen/CardViewListEquipmentScreenCardElevation">
+
+    <LinearLayout style="@style/ListEquipmentScreenCardViewLinearLayout">
+
+        <TextView
+            android:id="@+id/listequipmentscreentextviewNameEquipment"
+            style="@style/ListEquipmentScreenCardViewTextView" />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
