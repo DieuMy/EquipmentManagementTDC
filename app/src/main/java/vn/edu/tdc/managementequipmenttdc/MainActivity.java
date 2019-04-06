@@ -38,22 +38,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.edit_profile_flagment);
         setContentView(R.layout.list_equipment_screen_flagment);
+        displayListEquipment();
+    }
 
-        ///////////////////////////////Start List Equipment Screen/////////////////////////
+    private void displayListEquipment()
+    {
         listequipmentrecycleview =(RecyclerView) findViewById(R.id.ListEquipmentScreenRecycleViewFunction);
         listEquipmentCardViewModels = new Vector<ListEquipmentCardViewModel>();
         listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy tính"));
         listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy lạnh"));
         listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Đèn"));
         listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy chiếu"));
+
         GridLayoutManager gridLayoutManager =  new GridLayoutManager(this, 1);//chia recycleview thanh cot
         listequipmentrecycleview.setLayoutManager(gridLayoutManager);
         ListEquipmentRecycleViewFunctionAdapter adapter = new ListEquipmentRecycleViewFunctionAdapter(R.layout.card_view_list_equipment_screen_layout, listEquipmentCardViewModels);
         listequipmentrecycleview.setAdapter(adapter);
-        ///////////////////////////////End List Equipment Screen/////////////////////////
-
     }
-
     private void displayListFunctionOfUsersAtHomePage(){
         //Get views layout
         homeScreenrecyclerViewFunctions = (RecyclerView) findViewById(R.id.homeScreenRecycleViewFunctions);
