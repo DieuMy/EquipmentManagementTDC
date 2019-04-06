@@ -52,4 +52,11 @@
     <string name="changePasswordConfirmPass">Gõ lại mật khẩu...</string>
     <string name="changePasswordBtnChangePass">Lưu thay đổi</string>
     <string name="changePasswordBtnCancelChangePass">Hủy</string>
+
+    <!--.........................Area/Building Screen...........................-->
+    <string name="areaBuildingScreenName">Khu vực/ tòa nhà</string>
+
+    <!--........................List room screen..............................-->
+    <string name="listRoomScreenName">Danh sách phòng học</string>
+
 </resources>

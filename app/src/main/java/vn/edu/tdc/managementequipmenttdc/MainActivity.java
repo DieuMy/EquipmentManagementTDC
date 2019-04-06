@@ -1,10 +1,6 @@
 package vn.edu.tdc.managementequipmenttdc;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
-import android.widget.LinearLayout;
 
 import java.util.Vector;
 
@@ -12,10 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import vn.edu.tdc.managementequipmenttdc.data_adapter.AreaBuildingRecycleAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.HomeScreenRecycleViewFunctionAdapter;
+import vn.edu.tdc.managementequipmenttdc.data_adapter.ListRoomRecycleAdapter;
+import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuildingCardviewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,17 +24,112 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView homeScreenrecyclerViewFunctions;
 
     //Display list notifycation
-    private  Vector<DisplayListNotifycationCardViewModel> displayListNotifycationCardViewModels;
+    private  Vector<DisplayListNotifycationCardViewModel> list_displayListNotifycationCardViewModels;
     RecyclerView displayListNotifycationRecycleView;
+
+    //Display list area
+    private  Vector<AreaBuildingCardviewModel> list_areaBuildingCardviewModels;
+    RecyclerView areaBuildingRecycleView;
+
+    //Display room
+    private Vector<ListRoomCardViewModel> listRoomCardViewModels;
+    RecyclerView listRoomRecycleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_profile_flagment);
-
+        setContentView(R.layout.list_room_flagment);
+            displayListRooms();
 
     }
 
+    //Hien thi danh sach cac phong
+    private void displayListRooms(){
+        //Get views layout
+        listRoomRecycleView = (RecyclerView) findViewById(R.id.listRoomRecycleView);
+
+        //Tat ca khai bao het, rieng noi dung list nayf thif add vaof de test sau nayf thay baang APIs
+        //Khoi tao gia tri
+        listRoomCardViewModels = new Vector<ListRoomCardViewModel>();
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
+
+        //Setup RecycleView
+        GridLayoutManager gridLayoutManager =  new GridLayoutManager(this, 3);//chia recycleview thanh cot
+        listRoomRecycleView.setLayoutManager(gridLayoutManager);
+        ListRoomRecycleAdapter adapter = new ListRoomRecycleAdapter(R.layout.card_view_list_room_layout, listRoomCardViewModels);
+        listRoomRecycleView.setAdapter(adapter);
+    }
+
+    //Hien thi danh sach cac khu vuc/toa nha
+    private void displayListAreaBuilding(){
+        //Get views layout
+        areaBuildingRecycleView = (RecyclerView) findViewById(R.id.areaBuildingRecycleView);
+
+        //Tat ca khai bao het, rieng noi dung list nayf thif add vaof de test sau nayf thay baang APIs
+        //Khoi tao gia tri
+        list_areaBuildingCardviewModels = new Vector<AreaBuildingCardviewModel>();
+        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel("Khu A"));
+        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel("Khu B"));
+        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel("Khu C"));
+        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel("Khu H"));
+
+        //Setup RecycleView
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        areaBuildingRecycleView.setLayoutManager(layoutManager);
+
+        AreaBuildingRecycleAdapter adapter = new AreaBuildingRecycleAdapter(R.layout.card_view_areabuilding_layout, list_areaBuildingCardviewModels);
+        areaBuildingRecycleView.setAdapter(adapter);
+
+    }
+
+    //Hien thi danh sach cac chuc nang(man hinh trang chu)
     private void displayListFunctionOfUsersAtHomePage(){
         //Get views layout
         homeScreenrecyclerViewFunctions = (RecyclerView) findViewById(R.id.homeScreenRecycleViewFunctions);
@@ -56,31 +151,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Hien thi danh sach thong bao
     private void displayListNotifycationOfDispayListNotifycationScreen(){
         //Get views layout
         displayListNotifycationRecycleView = (RecyclerView) findViewById(R.id.displayNotifycationRecycleView);
 
         //Tat ca khai bao het, rieng noi dung list nayf thif add vaof de test sau nayf thay baang APIs
         //Khoi tao gia tri
-        displayListNotifycationCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
+        list_displayListNotifycationCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
 
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
 
         //Setup RecycleView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         displayListNotifycationRecycleView.setLayoutManager(layoutManager);
 
-        DisplayListNotifycationRecycleViewAdapter adapter = new DisplayListNotifycationRecycleViewAdapter(R.layout.card_view_display_list_notifycation_layout, displayListNotifycationCardViewModels);
+        DisplayListNotifycationRecycleViewAdapter adapter = new DisplayListNotifycationRecycleViewAdapter(R.layout.card_view_display_list_notifycation_layout, list_displayListNotifycationCardViewModels);
         displayListNotifycationRecycleView.setAdapter(adapter);
 
     }
