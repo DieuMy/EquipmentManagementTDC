@@ -118,20 +118,6 @@
 
                 <ImageView
                     style="@style/PersonalScreenImageViewIconFunction"
-                    android:src="@drawable/ic_language" />
-
-                <TextView
-                    android:id="@+id/personalScreenTxtLanguage"
-                    style="@style/PersonalScreenTextViewFunctionName"
-                    android:text="@string/personalScreenTxtLanguage" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                style="@style/PersonalScreenLinearLayoutContainOneFunction">
-
-                <ImageView
-                    style="@style/PersonalScreenImageViewIconFunction"
                     android:src="@drawable/ic_logout" />
 
                 <TextView

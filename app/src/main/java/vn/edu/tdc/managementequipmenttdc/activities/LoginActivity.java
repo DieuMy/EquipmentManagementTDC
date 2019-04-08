@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtAccount;
     private EditText edtPasword;
     private Button btnLogin;
-    private Button btnCancel;
+    private Button btnForgetPassword;
     private Button btnHelp;
     private Button btnExit;
     private ProgressBar progressBarLoading;
@@ -41,19 +41,49 @@ public class LoginActivity extends AppCompatActivity {
         //Get views from layout
         edtAccount = (EditText) findViewById(R.id.loginScreenEdtAccount);
         edtPasword = (EditText) findViewById(R.id.loginScreenEdtPassword);
-        btnCancel = (Button) findViewById(R.id.loginScreenBtnForgetPassword);
+        btnForgetPassword = (Button) findViewById(R.id.loginScreenBtnForgetPassword);
         btnHelp = (Button) findViewById(R.id.loginScreenBtnHelp);
         btnExit = (Button) findViewById(R.id.loginScreenBtnExit);
+        btnLogin = (Button) findViewById(R.id.loginScreenBtnLogin);
         progressBarLoading = (ProgressBar) findViewById((R.id.loginScreenProgressBar));
 
-        btnLogin = (Button) findViewById(R.id.loginScreenBtnLogin);
-
+        //Processing button login
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkLogin();
             }
         });
+
+        //Proccessing button exit
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
+
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpUser();
+            }
+        });
+
+        btnForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processingForgetPassword();
+            }
+        });
+    }
+
+    private void processingForgetPassword(){
+
+    }
+
+    private void helpUser(){
+
     }
 
     //Kiem tra dang nhap
