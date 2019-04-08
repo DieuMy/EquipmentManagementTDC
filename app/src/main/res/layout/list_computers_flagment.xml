@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
 
         <androidx.appcompat.widget.Toolbar style="@style/ToolBarApp">
@@ -19,15 +18,29 @@
                 android:layout_height="match_parent"
                 android:gravity="right">
                 <ImageView
-                    android:id="@+id/editProfileToolBarSave"
+                    android:id="@+id/listComputerToolBarSearchs"
                     style="@style/ToolBarRightOfAppBar"
                     android:src="@drawable/ic_search" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tất cả"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/displayNotifycationRecycleView"
+        android:id="@+id/listComputersRecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 

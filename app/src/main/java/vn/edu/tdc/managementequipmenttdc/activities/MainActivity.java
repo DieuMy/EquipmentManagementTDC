@@ -1,13 +1,17 @@
-package vn.edu.tdc.managementequipmenttdc;
+package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.Vector;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.AreaBuildingRecycleAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.HomeScreenRecycleViewFunctionAdapter;
@@ -20,9 +24,11 @@ import vn.edu.tdc.managementequipmenttdc.data_adapter.ListEquipmentRecycleViewFu
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListEquipmentCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class MainActivity extends AppCompatActivity {
 
+    FragmentManager fragmentManager;
     //    Home Screen
     private Vector<HomeScreenCardViewModel> homeScreenListFunctions;
     RecyclerView homeScreenrecyclerViewFunctions;
@@ -45,15 +51,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_report_malfuntion_screen_flagment);
+        setContentView(R.layout.home_screen_flagment);
 
+        displayListFunctionOfUsersAtHomePage();
+        Toast.makeText(MainActivity.this, User_Provider.username, Toast.LENGTH_SHORT).show();
 
     }
+
+//    private void updateUI(){
+//        //Gan fragment
+//        fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        AbstractFragment fragment = new AbstractFragment();
+//        fragment = new LoginFragment();
+//        //fragmentTransaction.replace(R.id.fragmentContainer, fragment);
+//        fragmentTransaction.commit();
+//
+//    }
 
     //Hien thi danh sach cac phong
     private void displayListRooms() {
         //Get views layout
-        listRoomRecycleView = (RecyclerView) findViewById(R.id.listRoomRecycleView);
+        listRoomRecycleView = (RecyclerView) findViewById(R.id.listComputersRecycleView);
 
         //Tat ca khai bao het, rieng noi dung list nayf thif add vaof de test sau nayf thay baang APIs
         //Khoi tao gia tri

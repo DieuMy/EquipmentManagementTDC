@@ -86,4 +86,7 @@
 
     <!--.........................List Equipment Screen............................... -->
     <string name="ListEquipmentScreenNameScreen">Danh sách thiết bị</string>
+
+    <!--........................List computers.................................-->
+    <string name="ListComputerScreenNameScreen">Danh sách máy tính</string>
 </resources>

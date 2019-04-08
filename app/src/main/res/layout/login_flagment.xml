@@ -2,11 +2,13 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/login_screen_background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activities.LoginActivity">
 
     <LinearLayout
         style="@style/LoginScreenLinearLayoutComponent"
@@ -57,6 +59,13 @@
             style="@style/LoginScreenButton"
             android:elevation="10dp"
             android:text="@string/loginScreenBtnForgetPaswordText"/>
+
+        <ProgressBar
+            android:id="@+id/loginScreenProgressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <LinearLayout

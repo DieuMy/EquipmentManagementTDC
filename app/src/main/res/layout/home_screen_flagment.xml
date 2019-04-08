@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/HomeScreenLinearLayout">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/HomeScreenLinearLayout"
+    tools:context=".activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
         <TextView
