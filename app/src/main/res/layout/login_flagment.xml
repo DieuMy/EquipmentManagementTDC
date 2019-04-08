@@ -21,7 +21,7 @@
             android:layout_width="@dimen/loginScreenWidthOfImage"
             android:layout_height="@dimen/loginScreenHeightOfImage"
             android:layout_gravity="center"
-            android:src="@drawable/teamwork"
+            android:src="@drawable/ic_login"
             app:civ_border_color="@color/colorCivBorderImage"
             app:civ_border_width="@dimen/loginScreenBorderWidthOfImage" />
 
