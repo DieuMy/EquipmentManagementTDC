@@ -80,9 +80,13 @@
 
     <!--.....................................View report Malfunction Screen............................................-->
     <dimen name="viewreportmalfunctionMarginTopTextView">30dp</dimen>
-    <dimen name="viewreportmalfunctionTextsizeTextview">20dp</dimen>
+    <dimen name="viewreportmalfunctionTextsizeTextview">15sp</dimen>
     <dimen name="viewreportmalfunctionMarginLeftTextview_Noidung">100dp</dimen>
     <dimen name="viewreportmalfunctionMarginRightTextview_Noidung">100dp</dimen>
+    <dimen name="viewreportmalfunctionLayoutMarginTop">15dp</dimen>
+    <dimen name="viewreportmalfunctionPadding">10dp</dimen>
+    <dimen name="viewreportmalfunctionLayoutWidth">120dp</dimen>
+    <dimen name="viewreportmalfunctionMarginLeft">20dp</dimen>
 
     <!--...........................List Equipment Screen..................................-->
     <dimen name="ListEquipmentScreenWidthOfImage">90dp</dimen>
@@ -96,7 +100,25 @@
     <dimen name="CardViewListEquipmentScreenLayoutMargin">7dp</dimen>
     <dimen name="CardViewListEquipmentScreenCardCornerRadius">5dp</dimen>
     <dimen name="CardViewListEquipmentScreenCardElevation">10dp</dimen>
+    <dimen name="ListEquipmentScreenPaddingTop">15dp</dimen>
+    <dimen name="ListEquipmentScreenPaddingBottom">15dp</dimen>
 
     <!--.............................Report Malfunction Screen.....................................-->
     <dimen name="ReportMalfunctionScreenMarginBottomCheckbox">40dp</dimen>
+    <dimen name="ReportMalfunctionScreenLayoutHeight">0dp</dimen>
+    <dimen name="ReportMalfunctionScreenLayoutHeight_EditText">50dp</dimen>
+    <dimen name="ReportMalfunctionScreenPadding">10dp</dimen>
+    <dimen name="ReportMalfunctionScreenTextSize">15sp</dimen>
+    <dimen name="ReportMalfunctionScreenCheckbox_LayoutWidth">106dp</dimen>
+    <dimen name="ReportMalfunctionScreenCheckbox_LayoutHeight">39dp</dimen>
+    <dimen name="ReportMalfunctionScreenCheckbox_LayoutMarginStart">8dp</dimen>
+    <dimen name="ReportMalfunctionScreenCheckbox_LayoutMarginTop">8dp</dimen>
+    <dimen name="ReportMalfunctionScreenCheckbox_LayoutMarginEnd">8dp</dimen>
+    <dimen name="ReportMalfunctionScreenCheckbox_LayoutMarginBottom">8dp</dimen>
+    <!--..........................Detail Report Screen.........................................-->
+    <dimen name="detailreportscreenMarginTop">15dp</dimen>
+    <dimen name="detailreportscreenPadding">10dp</dimen>
+    <dimen name="detailreportscreenLayoutWidth">120dp</dimen>
+    <dimen name="detailreportscreenTextsizeTextview">15sp</dimen>
+    <dimen name="detailreportscreenMarginLeft">20dp</dimen>
 </resources>

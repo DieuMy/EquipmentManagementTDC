@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DetailReportScreenLinearlayout">
+    <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
+
+
+        <androidx.appcompat.widget.Toolbar
+            style="@style/ToolBarApp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left">
+                <ImageView
+                    android:id="@+id/editProfileToolBarBack"
+                    style="@style/ToolBarRightOfAppBar"
+                    android:src="@drawable/ic_back" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/AppBarLayoutTextViewScreenName"
+                android:text="@string/DetailReportScreenNameScreen" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            style="@style/DetailReportScreenLinearlayout">
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_TimeBaoCao" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_timebaocao"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_TimeBaoCao" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_Masuco" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_masuco"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Masuco" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_Maphong" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_maphong"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Maphong" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_Mathietbi" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_mathietbi"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Mathietbi" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_Manhanvien" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_manhanvien"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Manhanvien" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_Tennhanvien" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_tennhanvien"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Tennhanvien" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_Noidung" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_noidung"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Noidung" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_TimeSuaChua" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_timesuachua"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_TimeSuaChua" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_Loidakhacphuc" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_loikhacphuc"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Loidakhacphuc" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

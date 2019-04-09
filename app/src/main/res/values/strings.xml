@@ -88,7 +88,29 @@
 
     <!--.........................List Equipment Screen............................... -->
     <string name="ListEquipmentScreenNameScreen">Danh sách thiết bị</string>
+    <string name="ListEquipmentScreenCardViewTextView">Tên thiết bị</string>
 
     <!--........................List computers.................................-->
     <string name="ListComputerScreenNameScreen">Danh sách máy tính</string>
+
+    <!--........................Detail_Report_Screen.............................-->
+    <string name="DetailReportScreenNameScreen">Chi tiết thông báo</string>
+    <string name="DetailReportLabel_TimeBaoCao">Thời gian báo cáo : </string>
+    <string name="DetailReportLabel_Masuco">Mã sự cố : </string>
+    <string name="DetailReportLabel_Maphong">Mã phòng : </string>
+    <string name="DetailReportLabel_Mathietbi">Mã thiết bị : </string>
+    <string name="DetailReportLabel_Manhanvien">Mã nhân viên : </string>
+    <string name="DetailReportLabel_Tennhanvien">Tên nhân viên : </string>
+    <string name="DetailReportLabel_Noidung">Nội dung : </string>
+    <string name="DetailReportLabel_TimeSuaChua">Thời gian sửa chữa : </string>
+    <string name="DetailReportLabel_Loidakhacphuc">Lỗi đã khắc phục : </string>
+    <string name="DetailReportContent_TimeBaoCao">(Hiển thị thời gian)</string>
+    <string name="DetailReportContent_Masuco">(Hiển thị mã sự cố)</string>
+    <string name="DetailReportContent_Maphong">(Hiển thị Mã phòng)</string>
+    <string name="DetailReportContent_Mathietbi">(Hiển thị Mã thiết bị)</string>
+    <string name="DetailReportContent_Manhanvien">(Hiển thị Mã nhân viên) </string>
+    <string name="DetailReportContent_Tennhanvien">(Hiển thị Tên nhân viên )</string>
+    <string name="DetailReportContent_Noidung">(Hiển thị Nội dung )</string>
+    <string name="DetailReportContent_TimeSuaChua">(Hiển thị Thời gian sửa chữa)</string>
+    <string name="DetailReportContent_Loidakhacphuc">(Hiển thị Lỗi đã khắc phục)</string>
 </resources>

@@ -337,12 +337,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_marginTop">15dp</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">@dimen/viewreportmalfunctionLayoutMarginTop</item>
+        <item name="android:padding">@dimen/viewreportmalfunctionPadding</item>
     </style>
 
     <style name="viewreportmalfunctionTextview">
-        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_width">@dimen/viewreportmalfunctionLayoutWidth</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/viewreportmalfunctionTextsizeTextview</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
@@ -353,7 +353,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/viewreportmalfunctionTextsizeTextview</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginLeft">@dimen/viewreportmalfunctionMarginLeft</item>
     </style>
 
     <!--.......................................Report MalFunction.......................................-->
@@ -365,8 +365,8 @@
 
     <style name="ReportMalfunctionConstraint_Linerlayout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:layout_height">@dimen/ReportMalfunctionScreenLayoutHeight</item>
+        <item name="android:padding">@dimen/ReportMalfunctionScreenPadding</item>
     </style>
 
     <style name="ReportMalfunctionScreenCheckbox">
@@ -375,17 +375,17 @@
             @dimen/ReportMalfunctionScreenMarginBottomCheckbox
         </item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/ReportMalfunctionScreenTextSize</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
 
     </style>
 
     <style name="ReportMalfunctionScreenEditText">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">@dimen/ReportMalfunctionScreenLayoutHeight_EditText</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/ReportMalfunctionScreenTextSize</item>
     </style>
     <!--......................................List Equipment Screen.......................................................-->
     <style name="ListEquipmentScreenLinearLayout">
@@ -406,8 +406,8 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
         <item name="android:gravity">center</item>
-        <item name="android:paddingTop">15dp</item>
-        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingTop">@dimen/ListEquipmentScreenPaddingTop</item>
+        <item name="android:paddingBottom">@dimen/ListEquipmentScreenPaddingBottom</item>
     </style>
 
     <style name="ListEquipmentScreenCardViewTextView">
@@ -416,7 +416,42 @@
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textSize">@dimen/ListEquipmentScreenCardViewTextSizeOfTextView</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:text">Tên thiết bị</item>
+        <item name="android:text">@string/ListEquipmentScreenCardViewTextView</item>
         <item name="android:gravity">center</item>
+    </style>
+    <!--...............................Card View List Equipment Screen Layout.........................-->
+    <style name="CardViewListEquipmentScreenLayout_Linearlayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <!--..............................Detail Report Screen.......................................-->
+    <style name="DetailReportScreenLinearlayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="DetailReportScreen_Textview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">@dimen/detailreportscreenMarginTop</item>
+        <item name="android:padding">@dimen/detailreportscreenPadding</item>
+    </style>
+
+    <style name="DetailReportScreenTextview">
+        <item name="android:layout_width">@dimen/detailreportscreenLayoutWidth</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/detailreportscreenTextsizeTextview</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="DetailReportScreenTextviewContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/detailreportscreenTextsizeTextview</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:layout_marginLeft">@dimen/detailreportscreenMarginLeft</item>
     </style>
 </resources>
