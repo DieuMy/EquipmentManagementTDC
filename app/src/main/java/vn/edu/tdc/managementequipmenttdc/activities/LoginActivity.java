@@ -9,10 +9,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
@@ -47,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.loginScreenBtnLogin);
         progressBarLoading = (ProgressBar) findViewById((R.id.loginScreenProgressBar));
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         //Processing button login
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +84,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBarLoading.setVisibility(View.GONE);
+    }
+
     private void processingForgetPassword(){
 
     }
@@ -88,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Kiem tra dang nhap
     private void checkLogin(){
-        String username = edtAccount.getText().toString().trim();
+        final String username = edtAccount.getText().toString().trim();
         final String password = edtPasword.getText().toString().trim();
 
         if (TextUtils.isEmpty(username)) {
@@ -103,14 +115,22 @@ public class LoginActivity extends AppCompatActivity {
 
         progressBarLoading.setVisibility(View.VISIBLE);
 
-        if(username.equals("huongnguyen") && password.equals("123456")) {
-            progressBarLoading.setVisibility(View.GONE);
-            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            User_Provider.username = username;
-            startActivity(intent);
-        } else{
-            Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không trùng khớp!", Toast.LENGTH_LONG).show();
-        }
+        //check login
+        firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                progressBarLoading.setVisibility(View.GONE);
+                if (!task.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không trùng khớp!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(LoginActivity.this, firebaseAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    User_Provider.username = username;
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 }

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/HomeScreenLinearLayout"
     tools:context=".activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
+
         <TextView
-           style="@style/AppBarLayoutTextViewScreenName"
-            android:text="@string/homeScreenNameScreen"/>
+            style="@style/AppBarLayoutTextViewScreenName"
+            android:text="@string/homeScreenNameScreen" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@drawable/home_screen_background"
         android:id="@+id/homeScreenRecycleViewFunctions"
-       style="@style/HomeScreenRecycleView"></androidx.recyclerview.widget.RecyclerView>
+        style="@style/HomeScreenRecycleView"
+        android:background="@drawable/home_screen_background">
 
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

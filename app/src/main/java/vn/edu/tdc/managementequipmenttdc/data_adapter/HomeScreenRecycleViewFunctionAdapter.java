@@ -18,6 +18,15 @@ import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
 public class HomeScreenRecycleViewFunctionAdapter extends RecyclerView.Adapter<HomeScreenRecycleViewFunctionAdapter.MyViewHolder>{
     private int layoutID;
     private Vector<HomeScreenCardViewModel> listData;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        mListener = onItemClickListener;
+    }
 
     //Contructor
     public HomeScreenRecycleViewFunctionAdapter(int layoutID, Vector<HomeScreenCardViewModel> data) {
@@ -32,10 +41,22 @@ public class HomeScreenRecycleViewFunctionAdapter extends RecyclerView.Adapter<H
         private TextView txtFunctionName;
 
         //Contructor
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView, final OnItemClickListener onItemClickListener) {
             super(itemView);
             imageViewFunction = (ImageView) itemView.findViewById(R.id.homeScreenImageFunction);
             txtFunctionName = (TextView) itemView.findViewById(R.id.homeScreenTxtFunctionName);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            onItemClickListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -45,7 +66,7 @@ public class HomeScreenRecycleViewFunctionAdapter extends RecyclerView.Adapter<H
         //lấy đối tượng inflater dán vào đối tượng
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView viewItem = (CardView) inflater.inflate(layoutID,parent,false);//false: de tra ve doi tuong viewItem chu khong gan doi tuong vao viewGroup
-        return new MyViewHolder(viewItem);//Tra ve doi tuong MyViewHolder
+        return new MyViewHolder(viewItem, mListener);//Tra ve doi tuong MyViewHolder
     }
 
     @Override
