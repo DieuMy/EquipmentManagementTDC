@@ -100,8 +100,8 @@
     <dimen name="CardViewListEquipmentScreenLayoutMargin">7dp</dimen>
     <dimen name="CardViewListEquipmentScreenCardCornerRadius">5dp</dimen>
     <dimen name="CardViewListEquipmentScreenCardElevation">10dp</dimen>
-    <dimen name="ListEquipmentScreenPaddingTop">15dp</dimen>
-    <dimen name="ListEquipmentScreenPaddingBottom">15dp</dimen>
+    <dimen name="ListEquipmentScreenPaddingTop">10dp</dimen>
+    <dimen name="ListEquipmentScreenPaddingBottom">10dp</dimen>
 
     <!--.............................Report Malfunction Screen.....................................-->
     <dimen name="ReportMalfunctionScreenMarginBottomCheckbox">40dp</dimen>

@@ -19,7 +19,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:src="@drawable/teamwork"
+            android:src="@drawable/ic_building"
             android:elevation="@dimen/homeScreenElevationOfImage"
             android:layout_marginLeft="10dp"/>
 

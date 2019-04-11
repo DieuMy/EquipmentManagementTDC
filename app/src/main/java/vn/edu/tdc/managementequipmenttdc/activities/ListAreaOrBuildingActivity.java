@@ -1,6 +1,7 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -95,7 +96,8 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new AreaBuildingRecycleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(ListAreaOrBuildingActivity.this, "Click: " + listAreaBuilding.get(position).getAreaID(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ListAreaOrBuildingActivity.this, TypeEquipmentActivity.class);
+                startActivity(intent);
             }
         });
 

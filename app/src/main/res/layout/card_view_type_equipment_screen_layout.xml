@@ -8,6 +8,14 @@
 
     <LinearLayout style="@style/ListEquipmentScreenCardViewLinearLayout">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_laptop"
+            android:elevation="@dimen/homeScreenElevationOfImage"
+            android:layout_marginLeft="15dp"/>
+
         <TextView
             android:id="@+id/listequipmentscreentextviewNameEquipment"
             style="@style/ListEquipmentScreenCardViewTextView" />

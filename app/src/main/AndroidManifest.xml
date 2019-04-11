@@ -23,6 +23,7 @@
         <activity android:name=".activities.ChangePasswordActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.ListAreaOrBuildingActivity" />
+        <activity android:name=".activities.TypeEquipmentActivity" />
     </application>
 
 </manifest>

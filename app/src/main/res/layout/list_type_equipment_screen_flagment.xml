@@ -2,8 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.MainActivity"
-    style="@style/ListEquipmentScreenLinearLayout">
+    style="@style/ListEquipmentScreenLinearLayout"
+    tools:context=".activities.TypeEquipmentActivity">
 
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
 

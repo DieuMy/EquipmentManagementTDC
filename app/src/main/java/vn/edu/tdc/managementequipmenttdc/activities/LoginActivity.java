@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
             }
@@ -91,16 +92,16 @@ public class LoginActivity extends AppCompatActivity {
         progressBarLoading.setVisibility(View.GONE);
     }
 
-    private void processingForgetPassword(){
+    private void processingForgetPassword() {
 
     }
 
-    private void helpUser(){
+    private void helpUser() {
 
     }
 
     //Kiem tra dang nhap
-    private void checkLogin(){
+    private void checkLogin() {
         final String username = edtAccount.getText().toString().trim();
         final String password = edtPasword.getText().toString().trim();
 

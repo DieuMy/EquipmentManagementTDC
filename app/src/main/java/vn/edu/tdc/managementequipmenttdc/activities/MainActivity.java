@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
     //Display room
     private Vector<ListRoomCardViewModel> listRoomCardViewModels;
     RecyclerView listRoomRecycleView;
-    //List Equipment
-    private Vector<ListEquipmentCardViewModel> listEquipmentCardViewModels;
-    RecyclerView listequipmentrecycleview;
 
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
@@ -162,20 +159,6 @@ public class MainActivity extends AppCompatActivity {
         listRoomRecycleView.setLayoutManager(gridLayoutManager);
         ListRoomRecycleAdapter adapter = new ListRoomRecycleAdapter(R.layout.card_view_list_room_layout, listRoomCardViewModels);
         listRoomRecycleView.setAdapter(adapter);
-    }
-
-    private void displayListEquipment() {
-        listequipmentrecycleview = (RecyclerView) findViewById(R.id.ListEquipmentScreenRecycleViewFunction);
-        listEquipmentCardViewModels = new Vector<ListEquipmentCardViewModel>();
-        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy tính"));
-        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy lạnh"));
-        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Đèn"));
-        listEquipmentCardViewModels.add(new ListEquipmentCardViewModel("Máy chiếu"));
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);//chia recycleview thanh cot
-        listequipmentrecycleview.setLayoutManager(gridLayoutManager);
-        ListEquipmentRecycleViewFunctionAdapter adapter = new ListEquipmentRecycleViewFunctionAdapter(R.layout.card_view_list_equipment_screen_layout, listEquipmentCardViewModels);
-        listequipmentrecycleview.setAdapter(adapter);
     }
 
     //Hien thi danh sach thong bao

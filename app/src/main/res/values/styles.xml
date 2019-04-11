@@ -403,7 +403,7 @@
     <style name="ListEquipmentScreenCardViewLinearLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:orientation">vertical</item>
+        <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">@dimen/ListEquipmentScreenPaddingTop</item>
         <item name="android:paddingBottom">@dimen/ListEquipmentScreenPaddingBottom</item>
@@ -416,7 +416,8 @@
         <item name="android:textSize">@dimen/ListEquipmentScreenCardViewTextSizeOfTextView</item>
         <item name="android:textStyle">bold</item>
         <item name="android:text">@string/ListEquipmentScreenCardViewTextView</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">25dp</item>
     </style>
     <!--...............................Card View List Equipment Screen Layout.........................-->
     <style name="CardViewListEquipmentScreenLayout_Linearlayout">
