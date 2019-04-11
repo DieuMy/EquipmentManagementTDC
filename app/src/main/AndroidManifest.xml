@@ -22,6 +22,7 @@
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.ChangePasswordActivity" />
         <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.ListAreaOrBuildingActivity" />
     </application>
 
 </manifest>

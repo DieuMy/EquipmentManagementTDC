@@ -24,17 +24,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.tdc.managementequipmenttdc.R;
-import vn.edu.tdc.managementequipmenttdc.data_adapter.AreaBuildingRecycleAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.HomeScreenRecycleViewFunctionAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListRoomRecycleAdapter;
-import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuildingCardviewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.Function;
 import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListEquipmentRecycleViewFunctionAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListEquipmentCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.data_models.Permissions;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,10 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private Vector<DisplayListNotifycationCardViewModel> list_displayListNotifycationCardViewModels;
     RecyclerView displayListNotifycationRecycleView;
 
-    //Display list area
-    private Vector<AreaBuildingCardviewModel> list_areaBuildingCardviewModels;
-    RecyclerView areaBuildingRecycleView;
-
     //Display room
     private Vector<ListRoomCardViewModel> listRoomCardViewModels;
     RecyclerView listRoomRecycleView;
@@ -62,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     Intent intent;
-    private Permission permission;
-    private Function function;
+
+    private ArrayList<Function> listFunctions = new ArrayList<Function>();
+    private ArrayList<Permissions> listPermissions = new ArrayList<Permissions>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,31 +80,25 @@ public class MainActivity extends AppCompatActivity {
         //Hien thi trang chu
         setContentView(R.layout.home_screen_flagment);
         getDataFunctionsForCurrentUser();
-        //displayListFunctionOfUsersAtHomePage();
         //Toast.makeText(MainActivity.this, User_Provider.username, Toast.LENGTH_SHORT).show();
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     //Lay danh sach chuc nang cho user dang dang nhap
     private void getDataFunctionsForCurrentUser() {
-        Query query = databaseReference.child("functions");
+        //lay quyen cua user dang dang nhap hien tai
+        Query query = databaseReference.child("functions");//Lay danh sach quyen cua user dang dang nhap
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {//kiem tra ton tai du lieu khong
-                    //ArrayList<Function> listFunction = new ArrayList<Function>();//Chua danh sach chuc nang
                     //Duyet de lay danh sach
-                   for (DataSnapshot func : dataSnapshot.getChildren()){
-                       Function function = func.getValue(Function.class);
-                       //listFunction.add(function);
-                       listFunctionsHomeScreen.add(new HomeScreenCardViewModel(R.drawable.ic_login, function.getFunctionName()));
-                   }
-                   displayListFunctionOfUsersAtHomePage();
+                    for (DataSnapshot func : dataSnapshot.getChildren()) {
+                        Function function = func.getValue(Function.class);
+                        listFunctions.add(function);//them function vao danh sach
+                        listFunctionsHomeScreen.add(new HomeScreenCardViewModel(R.drawable.ic_login, function.getFunctionName()));
+                    }
+                    displayListFunctionOfUsersAtHomePage();
                 } else {
                     Toast.makeText(MainActivity.this, "Không có chức năng gì", Toast.LENGTH_SHORT).show();
                 }
@@ -122,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Display list functions of users
     private void displayListFunctionOfUsersAtHomePage() {
         //Get views layout
         homeScreenrecyclerViewFunctions = (RecyclerView) findViewById(R.id.homeScreenRecycleViewFunctions);
@@ -133,32 +124,27 @@ public class MainActivity extends AppCompatActivity {
         HomeScreenRecycleViewFunctionAdapter adapter = new HomeScreenRecycleViewFunctionAdapter(R.layout.card_view_home_screen_layout, listFunctionsHomeScreen);
         homeScreenrecyclerViewFunctions.setAdapter(adapter);
 
+        //Set event OnItemClickListener
         adapter.setOnItemClickListener(new HomeScreenRecycleViewFunctionAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(MainActivity.this, ChangePasswordActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("test", listFunctionsHomeScreen.get(position).getFunctionName() + "");
-                intent.putExtras(bundle);
-                startActivity(intent);
+
+                String activityClass = listFunctions.get(position).getPackageClass() + listFunctions.get(position).getActivityClass();
+
+                try {
+                    Class<?> myClass = Class.forName(activityClass);
+                    Intent intent = new Intent(MainActivity.this, myClass);
+                    startActivity(intent);
+
+                } catch (ClassNotFoundException ignored) {
+                    Toast.makeText(MainActivity.this, "Chức năng đang được phát triển", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
 
-//    private void updateUI(){
-//        //Gan fragment
-//        fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//        AbstractFragment fragment = new AbstractFragment();
-//        fragment = new LoginFragment();
-//        //fragmentTransaction.replace(R.id.fragmentContainer, fragment);
-//        fragmentTransaction.commit();
-//
-//    }
-
-
+    //-------------------------------------------------------------------------------------
     //Hien thi danh sach cac phong
     private void displayListRooms() {
         //Get views layout
@@ -171,78 +157,12 @@ public class MainActivity extends AppCompatActivity {
         listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
         listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
         listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
-        listRoomCardViewModels.add(new ListRoomCardViewModel("B002A"));
 
         //Setup RecycleView
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);//chia recycleview thanh cot
         listRoomRecycleView.setLayoutManager(gridLayoutManager);
         ListRoomRecycleAdapter adapter = new ListRoomRecycleAdapter(R.layout.card_view_list_room_layout, listRoomCardViewModels);
         listRoomRecycleView.setAdapter(adapter);
-    }
-
-    //Hien thi danh sach cac khu vuc/toa nha
-    private void displayListAreaBuilding() {
-        //Get views layout
-        areaBuildingRecycleView = (RecyclerView) findViewById(R.id.areaBuildingRecycleView);
-
-        //Tat ca khai bao het, rieng noi dung list nayf thif add vaof de test sau nayf thay baang APIs
-        //Khoi tao gia tri
-        list_areaBuildingCardviewModels = new Vector<AreaBuildingCardviewModel>();
-        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel("Khu A"));
-        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel("Khu B"));
-        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel("Khu C"));
-        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel("Khu H"));
-
-        //Setup RecycleView
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        areaBuildingRecycleView.setLayoutManager(layoutManager);
-
-        AreaBuildingRecycleAdapter adapter = new AreaBuildingRecycleAdapter(R.layout.card_view_areabuilding_layout, list_areaBuildingCardviewModels);
-        areaBuildingRecycleView.setAdapter(adapter);
-
     }
 
     private void displayListEquipment() {
@@ -288,4 +208,16 @@ public class MainActivity extends AppCompatActivity {
         displayListNotifycationRecycleView.setAdapter(adapter);
 
     }
+
+    //    private void updateUI(){
+//        //Gan fragment
+//        fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        AbstractFragment fragment = new AbstractFragment();
+//        fragment = new LoginFragment();
+//        //fragmentTransaction.replace(R.id.fragmentContainer, fragment);
+//        fragmentTransaction.commit();
+//
+//    }
 }

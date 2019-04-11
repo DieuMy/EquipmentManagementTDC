@@ -1,16 +1,16 @@
 package vn.edu.tdc.managementequipmenttdc.data_models;
 
-public class Permission {
+public class Permissions {
     private String userID;
     private String functionID;
     private String permiss;
     private String create_at;
     private String update_at;
 
-    public Permission() {
+    public Permissions() {
     }
 
-    public Permission(String userID, String functionID, String permiss, String create_at, String update_at) {
+    public Permissions(String userID, String functionID, String permiss, String create_at, String update_at) {
         this.userID = userID;
         this.functionID = functionID;
         this.permiss = permiss;
