@@ -49,12 +49,6 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
 
     }
 
-    public void create(AreaBuilding permission){
-        databaseReference.child("area_buildings").push().setValue(permission);
-        //databaseReference.child("permissions").child("a").setValue(permission);
-        Toast.makeText(ListAreaOrBuildingActivity.this, "Insert successfully!", Toast.LENGTH_SHORT).show();
-    }
-
     //Lay danh sach ca khu vuc/ toa nha
     private void getAllDataOfAreaBuilding(){
         Query query = databaseReference.child("area_buildings");//Lay toa bo du lieu bang are_buildings

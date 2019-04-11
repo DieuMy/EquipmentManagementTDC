@@ -2,7 +2,6 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -13,7 +12,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -31,8 +29,6 @@ import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCard
 import vn.edu.tdc.managementequipmenttdc.data_models.Function;
 import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
-import vn.edu.tdc.managementequipmenttdc.data_adapter.ListEquipmentRecycleViewFunctionAdapter;
-import vn.edu.tdc.managementequipmenttdc.data_models.ListEquipmentCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.Permissions;
 
 public class MainActivity extends AppCompatActivity {
