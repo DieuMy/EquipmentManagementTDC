@@ -60,7 +60,7 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
                     for (DataSnapshot area : dataSnapshot.getChildren()) {
                         AreaBuilding areaBuilding = area.getValue(AreaBuilding.class);
                         listAreaBuilding.add(areaBuilding);//them function vao danh sach
-                        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel(R.drawable.ic_login, areaBuilding.getAreaName()));
+                        list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel(R.drawable.ic_building, areaBuilding.getAreaName()));
                     }
                     displayListAreaBuilding();
                 } else{
