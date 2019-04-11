@@ -3,7 +3,7 @@ package vn.edu.tdc.managementequipmenttdc.data_models;
 public class AreaBuildingCardviewModel {
     private String areaName;
 
-    public AreaBuildingCardviewModel(String areaName) {
+    public AreaBuildingCardviewModel(int ic_login, String areaName) {
         this.areaName = areaName;
     }
 

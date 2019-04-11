@@ -128,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new HomeScreenRecycleViewFunctionAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
                 String activityClass = listFunctions.get(position).getPackageClass() + listFunctions.get(position).getActivityClass();
 
                 try {

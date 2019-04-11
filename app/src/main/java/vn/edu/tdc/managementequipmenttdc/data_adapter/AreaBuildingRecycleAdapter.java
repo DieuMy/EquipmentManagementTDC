@@ -19,6 +19,15 @@ import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
 public class AreaBuildingRecycleAdapter extends RecyclerView.Adapter<AreaBuildingRecycleAdapter.MyViewHolder>{
     private int layoutID;
     private Vector<AreaBuildingCardviewModel> listData;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        mListener = onItemClickListener;
+    }
 
     //Contructor
     public AreaBuildingRecycleAdapter(int layoutID, Vector<AreaBuildingCardviewModel> data) {
@@ -32,9 +41,21 @@ public class AreaBuildingRecycleAdapter extends RecyclerView.Adapter<AreaBuildin
         private TextView txtAreaName;
 
         //Contructor
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView, final OnItemClickListener onItemClickListener) {
             super(itemView);
             txtAreaName = (TextView) itemView.findViewById(R.id.areaBuildingTxtAreaName);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            onItemClickListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -44,7 +65,7 @@ public class AreaBuildingRecycleAdapter extends RecyclerView.Adapter<AreaBuildin
         //lấy đối tượng inflater dán vào đối tượng
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView viewItem = (CardView) inflater.inflate(layoutID,parent,false);//false: de tra ve doi tuong viewItem chu khong gan doi tuong vao viewGroup
-        return new MyViewHolder(viewItem);//Tra ve doi tuong MyViewHolder
+        return new MyViewHolder(viewItem, mListener);//Tra ve doi tuong MyViewHolder
     }
 
     @Override
