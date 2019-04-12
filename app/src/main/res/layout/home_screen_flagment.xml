@@ -12,22 +12,8 @@
             android:text="@string/homeScreenNameScreen" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/homeScreenRecycleViewFunctions"
-            style="@style/HomeScreenRecycleView"
-            android:background="@drawable/home_screen_background"/>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:menu="@menu/bottom_navigation"
-            app:itemIconTint="#FFF"
-            android:background="@drawable/appbarlayout_background"
-            app:itemTextColor="#FFF"/>
-    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homeScreenRecycleViewFunctions"
+        style="@style/HomeScreenRecycleView"
+        android:background="@drawable/home_screen_background" />
 </LinearLayout>
