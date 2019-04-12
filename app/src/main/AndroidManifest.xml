@@ -24,6 +24,9 @@
         <activity android:name=".activities.ListAreaOrBuildingActivity" />
         <activity android:name=".activities.TypeEquipmentActivity" />
         <activity android:name=".activities.EquipmentsActivity" />
+        <activity android:name=".activities.ReportMalfunctionActivity" />
+        <activity android:name=".activities.HistoryActivity" />
+        <activity android:name=".activities.MyWorkActivity" />
     </application>
 
 </manifest>

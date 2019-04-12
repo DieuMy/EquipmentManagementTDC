@@ -11,6 +11,7 @@
         <androidx.appcompat.widget.Toolbar style="@style/ToolBarApp">
 
             <TextView
+                android:id="@+id/displayNotifycationScreenName"
                 style="@style/AppBarLayoutTextViewScreenName"
                 android:text="@string/displayNotifycationScreenName" />
 
@@ -19,7 +20,7 @@
                 android:layout_height="match_parent"
                 android:gravity="right">
                 <ImageView
-                    android:id="@+id/editProfileToolBarSave"
+                    android:id="@+id/displayNotifycationToolBarSave"
                     style="@style/ToolBarRightOfAppBar"
                     android:src="@drawable/ic_search" />
             </LinearLayout>

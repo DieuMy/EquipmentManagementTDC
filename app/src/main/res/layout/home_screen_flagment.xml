@@ -19,7 +19,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/homeScreenRecycleViewFunctions"
             style="@style/HomeScreenRecycleView"
-            android:background="@drawable/home_screen_background"></androidx.recyclerview.widget.RecyclerView>
+            android:background="@drawable/home_screen_background"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"

@@ -84,6 +84,14 @@ public class PersonalPageFragment extends Fragment {
             }
         });
 
+        //Proccessing event for btnHelp
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return view;
     }
 }

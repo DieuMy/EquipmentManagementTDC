@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
-    style="@style/ReportMalfunctionLinerlayout">
+    style="@style/ReportMalfunctionLinerlayout"
+    tools:context=".activities.ReportMalfunctionActivity">
 
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
 

@@ -17,7 +17,7 @@
             android:layout_width="@dimen/homeScreenWidthOfImage"
             android:layout_height="@dimen/homeScreenHeightOfImage"
             android:layout_gravity="center"
-            android:src="@drawable/teamwork"
+            android:src="@drawable/ic_login"
             android:elevation="@dimen/homeScreenElevationOfImage"/>
 
         <TextView

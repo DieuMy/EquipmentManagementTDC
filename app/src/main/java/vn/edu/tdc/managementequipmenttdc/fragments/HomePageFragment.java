@@ -114,8 +114,8 @@ public class HomePageFragment extends Fragment {
         adapter.setOnItemClickListener(new HomeScreenRecycleViewFunctionAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                String activityClass = listFunctions.get(position).getPackageClass() + listFunctions.get(position).getActivityClass();
-
+                String activityClass = listFunctions.get(position).getPackageClass() + "." + listFunctions.get(position).getActivityClass();
+               // Toast.makeText(getActivity(), activityClass, Toast.LENGTH_LONG).show();
                 try {
                     Class<?> myClass = Class.forName(activityClass);
                     Intent intent = new Intent(getActivity(), myClass);

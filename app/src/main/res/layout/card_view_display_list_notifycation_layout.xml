@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_margin="4dp"
+    android:layout_height="85dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="10dp">
 
@@ -25,7 +25,7 @@
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
+           android:layout_marginLeft="20dp"
            android:orientation="vertical"
            android:gravity="center">
 
@@ -34,7 +34,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Nội dung thông báo"
-               android:textSize="17sp"
+               android:textSize="15sp"
                android:fontFamily="sans-serif-condensed"/>
 
            <TextView
@@ -43,10 +43,8 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="01/04/2019"
-               android:textSize="17sp"
+               android:textSize="15sp"
                android:fontFamily="sans-serif-condensed"/>
-
-
        </LinearLayout>
    </LinearLayout>
 

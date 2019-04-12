@@ -25,14 +25,14 @@
     <dimen name="loginScreenElevationLinearLayoutOfTextViewAndEditText">10dp</dimen>
 
     <!--...............................Home Screen..................................-->
-    <dimen name="homeScreenWidthOfImage">90dp</dimen>
-    <dimen name="homeScreenHeightOfImage">90dp</dimen>
+    <dimen name="homeScreenWidthOfImage">80dp</dimen>
+    <dimen name="homeScreenHeightOfImage">80dp</dimen>
     <dimen name="homeScreenBorderWidthOfImage">1dp</dimen>
     <dimen name="homeScreenElevationOfImage">10dp</dimen>
-
+    <dimen name="homeScreenCardViewMarginLeftTextView">20dp</dimen>
     <dimen name="homeScreenCardViewMarginTopTextView">10dp</dimen>
     <dimen name="homeScreenCardViewTextSizeOfTextView">15sp</dimen>
-    <dimen name="homeScreenPaddingCardView">10dp</dimen>
+    <dimen name="homeScreenPaddingCardView">7dp</dimen>
     <dimen name="homeScreenPaddingTopRecycleViewCardView">10dp</dimen>
 
     <!--...............................Pesonal Screen..................................-->
@@ -47,10 +47,10 @@
     <dimen name="personalScreenPaddingLeftLinearLayoutContainOneFunctions">15dp</dimen>
     <dimen name="personalScreenMarginTopLinearLayoutContainOneFunctions">10dp</dimen>
     <dimen name="personalScreenMarginLeftTextViewFunctionName">20dp</dimen>
-    <dimen name="personalScreenTextSizeOfTextViewFunctionName">17sp</dimen>
+    <dimen name="personalScreenTextSizeOfTextViewFunctionName">16sp</dimen>
     <dimen name="personalScreenWidthOfView">350dp</dimen>
     <dimen name="personalScreenHeightOfView">1dp</dimen>
-    <dimen name="personalScreenMarginTopOfView">10dp</dimen>
+    <dimen name="personalScreenMarginTopOfView">17dp</dimen>
     <dimen name="personalScreenElevationOfView">8dp</dimen>
     <dimen name="personalScreenBorderWidthOfAvartar">1dp</dimen>
     <dimen name="personalScreenHeightLinearLayoutContainAvatarAndFullNameRole">125dp</dimen>
