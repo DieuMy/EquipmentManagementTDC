@@ -36,10 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private Vector<HomeScreenCardViewModel> listFunctionsHomeScreen = new Vector<HomeScreenCardViewModel>();
     RecyclerView homeScreenrecyclerViewFunctions;
 
-    //Display list notifycation
-    private Vector<DisplayListNotifycationCardViewModel> list_displayListNotifycationCardViewModels;
-    RecyclerView displayListNotifycationRecycleView;
-
     //Display room
     private Vector<ListRoomCardViewModel> listRoomCardViewModels;
     RecyclerView listRoomRecycleView;
@@ -153,35 +149,5 @@ public class MainActivity extends AppCompatActivity {
         listRoomRecycleView.setLayoutManager(gridLayoutManager);
         ListRoomRecycleAdapter adapter = new ListRoomRecycleAdapter(R.layout.card_view_list_room_layout, listRoomCardViewModels);
         listRoomRecycleView.setAdapter(adapter);
-    }
-
-    //Hien thi danh sach thong bao
-    private void displayListNotifycationOfDispayListNotifycationScreen() {
-        //Get views layout
-        displayListNotifycationRecycleView = (RecyclerView) findViewById(R.id.displayNotifycationRecycleView);
-
-        //Tat ca khai bao het, rieng noi dung list nayf thif add vaof de test sau nayf thay baang APIs
-        //Khoi tao gia tri
-        list_displayListNotifycationCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
-
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-
-        //Setup RecycleView
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        displayListNotifycationRecycleView.setLayoutManager(layoutManager);
-
-        DisplayListNotifycationRecycleViewAdapter adapter = new DisplayListNotifycationRecycleViewAdapter(R.layout.card_view_display_list_notifycation_layout, list_displayListNotifycationCardViewModels);
-        displayListNotifycationRecycleView.setAdapter(adapter);
-
     }
 }

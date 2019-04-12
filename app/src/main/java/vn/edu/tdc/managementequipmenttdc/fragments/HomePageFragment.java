@@ -86,7 +86,6 @@ public class HomePageFragment extends Fragment {
                         listFunctions.add(function);//them function vao danh sach
                         listFunctionsHomeScreen.add(new HomeScreenCardViewModel(R.drawable.ic_login, function.getFunctionName()));
                     }
-                    //Toast.makeText(getActivity(), "Yeah", Toast.LENGTH_LONG).show();
                     displayListFunctionOfUsersAtHomePage();
                 } else {
                     Toast.makeText(getActivity(), "Không có chức năng gì", Toast.LENGTH_SHORT).show();
