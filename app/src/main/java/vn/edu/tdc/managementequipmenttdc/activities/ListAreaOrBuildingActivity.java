@@ -90,7 +90,7 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new AreaBuildingRecycleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(ListAreaOrBuildingActivity.this, TypeEquipmentActivity.class);
+                Intent intent = new Intent(ListAreaOrBuildingActivity.this, ListRoomsActivity.class);
                 startActivity(intent);
             }
         });

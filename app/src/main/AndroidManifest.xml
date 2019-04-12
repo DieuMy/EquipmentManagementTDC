@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.SplashActivity" />
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.ChangePasswordActivity" />
@@ -27,6 +26,7 @@
         <activity android:name=".activities.ReportMalfunctionActivity" />
         <activity android:name=".activities.HistoryActivity" />
         <activity android:name=".activities.MyWorkActivity" />
+        <activity android:name=".activities.ListRoomsActivity" />
     </application>
 
 </manifest>
