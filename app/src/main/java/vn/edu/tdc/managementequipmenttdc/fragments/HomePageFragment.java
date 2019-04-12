@@ -56,12 +56,12 @@ public class HomePageFragment extends Fragment {
         //Get views layout
         homeScreenrecyclerViewFunctions = (RecyclerView) view.findViewById(R.id.homeScreenRecycleViewFunctions);
 
-//        //Check user login
-//        if (null == firebaseAuth.getCurrentUser()) {
-//            intent = new Intent(getActivity(), SplashActivity.class);
-//            startActivity(intent);
-//            getActivity().finish();
-//        }
+        //Check user login
+        if (null == firebaseAuth.getCurrentUser()) {
+            intent = new Intent(getActivity(), SplashActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
 
         //Hien thi trang chu
         getDataFunctionsForCurrentUser();
