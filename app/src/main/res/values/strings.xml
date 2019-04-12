@@ -2,7 +2,7 @@
     <string name="app_name">ManagementEquipmentTDC</string>
 
     <string name="app_laucher">Quản lý thiết bị phòng thực hành tại TDC</string>
-    
+
     <!--..............................Login Screen................................-->
     <string name="loginScreenTxtAccount">Tài khoản đăng nhập</string>
     <string name="loginScreenTxtPassword">Mật khẩu</string>
