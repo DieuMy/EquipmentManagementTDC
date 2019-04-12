@@ -32,8 +32,6 @@ import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.Permissions;
 
 public class MainActivity extends AppCompatActivity {
-
-    FragmentManager fragmentManager;
     //    Home Screen
     private Vector<HomeScreenCardViewModel> listFunctionsHomeScreen = new Vector<HomeScreenCardViewModel>();
     RecyclerView homeScreenrecyclerViewFunctions;
@@ -186,16 +184,4 @@ public class MainActivity extends AppCompatActivity {
         displayListNotifycationRecycleView.setAdapter(adapter);
 
     }
-
-    //    private void updateUI(){
-//        //Gan fragment
-//        fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//        AbstractFragment fragment = new AbstractFragment();
-//        fragment = new LoginFragment();
-//        //fragmentTransaction.replace(R.id.fragmentContainer, fragment);
-//        fragmentTransaction.commit();
-//
-//    }
 }
