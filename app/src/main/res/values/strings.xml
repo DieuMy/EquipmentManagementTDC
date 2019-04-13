@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ManagementEquipmentTDC</string>
+    <string name="app_name">QL Thiết bị TDC</string>
 
     <string name="app_laucher">Quản lý thiết bị phòng thực hành tại TDC</string>
 
@@ -22,7 +22,7 @@
     <string name="ReportMulfuntionScreen_CheckboxKeyBoard">Bàn phím không hoạt động</string>
     <string name="ReportMulfuntionScreen_CheckboxPower">Mất Nguồn</string>
     <string name="ReportMulfuntionScreen_CheckboxScreen">Màn hình không hoạt động</string>
-    <string name="ReportMulfuntionScreen_CheckboxSoftware">Thiếu phần mềm</string>
+    <string name="ReportMulfuntionScreen_CheckboxSoftware">Thiếu phần mềm (Vui lòng ghi rõ tên phần mềm)</string>
     <string name="ReportMulfuntionScreen_CheckboxAll">Tất cả</string>
     <string name="ReportMulfuntionScreen_EdittextHintSoftware">(Vui lòng ghi rõ tên phần mềm)</string>
     <string name="ReportMulfuntionScreen_EdittextHintOther">Khác...</string>
@@ -91,7 +91,7 @@
     <string name="ListEquipmentScreenCardViewTextView">Tên thiết bị</string>
 
     <!--........................List computers.................................-->
-    <string name="ListComputerScreenNameScreen">Danh sách máy tính</string>
+    <string name="ListComputerScreenNameScreen">Danh sách máy</string>
 
     <!--........................Detail_Report_Screen.............................-->
     <string name="DetailReportScreenNameScreen">Chi tiết thông báo</string>

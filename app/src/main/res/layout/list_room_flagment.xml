@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
@@ -12,12 +14,13 @@
                 android:layout_height="match_parent"
                 android:gravity="left">
                 <ImageView
-                    android:id="@+id/editProfileToolBarBack"
+                    android:id="@+id/listRoomToolBarBack"
                     style="@style/ToolBarRightOfAppBar"
                     android:src="@drawable/ic_back" />
             </LinearLayout>
 
             <TextView
+                android:id="@+id/listRoomTxtScreenName"
                 style="@style/AppBarLayoutTextViewScreenName"
                 android:text="@string/listRoomScreenName" />
 
@@ -26,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:gravity="right">
                 <ImageView
-                    android:id="@+id/editProfileToolBarSave"
+                    android:id="@+id/listRoomToolBarSearch"
                     style="@style/ToolBarRightOfAppBar"
                     android:src="@drawable/ic_search" />
             </LinearLayout>
@@ -36,7 +39,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listRoomRecycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

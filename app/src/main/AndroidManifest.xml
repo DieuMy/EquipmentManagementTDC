@@ -27,6 +27,8 @@
         <activity android:name=".activities.HistoryActivity" />
         <activity android:name=".activities.MyWorkActivity" />
         <activity android:name=".activities.ListRoomsActivity" />
+        <activity android:name=".activities.ListMalfunctionEquipmentActivity" />
+        <activity android:name=".activities.ViewReportMalfunctionActivity" />
     </application>
 
 </manifest>

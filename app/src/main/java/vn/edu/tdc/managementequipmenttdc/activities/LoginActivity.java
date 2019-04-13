@@ -20,6 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuilding;
+import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
+import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class LoginActivity extends AppCompatActivity {
@@ -52,6 +55,9 @@ public class LoginActivity extends AppCompatActivity {
         progressBarLoading = (ProgressBar) findViewById((R.id.loginScreenProgressBar));
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        ToolUtils toolUtils = new ToolUtils();
 
         //Processing button login
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
+                finish();
             }
         });
 

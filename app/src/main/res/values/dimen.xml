@@ -104,7 +104,7 @@
     <dimen name="ListEquipmentScreenPaddingBottom">10dp</dimen>
 
     <!--.............................Report Malfunction Screen.....................................-->
-    <dimen name="ReportMalfunctionScreenMarginBottomCheckbox">40dp</dimen>
+    <dimen name="ReportMalfunctionScreenMarginBottomCheckbox">35dp</dimen>
     <dimen name="ReportMalfunctionScreenLayoutHeight">0dp</dimen>
     <dimen name="ReportMalfunctionScreenLayoutHeight_EditText">50dp</dimen>
     <dimen name="ReportMalfunctionScreenPadding">10dp</dimen>

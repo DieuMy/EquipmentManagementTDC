@@ -3,6 +3,8 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +37,7 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private ToolUtils toolUtils;
+    private ImageView imgToolBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,9 +46,17 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+        imgToolBack = findViewById(R.id.areaBuildingToolBarBack);
         toolUtils = new ToolUtils();
 
         getAllDataOfAreaBuilding();
+
+        imgToolBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
@@ -91,6 +102,11 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(ListAreaOrBuildingActivity.this, ListRoomsActivity.class);
+                //Truyen du lieu areaID sang listRoom
+                Bundle bundle = new Bundle();
+                bundle.putString("areaID", listAreaBuilding.get(position).getAreaID());
+                bundle.putString("areaName", listAreaBuilding.get(position).getAreaName());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

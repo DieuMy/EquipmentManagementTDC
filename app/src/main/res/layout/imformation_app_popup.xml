@@ -98,6 +98,19 @@
                     android:textSize="15sp"
                     android:fontFamily="sans-serif-condensed"
                     android:textStyle="bold"
+                    android:text="Email hỗ trợ: 29thanhhuong@gmail.com"
+                    android:textColor="#FFF"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textStyle="bold"
                     android:text="Phiên bản 1.0. Năm phát hành 05/2019"
                     android:textColor="#FFF"/>
 

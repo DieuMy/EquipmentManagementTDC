@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.w3c.dom.Text;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.activities.EditProfileActivity;
+import vn.edu.tdc.managementequipmenttdc.activities.LoginActivity;
 
 public class PersonalPageFragment extends Fragment {
     private Intent intent;
@@ -30,6 +33,8 @@ public class PersonalPageFragment extends Fragment {
     private TextView btnLogout;
     private Button btnOKDialog;
     private ImageView imgCloseDialog;
+
+    FirebaseAuth firebaseAuth;
 
     @Nullable
     @Override
@@ -43,6 +48,8 @@ public class PersonalPageFragment extends Fragment {
         btnHelp = (TextView) view.findViewById(R.id.personalScreenTxtHelp);
         btnInformationApp = (TextView) view.findViewById(R.id.personalScreenTxtInformationApp);
         btnLogout = (TextView) view.findViewById(R.id.personalScreenTxtLogout);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //Proccessing event for setting profile
         btnSettingProfile.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +96,17 @@ public class PersonalPageFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+
+        //Proccessing event for btnLogout
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseAuth.signOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 

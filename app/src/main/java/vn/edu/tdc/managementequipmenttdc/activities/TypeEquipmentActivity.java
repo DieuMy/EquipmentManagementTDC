@@ -2,6 +2,9 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +29,7 @@ import vn.edu.tdc.managementequipmenttdc.data_models.ListEquipmentCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 
 public class TypeEquipmentActivity extends AppCompatActivity {
-    //List Equipment
+    public static String ROOMNAME ="";
 
     private Vector<ListEquipmentCardViewModel> listTypeEquipmentCardViewModels = new Vector<ListEquipmentCardViewModel>();
     RecyclerView listequipmentrecycleview;
@@ -35,6 +38,10 @@ public class TypeEquipmentActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     ToolUtils toolUtils;
     ArrayList<Equipment> listTypeEquipments = new ArrayList<Equipment>();
+
+    private String roomName = "Danh sách thiết bị phòng ";
+    private TextView txtScreenName;
+    private ImageView imgToolBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +52,18 @@ public class TypeEquipmentActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
         toolUtils = new ToolUtils();
 
+        txtScreenName = findViewById(R.id.list_equipment_screen_name);
+        txtScreenName.setText(roomName + ROOMNAME);
+        imgToolBack = findViewById(R.id.list_equipmentToolBarBack);
+
         getDataOfTypeEquipment();
+
+        imgToolBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void create(Equipment equipment) {
@@ -93,6 +111,12 @@ public class TypeEquipmentActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(TypeEquipmentActivity.this, EquipmentsActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("equipmentID", listTypeEquipments.get(position).getEquipmentID());
+                bundle.putString("equipmentName", listTypeEquipments.get(position).getEquipmentName());
+
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

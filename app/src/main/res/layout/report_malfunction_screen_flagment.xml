@@ -9,15 +9,15 @@
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
 
 
-        <androidx.appcompat.widget.Toolbar
-            style="@style/ToolBarApp">
+        <androidx.appcompat.widget.Toolbar style="@style/ToolBarApp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="left">
+
                 <ImageView
-                    android:id="@+id/editProfileToolBarBack"
+                    android:id="@+id/reportmalFunctionToolBarBack"
                     style="@style/ToolBarRightOfAppBar"
                     android:src="@drawable/ic_back" />
             </LinearLayout>
@@ -40,8 +40,8 @@
             android:layout_marginTop="@dimen/ReportMalfunctionScreenCheckbox_LayoutMarginTop"
             android:layout_marginEnd="@dimen/ReportMalfunctionScreenCheckbox_LayoutMarginEnd"
             android:layout_marginBottom="@dimen/ReportMalfunctionScreenCheckbox_LayoutMarginBottom"
-            android:text="@string/ReportMulfuntionScreen_CheckboxAll"
             android:fontFamily="sans-serif-condensed"
+            android:text="@string/ReportMulfuntionScreen_CheckboxAll"
             android:textSize="@dimen/ReportMalfunctionScreenTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,32 +51,59 @@
             app:layout_constraintVertical_bias="0.4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        style="@style/ReportMalfunctionConstraint_Linerlayout"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="8"
-        android:orientation="vertical">
-        <CheckBox
-            style="@style/ReportMalfunctionScreenCheckbox"
-            android:text="@string/ReportMulfuntionScreen_CheckboxMouse"
-            android:id="@+id/reportmalfunctioncheckboxmouse"/>
-        <CheckBox
-            style="@style/ReportMalfunctionScreenCheckbox"
-            android:text="@string/ReportMulfuntionScreen_CheckboxKeyBoard"
-            android:id="@+id/reportmalfunctioncheckboxkeyboard"/>
-        <CheckBox
-            style="@style/ReportMalfunctionScreenCheckbox"
-            android:text="@string/ReportMulfuntionScreen_CheckboxPower"
-            android:id="@+id/reportmalfunctioncheckboxpower"/>
-        <CheckBox
-            style="@style/ReportMalfunctionScreenCheckbox"
-            android:text="@string/ReportMulfuntionScreen_CheckboxScreen"
-            android:id="@+id/reportmalfunctioncheckboxscreen"/>
-        <CheckBox
-            style="@style/ReportMalfunctionScreenCheckbox"
-            android:text="@string/ReportMulfuntionScreen_CheckboxSoftware"
-            android:id="@+id/reportmalfunctioncheckboxsoftware"/>
-        <EditText
-            style="@style/ReportMalfunctionScreenEditText"
-            android:hint="@string/ReportMulfuntionScreen_EdittextHintOther"/>
-    </LinearLayout>
+        android:fillViewport="true">
+
+        <LinearLayout
+            style="@style/ReportMalfunctionConstraint_Linerlayout"
+            android:layout_weight="8"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/reportmalfunctioncheckboxmouse"
+                style="@style/ReportMalfunctionScreenCheckbox"
+                android:text="@string/ReportMulfuntionScreen_CheckboxMouse" />
+
+            <CheckBox
+                android:id="@+id/reportmalfunctioncheckboxkeyboard"
+                style="@style/ReportMalfunctionScreenCheckbox"
+                android:text="@string/ReportMulfuntionScreen_CheckboxKeyBoard" />
+
+            <CheckBox
+                android:id="@+id/reportmalfunctioncheckboxpower"
+                style="@style/ReportMalfunctionScreenCheckbox"
+                android:text="@string/ReportMulfuntionScreen_CheckboxPower" />
+
+            <CheckBox
+                android:id="@+id/reportmalfunctioncheckboxscreen"
+                style="@style/ReportMalfunctionScreenCheckbox"
+                android:text="@string/ReportMulfuntionScreen_CheckboxScreen" />
+
+            <CheckBox
+                android:id="@+id/reportmalfunctioncheckboxsoftware"
+                style="@style/ReportMalfunctionScreenCheckbox"
+                android:text="@string/ReportMulfuntionScreen_CheckboxSoftware" />
+
+            <EditText
+                style="@style/ReportMalfunctionScreenEditText"
+                android:hint="@string/ReportMulfuntionScreen_EdittextHintOther" />
+
+            <Button
+                android:id="@+id/ReportMalfuntionBtnOK"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@drawable/login_screen_btnlogin_background"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Hoàn tất"
+                android:textColor="#FFF"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
