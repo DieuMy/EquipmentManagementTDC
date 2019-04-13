@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.activities.ListRoomsActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.SplashActivity;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.HomeScreenRecycleViewFunctionAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.Function;
@@ -115,6 +116,9 @@ public class HomePageFragment extends Fragment {
                 try {
                     Class<?> myClass = Class.forName(activityClass);
                     Intent intent = new Intent(getActivity(), myClass);
+
+                    ListRoomsActivity.FUNCTIONNAME = listFunctions.get(position).getActivityClass();
+
                     startActivity(intent);
 
                 } catch (ClassNotFoundException ignored) {

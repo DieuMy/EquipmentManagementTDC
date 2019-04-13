@@ -30,6 +30,7 @@ import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
 
 public class ListRoomsActivity extends AppCompatActivity {
 
+    public static String FUNCTIONNAME = "";
     //Display room
     private Vector<ListRoomCardViewModel> listRoomCardViewModels;
     RecyclerView listRoomRecycleView;
@@ -64,7 +65,11 @@ public class ListRoomsActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
         listRoomCardViewModels = new Vector<ListRoomCardViewModel>();
 
-        getDataRoomsOfCorrespondingArea();
+        if(FUNCTIONNAME.equals("ListRoomsActivity")){
+            getDataAllRooms();
+        } else {
+            getDataRoomsOfCorrespondingArea();
+        }
 
         imgToolBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +127,32 @@ public class ListRoomsActivity extends AppCompatActivity {
 
                 TypeEquipmentActivity.ROOMNAME = listRooms.get(position).getRoomName();
                 startActivity(intent);
+            }
+        });
+    }
+
+    //Lay danh sach tat ca cac phong thuc hanh
+    private void getDataAllRooms() {
+        Query query = databaseReference.child("rooms");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //Duyet de lay danh sach
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
+                        Rooms room = item.getValue(Rooms.class);
+                        listRooms.add(room);//them room vao danh sach
+                        listRoomCardViewModels.add(new ListRoomCardViewModel(room.getRoomName()));
+                    }
+                    displayListRooms();
+                } else {
+                    Toast.makeText(ListRoomsActivity.this, "Không tồn tại phòng thực hành nào!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
