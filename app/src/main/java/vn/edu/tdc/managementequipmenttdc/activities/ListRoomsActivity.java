@@ -1,8 +1,12 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +63,6 @@ public class ListRoomsActivity extends AppCompatActivity {
 
         txtScreenName = findViewById(R.id.listRoomTxtScreenName);
         imgToolBack = findViewById(R.id.listRoomToolBarBack);
-        txtScreenName.setText("Danh sách phòng khu vực/ tòa nhà " + areaName);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -67,8 +70,10 @@ public class ListRoomsActivity extends AppCompatActivity {
 
         if(FUNCTIONNAME.equals("ListRoomsActivity")){
             getDataAllRooms();
+            txtScreenName.setText("Danh sách tất cả các phòng thực hành");
         } else {
             getDataRoomsOfCorrespondingArea();
+            txtScreenName.setText("Danh sách phòng khu vực/ tòa nhà " + areaName);
         }
 
         imgToolBack.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +100,35 @@ public class ListRoomsActivity extends AppCompatActivity {
                     }
                     displayListRooms();
                 } else {
-                    Toast.makeText(ListRoomsActivity.this, "Không có phòng thực hành trong khu vực/ tòa nhà này!", Toast.LENGTH_SHORT).show();
+                    final Dialog dialog = new Dialog(ListRoomsActivity.this);
+                    dialog.setContentView(R.layout.popup_notifycation_layout);
+
+                    ImageView imgCloseDialog = dialog.findViewById(R.id.popup_close_dialog);
+                    Button btnOKDialog = dialog.findViewById(R.id.popup_dialog_buttonOK);
+                    TextView txtNofication = dialog.findViewById(R.id.popup_dialog_notification);
+
+                    txtNofication.setText("Không có phòng thực hành trong khu vực/ tòa nhà này!");
+
+                    //Processing event for close dialog
+                    imgCloseDialog.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+
+                    btnOKDialog.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.show();
+                   // Toast.makeText(ListRoomsActivity.this, "Không có phòng thực hành trong khu vực/ tòa nhà này!", Toast.LENGTH_SHORT).show();
                 }
             }
 

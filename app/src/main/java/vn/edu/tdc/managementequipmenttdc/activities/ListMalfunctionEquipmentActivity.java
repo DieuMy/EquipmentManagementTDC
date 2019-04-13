@@ -47,7 +47,7 @@ public class ListMalfunctionEquipmentActivity extends AppCompatActivity {
 //            equipmentID = bundle.getString("equipmentIDMal");
 //            equipmentName = bundle.getString("equipmentNameMal");
 //        }
-        txtScreenName.setText("Danh sách sự cố của máy " + equipmentName);
+        txtScreenName.setText("Danh sách sự cố đang xử lý của thiết bị " + equipmentName);
         imgToolBar = findViewById(R.id.listMalfunctionToolBarBack);
 
         displayListMalfunctionOfEquipment();
