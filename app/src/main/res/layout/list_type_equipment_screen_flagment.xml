@@ -13,11 +13,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="left">
+
                 <ImageView
                     android:id="@+id/list_equipmentToolBarBack"
                     style="@style/ToolBarRightOfAppBar"
                     android:src="@drawable/ic_back" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/list_equipment_screen_name"
                 style="@style/AppBarLayoutTextViewScreenName"
@@ -27,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right">
+
                 <ImageView
                     android:id="@+id/list_equipment_screen_ToolBarSearch"
                     style="@style/ToolBarRightOfAppBar"

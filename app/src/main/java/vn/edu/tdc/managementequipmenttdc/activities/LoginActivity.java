@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuilding;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
+import vn.edu.tdc.managementequipmenttdc.tools.ConnectionDetector;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 

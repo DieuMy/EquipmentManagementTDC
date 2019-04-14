@@ -8,7 +8,7 @@
     <!--Mau nen-->
     <gradient
         android:angle="90"
-        android:endColor="#7A8EF3"
-        android:startColor="#0E4A80"
+        android:endColor="#9EABEC"
+        android:startColor="#1E75C2"
         android:type="linear" />
 </shape>

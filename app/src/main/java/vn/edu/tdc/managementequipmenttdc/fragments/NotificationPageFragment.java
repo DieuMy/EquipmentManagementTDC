@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.activities.DetailMalfunctionActivity;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 
@@ -67,6 +68,15 @@ public class NotificationPageFragment extends Fragment {
 
         DisplayListNotifycationRecycleViewAdapter adapter = new DisplayListNotifycationRecycleViewAdapter(R.layout.card_view_display_list_notifycation_layout, list_displayListNotifycationCardViewModels);
         displayListNotifycationRecycleView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new DisplayListNotifycationRecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                intent = new Intent(getActivity(), DetailMalfunctionActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

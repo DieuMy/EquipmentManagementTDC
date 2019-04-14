@@ -99,6 +99,7 @@ public class EquipmentsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    //Toast.makeText(EquipmentsActivity.this, "Oh yeah", Toast.LENGTH_SHORT).show();
                     //Duyet de lay danh sach
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                         Equipment equipment = item.getValue(Equipment.class);

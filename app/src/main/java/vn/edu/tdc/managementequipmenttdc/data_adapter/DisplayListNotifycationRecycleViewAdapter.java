@@ -16,6 +16,15 @@ import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCard
 public class DisplayListNotifycationRecycleViewAdapter extends RecyclerView.Adapter<DisplayListNotifycationRecycleViewAdapter.MyViewHolder> {
     private int layoutID;
     private Vector<DisplayListNotifycationCardViewModel> listData;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        mListener = onItemClickListener;
+    }
 
     public DisplayListNotifycationRecycleViewAdapter(int layoutID, Vector<DisplayListNotifycationCardViewModel> listData) {
         this.layoutID = layoutID;
@@ -29,11 +38,22 @@ public class DisplayListNotifycationRecycleViewAdapter extends RecyclerView.Adap
         private TextView txtNotifycationDate;
 
         //Contructor
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView, final OnItemClickListener onItemClickListener) {
             super(itemView);
 
             txtNotifycationContent = (TextView) itemView.findViewById(R.id.displayNotifycationTxtNotifycationContent);
             txtNotifycationDate = (TextView) itemView.findViewById(R.id.displayNotifycationTxtNotifycationDate);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            onItemClickListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -43,7 +63,7 @@ public class DisplayListNotifycationRecycleViewAdapter extends RecyclerView.Adap
         //lấy đối tượng inflater dán vào đối tượng
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView viewItem = (CardView) inflater.inflate(layoutID,parent,false);//false: de tra ve doi tuong viewItem chu khong gan doi tuong vao viewGroup
-        return new MyViewHolder(viewItem);//Tra ve doi tuong MyViewHolder
+        return new MyViewHolder(viewItem, mListener);//Tra ve doi tuong MyViewHolder
     }
 
     @Override
