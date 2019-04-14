@@ -104,7 +104,43 @@ public class EquipmentsActivity extends AppCompatActivity {
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                         Equipment equipment = item.getValue(Equipment.class);
                         listEquipments.add(equipment);//them room vao danh sach
-                        listEquipmentsModels.add(new ListRoomCardViewModel(equipment.getEquipmentName()));
+                        //listEquipmentsModels.add(new ListRoomCardViewModel(equipment.getEquipmentName()));
+                    }
+
+                    //Duyet lay danh sach cac thiet bị thuoc loai thiet bi duoc chon
+                    for (Equipment equipment : listEquipments) {
+                        if(equipment.getParentID().equals(equipmentID)){
+                            listEquipmentsModels.add(new ListRoomCardViewModel(equipment.getEquipmentName()));
+                        } else{
+                            final Dialog dialog = new Dialog(EquipmentsActivity.this);
+                            dialog.setContentView(R.layout.popup_notifycation_layout);
+
+                            ImageView imgCloseDialog = dialog.findViewById(R.id.popup_close_dialog);
+                            Button btnOKDialog = dialog.findViewById(R.id.popup_dialog_buttonOK);
+                            TextView txtNofication = dialog.findViewById(R.id.popup_dialog_notification);
+
+                            txtNofication.setText("Không có thiết bị thuộc loại " + equipmentName + " trong phòng này!");
+
+                            //Processing event for close dialog
+                            imgCloseDialog.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                    finish();
+                                }
+                            });
+
+                            btnOKDialog.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                    finish();
+                                }
+                            });
+
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialog.show();
+                        }
                     }
 
                     displayListEquipments();

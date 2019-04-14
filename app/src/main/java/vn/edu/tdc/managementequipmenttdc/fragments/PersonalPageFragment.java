@@ -11,10 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-
-import org.w3c.dom.Text;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +28,9 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.activities.EditProfileActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.HelpUserActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.LoginActivity;
+import vn.edu.tdc.managementequipmenttdc.data_models.Role;
+import vn.edu.tdc.managementequipmenttdc.data_models.Users;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class PersonalPageFragment extends Fragment {
     private Intent intent;
@@ -35,7 +43,14 @@ public class PersonalPageFragment extends Fragment {
     private Button btnOKDialog;
     private ImageView imgCloseDialog;
 
+    private ImageView imgAvatar;
+    private TextView txtFullName;
+    private TextView txtRole;
+
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    private Users users;
 
     @Nullable
     @Override
@@ -45,12 +60,21 @@ public class PersonalPageFragment extends Fragment {
 
         btnSettingProfile = (TextView) view.findViewById(R.id.personalScreenTxtSettingProfile);
         btnSettingNotifycation = (TextView) view.findViewById(R.id.personalScreenSettingNotifycation);
-       // btnReviewApp = (TextView) view.findViewById(R.id.personalScreenTxtReviewsApp);
+        // btnReviewApp = (TextView) view.findViewById(R.id.personalScreenTxtReviewsApp);
         btnHelp = (TextView) view.findViewById(R.id.personalScreenTxtHelp);
         btnInformationApp = (TextView) view.findViewById(R.id.personalScreenTxtInformationApp);
         btnLogout = (TextView) view.findViewById(R.id.personalScreenTxtLogout);
+        imgAvatar = view.findViewById(R.id.personalScreenImageUsers);
+        txtFullName = view.findViewById(R.id.personalScreenTxtFullName);
+        txtRole = view.findViewById(R.id.personalScreenTxtRole);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
+
+        // Display information of user current login
+        getInformationOfUserCurrentLogin();
 
         //Proccessing event for setting profile
         btnSettingProfile.setOnClickListener(new View.OnClickListener() {
@@ -114,4 +138,50 @@ public class PersonalPageFragment extends Fragment {
 
         return view;
     }
+
+    public void getInformationOfUserCurrentLogin() {
+        Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    users = dataSnapshot.getValue(Users.class);
+                    txtFullName.setText(users.getFullName());
+
+                    User_Provider.user = users;//Luu thong tin cua user de su dung
+
+                    getRoleOfUserCurrentLogin(users.getRoleID());
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    public void getRoleOfUserCurrentLogin(final String roleID) {
+        Query query = databaseReference.child("roles").child(roleID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Role roles = dataSnapshot.getValue(Role.class);
+                    txtRole.setText(roles.getRoleName());
+                } else {
+                    Toast.makeText(getActivity(), "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

@@ -1,11 +1,19 @@
 package vn.edu.tdc.managementequipmenttdc.tools;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
 import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 
 public class User_Provider {
     public static String username;
     public static Users user;
-
     private boolean canAdd, canModify, canDelete;
 
     public void permissionFunction(String functionID) {
@@ -14,8 +22,8 @@ public class User_Provider {
         //Cat chuoi dua vao mang string[] = {A, D, M}
         String[] arrayPermission = str_permission.split("&");
         //duyet permission
-        for(String item : arrayPermission){
-            switch (item){
+        for (String item : arrayPermission) {
+            switch (item) {
                 case "A":
                     canAdd = true;
                     break;
@@ -35,8 +43,8 @@ public class User_Provider {
                     canDelete = false;
                     canModify = false;
                     break;
-                    default:
-                        break;
+                default:
+                    break;
             }
         }
 

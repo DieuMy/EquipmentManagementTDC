@@ -247,7 +247,6 @@
         <item name="android:layout_height">@dimen/editProfileHeightOfImageViewAvatar</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:src">@drawable/teamwork</item>
-        <item name="android:layout_marginTop">@dimen/editProfileMarginTopOfImageAvtar</item>
         <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
     </style>
 
@@ -255,12 +254,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:layout_marginTop">@dimen/editProfileMarginTopOfFullName</item>
-        <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/editProfileTextSizeFullName</item>
         <item name="android:textColor">@color/colorTextViewFullNameOfEditProfile</item>
         <item name="android:textStyle">bold</item>
         <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
+        <item name="android:layout_marginLeft">25dp</item>
     </style>
 
     <style name="EditProfileLinearLayout">
@@ -382,7 +380,8 @@
 
     <style name="ReportMalfunctionScreenEditText">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/ReportMalfunctionScreenLayoutHeight_EditText</item>
+        <item name="android:layout_height">@dimen/ReportMalfunctionScreenLayoutHeight_EditText
+        </item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textSize">@dimen/ReportMalfunctionScreenTextSize</item>
@@ -432,6 +431,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
     </style>
+
     <style name="DetailReportScreen_Textview">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

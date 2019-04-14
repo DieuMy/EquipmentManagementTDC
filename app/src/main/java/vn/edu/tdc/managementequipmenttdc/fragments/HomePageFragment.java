@@ -30,6 +30,7 @@ import vn.edu.tdc.managementequipmenttdc.data_adapter.HomeScreenRecycleViewFunct
 import vn.edu.tdc.managementequipmenttdc.data_models.Function;
 import vn.edu.tdc.managementequipmenttdc.data_models.HomeScreenCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.Permissions;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class HomePageFragment extends Fragment {
 

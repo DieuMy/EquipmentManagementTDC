@@ -39,16 +39,19 @@
     <!--Display avatar and full name-->
     <LinearLayout
         style="@style/EditProfileLinearLayout"
-        android:layout_weight="2"
-        android:background="@color/colorBackgroundLinearLayoutContainAvatarAndFullNameOfEditProfile"
+        android:layout_weight="1"
+        android:background="@drawable/appbarlayout_background"
         android:elevation="20dp"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/editProfileScreenImageUsers"
             style="@style/EditProfileScreenImageViewAvatar"
             app:civ_border_color="@color/colorCivBorderImage"
-            app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar" />
+            app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar"
+            android:layout_marginLeft="30dp"/>
 
         <TextView
             android:id="@+id/editProfileTxtFullName"
@@ -108,8 +111,12 @@
                     style="@style/EditProfileTextViewDisplayLabel"
                     android:text="@string/editProfileTextViewGenderLabel" />
 
-                <Spinner style="@style/EditProfileEditText"></Spinner>
+                <Spinner
+                    android:id="@+id/editProfileSpnGender"
+                    style="@style/EditProfileEditText"></Spinner>
             </LinearLayout>
+
+
 
             <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
 
@@ -145,6 +152,40 @@
                     android:id="@+id/editProfileEdtEmail"
                     style="@style/EditProfileEditText"
                     android:text="@string/editProfileTextViewEmailContent"></EditText>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="Chức vụ" />
+
+                <Spinner
+                    android:id="@+id/editProfileSpnRole"
+                    style="@style/EditProfileEditText"></Spinner>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="Phòng ban" />
+
+                <Spinner
+                    android:id="@+id/editProfileSpnDepartment"
+                    style="@style/EditProfileEditText"></Spinner>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="Truy cập lần trước" />
+
+                <TextView
+                    android:id="@+id/editProfileTxtLastAccess"
+                    style="@style/EditProfileTextViewDisplayAccountName"
+                    android:text="01/01/2019 08:00:00" />
             </LinearLayout>
 
         </LinearLayout>

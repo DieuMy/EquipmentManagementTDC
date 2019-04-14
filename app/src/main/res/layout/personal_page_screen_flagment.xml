@@ -24,14 +24,12 @@
 
                 <TextView
                     android:id="@+id/personalScreenTxtFullName"
-                    style="@style/PersonalSceenTextViewFullNameAndRole"
-                    android:text="@string/personalScreenFullName" />
+                    style="@style/PersonalSceenTextViewFullNameAndRole" />
 
                 <TextView
                     android:id="@+id/personalScreenTxtRole"
                     style="@style/PersonalSceenTextViewFullNameAndRole"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/personalScreenRole" />
+                    android:layout_marginTop="20dp" />
             </LinearLayout>
         </LinearLayout>
 
