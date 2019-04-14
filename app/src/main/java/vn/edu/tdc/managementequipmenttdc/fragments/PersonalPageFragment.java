@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.activities.EditProfileActivity;
+import vn.edu.tdc.managementequipmenttdc.activities.HelpUserActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.LoginActivity;
 
 public class PersonalPageFragment extends Fragment {
@@ -95,7 +96,8 @@ public class PersonalPageFragment extends Fragment {
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                intent = new Intent(getActivity(), HelpUserActivity.class);
+                startActivity(intent);
             }
         });
 

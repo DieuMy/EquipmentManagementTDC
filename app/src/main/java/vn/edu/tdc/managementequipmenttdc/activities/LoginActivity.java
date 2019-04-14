@@ -104,7 +104,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void helpUser() {
-
+        Intent intent = new Intent(LoginActivity.this, HelpUserActivity.class);
+        startActivity(intent);
     }
 
     //Kiem tra dang nhap
