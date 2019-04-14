@@ -71,19 +71,19 @@
             <View
               style="@style/PersonalScreenView"/>
 
-            <LinearLayout
-                style="@style/PersonalScreenLinearLayoutContainOneFunction">
+            <!--<LinearLayout-->
+                <!--style="@style/PersonalScreenLinearLayoutContainOneFunction">-->
 
-                <ImageView
-                    style="@style/PersonalScreenImageViewIconFunction"
-                    android:src="@drawable/ic_star" />
+                <!--<ImageView-->
+                    <!--style="@style/PersonalScreenImageViewIconFunction"-->
+                    <!--android:src="@drawable/ic_star" />-->
 
-                <TextView
-                    android:id="@+id/personalScreenTxtReviewsApp"
-                    style="@style/PersonalScreenTextViewFunctionName"
-                    android:text="@string/personalScreenTxtReviewsApp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/personalScreenTxtReviewsApp"-->
+                    <!--style="@style/PersonalScreenTextViewFunctionName"-->
+                    <!--android:text="@string/personalScreenTxtReviewsApp" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 style="@style/PersonalScreenLinearLayoutContainOneFunction">

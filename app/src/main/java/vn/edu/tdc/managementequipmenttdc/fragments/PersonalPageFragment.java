@@ -45,7 +45,7 @@ public class PersonalPageFragment extends Fragment {
 
         btnSettingProfile = (TextView) view.findViewById(R.id.personalScreenTxtSettingProfile);
         btnSettingNotifycation = (TextView) view.findViewById(R.id.personalScreenSettingNotifycation);
-        btnReviewApp = (TextView) view.findViewById(R.id.personalScreenTxtReviewsApp);
+       // btnReviewApp = (TextView) view.findViewById(R.id.personalScreenTxtReviewsApp);
         btnHelp = (TextView) view.findViewById(R.id.personalScreenTxtHelp);
         btnInformationApp = (TextView) view.findViewById(R.id.personalScreenTxtInformationApp);
         btnLogout = (TextView) view.findViewById(R.id.personalScreenTxtLogout);
