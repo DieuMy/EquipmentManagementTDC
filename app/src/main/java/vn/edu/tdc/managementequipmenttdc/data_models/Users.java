@@ -7,7 +7,7 @@ public class Users {
     private String username;
     private String password;
     private String fullName;
-    private boolean gender;
+    private String gender;
     private String address;
     private String numberPhone;
     private String email;
@@ -25,7 +25,7 @@ public class Users {
     public Users() {
     }
 
-    public Users(String userID, String username, String password, String fullName, boolean gender, String address, String numberPhone, String email, String roleID, String departmentID, String avartaUser, boolean active, boolean lock_account, String token_reset_password, String create_at, String update_at, String last_changePassword, String lastAccess) {
+    public Users(String userID, String username, String password, String fullName, String gender, String address, String numberPhone, String email, String roleID, String departmentID, String avartaUser, boolean active, boolean lock_account, String token_reset_password, String create_at, String update_at, String last_changePassword, String lastAccess) {
         this.userID = userID;
         this.username = username;
         this.password = password;
@@ -44,6 +44,14 @@ public class Users {
         this.update_at = update_at;
         this.last_changePassword = last_changePassword;
         this.lastAccess = lastAccess;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getUserID() {
@@ -76,14 +84,6 @@ public class Users {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
     }
 
     public String getAddress() {

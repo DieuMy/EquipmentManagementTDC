@@ -172,6 +172,7 @@ public class PersonalPageFragment extends Fragment {
                 if (dataSnapshot.exists()) {
                     Role roles = dataSnapshot.getValue(Role.class);
                     txtRole.setText(roles.getRoleName());
+                    User_Provider.roleNameOfCurrentUser = roles.getRoleName();
                 } else {
                     Toast.makeText(getActivity(), "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
                 }

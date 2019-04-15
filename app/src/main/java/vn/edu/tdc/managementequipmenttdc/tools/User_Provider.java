@@ -14,6 +14,7 @@ import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 public class User_Provider {
     public static String username;
     public static Users user;
+    public static String roleNameOfCurrentUser;//Get data from personalPage
     private boolean canAdd, canModify, canDelete;
 
     public void permissionFunction(String functionID) {
