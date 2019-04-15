@@ -112,6 +112,7 @@ public class TypeEquipmentActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 Intent intent = new Intent(TypeEquipmentActivity.this, EquipmentsActivity.class);
 
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Bundle bundle = new Bundle();
                 bundle.putString("equipmentID", listTypeEquipments.get(position).getEquipmentID());
                 bundle.putString("equipmentName", listTypeEquipments.get(position).getEquipmentName());

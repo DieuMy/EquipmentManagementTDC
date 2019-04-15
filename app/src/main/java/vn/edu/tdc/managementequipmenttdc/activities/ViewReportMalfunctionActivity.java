@@ -27,9 +27,8 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Gui di thong bao
-
                 //Tro ve man hinh home
-                intent = new Intent(ViewReportMalfunctionActivity.this, EquipmentsActivity.class);
+                intent = new Intent(ViewReportMalfunctionActivity.this, TypeEquipmentActivity.class);
                 startActivity(intent);
                 finish();
 

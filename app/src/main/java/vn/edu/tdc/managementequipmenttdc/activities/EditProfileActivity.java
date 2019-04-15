@@ -1,5 +1,6 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,10 +24,12 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.Department;
 import vn.edu.tdc.managementequipmenttdc.data_models.Role;
+import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class EditProfileActivity extends AppCompatActivity {
@@ -51,6 +54,7 @@ public class EditProfileActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    ToolUtils toolUtils;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +64,7 @@ public class EditProfileActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        toolUtils = new ToolUtils();
 
         //Gets view from layout
         btnChangePassword = (Button) findViewById(R.id.editProfileBtnChangePassword);
@@ -91,14 +96,7 @@ public class EditProfileActivity extends AppCompatActivity {
         //Set data for spinner department
         getAllDataOfDepartmentTable();
 
-
-        //Display information of current user login
-        txtFullName.setText(User_Provider.user.getFullName());
-        edtAddress.setText(User_Provider.user.getAddress());
-        edtNumberPhone.setText(User_Provider.user.getNumberPhone());
-        edtEmail.setText(User_Provider.user.getEmail());
-        txtAccount.setText(firebaseAuth.getCurrentUser().getEmail());
-        txtLastAccess.setText(User_Provider.user.getLastAccess());
+        displayInformationCurrentUserOnActivity();
 
         //Proccessing event for back
         imgToolBarBack.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +114,24 @@ public class EditProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        imgToolBarSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveNewProfile();
+            }
+        });
     }
 
+    private void displayInformationCurrentUserOnActivity(){
+        //Display information of current user login
+        txtFullName.setText(User_Provider.user.getFullName());
+        edtAddress.setText(User_Provider.user.getAddress());
+        edtNumberPhone.setText(User_Provider.user.getNumberPhone());
+        edtEmail.setText(User_Provider.user.getEmail());
+        txtAccount.setText(firebaseAuth.getCurrentUser().getEmail());
+        txtLastAccess.setText(User_Provider.user.getLastAccess());
+    }
 
     private void getAllDataOfRoleTable() {
         Query query = databaseReference.child("roles");
@@ -177,5 +191,36 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void saveNewProfile(){
 
+        String gender = spnGender.getSelectedItem().toString();
+        String address = edtAddress.getText().toString();
+        String numberPhone = edtNumberPhone.getText().toString();
+        String email = edtEmail.getText().toString();
+        String roleID = "";
+        String department = "";
+//        String lastAccess = ;
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
+        builder.setTitle("Xác nhận");
+        builder.setMessage("Bạn chắc chắn muốn thay đổi thông tin ?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(EditProfileActivity.this, "Thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               displayInformationCurrentUserOnActivity();
+            }
+        });
+
+        builder.show();
+
+    }
 }
