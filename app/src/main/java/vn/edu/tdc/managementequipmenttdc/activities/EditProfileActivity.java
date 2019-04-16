@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.Department;
 import vn.edu.tdc.managementequipmenttdc.data_models.Role;
+import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
@@ -38,7 +39,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ImageView imgToolBarBack;
     private ImageView imgToolBarSave;
     private ImageView imgAvatar;
-    private TextView txtFullName;
+    private EditText edtFullName;
     private TextView txtAccount;
     private Spinner spnGender;
     private EditText edtAddress;
@@ -70,7 +71,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btnChangePassword = (Button) findViewById(R.id.editProfileBtnChangePassword);
         imgToolBarBack = findViewById(R.id.editProfileToolBarBack);
         imgToolBarSave = findViewById(R.id.editProfileToolBarSave);
-        txtFullName = findViewById(R.id.editProfileTxtFullName);
+        edtFullName = findViewById(R.id.editProfileTxtFullName);
         txtAccount = findViewById(R.id.editProfileTxtAccountName);
         spnGender = findViewById(R.id.editProfileSpnGender);
         spnRole = findViewById(R.id.editProfileSpnRole);
@@ -123,9 +124,9 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void displayInformationCurrentUserOnActivity(){
+    private void displayInformationCurrentUserOnActivity() {
         //Display information of current user login
-        txtFullName.setText(User_Provider.user.getFullName());
+        edtFullName.setText(User_Provider.user.getFullName());
         edtAddress.setText(User_Provider.user.getAddress());
         edtNumberPhone.setText(User_Provider.user.getNumberPhone());
         edtEmail.setText(User_Provider.user.getEmail());
@@ -191,15 +192,20 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void saveNewProfile(){
-
+    private void saveNewProfile() {
+        String fullName = edtFullName.getText().toString();
         String gender = spnGender.getSelectedItem().toString();
         String address = edtAddress.getText().toString();
         String numberPhone = edtNumberPhone.getText().toString();
         String email = edtEmail.getText().toString();
         String roleID = "";
-        String department = "";
-//        String lastAccess = ;
+        String departmentID = "";
+        String update_at = toolUtils.getCurrentTimeString();
+        String lastAccess = "";
+
+        final Users users = new Users(fullName, gender, address, numberPhone, email, roleID, departmentID, "",
+                User_Provider.user.isActive(), User_Provider.user.isLock_account(), User_Provider.user.getCreate_at(),
+                update_at, User_Provider.user.getLast_changePassword(), lastAccess);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
         builder.setTitle("Xác nhận");
@@ -208,15 +214,30 @@ public class EditProfileActivity extends AppCompatActivity {
         builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(users);
+                            Toast.makeText(EditProfileActivity.this, "Thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(EditProfileActivity.this, "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
-                Toast.makeText(EditProfileActivity.this, "Thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               displayInformationCurrentUserOnActivity();
+                displayInformationCurrentUserOnActivity();
             }
         });
 

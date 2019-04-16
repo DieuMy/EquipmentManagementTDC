@@ -3,9 +3,6 @@ package vn.edu.tdc.managementequipmenttdc.data_models;
 import java.util.Date;
 
 public class Users {
-    private String userID;
-    private String username;
-    private String password;
     private String fullName;
     private String gender;
     private String address;
@@ -16,7 +13,6 @@ public class Users {
     private String avartaUser;
     private boolean active;
     private boolean lock_account;
-    private String token_reset_password;
     private String create_at;
     private String update_at;
     private String last_changePassword;
@@ -25,10 +21,7 @@ public class Users {
     public Users() {
     }
 
-    public Users(String userID, String username, String password, String fullName, String gender, String address, String numberPhone, String email, String roleID, String departmentID, String avartaUser, boolean active, boolean lock_account, String token_reset_password, String create_at, String update_at, String last_changePassword, String lastAccess) {
-        this.userID = userID;
-        this.username = username;
-        this.password = password;
+    public Users(String fullName, String gender, String address, String numberPhone, String email, String roleID, String departmentID, String avartaUser, boolean active, boolean lock_account, String create_at, String update_at, String last_changePassword, String lastAccess) {
         this.fullName = fullName;
         this.gender = gender;
         this.address = address;
@@ -39,7 +32,6 @@ public class Users {
         this.avartaUser = avartaUser;
         this.active = active;
         this.lock_account = lock_account;
-        this.token_reset_password = token_reset_password;
         this.create_at = create_at;
         this.update_at = update_at;
         this.last_changePassword = last_changePassword;
@@ -52,30 +44,6 @@ public class Users {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFullName() {
@@ -148,14 +116,6 @@ public class Users {
 
     public void setLock_account(boolean lock_account) {
         this.lock_account = lock_account;
-    }
-
-    public String getToken_reset_password() {
-        return token_reset_password;
-    }
-
-    public void setToken_reset_password(String token_reset_password) {
-        this.token_reset_password = token_reset_password;
     }
 
     public String getCreate_at() {

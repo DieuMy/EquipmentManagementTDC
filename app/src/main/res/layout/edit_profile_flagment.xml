@@ -53,10 +53,11 @@
             app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar"
             android:layout_marginLeft="30dp"/>
 
-        <TextView
+        <EditText
             android:id="@+id/editProfileTxtFullName"
             style="@style/EditProfileTextViewFullName"
-            android:text="@string/personalScreenFullName" />
+            android:text="@string/personalScreenFullName"
+            android:paddingBottom="20dp"/>
 
     </LinearLayout>
 

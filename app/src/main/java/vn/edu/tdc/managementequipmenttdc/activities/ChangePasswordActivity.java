@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 
 public class ChangePasswordActivity extends AppCompatActivity {
     private ImageView imgToolBarBack;
@@ -32,6 +33,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private EditText edtCurrentPassword;
     private EditText edtNewPassword;
     private EditText edtCofirmPassword;
+    private ToolUtils toolUtils;
 
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
@@ -47,6 +49,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        toolUtils = new ToolUtils();
 
         //Gets view from layout
         imgToolBarBack = findViewById(R.id.changePasswordToolBarBack);
@@ -140,6 +143,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 View view = findViewById(R.id.changePass_layout);
                                 final Snackbar snackbar_success = Snackbar.make(view, "Thay đổi mật khẩu thành công! Vui lòng đăng nhập lại", Snackbar.LENGTH_LONG);
                                 snackbar_success.show();
+
+                                //update time last_changePassword
+                                try {
+                                    databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("last_changePassword").setValue(toolUtils.getCurrentTimeString());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
                                 firebaseAuth.signOut();
                                 Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);
