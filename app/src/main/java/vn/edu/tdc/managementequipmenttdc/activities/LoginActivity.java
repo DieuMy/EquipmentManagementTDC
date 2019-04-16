@@ -1,8 +1,12 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,10 +103,6 @@ public class LoginActivity extends AppCompatActivity {
         progressBarLoading.setVisibility(View.GONE);
     }
 
-    private void processingForgetPassword() {
-
-    }
-
     private void helpUser() {
         Intent intent = new Intent(LoginActivity.this, HelpUserActivity.class);
         startActivity(intent);
@@ -134,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không trùng khớp!", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_LONG).show();
-//                    Toast.makeText(LoginActivity.this, firebaseAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, Main_Activity.class);
                     User_Provider.username = username;
                     startActivity(intent);
@@ -143,4 +142,53 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void processingForgetPassword() {
+        final Dialog dialog = new Dialog(LoginActivity.this);
+
+        dialog.setContentView(R.layout.popup_forget_password_layout);
+
+        Button btnSend = dialog.findViewById(R.id.forgetPassowrdBtnSend);
+        Button btnCancel = dialog.findViewById(R.id.forgetPassowrdBtnCancel);
+        final EditText edtEmailOrPhone = dialog.findViewById(R.id.forgetPasswordEdtEmail);
+
+        //Processing event for close dialog
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String emailOrPhone = edtEmailOrPhone.getText().toString().trim();
+                if (emailOrPhone.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Vui lòng nhập email đã đăng ký!", Toast.LENGTH_LONG).show();
+                    return;
+                } else {
+                    progressBarLoading.setVisibility(View.VISIBLE);
+
+                    firebaseAuth.sendPasswordResetEmail(emailOrPhone).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Vui lòng kiểm tra email để được cấp lại mật khẩu", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Gửi yêu cầu thất bại! Vui lòng thử lại sau! Hoặc liên hệ phòng kỹ thuật để cấp lại mật khẩu", Toast.LENGTH_LONG).show();
+                            }
+
+                            progressBarLoading.setVisibility(View.GONE);
+                        }
+                    });
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
 }

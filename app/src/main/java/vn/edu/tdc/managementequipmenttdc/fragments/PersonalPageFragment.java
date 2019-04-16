@@ -51,6 +51,9 @@ public class PersonalPageFragment extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private Users users;
+    private String roleName = "";
+    private String fullName = "";
+    private String roleID = "";
 
     @Nullable
     @Override
@@ -146,11 +149,12 @@ public class PersonalPageFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     users = dataSnapshot.getValue(Users.class);
-                    txtFullName.setText(users.getFullName());
+                    fullName = users.getFullName();
+                    txtFullName.setText(fullName);
 
                     User_Provider.user = users;//Luu thong tin cua user de su dung
-
-                    getRoleOfUserCurrentLogin(users.getRoleID());
+                    roleID = users.getRoleID();
+                    getRoleOfUserCurrentLogin(roleID);
                 } else {
 
                 }
@@ -165,13 +169,17 @@ public class PersonalPageFragment extends Fragment {
 
 
     public void getRoleOfUserCurrentLogin(final String roleID) {
+        if(roleID == null){
+            return;
+        }
         Query query = databaseReference.child("roles").child(roleID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Role roles = dataSnapshot.getValue(Role.class);
-                    txtRole.setText(roles.getRoleName());
+                    roleName = roles.getRoleName();
+                    txtRole.setText(roleName);
                     User_Provider.roleNameOfCurrentUser = roles.getRoleName();
                 } else {
                     Toast.makeText(getActivity(), "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
