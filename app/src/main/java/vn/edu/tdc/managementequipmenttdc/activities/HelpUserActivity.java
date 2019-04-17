@@ -70,7 +70,5 @@ public class HelpUserActivity extends AppCompatActivity {
         listAnswer.put(listQuestion.get(2), listQuestion_3);
         listAnswer.put(listQuestion.get(3), listQuestion_4);
 
-
-
     }
 }

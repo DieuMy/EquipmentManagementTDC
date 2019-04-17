@@ -45,6 +45,7 @@ public class HomePageFragment extends Fragment {
 
     private ArrayList<Function> listFunctions = new ArrayList<Function>();
     private ArrayList<Permissions> listPermissions = new ArrayList<Permissions>();
+    private ArrayList<Function> listFunctionsOfCurrentUser = new ArrayList<Function>();
 
     @Nullable
     @Override
@@ -66,23 +67,35 @@ public class HomePageFragment extends Fragment {
         }
 
         //Hien thi trang chu
-        getDataFunctionsForCurrentUser();
+        getDataPermissionForCurrentUser();
+
         return view;
     }
 
     //Lay danh sach chuc nang cho user dang dang nhap
-    private void getDataFunctionsForCurrentUser() {
+    private void getDataPermissionForCurrentUser() {
+        listFunctions = getDataFunctionsForCurrentUser();
         //lay quyen cua user dang dang nhap hien tai
-        Query query = databaseReference.child("functions");//Lay danh sach quyen cua user dang dang nhap
+        Query query = databaseReference.child("permissions").orderByChild("userID").equalTo(firebaseAuth.getCurrentUser().getUid());//Lay danh sach quyen cua user dang dang nhap
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {//kiem tra ton tai du lieu khong
+
                     //Duyet de lay danh sach
                     for (DataSnapshot func : dataSnapshot.getChildren()) {
-                        Function function = func.getValue(Function.class);
-                        listFunctions.add(function);//them function vao danh sach
-                        listFunctionsHomeScreen.add(new HomeScreenCardViewModel(R.drawable.ic_login, function.getFunctionName()));
+                        Permissions permissions = func.getValue(Permissions.class);
+                        listPermissions.add(permissions);//them function vao danh sach
+                    }
+
+                    // Toast.makeText(getActivity(), "Size: " + listFunctions.size(), Toast.LENGTH_SHORT).show();
+                    for (int i = 0; i < listPermissions.size(); i++) {
+                        for (int j = 0; j < listFunctions.size(); j++) {
+                            if (listPermissions.get(i).getFunctionID().equals(listFunctions.get(j).getFunctionID())) {
+                                listFunctionsHomeScreen.add(new HomeScreenCardViewModel(R.drawable.ic_login, listFunctions.get(j).getFunctionName()));
+                                listFunctionsOfCurrentUser.add(listFunctions.get(j));
+                            }
+                        }
                     }
                     displayListFunctionOfUsersAtHomePage();
                 } else {
@@ -96,6 +109,32 @@ public class HomePageFragment extends Fragment {
             }
         });
 
+    }
+
+    private ArrayList<Function> getDataFunctionsForCurrentUser() {
+        // final ArrayList<Function> listData = new ArrayList<Function>();
+        //lay quyen cua user dang dang nhap hien tai
+        Query query = databaseReference.child("functions");//Lay danh sach quyen cua user dang dang nhap
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {//kiem tra ton tai du lieu khong
+                    //Duyet de lay danh sach
+                    for (DataSnapshot func : dataSnapshot.getChildren()) {
+                        Function function = func.getValue(Function.class);
+                        listFunctions.add(function);//them function vao danh sach
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Không hiển thị tên chức năng", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return listFunctions;
     }
 
     //Display list functions of users
@@ -112,13 +151,13 @@ public class HomePageFragment extends Fragment {
         adapter.setOnItemClickListener(new HomeScreenRecycleViewFunctionAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                String activityClass = listFunctions.get(position).getPackageClass() + "." + listFunctions.get(position).getActivityClass();
-               // Toast.makeText(getActivity(), activityClass, Toast.LENGTH_LONG).show();
+                String activityClass = listFunctionsOfCurrentUser.get(position).getPackageClass() + "." + listFunctionsOfCurrentUser.get(position).getActivityClass();
+                //Toast.makeText(getActivity(), activityClass, Toast.LENGTH_LONG).show();
                 try {
                     Class<?> myClass = Class.forName(activityClass);
                     Intent intent = new Intent(getActivity(), myClass);
 
-                    ListRoomsActivity.FUNCTIONNAME = listFunctions.get(position).getActivityClass();
+                    ListRoomsActivity.FUNCTIONNAME = listFunctionsOfCurrentUser.get(position).getActivityClass();
 
                     startActivity(intent);
 
