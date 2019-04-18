@@ -18,7 +18,8 @@
             android:layout_height="@dimen/homeScreenHeightOfImage"
             android:layout_gravity="center"
             android:src="@drawable/ic_login"
-            android:elevation="@dimen/homeScreenElevationOfImage"/>
+            android:elevation="@dimen/homeScreenElevationOfImage"
+            android:layout_marginLeft="7dp"/>
 
         <TextView
             android:id="@+id/homeScreenTxtFunctionName"

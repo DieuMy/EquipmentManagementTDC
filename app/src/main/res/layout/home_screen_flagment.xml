@@ -12,8 +12,22 @@
             android:text="@string/homeScreenNameScreen" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeScreenRecycleViewFunctions"
-        style="@style/HomeScreenRecycleView"
-        android:background="@drawable/home_screen_background" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/homeScreenswipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeScreenRecycleViewFunctions"
+            style="@style/HomeScreenRecycleView"
+            android:background="@drawable/home_screen_background" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <ProgressBar
+        android:id="@+id/homeScreenProgressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 </LinearLayout>

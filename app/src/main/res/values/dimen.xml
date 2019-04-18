@@ -25,11 +25,11 @@
     <dimen name="loginScreenElevationLinearLayoutOfTextViewAndEditText">10dp</dimen>
 
     <!--...............................Home Screen..................................-->
-    <dimen name="homeScreenWidthOfImage">80dp</dimen>
-    <dimen name="homeScreenHeightOfImage">80dp</dimen>
+    <dimen name="homeScreenWidthOfImage">70dp</dimen>
+    <dimen name="homeScreenHeightOfImage">70dp</dimen>
     <dimen name="homeScreenBorderWidthOfImage">1dp</dimen>
     <dimen name="homeScreenElevationOfImage">10dp</dimen>
-    <dimen name="homeScreenCardViewMarginLeftTextView">20dp</dimen>
+    <dimen name="homeScreenCardViewMarginLeftTextView">25dp</dimen>
     <dimen name="homeScreenCardViewMarginTopTextView">10dp</dimen>
     <dimen name="homeScreenCardViewTextSizeOfTextView">15sp</dimen>
     <dimen name="homeScreenPaddingCardView">7dp</dimen>

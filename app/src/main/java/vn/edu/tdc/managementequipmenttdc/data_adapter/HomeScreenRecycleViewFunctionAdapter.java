@@ -73,7 +73,7 @@ public class HomeScreenRecycleViewFunctionAdapter extends RecyclerView.Adapter<H
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //gắn datasource vị trí thứ i vào viewholer
         HomeScreenCardViewModel cardViewModel = listData.get(position);
-        Drawable drawable = holder.imageViewFunction.getResources().getDrawable(cardViewModel.getImgFunctionID());//lấy ảnh từ id
+        Drawable drawable = (Drawable) holder.imageViewFunction.getResources().getDrawable(cardViewModel.getImgFunctionID());//lấy ảnh từ id
         holder.imageViewFunction.setImageDrawable(drawable);//set lại ảnh trong viewHolder
         holder.txtFunctionName.setText(cardViewModel.getFunctionName());
     }

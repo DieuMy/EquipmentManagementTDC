@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class PersonalPageFragment extends Fragment {
     private TextView btnLogout;
     private Button btnOKDialog;
     private ImageView imgCloseDialog;
+    private ProgressBar progressBarLoading;
 
     private ImageView imgAvatar;
     private TextView txtFullName;
@@ -55,9 +57,16 @@ public class PersonalPageFragment extends Fragment {
     private String fullName = "";
     private String roleID = "";
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        progressBarLoading.setVisibility(View.GONE);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = null;
         view = inflater.inflate(R.layout.personal_page_screen_flagment, container, false);
 
@@ -70,6 +79,7 @@ public class PersonalPageFragment extends Fragment {
         imgAvatar = view.findViewById(R.id.personalScreenImageUsers);
         txtFullName = view.findViewById(R.id.personalScreenTxtFullName);
         txtRole = view.findViewById(R.id.personalScreenTxtRole);
+        progressBarLoading = (ProgressBar)view.findViewById((R.id.personalScreenProgressBar));
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -143,10 +153,12 @@ public class PersonalPageFragment extends Fragment {
     }
 
     public void getInformationOfUserCurrentLogin() {
+        progressBarLoading.setVisibility(View.VISIBLE);
         Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBarLoading.setVisibility(View.GONE);
                 if (dataSnapshot.exists()) {
                     users = dataSnapshot.getValue(Users.class);
                     fullName = users.getFullName();
