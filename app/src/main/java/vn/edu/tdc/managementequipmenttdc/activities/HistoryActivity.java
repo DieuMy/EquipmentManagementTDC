@@ -1,10 +1,22 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.Vector;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,50 +24,77 @@ import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 
 public class HistoryActivity extends AppCompatActivity {
 
     //Display list notifycation
-    private Vector<DisplayListNotifycationCardViewModel> list_displayListNotifycationCardViewModels;
+    private Vector<DisplayListNotifycationCardViewModel> list_displayHistoryCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();;
     RecyclerView displayListNotifycationRecycleView;
+    private ArrayList<RepairDiary> listRepairDiaryArray = new ArrayList<RepairDiary>();
 
     private TextView txtScreenName;
+    FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_list_notifycation_flagment);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
         displayListNotifycationRecycleView = findViewById(R.id.displayNotifycationRecycleView);
         txtScreenName = findViewById(R.id.displayNotifycationScreenName);
         txtScreenName.setText("Lịch sử");
 
-        displayListNotifycationOfDispayListNotifycationScreen();
+        getDataHistoryManipulationOfUser();
+    }
+
+
+    private void getDataHistoryManipulationOfUser(){
+        Query query = databaseReference.child("repairDiarys").orderByChild("userIDReport").equalTo(firebaseAuth.getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
+                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
+                        listRepairDiaryArray.add(repairDiary);
+                        //Toast.makeText(HistoryActivity.this, repairDiary.getIncident_content(), Toast.LENGTH_LONG).show();
+                        list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(repairDiary.getRepairDiaryID(), repairDiary.getDateReport()));
+                    }
+                    displayHistoryManipulationOfUser();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     //Hien thi lich su
-    private void displayListNotifycationOfDispayListNotifycationScreen() {
-        //Khoi tao gia tri
-        list_displayListNotifycationCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
-
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-
+    private void displayHistoryManipulationOfUser() {
         //Setup RecycleView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         displayListNotifycationRecycleView.setLayoutManager(layoutManager);
 
-        DisplayListNotifycationRecycleViewAdapter adapter = new DisplayListNotifycationRecycleViewAdapter(R.layout.card_view_display_list_notifycation_layout, list_displayListNotifycationCardViewModels);
+        DisplayListNotifycationRecycleViewAdapter adapter = new DisplayListNotifycationRecycleViewAdapter(R.layout.card_view_display_list_notifycation_layout, list_displayHistoryCardViewModels);
         displayListNotifycationRecycleView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new DisplayListNotifycationRecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(HistoryActivity.this, DetailMalfunctionActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

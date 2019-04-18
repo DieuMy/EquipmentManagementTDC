@@ -97,7 +97,7 @@ public class EditProfileActivity extends AppCompatActivity {
         //Set data for spinner department
         getAllDataOfDepartmentTable();
 
-        displayInformationCurrentUserOnActivity();
+        getInformationOfUserCurrentLogin();
 
         //Proccessing event for back
         imgToolBarBack.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +132,58 @@ public class EditProfileActivity extends AppCompatActivity {
         edtEmail.setText(User_Provider.user.getEmail());
         txtAccount.setText(firebaseAuth.getCurrentUser().getEmail());
         txtLastAccess.setText(User_Provider.user.getLastAccess());
+    }
+    
+    public void getInformationOfUserCurrentLogin() {
+        Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Users user = dataSnapshot.getValue(Users.class);
+
+                    edtFullName.setText(user.getFullName());
+                    edtAddress.setText(user.getAddress());
+                    edtNumberPhone.setText(user.getNumberPhone());
+                    edtEmail.setText(user.getEmail());
+                    txtAccount.setText(firebaseAuth.getCurrentUser().getEmail());
+                    txtLastAccess.setText(user.getLastAccess());
+
+                    //User_Provider.user = users;//Luu thong tin cua user de su dung
+                    getRoleOfUserCurrentLogin(user.getRoleID());
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getRoleOfUserCurrentLogin(final String roleID) {
+        if (roleID == null) {
+            return;
+        }
+        Query query = databaseReference.child("roles").child(roleID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Role roles = dataSnapshot.getValue(Role.class);
+                    String roleName = roles.getRoleName();
+                } else {
+                    Toast.makeText(EditProfileActivity.this, "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void getAllDataOfRoleTable() {
@@ -193,15 +245,30 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void saveNewProfile() {
-        String fullName = edtFullName.getText().toString();
-        String gender = spnGender.getSelectedItem().toString();
-        String address = edtAddress.getText().toString();
-        String numberPhone = edtNumberPhone.getText().toString();
-        String email = edtEmail.getText().toString();
+        String fullName = edtFullName.getText().toString().trim();
+        String gender = spnGender.getSelectedItem().toString().trim();
+        String address = edtAddress.getText().toString().trim();
+        String numberPhone = edtNumberPhone.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
         String roleID = "";
         String departmentID = "";
         String update_at = toolUtils.getCurrentTimeString();
-        String lastAccess = "";
+        String lastAccess = toolUtils.getCurrentTimeString();
+        
+        if(fullName.isEmpty()){
+            Toast.makeText(this, "Vui lòng nhập họ và tên", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(numberPhone.isEmpty()){
+            Toast.makeText(this, "Vui lòng nhập số điện thoại liên lạc", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(email.isEmpty()){
+            Toast.makeText(this, "Vui lòng nhập email liên hệ", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         final Users users = new Users(fullName, gender, address, numberPhone, email, roleID, departmentID, "",
                 User_Provider.user.isActive(), User_Provider.user.isLock_account(), User_Provider.user.getCreate_at(),
@@ -221,6 +288,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         if (dataSnapshot.exists()) {
                             databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(users);
                             Toast.makeText(EditProfileActivity.this, "Thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                            getInformationOfUserCurrentLogin();
                         } else {
                             Toast.makeText(EditProfileActivity.this, "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
                         }

@@ -167,7 +167,6 @@ public class PersonalPageFragment extends Fragment {
         });
     }
 
-
     public void getRoleOfUserCurrentLogin(final String roleID) {
         if(roleID == null){
             return;

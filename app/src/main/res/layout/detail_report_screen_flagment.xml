@@ -26,9 +26,9 @@
                 android:gravity="right">
 
                 <TextView
-                    android:id="@+id/list_equipment_screen_ToolBarSearch"
+                    android:id="@+id/list_equipment_screen_ToolBarRight"
                     style="@style/ToolBarRightOfAppBar"
-                   android:text="Đánh giá"
+                    android:text="Đánh giá"
                     android:fontFamily="sans-serif-condensed"
                     android:textSize="15sp"
                     android:textColor="#FFF"

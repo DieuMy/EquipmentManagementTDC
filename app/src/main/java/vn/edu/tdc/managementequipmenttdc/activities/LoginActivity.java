@@ -176,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(LoginActivity.this, "Vui lòng kiểm tra email để được cấp lại mật khẩu", Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(LoginActivity.this, "Gửi yêu cầu thất bại! Vui lòng thử lại sau! Hoặc liên hệ phòng kỹ thuật để cấp lại mật khẩu", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Gửi yêu cầu thất bại! Tài khoản chưa được đăng ký! Vui lòng thử lại sau! Hoặc liên hệ phòng kỹ thuật để cấp lại mật khẩu", Toast.LENGTH_LONG).show();
                             }
 
                             progressBarLoading.setVisibility(View.GONE);
