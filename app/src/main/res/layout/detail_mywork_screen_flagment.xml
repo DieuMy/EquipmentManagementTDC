@@ -12,7 +12,7 @@
                 android:layout_height="match_parent"
                 android:gravity="left">
                 <ImageView
-                    android:id="@+id/detailReportToolBarBack"
+                    android:id="@+id/detailMyWorkToolBarBack"
                     style="@style/ToolBarRightOfAppBar"
                     android:src="@drawable/ic_back" />
             </LinearLayout>
@@ -28,12 +28,13 @@
                 <TextView
                     android:id="@+id/detailReportToolBarRight"
                     style="@style/ToolBarRightOfAppBar"
-                    android:text="Đánh giá"
+                    android:text="Hoàn tất sửa chữa"
                     android:fontFamily="sans-serif-condensed"
                     android:textSize="15sp"
                     android:textColor="#FFF"
                     android:gravity="center"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -50,7 +51,7 @@
                     android:text="@string/DetailReportLabel_TimeBaoCao" />
 
                 <TextView
-                    android:id="@+id/detailreportscreen_timebaocao"
+                    android:id="@+id/detailMyWorkscreen_timebaocao"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_TimeBaoCao" />
             </LinearLayout>
@@ -62,7 +63,7 @@
                     android:text="@string/DetailReportLabel_Masuco" />
 
                 <TextView
-                    android:id="@+id/detailreportscreen_masuco"
+                    android:id="@+id/detailMyWork_masuco"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_Masuco" />
             </LinearLayout>
@@ -74,7 +75,7 @@
                     android:text="@string/DetailReportLabel_Maphong" />
 
                 <TextView
-                    android:id="@+id/detailreportscreen_maphong"
+                    android:id="@+id/ddetailMyWork_maphong"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_Maphong" />
             </LinearLayout>
@@ -86,7 +87,7 @@
                     android:text="@string/DetailReportLabel_Mathietbi" />
 
                 <TextView
-                    android:id="@+id/detailreportscreen_mathietbi"
+                    android:id="@+id/detailMyWork_mathietbi"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_Mathietbi" />
             </LinearLayout>
@@ -98,7 +99,7 @@
                     android:text="@string/DetailReportLabel_Manhanvien" />
 
                 <TextView
-                    android:id="@+id/detailreportscreen_manhanvien"
+                    android:id="@+id/detailMyWork_manhanvien"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_Manhanvien" />
             </LinearLayout>
@@ -110,7 +111,7 @@
                     android:text="@string/DetailReportLabel_Tennhanvien" />
 
                 <TextView
-                    android:id="@+id/detailreportscreen_tennhanvien"
+                    android:id="@+id/detailMyWork_tennhanvien"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_Tennhanvien" />
             </LinearLayout>
@@ -122,46 +123,32 @@
                     android:text="@string/DetailReportLabel_Noidung" />
 
                 <TextView
-                    android:id="@+id/detailreportscreen_noidung"
+                    android:id="@+id/detailMyWork_noidung"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_Noidung" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/detailReportLinnearLayoutTimeFix"
-                style="@style/DetailReportScreen_Textview">
-
-                <TextView
-                    style="@style/DetailReportScreenTextview"
-                    android:text="@string/DetailReportLabel_TimeSuaChua" />
-
-                <TextView
-                    android:id="@+id/detailreportscreen_timesuachua"
-                    style="@style/DetailReportScreenTextviewContent"
-                    android:hint="@string/DetailReportContent_TimeSuaChua" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/detailReportLinnearLayoutLoiDaKhacPhuc"
-                style="@style/DetailReportScreen_Textview">
+                style="@style/DetailReportScreen_Textview"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/DetailReportScreenTextview"
                     android:text="@string/DetailReportLabel_Loidakhacphuc" />
 
-                <TextView
-                    android:id="@+id/detailreportscreen_loikhacphuc"
+                <EditText
+                    android:id="@+id/detailMyWork_loikhacphuc"
                     style="@style/DetailReportScreenTextviewContent"
-                    android:hint="@string/DetailReportContent_Loidakhacphuc"/>
+                    android:hint="Nhập lỗi thực của thiết bị" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/detailReportLinnearLayoutButton"
-                style="@style/DetailReportScreen_Textview"
-                android:visibility="gone">
+                style="@style/DetailReportScreen_Textview">
 
                 <Button
-                    android:id="@+id/detailReportBtnTiepNhan"
+                    android:id="@+id/detailMyWorkBtnTiepNhan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tiếp nhận sửa chữa"

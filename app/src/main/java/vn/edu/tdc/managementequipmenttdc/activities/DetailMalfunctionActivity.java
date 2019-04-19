@@ -11,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
 
 public class DetailMalfunctionActivity  extends AppCompatActivity {
-    public static String FUNCTIONNAME ="";
     private ImageView imgToolBarBack;
-    private LinearLayout linearLayoutButtonTiepNhan;
     private TextView txtToolBarRight;
 
     @Override
@@ -24,13 +22,6 @@ public class DetailMalfunctionActivity  extends AppCompatActivity {
         //Gets view from layout
         imgToolBarBack = findViewById(R.id.detailReportToolBarBack);
         txtToolBarRight = findViewById(R.id.detailReportToolBarRight);
-        linearLayoutButtonTiepNhan = findViewById(R.id.detailReportLinnearLayoutButton);
-
-        if(FUNCTIONNAME.equals("MyWorkActivity")) {
-
-            txtToolBarRight.setText("Hoàn tất sửa chữa");
-            linearLayoutButtonTiepNhan.setVisibility(View.VISIBLE);
-        }
 
         imgToolBarBack.setOnClickListener(new View.OnClickListener() {
             @Override

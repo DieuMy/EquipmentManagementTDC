@@ -8,6 +8,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,6 @@ public class EquipmentsActivity extends AppCompatActivity {
     public static String ROOMID = "";
     public static String ROOMNAME = "";
 
-
     //List Equipment
     private Vector<ListRoomCardViewModel> listEquipmentsModels = new Vector<ListRoomCardViewModel>();
     RecyclerView listequipmentrecycleview;
@@ -54,7 +54,9 @@ public class EquipmentsActivity extends AppCompatActivity {
     String roomID;
 
     private TextView txtScreenName;
+    private TextView txtReportAll;
     private ImageView imgToolBar;
+    private CheckBox chkAll;
     private String equipmentID = "", equipmentName = "";
 
     @Override
@@ -78,6 +80,9 @@ public class EquipmentsActivity extends AppCompatActivity {
             equipmentID = bundle.getString("equipmentID");
             equipmentName = bundle.getString("equipmentName");
         }
+
+        txtReportAll = findViewById(R.id.listComputerTxtReportAll);
+        chkAll = findViewById(R.id.listComputerChkAll);
         txtScreenName.setText("Danh sách " + equipmentName + " phòng " + ROOMNAME);
 
         getDataEquipmentOfCorrespondingRoomID();
@@ -87,6 +92,18 @@ public class EquipmentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        chkAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chkAll.isChecked()) {
+                  txtReportAll.setVisibility(View.VISIBLE);
+                }
+                else{
+                    txtReportAll.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -109,9 +126,9 @@ public class EquipmentsActivity extends AppCompatActivity {
 
                     //Duyet lay danh sach cac thiet bị thuoc loai thiet bi duoc chon
                     for (Equipment equipment : listEquipments) {
-                        if(equipment.getParentID().equals(equipmentID)){
+                        if (equipment.getParentID().equals(equipmentID)) {
                             listEquipmentsModels.add(new ListRoomCardViewModel(equipment.getEquipmentName()));
-                        } else{
+                        } else {
                             final Dialog dialog = new Dialog(EquipmentsActivity.this);
                             dialog.setContentView(R.layout.popup_notifycation_layout);
 

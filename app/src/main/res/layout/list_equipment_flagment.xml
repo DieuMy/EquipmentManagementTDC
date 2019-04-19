@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.EquipmentsActivity">
 
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
@@ -15,6 +14,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="left">
+
                 <ImageView
                     android:id="@+id/listComputersToolBarBack"
                     style="@style/ToolBarRightOfAppBar"
@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right">
+
                 <ImageView
                     android:id="@+id/listComputerToolBarSearchs"
                     style="@style/ToolBarRightOfAppBar"
@@ -47,21 +48,25 @@
         android:paddingRight="20dp">
 
         <CheckBox
+            android:id="@+id/listComputerChkAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
             android:fontFamily="sans-serif-condensed"
             android:text="Tất cả"
-            android:textSize="15sp"
-            android:layout_marginRight="40dp"/>
+            android:textSize="15sp" />
+
         <TextView
+            android:id="@+id/listComputerTxtReportAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-           android:text="Báo cáo"
             android:fontFamily="sans-serif-condensed"
-            android:textSize="15sp"
+            android:text="Báo cáo"
             android:textColor="#5627A8"
-            android:enabled="false"/>
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

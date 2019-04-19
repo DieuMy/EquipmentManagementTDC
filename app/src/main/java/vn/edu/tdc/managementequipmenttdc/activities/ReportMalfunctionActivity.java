@@ -96,7 +96,6 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
                         reportContent += chkThieuPhanMem.getText() + "; ";
                     }
                     reportContent += edtOther.getText();
-                    Toast.makeText(ReportMalfunctionActivity.this, reportContent, Toast.LENGTH_SHORT).show();
                 }
             }
         });

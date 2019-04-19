@@ -186,7 +186,6 @@ public class HomePageFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), myClass);
 
                     ListRoomsActivity.FUNCTIONNAME = listFunctionsOfCurrentUser.get(position).getActivityClass();
-                    DetailMalfunctionActivity.FUNCTIONNAME = listFunctionsOfCurrentUser.get(position).getActivityClass();
 
                     startActivity(intent);
 

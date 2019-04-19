@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/navBottom_notification"
-        android:icon="@drawable/ic_notifications_active_black_24dp"
-        android:title="Thông báo" />
 
     <item
         android:id="@+id/navBottom_home"
         android:icon="@drawable/ic_home"
         android:title="Trang chủ" />
+    <item
+        android:id="@+id/navBottom_notification"
+        android:icon="@drawable/ic_notifications_active_black_24dp"
+        android:title="Thông báo" />
 
     <item
         android:id="@+id/navBottom_personal"

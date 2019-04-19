@@ -67,7 +67,7 @@ public class MyWorkActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new DisplayListNotifycationRecycleViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(MyWorkActivity.this, DetailMalfunctionActivity.class);
+                Intent intent = new Intent(MyWorkActivity.this, DetailMyWorkActivity.class);
                 startActivity(intent);
             }
         });
