@@ -94,7 +94,7 @@
     <string name="ListComputerScreenNameScreen">Danh sách máy</string>
 
     <!--........................Detail_Report_Screen.............................-->
-    <string name="DetailReportScreenNameScreen">Chi tiết thông báo</string>
+    <string name="DetailReportScreenNameScreen">Chi tiết</string>
     <string name="DetailReportLabel_TimeBaoCao">Thời gian báo cáo : </string>
     <string name="DetailReportLabel_Masuco">Mã sự cố : </string>
     <string name="DetailReportLabel_Maphong">Mã phòng : </string>

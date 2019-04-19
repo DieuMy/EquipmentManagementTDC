@@ -12,7 +12,7 @@
                 android:layout_height="match_parent"
                 android:gravity="left">
                 <ImageView
-                    android:id="@+id/editProfileToolBarBack"
+                    android:id="@+id/detailReportToolBarBack"
                     style="@style/ToolBarRightOfAppBar"
                     android:src="@drawable/ic_back" />
             </LinearLayout>
@@ -26,7 +26,7 @@
                 android:gravity="right">
 
                 <TextView
-                    android:id="@+id/list_equipment_screen_ToolBarRight"
+                    android:id="@+id/detailReportToolBarRight"
                     style="@style/ToolBarRightOfAppBar"
                     android:text="Đánh giá"
                     android:fontFamily="sans-serif-condensed"
@@ -145,11 +145,31 @@
                     style="@style/DetailReportScreenTextview"
                     android:text="@string/DetailReportLabel_Loidakhacphuc" />
 
-                <TextView
+                <EditText
                     android:id="@+id/detailreportscreen_loikhacphuc"
                     style="@style/DetailReportScreenTextviewContent"
-                    android:hint="@string/DetailReportContent_Loidakhacphuc" />
+                    android:hint="@string/DetailReportContent_Loidakhacphuc"
+                    android:enabled="false"/>
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detailReportLinnearLayoutButton"
+                style="@style/DetailReportScreen_Textview"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/detailReportBtnTiepNhan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tiếp nhận sửa chữa"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="15sp"
+                    android:textColor="#FFF"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/login_screen_btnlogin_background"/>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

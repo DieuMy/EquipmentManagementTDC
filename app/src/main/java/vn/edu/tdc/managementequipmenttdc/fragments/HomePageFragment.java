@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.activities.DetailMalfunctionActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.ListRoomsActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.SplashActivity;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.HomeScreenRecycleViewFunctionAdapter;
@@ -185,6 +186,7 @@ public class HomePageFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), myClass);
 
                     ListRoomsActivity.FUNCTIONNAME = listFunctionsOfCurrentUser.get(position).getActivityClass();
+                    DetailMalfunctionActivity.FUNCTIONNAME = listFunctionsOfCurrentUser.get(position).getActivityClass();
 
                     startActivity(intent);
 
