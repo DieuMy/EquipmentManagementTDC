@@ -37,7 +37,7 @@ import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class HomePageFragment extends Fragment {
 
-    //    Home Screen
+    //Home Screen
     private Vector<HomeScreenCardViewModel> listFunctionsHomeScreen = new Vector<HomeScreenCardViewModel>();
     RecyclerView homeScreenrecyclerViewFunctions;
 

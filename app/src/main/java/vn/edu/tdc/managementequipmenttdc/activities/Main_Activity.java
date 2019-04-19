@@ -60,7 +60,7 @@ public class Main_Activity extends AppCompatActivity {
             //Gets view from layout
             BottomNavigationView bottomNavView = findViewById(R.id.bottom_navigation);
             bottomNavView.setOnNavigationItemSelectedListener(navListener);
-            
+
             //Khoi dong man hinh home
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomePageFragment()).commit();
         } else {
