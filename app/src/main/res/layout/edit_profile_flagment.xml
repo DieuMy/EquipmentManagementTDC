@@ -46,17 +46,18 @@
         android:gravity="center"
         android:padding="5dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/editProfileScreenImageUsers"
             style="@style/EditProfileScreenImageViewAvatar"
             app:civ_border_color="@color/colorCivBorderImage"
             app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/ic_login"/>
 
         <EditText
             android:id="@+id/editProfileTxtFullName"
             style="@style/EditProfileTextViewFullName"
-            android:text="@string/personalScreenFullName"
             android:paddingBottom="20dp"/>
 
     </LinearLayout>
@@ -81,8 +82,7 @@
 
                 <TextView
                     android:id="@+id/editProfileTxtAccountName"
-                    style="@style/EditProfileTextViewDisplayAccountName"
-                    android:text="@string/editProfileTextAccount" />
+                    style="@style/EditProfileTextViewDisplayAccountName"/>
             </LinearLayout>
 
             <!--Tao thanh ngang-->
@@ -127,8 +127,7 @@
 
                 <EditText
                     android:id="@+id/editProfileEdtAddress"
-                    style="@style/EditProfileEditText"
-                    android:text="@string/editProfileTextViewAddressContent"></EditText>
+                    style="@style/EditProfileEditText"></EditText>
             </LinearLayout>
 
             <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
@@ -139,8 +138,7 @@
 
                 <EditText
                     android:id="@+id/editProfileEdtNumberPhone"
-                    style="@style/EditProfileEditText"
-                    android:text="@string/editProfileTextViewPhoneContent"></EditText>
+                    style="@style/EditProfileEditText"></EditText>
             </LinearLayout>
 
             <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
@@ -151,8 +149,7 @@
 
                 <EditText
                     android:id="@+id/editProfileEdtEmail"
-                    style="@style/EditProfileEditText"
-                    android:text="@string/editProfileTextViewEmailContent"></EditText>
+                    style="@style/EditProfileEditText"></EditText>
             </LinearLayout>
 
             <LinearLayout style="@style/EditProfileLinearLayoutContainContent">

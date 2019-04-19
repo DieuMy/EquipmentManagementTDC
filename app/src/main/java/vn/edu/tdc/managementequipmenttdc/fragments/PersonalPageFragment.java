@@ -2,6 +2,8 @@ package vn.edu.tdc.managementequipmenttdc.fragments;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -84,7 +86,6 @@ public class PersonalPageFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-
 
         // Display information of user current login
         getInformationOfUserCurrentLogin();
@@ -202,6 +203,25 @@ public class PersonalPageFragment extends Fragment {
 
             }
         });
+    }
+
+    //Load anh co kich thuoc lon
+    public Bitmap loadImage(int imageID, int targetHeight, int targetWidth){
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true; //De khong doc toan bo noi dung anh, ma chi doc tham so anh de biet kich thuoc anh
+        BitmapFactory.decodeResource(getResources(), imageID, options); //imageID: la anh can load/ sau khi thuc hien cau lenh nay options chua cac tham so cua anh
+        final int originalWidth = options.outWidth;//originalWidth: Chua chieu rong goc cua anh(anh lon)
+        final int originalHeight = options.outHeight;//originalHeight: Chieu cao goc cua anh(anh lon)
+
+        int inSampleSize = 1;
+
+        while ((originalHeight / (inSampleSize * 2)) > targetHeight &&  (originalWidth / (inSampleSize * 2)) > targetWidth) {
+            inSampleSize *= 2;
+        }
+
+        options.inSampleSize = inSampleSize;
+        options.inJustDecodeBounds = false; //Load kich thuoc that cua anh (vi sau khi xu ly anh nay da theo yeu cau)
+        return  BitmapFactory.decodeResource(getResources(), imageID, options);//Tra ve anh theo kich thuoc mong muon(options: chua kich thuoc anh sau xu ly)
     }
 
 }

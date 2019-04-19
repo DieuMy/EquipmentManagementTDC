@@ -67,12 +67,7 @@ public class HomePageFragment extends Fragment {
         progressBarLoading = (ProgressBar) view.findViewById((R.id.homeScreenProgressBar));
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.homeScreenswipeRefresh);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshList();
-            }
-        });
+        adapter = new HomeScreenRecycleViewFunctionAdapter(R.layout.card_view_home_screen_layout, listFunctionsHomeScreen);
 
         //Check user login
         if (null == firebaseAuth.getCurrentUser()) {
@@ -84,6 +79,13 @@ public class HomePageFragment extends Fragment {
         //Hien thi trang chu
         getDataPermissionForCurrentUser();
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
+
         return view;
     }
 
@@ -94,7 +96,6 @@ public class HomePageFragment extends Fragment {
     }
 
     private void refreshList() {
-
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -171,7 +172,6 @@ public class HomePageFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         homeScreenrecyclerViewFunctions.setLayoutManager(layoutManager);
 
-        adapter = new HomeScreenRecycleViewFunctionAdapter(R.layout.card_view_home_screen_layout, listFunctionsHomeScreen);
         homeScreenrecyclerViewFunctions.setAdapter(adapter);
 
         //Set event OnItemClickListener

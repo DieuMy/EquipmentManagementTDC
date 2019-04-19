@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListRoomRecycleAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
@@ -48,6 +50,8 @@ public class ListRoomsActivity extends AppCompatActivity {
     private ArrayList<Rooms> listRooms = new ArrayList<Rooms>();
     private TextView txtScreenName;
     private ImageView imgToolBack;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBarLoading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,8 +65,11 @@ public class ListRoomsActivity extends AppCompatActivity {
             areaName = bundle.getString("areaName");
         }
 
+        //Gets view from layout
         txtScreenName = findViewById(R.id.listRoomTxtScreenName);
         imgToolBack = findViewById(R.id.listRoomToolBarBack);
+        progressBarLoading = findViewById(R.id.listRoomProgressBar);
+        swipeRefreshLayout = findViewById(R.id.listRoomswipeRefresh);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -82,15 +89,34 @@ public class ListRoomsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBarLoading.setVisibility(View.GONE);
+    }
+
+    private void refreshList() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     //Lay danh sach cac phong thuc hanh theo khu vuc tuong ưng
     private void getDataRoomsOfCorrespondingArea() {
+        progressBarLoading.setVisibility(View.VISIBLE);
         //Lay danh sach phòng theo id cua khu vuc
         Query query = databaseReference.child("rooms").orderByChild("areaID").equalTo(areaID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBarLoading.setVisibility(View.GONE);
                 if (dataSnapshot.exists()) {
                     //Duyet de lay danh sach
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
@@ -166,10 +192,12 @@ public class ListRoomsActivity extends AppCompatActivity {
 
     //Lay danh sach tat ca cac phong thuc hanh
     private void getDataAllRooms() {
+        progressBarLoading.setVisibility(View.VISIBLE);
         Query query = databaseReference.child("rooms");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBarLoading.setVisibility(View.GONE);
                 if (dataSnapshot.exists()) {
                     //Duyet de lay danh sach
                     for (DataSnapshot item : dataSnapshot.getChildren()) {

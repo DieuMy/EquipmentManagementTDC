@@ -17,7 +17,8 @@
                 android:id="@+id/personalScreenImageUsers"
                 style="@style/PersonalSceenImageViewAvatar"
                 app:civ_border_color="@color/colorCivBorderImage"
-                app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar" />
+                app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar"
+                android:src="@drawable/ic_login"/>
 
             <LinearLayout
                 style="@style/PersonalScreenLinearLayoutContainFullNameAndRole">

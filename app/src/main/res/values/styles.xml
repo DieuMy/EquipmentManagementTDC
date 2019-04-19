@@ -149,7 +149,6 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">@dimen/personalScreenMarginLeftOfImageViewAvatar
         </item>
-        <item name="android:src">@drawable/teamwork</item>
     </style>
 
     <style name="PersonalSceenTextViewFullNameAndRole">
@@ -246,7 +245,6 @@
         <item name="android:layout_width">@dimen/editProfileWidthOfImageViewAvatar</item>
         <item name="android:layout_height">@dimen/editProfileHeightOfImageViewAvatar</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:src">@drawable/teamwork</item>
         <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
     </style>
 
@@ -257,7 +255,6 @@
         <item name="android:textSize">@dimen/editProfileTextSizeFullName</item>
         <item name="android:textColor">@color/colorTextViewFullNameOfEditProfile</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:elevation">@dimen/editProfileEvelationComponent</item>
         <item name="android:layout_marginLeft">25dp</item>
     </style>
 
