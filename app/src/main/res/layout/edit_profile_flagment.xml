@@ -112,9 +112,15 @@
                     style="@style/EditProfileTextViewDisplayLabel"
                     android:text="@string/editProfileTextViewGenderLabel" />
 
+                <TextView
+                    android:id="@+id/editProfileTxtGender"
+                    style="@style/EditProfileEditText"
+                    android:gravity="center_vertical"></TextView>
+
                 <Spinner
                     android:id="@+id/editProfileSpnGender"
-                    style="@style/EditProfileEditText"></Spinner>
+                    style="@style/EditProfileEditText"
+                    android:visibility="gone"></Spinner>
             </LinearLayout>
 
 

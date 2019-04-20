@@ -151,6 +151,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
 
+                                //Update last_access for user
+                                try {
+                                    databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("lastAccess").setValue(toolUtils.getCurrentTimeString());
+                                } catch (Exception e){
+                                    e.printStackTrace();
+                                }
 
                                 firebaseAuth.signOut();
                                 Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);

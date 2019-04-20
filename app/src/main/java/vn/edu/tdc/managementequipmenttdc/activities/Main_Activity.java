@@ -26,7 +26,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Main_Activity extends AppCompatActivity {
     ConnectionDetector connectionDetector;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override

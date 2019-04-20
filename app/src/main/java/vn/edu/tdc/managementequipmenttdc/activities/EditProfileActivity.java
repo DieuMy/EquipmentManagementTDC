@@ -47,7 +47,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText edtEmail;
     private Spinner spnRole;
     private Spinner spnDepartment;
-    private TextView txtLastAccess;
+    private TextView txtLastAccess, txtDisplayGender;
 
     private ArrayList<Role> listRole = new ArrayList<Role>();
     private ArrayList<Department> listDepartment = new ArrayList<Department>();
@@ -80,6 +80,7 @@ public class EditProfileActivity extends AppCompatActivity {
         edtNumberPhone = findViewById(R.id.editProfileEdtNumberPhone);
         edtEmail = findViewById(R.id.editProfileEdtEmail);
         txtLastAccess = findViewById(R.id.editProfileTxtLastAccess);
+        txtDisplayGender = findViewById(R.id.editProfileTxtGender);
 
         //Set adapter for spinner
         //Set data for spinner gender
@@ -116,6 +117,14 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+        txtDisplayGender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtDisplayGender.setVisibility(View.GONE);
+                spnGender.setVisibility(View.VISIBLE);
+            }
+        });
+
         imgToolBarSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,13 +150,13 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Users user = dataSnapshot.getValue(Users.class);
-
                     edtFullName.setText(user.getFullName());
                     edtAddress.setText(user.getAddress());
                     edtNumberPhone.setText(user.getNumberPhone());
                     edtEmail.setText(user.getEmail());
                     txtAccount.setText(firebaseAuth.getCurrentUser().getEmail());
                     txtLastAccess.setText(user.getLastAccess());
+                    txtDisplayGender.setText(user.getGender());
 
                     //User_Provider.user = users;//Luu thong tin cua user de su dung
                     getRoleOfUserCurrentLogin(user.getRoleID());
@@ -253,7 +262,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String roleID = "";
         String departmentID = "";
         String update_at = toolUtils.getCurrentTimeString();
-        String lastAccess = toolUtils.getCurrentTimeString();
+        String lastAccess =User_Provider.user.getLastAccess();
         
         if(fullName.isEmpty()){
             Toast.makeText(this, "Vui lòng nhập họ và tên", Toast.LENGTH_SHORT).show();

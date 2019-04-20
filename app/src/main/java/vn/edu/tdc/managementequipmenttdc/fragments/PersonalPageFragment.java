@@ -33,6 +33,7 @@ import vn.edu.tdc.managementequipmenttdc.activities.HelpUserActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.LoginActivity;
 import vn.edu.tdc.managementequipmenttdc.data_models.Role;
 import vn.edu.tdc.managementequipmenttdc.data_models.Users;
+import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class PersonalPageFragment extends Fragment {
@@ -54,6 +55,8 @@ public class PersonalPageFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    ToolUtils toolUtils;
+
     private Users users;
     private String roleName = "";
     private String fullName = "";
@@ -81,11 +84,12 @@ public class PersonalPageFragment extends Fragment {
         imgAvatar = view.findViewById(R.id.personalScreenImageUsers);
         txtFullName = view.findViewById(R.id.personalScreenTxtFullName);
         txtRole = view.findViewById(R.id.personalScreenTxtRole);
-        progressBarLoading = (ProgressBar)view.findViewById((R.id.personalScreenProgressBar));
+        progressBarLoading = (ProgressBar) view.findViewById((R.id.personalScreenProgressBar));
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        toolUtils = new ToolUtils();
 
         // Display information of user current login
         getInformationOfUserCurrentLogin();
@@ -143,7 +147,15 @@ public class PersonalPageFragment extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Update lastaccess for user
+                try {
+                    databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("lastAccess").setValue(toolUtils.getCurrentTimeString());
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
                 firebaseAuth.signOut();
+
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -181,7 +193,7 @@ public class PersonalPageFragment extends Fragment {
     }
 
     public void getRoleOfUserCurrentLogin(final String roleID) {
-        if(roleID == null){
+        if (roleID == null) {
             return;
         }
         Query query = databaseReference.child("roles").child(roleID);
@@ -204,24 +216,4 @@ public class PersonalPageFragment extends Fragment {
             }
         });
     }
-
-    //Load anh co kich thuoc lon
-    public Bitmap loadImage(int imageID, int targetHeight, int targetWidth){
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true; //De khong doc toan bo noi dung anh, ma chi doc tham so anh de biet kich thuoc anh
-        BitmapFactory.decodeResource(getResources(), imageID, options); //imageID: la anh can load/ sau khi thuc hien cau lenh nay options chua cac tham so cua anh
-        final int originalWidth = options.outWidth;//originalWidth: Chua chieu rong goc cua anh(anh lon)
-        final int originalHeight = options.outHeight;//originalHeight: Chieu cao goc cua anh(anh lon)
-
-        int inSampleSize = 1;
-
-        while ((originalHeight / (inSampleSize * 2)) > targetHeight &&  (originalWidth / (inSampleSize * 2)) > targetWidth) {
-            inSampleSize *= 2;
-        }
-
-        options.inSampleSize = inSampleSize;
-        options.inJustDecodeBounds = false; //Load kich thuoc that cua anh (vi sau khi xu ly anh nay da theo yeu cau)
-        return  BitmapFactory.decodeResource(getResources(), imageID, options);//Tra ve anh theo kich thuoc mong muon(options: chua kich thuoc anh sau xu ly)
-    }
-
 }
