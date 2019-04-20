@@ -16,6 +16,15 @@ import vn.edu.tdc.managementequipmenttdc.data_models.ListMalfunctionEquipmentMod
 public class ListMalfunctionEquipmentAdapter extends RecyclerView.Adapter<ListMalfunctionEquipmentAdapter.MyViewHolder>{
     private int layoutID;
     private Vector<ListMalfunctionEquipmentModels> listData;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        mListener = onItemClickListener;
+    }
 
     public ListMalfunctionEquipmentAdapter(int layoutID, Vector<ListMalfunctionEquipmentModels> listData) {
         this.layoutID = layoutID;
@@ -26,10 +35,22 @@ public class ListMalfunctionEquipmentAdapter extends RecyclerView.Adapter<ListMa
         private TextView txtPopupMalfunctionContent;
         private TextView txtPopupMalfunctionDate;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, final OnItemClickListener onItemClickListener) {
             super(itemView);
             txtPopupMalfunctionContent = (TextView) itemView.findViewById(R.id.popupContentMalfunction);
             txtPopupMalfunctionDate = (TextView) itemView.findViewById(R.id.popupDateReportMalfunction);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            onItemClickListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -38,7 +59,7 @@ public class ListMalfunctionEquipmentAdapter extends RecyclerView.Adapter<ListMa
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView viewItem = (CardView) inflater.inflate(layoutID,parent,false);
-        return new MyViewHolder(viewItem);
+        return new MyViewHolder(viewItem, mListener);
     }
 
     @Override

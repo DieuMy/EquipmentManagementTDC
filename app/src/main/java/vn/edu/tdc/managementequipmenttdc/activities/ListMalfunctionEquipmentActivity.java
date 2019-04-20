@@ -1,14 +1,25 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Vector;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,39 +29,51 @@ import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRec
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListMalfunctionEquipmentAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListMalfunctionEquipmentModels;
+import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 
 public class ListMalfunctionEquipmentActivity extends AppCompatActivity {
-
-    //Display list notifycation
     private Vector<ListMalfunctionEquipmentModels> list_displayListMalfunctionCardViewModels;
+    ;
     RecyclerView recycleViewListMalfunction;
 
-    private TextView txtScreenName;
+    private TextView txtScreenName, txtNotification;
+    private LinearLayout linearLayoutNotification;
     private ImageView imgToolBar;
     private Button btnOK;
     Intent intent;
-    private String equipmentID ="", equipmentName = "";
+    private String equipmentID = "", equipmentName = "";
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.malfunction_equipment_layout);
 
+        //Gets view from layout
         recycleViewListMalfunction = findViewById(R.id.listMalfunctionRecycleView);
         btnOK = findViewById(R.id.listMalfuntionBtnOK);
-
         txtScreenName = findViewById(R.id.listMalfunctionTxtScreenName);
-//        //Nhan du lieu
-//        intent = getIntent();
-//        Bundle bundle = intent.getExtras();
-//        if (bundle != null) {
-//            equipmentID = bundle.getString("equipmentIDMal");
-//            equipmentName = bundle.getString("equipmentNameMal");
-//        }
-        txtScreenName.setText("Danh sách sự cố đang xử lý của thiết bị " + equipmentName);
-        imgToolBar = findViewById(R.id.listMalfunctionToolBarBack);
+        txtNotification = findViewById(R.id.malfunctionTxtNotifyCation);
+        linearLayoutNotification = findViewById(R.id.malfunctionLinearLayoutNotifyCation);
 
-        displayListMalfunctionOfEquipment();
+        //Initial
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        list_displayListMalfunctionCardViewModels = new Vector<ListMalfunctionEquipmentModels>();
+
+        //Nhan du lieu
+        intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            equipmentID = bundle.getString("equipmentIDMal");
+            equipmentName = bundle.getString("equipmentNameMal");
+        }
+
+        //Toast.makeText(this, "IDMal: " + equipmentID, Toast.LENGTH_SHORT).show();
+        txtScreenName.setText("Danh sách sự cố đang xử lý " + equipmentName);
+        imgToolBar = findViewById(R.id.listMalfunctionToolBarBack);
 
         //Proccessing event for button OK
         btnOK.setOnClickListener(new View.OnClickListener() {
@@ -71,29 +94,46 @@ public class ListMalfunctionEquipmentActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAllDataMalfunctionOfEquipment(equipmentID);
+    }
+
+    public void getAllDataMalfunctionOfEquipment(String equipID) {
+        Query query = databaseReference.child("repairDiarys").orderByChild("equipmentID").equalTo(equipID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
+                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
+                        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels(repairDiary.getIncident_content(), repairDiary.getDateReport()));
+                    }
+
+                    displayListMalfunctionOfEquipment();
+                } else {
+                    recycleViewListMalfunction.setVisibility(View.GONE);
+                    linearLayoutNotification.setVisibility(View.VISIBLE);
+                    txtNotification.setText("Thiết bị hiện tại không có sự cố nào");
+                    Toast.makeText(ListMalfunctionEquipmentActivity.this, "Thiết bị hiện tại không có sự cố nào", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     //Hien thi lich su
     private void displayListMalfunctionOfEquipment() {
-        //Khoi tao gia tri
-        list_displayListMalfunctionCardViewModels = new Vector<ListMalfunctionEquipmentModels>();
-
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-
         //Setup RecycleView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recycleViewListMalfunction.setLayoutManager(layoutManager);
 
         ListMalfunctionEquipmentAdapter adapter = new ListMalfunctionEquipmentAdapter(R.layout.card_view_popup_malfunction_equipment_layout, list_displayListMalfunctionCardViewModels);
         recycleViewListMalfunction.setAdapter(adapter);
-
     }
-
 }

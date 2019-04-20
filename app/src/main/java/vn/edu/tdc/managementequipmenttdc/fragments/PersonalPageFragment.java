@@ -66,6 +66,8 @@ public class PersonalPageFragment extends Fragment {
     public void onResume() {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
+        // Display information of user current login
+        getInformationOfUserCurrentLogin();
     }
 
     @Nullable
@@ -90,9 +92,6 @@ public class PersonalPageFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         toolUtils = new ToolUtils();
-
-        // Display information of user current login
-        getInformationOfUserCurrentLogin();
 
         //Proccessing event for setting profile
         btnSettingProfile.setOnClickListener(new View.OnClickListener() {

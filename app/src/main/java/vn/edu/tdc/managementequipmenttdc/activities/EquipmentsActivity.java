@@ -216,12 +216,11 @@ public class EquipmentsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 intent = new Intent(EquipmentsActivity.this, ListMalfunctionEquipmentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("equipmentIDMal", listEquipments.get(position).getEquipmentID());
+                bundle.putString("equipmentNameMal", listEquipments.get(position).getEquipmentName());
 
-//                Bundle bundle = new Bundle();
-//                bundle.putString("equipmentIDMal", listEquipments.get(position).getEquipmentID());
-//                bundle.putString("equipmentNameMal", listEquipments.get(position).getEquipmentName());
-//
-//                intent.putExtras(bundle);
+                intent.putExtras(bundle);
                 //Truyen du lieu areaID sang listRoom
                 startActivity(intent);
             }

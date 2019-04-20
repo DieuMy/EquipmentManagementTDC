@@ -164,9 +164,15 @@
                     style="@style/EditProfileTextViewDisplayLabel"
                     android:text="Chức vụ" />
 
+                <TextView
+                    android:id="@+id/editProfileTxtRole"
+                    style="@style/EditProfileEditText"
+                    android:gravity="center_vertical"></TextView>
+
                 <Spinner
                     android:id="@+id/editProfileSpnRole"
-                    style="@style/EditProfileEditText"></Spinner>
+                    style="@style/EditProfileEditText"
+                    android:visibility="gone"></Spinner>
             </LinearLayout>
 
             <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
@@ -175,9 +181,15 @@
                     style="@style/EditProfileTextViewDisplayLabel"
                     android:text="Phòng ban" />
 
+                <TextView
+                    android:id="@+id/editProfileTxtDepartment"
+                    style="@style/EditProfileEditText"
+                    android:gravity="center_vertical"></TextView>
+
                 <Spinner
                     android:id="@+id/editProfileSpnDepartment"
-                    style="@style/EditProfileEditText"></Spinner>
+                    style="@style/EditProfileEditText"
+                    android:visibility="gone"></Spinner>
             </LinearLayout>
 
             <LinearLayout style="@style/EditProfileLinearLayoutContainContent">

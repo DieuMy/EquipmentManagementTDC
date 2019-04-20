@@ -37,6 +37,25 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:id="@+id/malfunctionLinearLayoutNotifyCation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/malfunctionTxtNotifyCation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="16sp"
+            android:text="Không có sự cố nào"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listMalfunctionRecycleView"
         android:layout_width="match_parent"
