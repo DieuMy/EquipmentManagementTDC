@@ -47,7 +47,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText edtEmail;
     private Spinner spnRole;
     private Spinner spnDepartment;
-    private TextView txtLastAccess, txtDisplayGender;
+    private TextView txtLastAccess, txtDisplayGender, txtDisplayRole, txtDisplayDepartment;
 
     private ArrayList<Role> listRole = new ArrayList<Role>();
     private ArrayList<Department> listDepartment = new ArrayList<Department>();
@@ -81,6 +81,8 @@ public class EditProfileActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.editProfileEdtEmail);
         txtLastAccess = findViewById(R.id.editProfileTxtLastAccess);
         txtDisplayGender = findViewById(R.id.editProfileTxtGender);
+        txtDisplayRole = findViewById(R.id.editProfileTxtRole);
+        txtDisplayDepartment = findViewById(R.id.editProfileTxtDepartment);
 
         //Set adapter for spinner
         //Set data for spinner gender
@@ -125,6 +127,24 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+        txtDisplayRole.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtDisplayRole.setText("");
+                txtDisplayRole.setVisibility(View.GONE);
+                spnRole.setVisibility(View.VISIBLE);
+            }
+        });
+
+        txtDisplayDepartment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtDisplayDepartment.setText("");
+                txtDisplayDepartment.setVisibility(View.GONE);
+                spnDepartment.setVisibility(View.VISIBLE);
+            }
+        });
+
         imgToolBarSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +162,7 @@ public class EditProfileActivity extends AppCompatActivity {
         txtAccount.setText(firebaseAuth.getCurrentUser().getEmail());
         txtLastAccess.setText(User_Provider.user.getLastAccess());
     }
-    
+
     public void getInformationOfUserCurrentLogin() {
         Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -158,8 +178,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     txtLastAccess.setText(user.getLastAccess());
                     txtDisplayGender.setText(user.getGender());
 
-                    //User_Provider.user = users;//Luu thong tin cua user de su dung
                     getRoleOfUserCurrentLogin(user.getRoleID());
+                    getDepartmentOfUserCurrentLogin(user.getDepartmentID());
                 } else {
 
                 }
@@ -183,6 +203,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     Role roles = dataSnapshot.getValue(Role.class);
                     String roleName = roles.getRoleName();
+                    txtDisplayRole.setText(roleName);
                 } else {
                     Toast.makeText(EditProfileActivity.this, "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
                 }
@@ -195,6 +216,31 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
+    public void getDepartmentOfUserCurrentLogin(final String departmentID) {
+        if (departmentID == null) {
+            return;
+        }
+        Query query = databaseReference.child("departments").child(departmentID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Department department = dataSnapshot.getValue(Department.class);
+                    String departmentName = department.getDepartmentName();
+                    txtDisplayDepartment.setText(departmentName);
+                } else {
+                    Toast.makeText(EditProfileActivity.this, "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    //Lay toan bo du lieu cua bang vi tri lam viec de gan vao spinner
     private void getAllDataOfRoleTable() {
         Query query = databaseReference.child("roles");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -259,24 +305,55 @@ public class EditProfileActivity extends AppCompatActivity {
         String address = edtAddress.getText().toString().trim();
         String numberPhone = edtNumberPhone.getText().toString().trim();
         String email = edtEmail.getText().toString().trim();
-        String roleID = "";
-        String departmentID = "";
         String update_at = toolUtils.getCurrentTimeString();
-        String lastAccess =User_Provider.user.getLastAccess();
-        
-        if(fullName.isEmpty()){
+        String lastAccess = User_Provider.user.getLastAccess();
+
+        if (fullName.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập họ và tên", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(numberPhone.isEmpty()){
+        if (numberPhone.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập số điện thoại liên lạc", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập email liên hệ", Toast.LENGTH_SHORT).show();
             return;
+        }
+
+        //Lay du lieu role_id va department_id
+        // Toast.makeText(this, "size: " + listRole.size(), Toast.LENGTH_SHORT).show();
+
+        String roleID = "";
+        for (int i = 0; i < listRole.size(); i++) {
+            if (txtDisplayRole.getText() == "") {
+                if (spnRole.getSelectedItem().equals(listRole.get(i).getRoleName())) {
+                    roleID = listRole.get(i).getRoleID();
+                    break;
+                }
+            } else {
+                if (txtDisplayRole.getText().equals(listRole.get(i).getRoleName())) {
+                    roleID = listRole.get(i).getRoleID();
+                    break;
+                }
+            }
+        }
+
+        String departmentID = "";
+        for (Department department : listDepartment) {
+            if (txtDisplayDepartment.getText() == "") {
+                if (spnDepartment.getSelectedItem().equals(department.getDepartmentName())) {
+                    departmentID = department.getDepartmentID();
+                    break;
+                }
+            } else {
+                if (txtDisplayDepartment.getText().equals(department.getDepartmentName())) {
+                    departmentID = department.getDepartmentID();
+                    break;
+                }
+            }
         }
 
         final Users users = new Users(fullName, gender, address, numberPhone, email, roleID, departmentID, "",
