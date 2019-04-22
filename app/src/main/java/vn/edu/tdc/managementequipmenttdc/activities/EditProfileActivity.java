@@ -40,7 +40,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ImageView imgToolBarSave;
     private ImageView imgAvatar;
     private EditText edtFullName;
-    private TextView txtAccount;
+    private TextView txtAccount, txtUserID, labelUserID;
     private Spinner spnGender;
     private EditText edtAddress;
     private EditText edtNumberPhone;
@@ -83,6 +83,8 @@ public class EditProfileActivity extends AppCompatActivity {
         txtDisplayGender = findViewById(R.id.editProfileTxtGender);
         txtDisplayRole = findViewById(R.id.editProfileTxtRole);
         txtDisplayDepartment = findViewById(R.id.editProfileTxtDepartment);
+        txtUserID = findViewById(R.id.editProfileTxtUserID);
+        labelUserID = findViewById(R.id.editProfileTxtLabelUserID);
 
         //Set adapter for spinner
         //Set data for spinner gender
@@ -155,6 +157,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void displayInformationCurrentUserOnActivity() {
         //Display information of current user login
+        txtUserID.setText(User_Provider.user.getUserID());
         edtFullName.setText(User_Provider.user.getFullName());
         edtAddress.setText(User_Provider.user.getAddress());
         edtNumberPhone.setText(User_Provider.user.getNumberPhone());
@@ -300,6 +303,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void saveNewProfile() {
+        String userID = txtUserID.getText().toString();
         String fullName = edtFullName.getText().toString().trim();
         String gender = spnGender.getSelectedItem().toString().trim();
         String address = edtAddress.getText().toString().trim();
@@ -356,7 +360,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
 
-        final Users users = new Users(fullName, gender, address, numberPhone, email, roleID, departmentID, "",
+        final Users users = new Users(userID, fullName, gender, address, numberPhone, email, roleID, departmentID, "",
                 User_Provider.user.isActive(), User_Provider.user.isLock_account(), User_Provider.user.getCreate_at(),
                 update_at, User_Provider.user.getLast_changePassword(), lastAccess);
 

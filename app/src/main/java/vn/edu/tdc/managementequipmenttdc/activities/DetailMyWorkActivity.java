@@ -14,6 +14,7 @@ import vn.edu.tdc.managementequipmenttdc.R;
 public class DetailMyWorkActivity  extends AppCompatActivity {
     private ImageView imgToolBarBack;
     private Button btnTiepNhan;
+    private TextView txtTiepNhan;
     private TextView txtToolBarRight;
     private LinearLayout detailReportLinnearLayoutLoiDaKhacPhuc;
 
@@ -25,7 +26,7 @@ public class DetailMyWorkActivity  extends AppCompatActivity {
         //Gets view from layout
         imgToolBarBack = findViewById(R.id.detailMyWorkToolBarBack);
         txtToolBarRight = findViewById(R.id.detailReportToolBarRight);
-        btnTiepNhan = findViewById(R.id.detailMyWorkBtnTiepNhan);
+        txtTiepNhan = findViewById(R.id.detailMyWorkBtnTiepNhan);
         detailReportLinnearLayoutLoiDaKhacPhuc = findViewById(R.id.detailReportLinnearLayoutLoiDaKhacPhuc);
 
         checkUI();
@@ -38,13 +39,13 @@ public class DetailMyWorkActivity  extends AppCompatActivity {
             }
         });
 
-        btnTiepNhan.setOnClickListener(new View.OnClickListener() {
+        txtTiepNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Bat nut hoan tat
                 txtToolBarRight.setVisibility(View.VISIBLE);
                 detailReportLinnearLayoutLoiDaKhacPhuc.setVisibility(View.VISIBLE);
-                btnTiepNhan.setVisibility(View.GONE);
+                txtTiepNhan.setVisibility(View.GONE);
 
                 //Thay doi trang thai cua loi tren co so du lieu
                 finish();

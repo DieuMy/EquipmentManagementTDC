@@ -110,13 +110,6 @@
                     style="@style/PersonalScreenTextViewFunctionName"
                     android:text="@string/personalScreenTxtInformationApp"/>
 
-                <ProgressBar
-                    android:id="@+id/personalScreenProgressBar"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:visibility="gone"
-                    android:layout_gravity="center"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -134,5 +127,11 @@
             </LinearLayout>
 
         </LinearLayout>
+        <ProgressBar
+            android:id="@+id/personalScreenProgressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:layout_gravity="center" />
     </LinearLayout>
 </ScrollView>

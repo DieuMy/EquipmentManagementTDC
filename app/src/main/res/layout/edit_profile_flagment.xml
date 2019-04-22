@@ -85,6 +85,18 @@
                     style="@style/EditProfileTextViewDisplayAccountName"/>
             </LinearLayout>
 
+            <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
+
+                <TextView
+                    android:id="@+id/editProfileTxtLabelUserID"
+                    style="@style/EditProfileTextViewDisplayLabel"
+                    android:text="Mã số nhân viên" />
+
+                <TextView
+                    android:id="@+id/editProfileTxtUserID"
+                    style="@style/EditProfileTextViewDisplayAccountName"/>
+            </LinearLayout>
+
             <!--Tao thanh ngang-->
             <View style="@style/EditProfileView" />
 
@@ -205,6 +217,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

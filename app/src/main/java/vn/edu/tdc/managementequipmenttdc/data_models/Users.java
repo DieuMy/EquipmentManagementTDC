@@ -3,6 +3,7 @@ package vn.edu.tdc.managementequipmenttdc.data_models;
 import java.util.Date;
 
 public class Users {
+    private String userID;
     private String fullName;
     private String gender;
     private String address;
@@ -21,7 +22,8 @@ public class Users {
     public Users() {
     }
 
-    public Users(String fullName, String gender, String address, String numberPhone, String email, String roleID, String departmentID, String avartaUser, boolean active, boolean lock_account, String create_at, String update_at, String last_changePassword, String lastAccess) {
+    public Users(String userID, String fullName, String gender, String address, String numberPhone, String email, String roleID, String departmentID, String avartaUser, boolean active, boolean lock_account, String create_at, String update_at, String last_changePassword, String lastAccess) {
+        this.userID = userID;
         this.fullName = fullName;
         this.gender = gender;
         this.address = address;
@@ -36,6 +38,14 @@ public class Users {
         this.update_at = update_at;
         this.last_changePassword = last_changePassword;
         this.lastAccess = lastAccess;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getGender() {
