@@ -58,8 +58,8 @@
                 style="@style/viewreportmalfunctionTextview"
                 android:text="@string/viewreportmalfunctionHolderTextview_Maphong"/>
             <TextView
+                android:id="@+id/viewreportmalfunctionTextviewRoomID"
                 style="@style/viewreportmalfunctionTextviewContent"
-                android:id="@+id/viewreportmalfunctionTextviewContent"
                 android:hint="@string/viewreportmalfunctionHintTextview_Maphong"
                 />
         </LinearLayout>
@@ -106,6 +106,7 @@
                 style="@style/viewreportmalfunctionTextview"
                 android:text="@string/viewreportmalfunctionHolderTextview_Noidung"/>
             <TextView
+                android:id="@+id/viewreportmalfunctiontextview_noidungsuco"
                 style="@style/viewreportmalfunctionTextviewContent"
                 android:hint="@string/viewreportmalfunctionHintTextview_Noidung"
                 />

@@ -135,7 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this, Main_Activity.class);
-                    User_Provider.username = username;
                     startActivity(intent);
                     finish();
                 }

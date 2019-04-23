@@ -86,7 +86,7 @@ public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
 
     public void getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(String roomID) {
         //  Lay danh sach su co cua phong thuc hành roomID = "a" and processingStatus = true
-        Query query = databaseReference.child("repairDiarys").orderByChild("roomID").equalTo(roomID);
+        Query query = databaseReference.child("repairDiarys").orderByChild("roomID_processingStatus").equalTo(roomID+"&false");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

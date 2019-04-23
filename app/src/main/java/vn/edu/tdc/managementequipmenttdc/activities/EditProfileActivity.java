@@ -83,7 +83,7 @@ public class EditProfileActivity extends AppCompatActivity {
         txtDisplayGender = findViewById(R.id.editProfileTxtGender);
         txtDisplayRole = findViewById(R.id.editProfileTxtRole);
         txtDisplayDepartment = findViewById(R.id.editProfileTxtDepartment);
-        txtUserID = findViewById(R.id.editProfileTxtUserID);
+        txtUserID = findViewById(R.id.EditProfileTxtUserID);
         labelUserID = findViewById(R.id.editProfileTxtLabelUserID);
 
         //Set adapter for spinner
@@ -180,7 +180,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     txtAccount.setText(firebaseAuth.getCurrentUser().getEmail());
                     txtLastAccess.setText(user.getLastAccess());
                     txtDisplayGender.setText(user.getGender());
-
+                    txtUserID.setText(user.getUserID());
                     getRoleOfUserCurrentLogin(user.getRoleID());
                     getDepartmentOfUserCurrentLogin(user.getDepartmentID());
                 } else {

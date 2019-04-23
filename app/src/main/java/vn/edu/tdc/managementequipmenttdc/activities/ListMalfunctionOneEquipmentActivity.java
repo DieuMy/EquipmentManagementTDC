@@ -97,7 +97,7 @@ public class ListMalfunctionOneEquipmentActivity extends AppCompatActivity {
     }
 
     public void getAllDataMalfunctionOfEquipment(String equipID) {
-        Query query = databaseReference.child("repairDiarys").orderByChild("equipmentID").equalTo(equipID);
+        Query query = databaseReference.child("repairDiarys").orderByChild("equipmentID_processingStatus").equalTo(equipID+"&false");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

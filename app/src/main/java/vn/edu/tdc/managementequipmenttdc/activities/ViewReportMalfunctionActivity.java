@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
 
     private ImageView imgSend;
     private ImageView imgToolBack;
+    private TextView txtMalfunctionID, txtRoomID, txtEquipmentID, txtUserID, txtEmployeeName, txtMalfunctionContent, txtDateReport;
     Intent intent;
 
     @Override
@@ -20,8 +22,17 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_report_malfuntion_screen_flagment);
 
+        //Gets view from layout
         imgSend = findViewById(R.id.viewReportMalfunctionToolBarSend);
         imgToolBack = findViewById(R.id.viewReportMalfunctionToolBarBack);
+        txtMalfunctionID = findViewById(R.id.viewreportmalfunctiontextview_masuco);
+        txtRoomID = findViewById(R.id.viewreportmalfunctionTextviewRoomID);
+        txtEquipmentID = findViewById(R.id.viewreportmalfunctiontextview_mathietbi);
+        txtUserID = findViewById(R.id.viewreportmalfunctiontextview_manhanvien);
+        txtEmployeeName = findViewById(R.id.viewreportmalfunctiontextview_tennhanvien);
+        txtMalfunctionContent = findViewById(R.id.viewreportmalfunctiontextview_noidungsuco);
+        txtDateReport = findViewById(R.id.viewreportmalfunctiontextview_thoigian);
+
 
         imgSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,5 +52,9 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void viewReportMalfunction(){
+
     }
 }

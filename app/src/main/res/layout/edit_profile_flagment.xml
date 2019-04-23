@@ -86,15 +86,15 @@
             </LinearLayout>
 
             <LinearLayout style="@style/EditProfileLinearLayoutContainContent">
-
                 <TextView
                     android:id="@+id/editProfileTxtLabelUserID"
                     style="@style/EditProfileTextViewDisplayLabel"
                     android:text="Mã số nhân viên" />
 
                 <TextView
-                    android:id="@+id/editProfileTxtUserID"
-                    style="@style/EditProfileTextViewDisplayAccountName"/>
+                    android:id="@+id/EditProfileTxtUserID"
+                    style="@style/EditProfileTextViewDisplayAccountName"
+                    android:text="ABC-116677"/>
             </LinearLayout>
 
             <!--Tao thanh ngang-->

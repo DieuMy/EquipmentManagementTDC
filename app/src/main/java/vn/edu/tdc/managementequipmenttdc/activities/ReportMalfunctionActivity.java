@@ -62,44 +62,54 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
         chkAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (chkAll.isChecked()) {
-                    chkHuBanPhim.setChecked(true);
-                    chkHuChuot.setChecked(true);
-                    chkMatNguon.setChecked(true);
-                    chkManHinh.setChecked(true);
-                    chkThieuPhanMem.setChecked(true);
-                    reportContent += chkHuBanPhim.getText() + "; " + chkHuChuot.getText() + "; " +
-                            chkMatNguon.getText() + "; " + chkManHinh.getText() + "; " +
-                            chkThieuPhanMem.getText() + "; " + edtOther.getText();
-                    Toast.makeText(ReportMalfunctionActivity.this, reportContent, Toast.LENGTH_SHORT).show();
-                } else {
-                    chkHuBanPhim.setChecked(false);
-                    chkHuChuot.setChecked(false);
-                    chkMatNguon.setChecked(false);
-                    chkManHinh.setChecked(false);
-                    chkThieuPhanMem.setChecked(false);
-                    reportContent = "";
-
-                    if (chkHuBanPhim.isChecked()) {
-                        reportContent += chkHuBanPhim.getText() + "; ";
-                    }
-                    if (chkHuChuot.isChecked()) {
-                        reportContent += chkHuChuot.getText() + "; ";
-                    }
-                    if (chkMatNguon.isChecked()) {
-                        reportContent += chkMatNguon.getText() + "; ";
-                    }
-                    if (chkManHinh.isChecked()) {
-                        reportContent += chkManHinh.getText() + "; ";
-                    }
-                    if (chkThieuPhanMem.isChecked()) {
-                        reportContent += chkThieuPhanMem.getText() + "; ";
-                    }
-                    reportContent += edtOther.getText();
-                }
+               checkCheckBoxAllIsCheck();
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reportContent = "";
+        checkCheckBoxAllIsCheck();
+    }
+
+    private void checkCheckBoxAllIsCheck(){
+        if (chkAll.isChecked()) {
+            chkHuBanPhim.setChecked(true);
+            chkHuChuot.setChecked(true);
+            chkMatNguon.setChecked(true);
+            chkManHinh.setChecked(true);
+            chkThieuPhanMem.setChecked(true);
+            reportContent += chkHuBanPhim.getText() + "; " + chkHuChuot.getText() + "; " +
+                    chkMatNguon.getText() + "; " + chkManHinh.getText() + "; " +
+                    chkThieuPhanMem.getText() + "; " + edtOther.getText();
+            Toast.makeText(ReportMalfunctionActivity.this, reportContent, Toast.LENGTH_SHORT).show();
+        } else {
+            chkHuBanPhim.setChecked(false);
+            chkHuChuot.setChecked(false);
+            chkMatNguon.setChecked(false);
+            chkManHinh.setChecked(false);
+            chkThieuPhanMem.setChecked(false);
+            reportContent = "";
+
+            if (chkHuBanPhim.isChecked()) {
+                reportContent += chkHuBanPhim.getText() + "; ";
+            }
+            if (chkHuChuot.isChecked()) {
+                reportContent += chkHuChuot.getText() + "; ";
+            }
+            if (chkMatNguon.isChecked()) {
+                reportContent += chkMatNguon.getText() + "; ";
+            }
+            if (chkManHinh.isChecked()) {
+                reportContent += chkManHinh.getText() + "; ";
+            }
+            if (chkThieuPhanMem.isChecked()) {
+                reportContent += chkThieuPhanMem.getText() + "; ";
+            }
+            reportContent += edtOther.getText();
+        }
     }
 }
 
