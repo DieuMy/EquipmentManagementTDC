@@ -1,7 +1,7 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
-import android.app.DownloadManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,22 +26,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.tdc.managementequipmenttdc.R;
-import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListMalfunctionEquipmentAdapter;
-import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListMalfunctionEquipmentModels;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 
-public class ListMalfunctionEquipmentActivity extends AppCompatActivity {
+public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
+    public static String ROOMID = "";
     private Vector<ListMalfunctionEquipmentModels> list_displayListMalfunctionCardViewModels;
-    ;
     RecyclerView recycleViewListMalfunction;
 
     private TextView txtScreenName, txtNotification;
     private LinearLayout linearLayoutNotification;
-    private ImageView imgToolBar;
-    private Button btnOK;
+    private ImageView imgToolBar, imgToolBarSearch;
+    private Button btnReport;
     Intent intent;
+
     private String equipmentID = "", equipmentName = "";
 
     FirebaseDatabase firebaseDatabase;
@@ -53,40 +53,21 @@ public class ListMalfunctionEquipmentActivity extends AppCompatActivity {
 
         //Gets view from layout
         recycleViewListMalfunction = findViewById(R.id.listMalfunctionRecycleView);
-        btnOK = findViewById(R.id.listMalfuntionBtnOK);
+        btnReport = findViewById(R.id.listMalfuntionBtnOK);
         txtScreenName = findViewById(R.id.listMalfunctionTxtScreenName);
         txtNotification = findViewById(R.id.malfunctionTxtNotifyCation);
         linearLayoutNotification = findViewById(R.id.malfunctionLinearLayoutNotifyCation);
+        imgToolBarSearch = findViewById(R.id.listMalfunctionToolBarSearch);
+        imgToolBar = findViewById(R.id.listMalfunctionToolBarBack);
 
         //Initial
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         list_displayListMalfunctionCardViewModels = new Vector<ListMalfunctionEquipmentModels>();
 
-        //Nhan du lieu
-        intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            equipmentID = bundle.getString("equipmentIDMal");
-            equipmentName = bundle.getString("equipmentNameMal");
-        }
+        txtScreenName.setText("Danh sách sự cố của phòng " + ROOMID);
 
-        //Toast.makeText(this, "IDMal: " + equipmentID, Toast.LENGTH_SHORT).show();
-        txtScreenName.setText("Danh sách sự cố đang xử lý " + equipmentName);
-        imgToolBar = findViewById(R.id.listMalfunctionToolBarBack);
-
-        //Proccessing event for button OK
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(ListMalfunctionEquipmentActivity.this, ReportMalfunctionActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        //Proccessing event tool bar back
-        imgToolBar.setOnClickListener(new View.OnClickListener() {
+        imgToolBarSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -97,26 +78,30 @@ public class ListMalfunctionEquipmentActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getAllDataMalfunctionOfEquipment(equipmentID);
+        btnReport.setVisibility(View.GONE);
+        imgToolBarSearch.setImageResource(R.drawable.ic_close_black_24dp);
+        imgToolBar.setVisibility(View.GONE);
+        getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(ROOMID);
     }
 
-    public void getAllDataMalfunctionOfEquipment(String equipID) {
-        Query query = databaseReference.child("repairDiarys").orderByChild("equipmentID").equalTo(equipID);
+    public void getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(String roomID) {
+        //  Lay danh sach su co cua phong thuc hành roomID = "a" and processingStatus = true
+        Query query = databaseReference.child("repairDiarys").orderByChild("roomID").equalTo(roomID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                         RepairDiary repairDiary = item.getValue(RepairDiary.class);
-                        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels(repairDiary.getIncident_content(), repairDiary.getDateReport()));
+                        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Máy " +
+                                repairDiary.getEquipmentID() + "\n" + repairDiary.getIncident_content(), repairDiary.getDateReport()));
                     }
 
                     displayListMalfunctionOfEquipment();
                 } else {
                     recycleViewListMalfunction.setVisibility(View.GONE);
                     linearLayoutNotification.setVisibility(View.VISIBLE);
-                    txtNotification.setText("Thiết bị hiện tại không có sự cố nào");
-                    Toast.makeText(ListMalfunctionEquipmentActivity.this, "Thiết bị hiện tại không có sự cố nào", Toast.LENGTH_SHORT).show();
+                    txtNotification.setText("Phòng thực hành này hiện tại không có thiết bị nào bị sự cố");
                 }
             }
 

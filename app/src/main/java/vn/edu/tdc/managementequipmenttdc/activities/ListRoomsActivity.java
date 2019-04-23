@@ -185,6 +185,7 @@ public class ListRoomsActivity extends AppCompatActivity {
                 EquipmentsActivity.ROOMNAME = listRooms.get(position).getRoomName();
 
                 TypeEquipmentActivity.ROOMNAME = listRooms.get(position).getRoomName();
+                ListMalfunctionOfRoomActivity.ROOMID = listRooms.get(position).getRoomID();
                 startActivity(intent);
             }
         });

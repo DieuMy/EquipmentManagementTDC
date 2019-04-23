@@ -31,9 +31,10 @@
         <activity android:name=".activities.ListRoomsActivity" />
         <activity android:name=".activities.DetailMyWorkActivity" />
         <activity android:name=".activities.HelpUserActivity" />
-        <activity android:name=".activities.ListMalfunctionEquipmentActivity" />
+        <activity android:name=".activities.ListMalfunctionOneEquipmentActivity" />
         <activity android:name=".activities.ViewReportMalfunctionActivity" />
         <activity android:name=".activities.DetailMalfunctionActivity" />
+        <activity android:name=".activities.ListMalfunctionOfRoomActivity" />
     </application>
 
 </manifest>

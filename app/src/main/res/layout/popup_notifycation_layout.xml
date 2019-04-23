@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardBackgroundColor="#99D7FA"
+        app:cardBackgroundColor="#C3E8FD"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">

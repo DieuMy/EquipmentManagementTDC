@@ -2,7 +2,6 @@
 <resources>
 
     <!--................................AppBar layout................................-->
-    <dimen name="appBarLayoutPaddingLeft">8dp</dimen>
     <dimen name="appBarLayoutTextSizeScreenName">15sp</dimen>
 
     <!--...............................Login Screen..................................-->

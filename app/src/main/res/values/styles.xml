@@ -14,7 +14,7 @@
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:background">@drawable/appbarlayout_background</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingLeft">@dimen/appBarLayoutPaddingLeft</item>
+
     </style>
 
     <style name="AppBarLayoutTextViewScreenName">
@@ -25,6 +25,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/appBarLayoutTextSizeScreenName</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:layout_marginLeft">5dp</item>
     </style>
 
     <style name="ToolBarApp">
@@ -36,7 +37,7 @@
     <style name="ToolBarRightOfAppBar">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginRight">7dp</item>
     </style>
     <!--.................................Login Screen.................................-->
 

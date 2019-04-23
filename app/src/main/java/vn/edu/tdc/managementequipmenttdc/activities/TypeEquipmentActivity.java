@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +30,7 @@ import vn.edu.tdc.managementequipmenttdc.data_models.ListEquipmentCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 
 public class TypeEquipmentActivity extends AppCompatActivity {
-    public static String ROOMNAME ="";
+    public static String ROOMNAME = "";
 
     private Vector<ListEquipmentCardViewModel> listTypeEquipmentCardViewModels = new Vector<ListEquipmentCardViewModel>();
     RecyclerView listequipmentrecycleview;
@@ -42,6 +43,7 @@ public class TypeEquipmentActivity extends AppCompatActivity {
     private String roomName = "Danh sách thiết bị phòng ";
     private TextView txtScreenName;
     private ImageView imgToolBack;
+    private FloatingActionButton floatingActionButtonViewListMalfunction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class TypeEquipmentActivity extends AppCompatActivity {
         txtScreenName = findViewById(R.id.list_equipment_screen_name);
         txtScreenName.setText(roomName + ROOMNAME);
         imgToolBack = findViewById(R.id.list_equipmentToolBarBack);
+        floatingActionButtonViewListMalfunction = findViewById(R.id.ListEquipmentScreenFloatButtonViewListMalfunction);
 
         getDataOfTypeEquipment();
 
@@ -62,6 +65,16 @@ public class TypeEquipmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        floatingActionButtonViewListMalfunction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(TypeEquipmentActivity.this, "Tap on float button", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(TypeEquipmentActivity.this, ListMalfunctionOfRoomActivity.class);
+                startActivity(intent);
+
             }
         });
     }

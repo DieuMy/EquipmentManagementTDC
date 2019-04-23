@@ -4,14 +4,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,8 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -34,7 +30,6 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListRoomRecycleAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.Equipment;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
-import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 
 public class EquipmentsActivity extends AppCompatActivity {
@@ -215,7 +210,7 @@ public class EquipmentsActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new ListRoomRecycleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                intent = new Intent(EquipmentsActivity.this, ListMalfunctionEquipmentActivity.class);
+                intent = new Intent(EquipmentsActivity.this, ListMalfunctionOneEquipmentActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("equipmentIDMal", listEquipments.get(position).getEquipmentID());
                 bundle.putString("equipmentNameMal", listEquipments.get(position).getEquipmentName());

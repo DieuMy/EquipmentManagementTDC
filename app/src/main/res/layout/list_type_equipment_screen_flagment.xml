@@ -1,46 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ListEquipmentScreenLinearLayout"
     tools:context=".activities.TypeEquipmentActivity">
 
-    <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
+    <LinearLayout style="@style/ListEquipmentScreenLinearLayout">
 
-        <androidx.appcompat.widget.Toolbar style="@style/ToolBarApp">
+        <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="left">
+            <androidx.appcompat.widget.Toolbar style="@style/ToolBarApp">
 
-                <ImageView
-                    android:id="@+id/list_equipmentToolBarBack"
-                    style="@style/ToolBarRightOfAppBar"
-                    android:src="@drawable/ic_back" />
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left">
 
-            <TextView
-                android:id="@+id/list_equipment_screen_name"
-                style="@style/AppBarLayoutTextViewScreenName"
-                android:text="@string/ListEquipmentScreenNameScreen" />
+                    <ImageView
+                        android:id="@+id/list_equipmentToolBarBack"
+                        style="@style/ToolBarRightOfAppBar"
+                        android:src="@drawable/ic_back" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="right">
+                <TextView
+                    android:id="@+id/list_equipment_screen_name"
+                    style="@style/AppBarLayoutTextViewScreenName"
+                    android:text="@string/ListEquipmentScreenNameScreen" />
 
-                <ImageView
-                    android:id="@+id/list_equipment_screen_ToolBarSearch"
-                    style="@style/ToolBarRightOfAppBar"
-                    android:src="@drawable/ic_search" />
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:background="@drawable/list_equipment_screen_background"
-        android:id="@+id/ListEquipmentScreenRecycleViewFunction"
-        style="@style/ListEquipmentScreenRecycleView"></androidx.recyclerview.widget.RecyclerView>
+                    <ImageView
+                        android:id="@+id/list_equipment_screen_ToolBarSearch"
+                        style="@style/ToolBarRightOfAppBar"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_search" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ListEquipmentScreenRecycleViewFunction"
+            style="@style/ListEquipmentScreenRecycleView"
+            android:background="@drawable/list_equipment_screen_background"
+            tools:itemCount="20" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ListEquipmentScreenFloatButtonViewListMalfunction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_assignment_black_24dp"
+        app:layout_anchor="@+id/ListEquipmentScreenRecycleViewFunction"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
