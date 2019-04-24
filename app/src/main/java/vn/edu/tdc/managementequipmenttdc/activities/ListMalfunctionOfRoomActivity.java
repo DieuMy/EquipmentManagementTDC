@@ -3,6 +3,8 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,9 +37,8 @@ public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
     private Vector<ListMalfunctionEquipmentModels> list_displayListMalfunctionCardViewModels;
     RecyclerView recycleViewListMalfunction;
 
-    private TextView txtScreenName, txtNotification;
+    private TextView txtNotification;
     private LinearLayout linearLayoutNotification;
-    private ImageView imgToolBar, imgToolBarSearch;
     private Button btnReport;
     Intent intent;
 
@@ -51,36 +52,53 @@ public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.malfunction_equipment_layout);
 
+        getSupportActionBar().setTitle("Danh sách sự cố của phòng " + ROOMID);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Gets view from layout
         recycleViewListMalfunction = findViewById(R.id.listMalfunctionRecycleView);
         btnReport = findViewById(R.id.listMalfuntionBtnOK);
-        txtScreenName = findViewById(R.id.listMalfunctionTxtScreenName);
         txtNotification = findViewById(R.id.malfunctionTxtNotifyCation);
         linearLayoutNotification = findViewById(R.id.malfunctionLinearLayoutNotifyCation);
-        imgToolBarSearch = findViewById(R.id.listMalfunctionToolBarSearch);
-        imgToolBar = findViewById(R.id.listMalfunctionToolBarBack);
 
         //Initial
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         list_displayListMalfunctionCardViewModels = new Vector<ListMalfunctionEquipmentModels>();
+    }
 
-        txtScreenName.setText("Danh sách sự cố của phòng " + ROOMID);
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 
-        imgToolBarSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    //Gan layout menu vua tao(menu_layout) vao menu cha
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Gan layout menu vua tao vao menu
+        getMenuInflater().inflate(R.menu.menu_search, menu);//Hien thi ra man hinh co menu tren thanh cong cu
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
+        //Kiem tra xem da click vao item nào
+        switch (indexItem) {
+            case R.id.menu_item_search: //Xu ly item xoa
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         btnReport.setVisibility(View.GONE);
-        imgToolBarSearch.setImageResource(R.drawable.ic_close_black_24dp);
-        imgToolBar.setVisibility(View.GONE);
         getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(ROOMID);
     }
 

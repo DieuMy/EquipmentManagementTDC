@@ -3,6 +3,8 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,8 +38,6 @@ import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 public class EditProfileActivity extends AppCompatActivity {
     private Intent intent;
     private Button btnChangePassword;
-    private ImageView imgToolBarBack;
-    private ImageView imgToolBarSave;
     private ImageView imgAvatar;
     private EditText edtFullName;
     private TextView txtAccount, txtUserID, labelUserID;
@@ -62,6 +62,10 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile_flagment);
 
+        getSupportActionBar().setTitle("Chỉnh sửa thông tin cá nhân");
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -69,8 +73,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         //Gets view from layout
         btnChangePassword = (Button) findViewById(R.id.editProfileBtnChangePassword);
-        imgToolBarBack = findViewById(R.id.editProfileToolBarBack);
-        imgToolBarSave = findViewById(R.id.editProfileToolBarSave);
         edtFullName = findViewById(R.id.editProfileTxtFullName);
         txtAccount = findViewById(R.id.editProfileTxtAccountName);
         spnGender = findViewById(R.id.editProfileSpnGender);
@@ -103,14 +105,6 @@ public class EditProfileActivity extends AppCompatActivity {
         getAllDataOfDepartmentTable();
 
         getInformationOfUserCurrentLogin();
-
-        //Proccessing event for back
-        imgToolBarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         //Proccessing event for button change password
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
@@ -146,13 +140,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 spnDepartment.setVisibility(View.VISIBLE);
             }
         });
+    }
 
-        imgToolBarSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveNewProfile();
-            }
-        });
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     private void displayInformationCurrentUserOnActivity() {
@@ -401,5 +394,26 @@ public class EditProfileActivity extends AppCompatActivity {
 
         builder.show();
 
+    }
+
+    //Gan layout menu vua tao(menu_layout) vao menu cha
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Gan layout menu vua tao vao menu
+        getMenuInflater().inflate(R.menu.menu_save, menu);//Hien thi ra man hinh co menu tren thanh cong cu
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
+        //Kiem tra xem da click vao item nào
+        switch (indexItem) {
+            case R.id.menu_item_save: //Xu ly item xoa
+                saveNewProfile();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

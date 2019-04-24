@@ -27,7 +27,6 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 
 public class ChangePasswordActivity extends AppCompatActivity {
-    private ImageView imgToolBarBack;
     private Button btnCancel;
     private Button btnSave;
     private EditText edtCurrentPassword;
@@ -52,20 +51,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
         toolUtils = new ToolUtils();
 
         //Gets view from layout
-        imgToolBarBack = findViewById(R.id.changePasswordToolBarBack);
         btnCancel = findViewById(R.id.changePasswordBtnCancel);
         btnSave = findViewById(R.id.changePasswordBtnSave);
         edtCurrentPassword = findViewById(R.id.changePasswordEdtCurrentPassword);
         edtNewPassword = findViewById(R.id.changePasswordNewPassword);
         edtCofirmPassword = findViewById(R.id.changePasswordCofirmPassword);
 
-        //Proccessing event tool bar back
-        imgToolBarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        getSupportActionBar().setTitle("Bảo mật và đăng nhập");
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Proccessing event btnCancel
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +110,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     private void changePassword() {
@@ -154,7 +155,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 //Update last_access for user
                                 try {
                                     databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("lastAccess").setValue(toolUtils.getCurrentTimeString());
-                                } catch (Exception e){
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 

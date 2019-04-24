@@ -5,13 +5,6 @@
     style="@style/HomeScreenLinearLayout"
     tools:context=".activities.Main_Activity">
 
-    <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
-
-        <TextView
-            style="@style/AppBarLayoutTextViewScreenName"
-            android:text="@string/homeScreenNameScreen" />
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/homeScreenswipeRefresh"
         android:layout_width="match_parent"

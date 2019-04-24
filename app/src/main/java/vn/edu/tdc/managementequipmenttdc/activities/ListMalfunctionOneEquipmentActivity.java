@@ -2,6 +2,8 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,9 +34,8 @@ public class ListMalfunctionOneEquipmentActivity extends AppCompatActivity {
     private Vector<ListMalfunctionEquipmentModels> list_displayListMalfunctionCardViewModels;
     RecyclerView recycleViewListMalfunction;
 
-    private TextView txtScreenName, txtNotification;
+    private TextView txtNotification;
     private LinearLayout linearLayoutNotification;
-    private ImageView imgToolBar;
     private Button btnOK;
     Intent intent;
     private String equipmentID = "", equipmentName = "";
@@ -50,7 +51,6 @@ public class ListMalfunctionOneEquipmentActivity extends AppCompatActivity {
         //Gets view from layout
         recycleViewListMalfunction = findViewById(R.id.listMalfunctionRecycleView);
         btnOK = findViewById(R.id.listMalfuntionBtnOK);
-        txtScreenName = findViewById(R.id.listMalfunctionTxtScreenName);
         txtNotification = findViewById(R.id.malfunctionTxtNotifyCation);
         linearLayoutNotification = findViewById(R.id.malfunctionLinearLayoutNotifyCation);
 
@@ -66,10 +66,10 @@ public class ListMalfunctionOneEquipmentActivity extends AppCompatActivity {
             equipmentID = bundle.getString("equipmentIDMal");
             equipmentName = bundle.getString("equipmentNameMal");
         }
-
         //Toast.makeText(this, "IDMal: " + equipmentID, Toast.LENGTH_SHORT).show();
-        txtScreenName.setText("Danh sách sự cố đang xử lý " + equipmentName);
-        imgToolBar = findViewById(R.id.listMalfunctionToolBarBack);
+        getSupportActionBar().setTitle("Danh sách sự cố đang xử lý " + equipmentName);
+
+        getAllDataMalfunctionOfEquipment(equipmentID);
 
         //Proccessing event for button OK
         btnOK.setOnClickListener(new View.OnClickListener() {
@@ -80,24 +80,36 @@ public class ListMalfunctionOneEquipmentActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
-        //Proccessing event tool bar back
-        imgToolBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    //Gan layout menu vua tao(menu_layout) vao menu cha
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Gan layout menu vua tao vao menu
+        getMenuInflater().inflate(R.menu.menu_close, menu);//Hien thi ra man hinh co menu tren thanh cong cu
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
+        //Kiem tra xem da click vao item nào
+        switch (indexItem) {
+            case R.id.menu_item_close: //Xu ly item xoa
                 finish();
-            }
-        });
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getAllDataMalfunctionOfEquipment(equipmentID);
     }
 
     public void getAllDataMalfunctionOfEquipment(String equipID) {
-        Query query = databaseReference.child("repairDiarys").orderByChild("equipmentID_processingStatus").equalTo(equipID+"&false");
+        Query query = databaseReference.child("repairDiarys").orderByChild("equipmentID_processingStatus").equalTo(equipID + "&false");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -48,8 +50,6 @@ public class ListRoomsActivity extends AppCompatActivity {
     private String areaID, areaName;
 
     private ArrayList<Rooms> listRooms = new ArrayList<Rooms>();
-    private TextView txtScreenName;
-    private ImageView imgToolBack;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBarLoading;
 
@@ -66,8 +66,6 @@ public class ListRoomsActivity extends AppCompatActivity {
         }
 
         //Gets view from layout
-        txtScreenName = findViewById(R.id.listRoomTxtScreenName);
-        imgToolBack = findViewById(R.id.listRoomToolBarBack);
         progressBarLoading = findViewById(R.id.listRoomProgressBar);
         swipeRefreshLayout = findViewById(R.id.listRoomswipeRefresh);
         listRoomRecycleView = (RecyclerView) findViewById(R.id.listRoomRecycleView);
@@ -78,18 +76,14 @@ public class ListRoomsActivity extends AppCompatActivity {
 
         if(FUNCTIONNAME.equals("ListRoomsActivity")){
             getDataAllRooms();
-            txtScreenName.setText("Danh sách tất cả các phòng thực hành");
+            getSupportActionBar().setTitle("Danh sách tất cả các phòng thực hành");
         } else {
             getDataRoomsOfCorrespondingArea();
-            txtScreenName.setText("Danh sách phòng khu vực/ tòa nhà " + areaName);
+            getSupportActionBar().setTitle("Danh sách phòng " + areaName);
         }
 
-        imgToolBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -97,6 +91,33 @@ public class ListRoomsActivity extends AppCompatActivity {
                 refreshList();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+    //Gan layout menu vua tao(menu_layout) vao menu cha
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Gan layout menu vua tao vao menu
+        getMenuInflater().inflate(R.menu.menu_search, menu);//Hien thi ra man hinh co menu tren thanh cong cu
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
+        //Kiem tra xem da click vao item nào
+        switch (indexItem) {
+            case R.id.menu_item_search: //Xu ly item xoa
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

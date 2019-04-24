@@ -45,12 +45,15 @@ public class Main_Activity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.navBottom_home:
+                    getSupportActionBar().setTitle("Trang chủ");
                     fragment = new HomePageFragment();
                     break;
                 case R.id.navBottom_notification:
+                    getSupportActionBar().setTitle("Thông báo");
                     fragment = new NotificationPageFragment();
                     break;
                 case R.id.navBottom_personal:
+                    getSupportActionBar().setTitle("Trang cá nhân");
                     fragment = new PersonalPageFragment();
                     break;
             }
@@ -66,6 +69,9 @@ public class Main_Activity extends AppCompatActivity {
         //Check internet
         connectionDetector = new ConnectionDetector(this);
         if (connectionDetector.isConnected()) {
+
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
             //Initial
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
@@ -79,6 +85,7 @@ public class Main_Activity extends AppCompatActivity {
             bottomNavView.setOnNavigationItemSelectedListener(navListener);
             //Khoi dong man hinh home
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomePageFragment()).commit();
+            getSupportActionBar().setTitle("Trang chủ");
         } else {
             setContentView(R.layout.login_flagment);
             final Dialog dialog = new Dialog(Main_Activity.this);

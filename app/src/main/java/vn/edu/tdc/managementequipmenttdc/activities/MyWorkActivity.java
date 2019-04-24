@@ -44,7 +44,7 @@ public class MyWorkActivity extends AppCompatActivity {
     RecyclerView recycleViewDisplayListNotifycation;
 
     private LinearLayout linearLayoutNotifycation;
-    private TextView txtScreenName, txtNotification;
+    private TextView txtNotification;
     private LinearLayout linearLayoutCheckBox;
     private ProgressBar progressBarLoading;
     private ArrayList<Rooms> listOfRoomsManagedByCurrentUser = new ArrayList<Rooms>();
@@ -54,6 +54,10 @@ public class MyWorkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_list_notifycation_flagment);
 
+        getSupportActionBar().setTitle("Công việc của tôi");
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Initial
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -62,15 +66,20 @@ public class MyWorkActivity extends AppCompatActivity {
 
         //Gets view from layout
         recycleViewDisplayListNotifycation = findViewById(R.id.displayNotifycationRecycleView);
-        txtScreenName = findViewById(R.id.displayNotifycationScreenName);
         progressBarLoading = findViewById(R.id.listNotifycationProgressBar);
-        txtScreenName.setText("Công việc của tôi");
+
         linearLayoutNotifycation = findViewById(R.id.listNotifycationLinearlayoutTextView);
         txtNotification = findViewById(R.id.listNotifycationTxtNotification);
         linearLayoutCheckBox = findViewById(R.id.displayNotifycationLinnearLayoutCheckBox);
         linearLayoutCheckBox.setVisibility(View.VISIBLE);
 
         getDataMyWorkOfCurrentUserWithRoleIsEmployee();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     @Override

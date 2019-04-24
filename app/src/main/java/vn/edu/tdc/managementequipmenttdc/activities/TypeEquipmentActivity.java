@@ -2,6 +2,8 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,10 +41,6 @@ public class TypeEquipmentActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     ToolUtils toolUtils;
     ArrayList<Equipment> listTypeEquipments = new ArrayList<Equipment>();
-
-    private String roomName = "Danh sách thiết bị phòng ";
-    private TextView txtScreenName;
-    private ImageView imgToolBack;
     private FloatingActionButton floatingActionButtonViewListMalfunction;
 
     @Override
@@ -50,23 +48,16 @@ public class TypeEquipmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_type_equipment_screen_flagment);
 
+        getSupportActionBar().setTitle("Danh sách thiết bị phòng " + ROOMNAME);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         toolUtils = new ToolUtils();
-
-        txtScreenName = findViewById(R.id.list_equipment_screen_name);
-        txtScreenName.setText(roomName + ROOMNAME);
-        imgToolBack = findViewById(R.id.list_equipmentToolBarBack);
         floatingActionButtonViewListMalfunction = findViewById(R.id.ListEquipmentScreenFloatButtonViewListMalfunction);
 
         getDataOfTypeEquipment();
-
-        imgToolBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         floatingActionButtonViewListMalfunction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +67,33 @@ public class TypeEquipmentActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+    //Gan layout menu vua tao(menu_layout) vao menu cha
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Gan layout menu vua tao vao menu
+        getMenuInflater().inflate(R.menu.menu_search, menu);//Hien thi ra man hinh co menu tren thanh cong cu
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
+        //Kiem tra xem da click vao item nào
+        switch (indexItem) {
+            case R.id.menu_item_search: //Xu ly item xoa
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void create(Equipment equipment) {

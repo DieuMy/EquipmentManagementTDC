@@ -16,7 +16,6 @@ import vn.edu.tdc.managementequipmenttdc.R;
 public class ReportMalfunctionActivity extends AppCompatActivity {
 
     private Button btnOK;
-    private ImageView imgToolBar;
     private CheckBox chkAll, chkHuChuot, chkHuBanPhim, chkMatNguon, chkManHinh, chkThieuPhanMem;
     private EditText edtOther;
     private String reportContent = "";
@@ -29,9 +28,12 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_malfunction_screen_flagment);
 
+        getSupportActionBar().setTitle("Phiếu báo cáo sự cố");
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Gets view from layout
         btnOK = findViewById(R.id.ReportMalfuntionBtnOK);
-        imgToolBar = findViewById(R.id.reportmalFunctionToolBarBack);
         chkAll = findViewById(R.id.reportmalfunctioncheckboxall);
         chkHuChuot = findViewById(R.id.reportmalfunctioncheckboxmouse);
         chkHuBanPhim = findViewById(R.id.reportmalfunctioncheckboxkeyboard);
@@ -50,14 +52,6 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
             }
         });
 
-        //Proccessing event tool bar back
-        imgToolBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         //Processing for event check all
         chkAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +59,12 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
                checkCheckBoxAllIsCheck();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     @Override

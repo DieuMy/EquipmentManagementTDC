@@ -1,6 +1,8 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -24,19 +26,35 @@ public class HelpUserActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_users_layout);
-        ImageView imgCloseActivity = (ImageView) findViewById(R.id.helpUserToolBarClose);
+
+        getSupportActionBar().setTitle("Trợ giúp");
 
         expandableListView = findViewById(R.id.helpUsersExpandableListView);
         initialData();
         expanableListViewAdapter = new HelpUserExpanableListViewAdapter(this, listQuestion, listAnswer);
         expandableListView.setAdapter(expanableListViewAdapter);
+    }
 
-        imgCloseActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+    //Gan layout menu vua tao(menu_layout) vao menu cha
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Gan layout menu vua tao vao menu
+        getMenuInflater().inflate(R.menu.menu_close, menu);//Hien thi ra man hinh co menu tren thanh cong cu
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
+        //Kiem tra xem da click vao item nào
+        switch (indexItem) {
+            case R.id.menu_item_close: //Xu ly item xoa
                 finish();
-            }
-        });
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void initialData(){

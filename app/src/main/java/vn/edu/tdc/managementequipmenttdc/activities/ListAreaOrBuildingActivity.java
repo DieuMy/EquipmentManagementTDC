@@ -30,43 +30,46 @@ import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 
 public class ListAreaOrBuildingActivity extends AppCompatActivity {
     //Display list area
-    private Vector<AreaBuildingCardviewModel> list_areaBuildingCardviewModels = new Vector<AreaBuildingCardviewModel>();;
+    private Vector<AreaBuildingCardviewModel> list_areaBuildingCardviewModels = new Vector<AreaBuildingCardviewModel>();
+    ;
     RecyclerView areaBuildingRecycleView;
 
     private ArrayList<AreaBuilding> listAreaBuilding = new ArrayList<AreaBuilding>();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private ToolUtils toolUtils;
-    private ImageView imgToolBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.areabuilding_screen_flagment);
+
+        getSupportActionBar().setTitle("Khu vực/ tòa nhà");
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-        imgToolBack = findViewById(R.id.areaBuildingToolBarBack);
         toolUtils = new ToolUtils();
 
         getAllDataOfAreaBuilding();
 
-        imgToolBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     //Lay danh sach ca khu vuc/ toa nha
-    private void getAllDataOfAreaBuilding(){
+    private void getAllDataOfAreaBuilding() {
         Query query = databaseReference.child("area_buildings");//Lay toa bo du lieu bang are_buildings
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if ((dataSnapshot.exists())){
+                if ((dataSnapshot.exists())) {
                     //Duyet de lay danh sach
                     for (DataSnapshot area : dataSnapshot.getChildren()) {
                         AreaBuilding areaBuilding = area.getValue(AreaBuilding.class);
@@ -74,7 +77,7 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
                         list_areaBuildingCardviewModels.add(new AreaBuildingCardviewModel(R.drawable.ic_building, areaBuilding.getAreaName()));
                     }
                     displayListAreaBuilding();
-                } else{
+                } else {
                     Toast.makeText(ListAreaOrBuildingActivity.this, "Không tồn tại khu vực/ tòa nhà nào!", Toast.LENGTH_SHORT).show();
                 }
             }

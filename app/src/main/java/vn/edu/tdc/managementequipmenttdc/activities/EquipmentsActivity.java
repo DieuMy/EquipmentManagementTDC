@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -48,9 +50,7 @@ public class EquipmentsActivity extends AppCompatActivity {
     ArrayList<Equipment> listEquipments = new ArrayList<Equipment>();
     String roomID;
 
-    private TextView txtScreenName;
     private TextView txtReportAll;
-    private ImageView imgToolBar;
     private CheckBox chkAll;
     private String equipmentID = "", equipmentName = "";
 
@@ -65,9 +65,6 @@ public class EquipmentsActivity extends AppCompatActivity {
         //Khoi tao gia tri
         listEquipmentsModels = new Vector<ListRoomCardViewModel>();
 
-        txtScreenName = findViewById(R.id.listComputersScreenName);
-        imgToolBar = findViewById(R.id.listComputersToolBarBack);
-
         //Nhan du lieu
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -78,17 +75,12 @@ public class EquipmentsActivity extends AppCompatActivity {
 
         txtReportAll = findViewById(R.id.listComputerTxtReportAll);
         chkAll = findViewById(R.id.listComputerChkAll);
-        txtScreenName.setText("Danh sách " + equipmentName + " phòng " + ROOMNAME);
+
+        getSupportActionBar().setTitle("Danh sách " + equipmentName + " phòng " + ROOMNAME);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getDataEquipmentOfCorrespondingRoomID();
-
-        //Processing event tool bar
-        imgToolBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         chkAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +93,33 @@ public class EquipmentsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+    //Gan layout menu vua tao(menu_layout) vao menu cha
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Gan layout menu vua tao vao menu
+        getMenuInflater().inflate(R.menu.menu_search, menu);//Hien thi ra man hinh co menu tren thanh cong cu
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
+        //Kiem tra xem da click vao item nào
+        switch (indexItem) {
+            case R.id.menu_item_search: //Xu ly item xoa
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Lay danh sach cac may theo id phong

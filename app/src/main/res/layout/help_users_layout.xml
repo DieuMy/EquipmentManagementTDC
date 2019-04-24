@@ -3,28 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.google.android.material.appbar.AppBarLayout style="@style/AppBarActionStyle">
-
-        <androidx.appcompat.widget.Toolbar style="@style/ToolBarApp">
-
-            <TextView
-                android:id="@+id/helpUsersTxtScreenName"
-                style="@style/AppBarLayoutTextViewScreenName"
-                android:text="Trợ giúp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="right">
-                <ImageView
-                    android:id="@+id/helpUserToolBarClose"
-                    style="@style/ToolBarRightOfAppBar"
-                    android:src="@drawable/ic_close_black_24dp" />
-            </LinearLayout>
-
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-
 
     <ExpandableListView
         android:id="@+id/helpUsersExpandableListView"

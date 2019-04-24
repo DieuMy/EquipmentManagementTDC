@@ -2,6 +2,8 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,11 +31,12 @@ import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 public class HistoryActivity extends AppCompatActivity {
 
     //Display list notifycation
-    private Vector<DisplayListNotifycationCardViewModel> list_displayHistoryCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();;
+    private Vector<DisplayListNotifycationCardViewModel> list_displayHistoryCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
+    ;
     RecyclerView displayListNotifycationRecycleView;
     private ArrayList<RepairDiary> listRepairDiaryArray = new ArrayList<RepairDiary>();
 
-    private TextView txtScreenName;
+    private ProgressBar progressBarLoading;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -43,24 +46,43 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_list_notifycation_flagment);
 
+        getSupportActionBar().setTitle("Lịch sử");
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-
+        progressBarLoading = findViewById(R.id.listNotifycationProgressBar);
         displayListNotifycationRecycleView = findViewById(R.id.displayNotifycationRecycleView);
-        txtScreenName = findViewById(R.id.displayNotifycationScreenName);
-        txtScreenName.setText("Lịch sử");
+
 
         getDataHistoryManipulationOfUser();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 
-    private void getDataHistoryManipulationOfUser(){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBarLoading.setVisibility(View.GONE);
+        displayListNotifycationRecycleView.setVisibility(View.VISIBLE);
+    }
+
+    private void getDataHistoryManipulationOfUser() {
+        progressBarLoading.setVisibility(View.VISIBLE);
+        displayListNotifycationRecycleView.setVisibility(View.GONE);
         Query query = databaseReference.child("repairDiarys").orderByChild("userIDReport").equalTo(firebaseAuth.getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                progressBarLoading.setVisibility(View.GONE);
+                displayListNotifycationRecycleView.setVisibility(View.VISIBLE);
+                if (dataSnapshot.exists()) {
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                         RepairDiary repairDiary = item.getValue(RepairDiary.class);
                         listRepairDiaryArray.add(repairDiary);
