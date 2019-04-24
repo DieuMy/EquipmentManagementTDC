@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +27,7 @@ public class NotificationPageFragment extends Fragment {
     //Display list notifycation
     private Vector<DisplayListNotifycationCardViewModel> list_displayListNotifycationCardViewModels;
     RecyclerView displayListNotifycationRecycleView;
+    private ProgressBar progressBarLoading;
 
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
@@ -39,11 +41,11 @@ public class NotificationPageFragment extends Fragment {
         view = inflater.inflate(R.layout.display_list_notifycation_flagment, container, false);
         //Get views layout
         displayListNotifycationRecycleView = (RecyclerView) view.findViewById(R.id.displayNotifycationRecycleView);
+        progressBarLoading = view.findViewById(R.id.listNotifycationProgressBar);
 
         displayListNotifycationOfDispayListNotifycationScreen();
         return view;
     }
-
 
     //Hien thi danh sach thong bao
     private void displayListNotifycationOfDispayListNotifycationScreen() {

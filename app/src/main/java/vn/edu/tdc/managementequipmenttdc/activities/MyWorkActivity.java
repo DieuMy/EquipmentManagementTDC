@@ -2,9 +2,12 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,20 +30,24 @@ import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRec
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class MyWorkActivity extends AppCompatActivity {
 
+    private final String TAG = "MyWorkActivity";
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
 
     //Display list notifycation
     private Vector<DisplayListNotifycationCardViewModel> list_displayListNotifycationCardViewModels;
-    RecyclerView displayListNotifycationRecycleView;
+    RecyclerView recycleViewDisplayListNotifycation;
 
-    private TextView txtScreenName;
+    private LinearLayout linearLayoutNotifycation;
+    private TextView txtScreenName, txtNotification;
     private LinearLayout linearLayoutCheckBox;
-    private ArrayList<Rooms> listOfRoomsManagedByCurrentUser;
+    private ProgressBar progressBarLoading;
+    private ArrayList<Rooms> listOfRoomsManagedByCurrentUser = new ArrayList<Rooms>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,20 +58,28 @@ public class MyWorkActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        list_displayListNotifycationCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
 
         //Gets view from layout
-        displayListNotifycationRecycleView = findViewById(R.id.displayNotifycationRecycleView);
+        recycleViewDisplayListNotifycation = findViewById(R.id.displayNotifycationRecycleView);
         txtScreenName = findViewById(R.id.displayNotifycationScreenName);
+        progressBarLoading = findViewById(R.id.listNotifycationProgressBar);
         txtScreenName.setText("Công việc của tôi");
-
+        linearLayoutNotifycation = findViewById(R.id.listNotifycationLinearlayoutTextView);
+        txtNotification = findViewById(R.id.listNotifycationTxtNotification);
         linearLayoutCheckBox = findViewById(R.id.displayNotifycationLinnearLayoutCheckBox);
         linearLayoutCheckBox.setVisibility(View.VISIBLE);
 
-
-        displayListNotifycationOfDispayListNotifycationScreen();
+        getDataMyWorkOfCurrentUserWithRoleIsEmployee();
     }
 
-    private void getRoomManagedByCurrentUser() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBarLoading.setVisibility(View.GONE);
+    }
+
+    private void getDataMyWorkOfCurrentUserWithRoleIsEmployee() {
         Query query = databaseReference.child("rooms").orderByChild("userID").equalTo(firebaseAuth.getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -74,8 +89,15 @@ public class MyWorkActivity extends AppCompatActivity {
                         Rooms rooms = item.getValue(Rooms.class);
                         listOfRoomsManagedByCurrentUser.add(rooms);
                     }
-                } else{
 
+                    getDataRepairDiary();
+
+                } else {
+                    recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+                    linearLayoutNotifycation.setVisibility(View.VISIBLE);
+                    linearLayoutCheckBox.setVisibility(View.GONE);
+                    txtNotification.setText("Không có phòng thực hành nào thuộc quyền quản lý của bạn");
+                    return;
                 }
             }
 
@@ -86,29 +108,62 @@ public class MyWorkActivity extends AppCompatActivity {
         });
     }
 
+    private void getDataRepairDiary() {
+        progressBarLoading.setVisibility(View.VISIBLE);
+        recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+        final ArrayList<RepairDiary> listRepairDiary = new ArrayList<RepairDiary>();
+        Query query = databaseReference.child("repairDiarys");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBarLoading.setVisibility(View.GONE);
+                recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
+                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
+                        listRepairDiary.add(repairDiary);
+                    }
 
-    private void displayListNotifycationOfDispayListNotifycationScreen() {
-        //Khoi tao gia tri
-        list_displayListNotifycationCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
+                    //Duyet de lay danh sach cong viec
+                    for (Rooms room : listOfRoomsManagedByCurrentUser) {
+                        for (RepairDiary repairDiary : listRepairDiary) {
+                            if (room.getRoomID().equals(repairDiary.getRoomID())) {
+                                list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
+                                        "Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
+                                                + "\n" + repairDiary.getIncident_content() + "\n",
+                                        repairDiary.getDateReport()));
+                            }
+                        }
+                    }
 
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
-        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel("Sự cố #BH005 đã được xử lý", "01/04/2019 09:00:15"));
+                    if (list_displayListNotifycationCardViewModels.size() == 0) {
+                        recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+                        linearLayoutNotifycation.setVisibility(View.VISIBLE);
+                        linearLayoutCheckBox.setVisibility(View.GONE);
+                        txtNotification.setText("Hiện tại bạn không có công việc nào cần xử lý");
+                        return;
+                    }
 
+                    displayListMyWorkOfUserIsEmployee();
+                } else {
+                    Log.d(TAG, "Không lấy được dữ liệu của repairDỉay");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void displayListMyWorkOfUserIsEmployee() {
         //Setup RecycleView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        displayListNotifycationRecycleView.setLayoutManager(layoutManager);
+        recycleViewDisplayListNotifycation.setLayoutManager(layoutManager);
 
         DisplayListNotifycationRecycleViewAdapter adapter = new DisplayListNotifycationRecycleViewAdapter(R.layout.card_view_display_list_notifycation_layout, list_displayListNotifycationCardViewModels);
-        displayListNotifycationRecycleView.setAdapter(adapter);
+        recycleViewDisplayListNotifycation.setAdapter(adapter);
         adapter.setOnItemClickListener(new DisplayListNotifycationRecycleViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {

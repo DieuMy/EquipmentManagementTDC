@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 import vn.edu.tdc.managementequipmenttdc.fragments.HomePageFragment;
 import vn.edu.tdc.managementequipmenttdc.fragments.NotificationPageFragment;
 import vn.edu.tdc.managementequipmenttdc.fragments.PersonalPageFragment;
 import vn.edu.tdc.managementequipmenttdc.tools.ConnectionDetector;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 import android.app.Dialog;
 import android.graphics.Color;
@@ -23,9 +25,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class Main_Activity extends AppCompatActivity {
     ConnectionDetector connectionDetector;
+    FirebaseDatabase firebaseDatabase;
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -54,12 +66,17 @@ public class Main_Activity extends AppCompatActivity {
         //Check internet
         connectionDetector = new ConnectionDetector(this);
         if (connectionDetector.isConnected()) {
-            setContentView(R.layout.activity_main_layout);
+            //Initial
+            firebaseAuth = FirebaseAuth.getInstance();
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            databaseReference = firebaseDatabase.getReference();
 
+            getInformationOfUserCurrentLogin();
+
+            setContentView(R.layout.activity_main_layout);
             //Gets view from layout
             BottomNavigationView bottomNavView = findViewById(R.id.bottom_navigation);
             bottomNavView.setOnNavigationItemSelectedListener(navListener);
-
             //Khoi dong man hinh home
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomePageFragment()).commit();
         } else {
@@ -96,5 +113,23 @@ public class Main_Activity extends AppCompatActivity {
 
     }
 
+    public void getInformationOfUserCurrentLogin() {
+        Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Users users = dataSnapshot.getValue(Users.class);
+                    User_Provider.user = users;//Luu thong tin cua user de su dung
+                } else {
 
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

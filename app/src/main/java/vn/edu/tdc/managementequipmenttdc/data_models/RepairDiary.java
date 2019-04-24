@@ -3,6 +3,7 @@ package vn.edu.tdc.managementequipmenttdc.data_models;
 public class RepairDiary {
     private String repairDiaryID;
     private String equipmentID;
+    private String roomID;
     private String userIDReport;//Nguoi bao cao
     private String incident_content;//Noi dung su co
     private String dateReport;//Ngay bao cao
@@ -19,9 +20,10 @@ public class RepairDiary {
     public RepairDiary() {
     }
 
-    public RepairDiary(String repairDiaryID, String equipmentID, String userIDReport, String incident_content, String dateReport, boolean statusReceive, String maintenanceContent, String processingDate, boolean processingStatus, String dateComplete, String confirmRepaired, int rating, String create_at, String update_at) {
+    public RepairDiary(String repairDiaryID, String equipmentID, String roomID, String userIDReport, String incident_content, String dateReport, boolean statusReceive, String maintenanceContent, String processingDate, boolean processingStatus, String dateComplete, String confirmRepaired, int rating, String create_at, String update_at) {
         this.repairDiaryID = repairDiaryID;
         this.equipmentID = equipmentID;
+        this.roomID = roomID;
         this.userIDReport = userIDReport;
         this.incident_content = incident_content;
         this.dateReport = dateReport;
@@ -34,6 +36,14 @@ public class RepairDiary {
         this.rating = rating;
         this.create_at = create_at;
         this.update_at = update_at;
+    }
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
     }
 
     public String getRepairDiaryID() {

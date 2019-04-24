@@ -70,6 +70,7 @@ public class ListRoomsActivity extends AppCompatActivity {
         imgToolBack = findViewById(R.id.listRoomToolBarBack);
         progressBarLoading = findViewById(R.id.listRoomProgressBar);
         swipeRefreshLayout = findViewById(R.id.listRoomswipeRefresh);
+        listRoomRecycleView = (RecyclerView) findViewById(R.id.listRoomRecycleView);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -102,6 +103,7 @@ public class ListRoomsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
+        listRoomRecycleView.setVisibility(View.VISIBLE);
     }
 
     private void refreshList() {
@@ -111,12 +113,14 @@ public class ListRoomsActivity extends AppCompatActivity {
     //Lay danh sach cac phong thuc hanh theo khu vuc tuong ưng
     private void getDataRoomsOfCorrespondingArea() {
         progressBarLoading.setVisibility(View.VISIBLE);
+        listRoomRecycleView.setVisibility(View.GONE);
         //Lay danh sach phòng theo id cua khu vuc
         Query query = databaseReference.child("rooms").orderByChild("areaID").equalTo(areaID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 progressBarLoading.setVisibility(View.GONE);
+                listRoomRecycleView.setVisibility(View.VISIBLE);
                 if (dataSnapshot.exists()) {
                     //Duyet de lay danh sach
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
@@ -167,10 +171,7 @@ public class ListRoomsActivity extends AppCompatActivity {
 
     //Hien thi danh sach cac phong
     private void displayListRooms() {
-        //Get views layout
-        listRoomRecycleView = (RecyclerView) findViewById(R.id.listRoomRecycleView);
-
-        //Setup RecycleView
+         //Setup RecycleView
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);//chia recycleview thanh cot
         listRoomRecycleView.setLayoutManager(gridLayoutManager);
         ListRoomRecycleAdapter adapter = new ListRoomRecycleAdapter(R.layout.card_view_list_room_layout, listRoomCardViewModels);
@@ -194,11 +195,13 @@ public class ListRoomsActivity extends AppCompatActivity {
     //Lay danh sach tat ca cac phong thuc hanh
     private void getDataAllRooms() {
         progressBarLoading.setVisibility(View.VISIBLE);
+        listRoomRecycleView.setVisibility(View.GONE);
         Query query = databaseReference.child("rooms");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 progressBarLoading.setVisibility(View.GONE);
+                listRoomRecycleView.setVisibility(View.VISIBLE);
                 if (dataSnapshot.exists()) {
                     //Duyet de lay danh sach
                     for (DataSnapshot item : dataSnapshot.getChildren()) {

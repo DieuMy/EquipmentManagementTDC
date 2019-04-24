@@ -91,6 +91,12 @@ public class HomePageFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        progressBarLoading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
@@ -103,6 +109,7 @@ public class HomePageFragment extends Fragment {
     //Lay danh sach chuc nang cho user dang dang nhap
     private void getDataPermissionForCurrentUser() {
         progressBarLoading.setVisibility(View.VISIBLE);
+        homeScreenrecyclerViewFunctions.setVisibility(View.GONE);
         listFunctions = getDataFunctionsForCurrentUser();
         //lay quyen cua user dang dang nhap hien tai
         Query query = databaseReference.child("permissions").orderByChild("userID").equalTo(firebaseAuth.getCurrentUser().getUid());//Lay danh sach quyen cua user dang dang nhap
@@ -110,6 +117,7 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 progressBarLoading.setVisibility(View.GONE);
+                homeScreenrecyclerViewFunctions.setVisibility(View.VISIBLE);
                 if (dataSnapshot.exists()) {//kiem tra ton tai du lieu khong
                     //Duyet de lay danh sach
                     for (DataSnapshot func : dataSnapshot.getChildren()) {

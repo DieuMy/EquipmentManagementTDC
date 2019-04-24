@@ -66,7 +66,6 @@ public class PersonalPageFragment extends Fragment {
     public void onResume() {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
-        // Display information of user current login
         getInformationOfUserCurrentLogin();
     }
 
