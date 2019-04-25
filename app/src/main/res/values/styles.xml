@@ -334,6 +334,7 @@
         <item name="android:textSize">@dimen/viewreportmalfunctionTextsizeTextview</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:layout_marginLeft">@dimen/viewreportmalfunctionMarginLeft</item>
+        <item name="android:textColor">@color/colorViewReportMalfunctionTextViewColor</item>
     </style>
 
     <!--.......................................Report MalFunction.......................................-->
@@ -367,6 +368,23 @@
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textSize">@dimen/ReportMalfunctionScreenTextSize</item>
+    </style>
+
+    <style name="ReportMalfunctionScreenButtonComplete">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/ReportMalfunctionScreenHeightButton</item>
+        <item name="android:layout_marginLeft">@dimen/ReportMalfunctionScreenMarginLeftButton</item>
+        <item name="android:layout_marginRight">@dimen/ReportMalfunctionScreenMarginRightButton
+        </item>
+        <item name="android:background">@drawable/login_screen_btnlogin_background</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:text">@string/ReportMulfuntionScreenButtonText</item>
+        <item name="android:textColor">@color/colorReportMalfunctionButtonComplete</item>
+        <item name="android:textSize">@dimen/ReportMalfunctionScreenTextSizeOfButton</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">
+            @dimen/ReportMalfunctionScreenMarginTopOfButtonComplete
+        </item>
     </style>
     <!--......................................List Equipment Screen.......................................................-->
     <style name="ListEquipmentScreenLinearLayout">

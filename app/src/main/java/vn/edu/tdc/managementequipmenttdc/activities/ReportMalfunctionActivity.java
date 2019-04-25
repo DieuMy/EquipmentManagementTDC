@@ -2,6 +2,7 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +16,7 @@ import vn.edu.tdc.managementequipmenttdc.R;
 
 public class ReportMalfunctionActivity extends AppCompatActivity {
 
+    private final String TAG = "ReportMalfunction";
     private Button btnOK;
     private CheckBox chkAll, chkHuChuot, chkHuBanPhim, chkMatNguon, chkManHinh, chkThieuPhanMem;
     private EditText edtOther;
@@ -47,7 +49,14 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//            Kiem tra xem co it nhat 1 check box duoc check hoac edittext phai co noi dung neu khong check checkbox
+                checkCheckBoxAllIsCheck();
+                if (reportContent.isEmpty()) {
+                    Toast.makeText(ReportMalfunctionActivity.this, "Bạn phải chọn hoặc nhập nội dung sự cố trước khi gửi", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 intent = new Intent(ReportMalfunctionActivity.this, ViewReportMalfunctionActivity.class);
+                ViewReportMalfunctionActivity.contentMalfunction = reportContent;
                 startActivity(intent);
             }
         });
@@ -56,7 +65,19 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
         chkAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               checkCheckBoxAllIsCheck();
+                if (chkAll.isChecked()) {
+                    chkHuBanPhim.setChecked(true);
+                    chkHuChuot.setChecked(true);
+                    chkMatNguon.setChecked(true);
+                    chkManHinh.setChecked(true);
+                    chkThieuPhanMem.setChecked(true);
+                } else {
+                    chkHuBanPhim.setChecked(false);
+                    chkHuChuot.setChecked(false);
+                    chkMatNguon.setChecked(false);
+                    chkManHinh.setChecked(false);
+                    chkThieuPhanMem.setChecked(false);
+                }
             }
         });
     }
@@ -71,45 +92,25 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         reportContent = "";
-        checkCheckBoxAllIsCheck();
     }
 
-    private void checkCheckBoxAllIsCheck(){
-        if (chkAll.isChecked()) {
-            chkHuBanPhim.setChecked(true);
-            chkHuChuot.setChecked(true);
-            chkMatNguon.setChecked(true);
-            chkManHinh.setChecked(true);
-            chkThieuPhanMem.setChecked(true);
-            reportContent += chkHuBanPhim.getText() + "; " + chkHuChuot.getText() + "; " +
-                    chkMatNguon.getText() + "; " + chkManHinh.getText() + "; " +
-                    chkThieuPhanMem.getText() + "; " + edtOther.getText();
-            Toast.makeText(ReportMalfunctionActivity.this, reportContent, Toast.LENGTH_SHORT).show();
-        } else {
-            chkHuBanPhim.setChecked(false);
-            chkHuChuot.setChecked(false);
-            chkMatNguon.setChecked(false);
-            chkManHinh.setChecked(false);
-            chkThieuPhanMem.setChecked(false);
-            reportContent = "";
-
-            if (chkHuBanPhim.isChecked()) {
-                reportContent += chkHuBanPhim.getText() + "; ";
-            }
-            if (chkHuChuot.isChecked()) {
-                reportContent += chkHuChuot.getText() + "; ";
-            }
-            if (chkMatNguon.isChecked()) {
-                reportContent += chkMatNguon.getText() + "; ";
-            }
-            if (chkManHinh.isChecked()) {
-                reportContent += chkManHinh.getText() + "; ";
-            }
-            if (chkThieuPhanMem.isChecked()) {
-                reportContent += chkThieuPhanMem.getText() + "; ";
-            }
-            reportContent += edtOther.getText();
+    private void checkCheckBoxAllIsCheck() {
+        if (chkHuBanPhim.isChecked()) {
+            reportContent += chkHuBanPhim.getText() + "; ";
         }
+        if (chkHuChuot.isChecked()) {
+            reportContent += chkHuChuot.getText() + "; ";
+        }
+        if (chkMatNguon.isChecked()) {
+            reportContent += chkMatNguon.getText() + "; ";
+        }
+        if (chkManHinh.isChecked()) {
+            reportContent += chkManHinh.getText() + "; ";
+        }
+        if (chkThieuPhanMem.isChecked()) {
+            reportContent += chkThieuPhanMem.getText() + "; ";
+        }
+        reportContent += edtOther.getText();
     }
 }
 

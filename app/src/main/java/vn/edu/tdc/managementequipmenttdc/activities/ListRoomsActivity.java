@@ -35,6 +35,7 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListRoomRecycleAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
+import vn.edu.tdc.managementequipmenttdc.tools.Room_Provider;
 
 public class ListRoomsActivity extends AppCompatActivity {
 
@@ -203,11 +204,14 @@ public class ListRoomsActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 intent = new Intent(ListRoomsActivity.this, TypeEquipmentActivity.class);
                 //Truyen du lieu areaID sang listRoom
-                EquipmentsActivity.ROOMID = listRooms.get(position).getRoomID();
-                EquipmentsActivity.ROOMNAME = listRooms.get(position).getRoomName();
+//                EquipmentsActivity.ROOMID = listRooms.get(position).getRoomID();
+//                EquipmentsActivity.ROOMNAME = listRooms.get(position).getRoomName();
+//
+//                TypeEquipmentActivity.ROOMNAME = listRooms.get(position).getRoomName();
+//                ListMalfunctionOfRoomActivity.ROOMID = listRooms.get(position).getRoomID();
+                Room_Provider.ROOMID = listRooms.get(position).getRoomID();
+                Room_Provider.ROOMNAME = listRooms.get(position).getRoomName();
 
-                TypeEquipmentActivity.ROOMNAME = listRooms.get(position).getRoomName();
-                ListMalfunctionOfRoomActivity.ROOMID = listRooms.get(position).getRoomID();
                 startActivity(intent);
             }
         });

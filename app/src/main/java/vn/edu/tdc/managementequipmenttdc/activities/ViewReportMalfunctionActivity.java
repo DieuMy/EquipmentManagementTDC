@@ -8,15 +8,29 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.tools.Room_Provider;
+import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class ViewReportMalfunctionActivity extends AppCompatActivity {
+    public static String EQUIPMENTID = "";
+    public static String EQUIPMENTNAME = "";
+    public static String contentMalfunction ="";
 
-    private ImageView imgSend;
-    private TextView txtMalfunctionID, txtRoomID, txtEquipmentID, txtUserID, txtEmployeeName, txtMalfunctionContent, txtDateReport;
+    private TextView txtRoomID, txtEquipmentID, txtUserID, txtEmployeeName, txtMalfunctionContent, txtDateReport;
     Intent intent;
+
+    FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    ToolUtils toolUtils;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,8 +41,13 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Initial
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        toolUtils = new ToolUtils();
+
         //Gets view from layout
-        txtMalfunctionID = findViewById(R.id.viewreportmalfunctiontextview_masuco);
         txtRoomID = findViewById(R.id.viewreportmalfunctionTextviewRoomID);
         txtEquipmentID = findViewById(R.id.viewreportmalfunctiontextview_mathietbi);
         txtUserID = findViewById(R.id.viewreportmalfunctiontextview_manhanvien);
@@ -36,18 +55,7 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         txtMalfunctionContent = findViewById(R.id.viewreportmalfunctiontextview_noidungsuco);
         txtDateReport = findViewById(R.id.viewreportmalfunctiontextview_thoigian);
 
-
-        imgSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Gui di thong bao
-                //Tro ve man hinh home
-                intent = new Intent(ViewReportMalfunctionActivity.this, TypeEquipmentActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
+        viewReportMalfunction();
 
     }
 
@@ -78,7 +86,12 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void viewReportMalfunction(){
-
+    private void viewReportMalfunction() {
+        txtUserID.setText(User_Provider.user.getUserID());
+        txtEmployeeName.setText(User_Provider.user.getFullName());
+        txtEquipmentID.setText(EQUIPMENTID);
+        txtRoomID.setText(Room_Provider.ROOMID);
+        txtDateReport.setText(toolUtils.getCurrentTimeString());
+        txtMalfunctionContent.setText(contentMalfunction);
     }
 }

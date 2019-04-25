@@ -29,10 +29,12 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.TypeEquipmentRecycleViewFunctionAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.Equipment;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListEquipmentCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.tools.Room_Provider;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class TypeEquipmentActivity extends AppCompatActivity {
-    public static String ROOMNAME = "";
+    //public static String ROOMNAME = "";
 
     private Vector<ListEquipmentCardViewModel> listTypeEquipmentCardViewModels = new Vector<ListEquipmentCardViewModel>();
     RecyclerView listequipmentrecycleview;
@@ -48,7 +50,7 @@ public class TypeEquipmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_type_equipment_screen_flagment);
 
-        getSupportActionBar().setTitle("Danh sách thiết bị phòng " + ROOMNAME);
+        getSupportActionBar().setTitle("Danh sách thiết bị phòng " + Room_Provider.ROOMNAME);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

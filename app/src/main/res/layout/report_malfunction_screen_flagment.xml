@@ -72,17 +72,7 @@
 
             <Button
                 android:id="@+id/ReportMalfuntionBtnOK"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:background="@drawable/login_screen_btnlogin_background"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Hoàn tất"
-                android:textColor="#FFF"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"/>
+                style="@style/ReportMalfunctionScreenButtonComplete" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

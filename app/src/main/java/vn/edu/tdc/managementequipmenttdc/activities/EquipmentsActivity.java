@@ -32,12 +32,10 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListRoomRecycleAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.Equipment;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListRoomCardViewModel;
+import vn.edu.tdc.managementequipmenttdc.tools.Room_Provider;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 
 public class EquipmentsActivity extends AppCompatActivity {
-    public static String ROOMID = "";
-    public static String ROOMNAME = "";
-
     //List Equipment
     private Vector<ListRoomCardViewModel> listEquipmentsModels = new Vector<ListRoomCardViewModel>();
     RecyclerView listequipmentrecycleview;
@@ -76,7 +74,7 @@ public class EquipmentsActivity extends AppCompatActivity {
         txtReportAll = findViewById(R.id.listComputerTxtReportAll);
         chkAll = findViewById(R.id.listComputerChkAll);
 
-        getSupportActionBar().setTitle("Danh sách " + equipmentName + " phòng " + ROOMNAME);
+        getSupportActionBar().setTitle("Danh sách " + equipmentName + " phòng " + Room_Provider.ROOMNAME);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -125,7 +123,7 @@ public class EquipmentsActivity extends AppCompatActivity {
     //Lay danh sach cac may theo id phong
     private void getDataEquipmentOfCorrespondingRoomID() {
         //Lay danh sach thiet bi theo id loai thiet bi va id phong .orderByChild("parentID").equalTo(equipmentID)
-        Query query = databaseReference.child("equipments").orderByChild("roomID").equalTo(ROOMID);
+        Query query = databaseReference.child("equipments").orderByChild("roomID").equalTo(Room_Provider.ROOMID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -235,6 +233,9 @@ public class EquipmentsActivity extends AppCompatActivity {
                 bundle.putString("equipmentNameMal", listEquipments.get(position).getEquipmentName());
 
                 intent.putExtras(bundle);
+
+                ViewReportMalfunctionActivity.EQUIPMENTID = listEquipments.get(position).getEquipmentID();
+                ViewReportMalfunctionActivity.EQUIPMENTNAME = listEquipments.get(position).getEquipmentName();
                 //Truyen du lieu areaID sang listRoom
                 startActivity(intent);
             }

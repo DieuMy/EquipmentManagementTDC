@@ -12,7 +12,9 @@
     <color name="colorAppBarLayoutText">#FFF</color>
     <color name="colorTextViewHelpAndExit">#0622CF</color>
 
-    <!--...............................Home Screen..................................-->
+    <!--...............................Activity_Main..................................-->
+    <color name="colorMainBottomNavigationItem">#FFF</color>
+    
 
     <!--...............................Personal Screen..............................-->
     <color name="colorViewPersonalScreen">#08135A</color>
@@ -25,4 +27,10 @@
     <color name="colorViewEditProfile">#031DC0</color>
     <color name="colorBtnChangePaawordEditProfile">#2C4ADA</color>
     <color name="colorBackgroundBtnChangePaawordEditProfile">#FFF</color>
+
+    <!--................................ReportMalfunction Screen..........................-->
+    <color name="colorReportMalfunctionButtonComplete">#FFF</color>
+
+    <!--................................View report malfunction screen.........................-->
+    <color name="colorViewReportMalfunctionTextViewColor">#673AB7</color>
 </resources>

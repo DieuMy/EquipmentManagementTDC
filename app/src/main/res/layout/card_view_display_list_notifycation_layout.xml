@@ -5,18 +5,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="10dp">
+    android:layout_margin="@dimen/CardViewDisplayListNotifycationMargin"
+    app:cardCornerRadius="@dimen/CardViewListEquipmentScreenCardCornerRadius"
+    app:cardElevation="@dimen/CardViewDisplayListNotifycationCardElevation">
 
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:orientation="horizontal"
        android:gravity="center"
-       android:paddingLeft="15dp"
-       android:paddingTop="5dp"
-       android:paddingBottom="5dp"
+       android:paddingLeft="@dimen/CardViewDisplayListNotifycationLinearlayoutPaddingLeft"
+       android:paddingTop="@dimen/CardViewDisplayListNotifycationLinearlayoutPaddingTop"
+       android:paddingBottom="@dimen/CardViewDisplayListNotifycationLinearlayoutPaddingBottom"
        android:background="@drawable/display_notifycation_selector_cardview">
 
        <ImageView
@@ -27,7 +27,7 @@
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginLeft="20dp"
+           android:layout_marginLeft="@dimen/CardViewDisplayListNotifycationLinearlayoutContentMarginLeft"
            android:orientation="vertical"
            android:gravity="center">
 
@@ -35,17 +35,17 @@
                android:id="@+id/displayNotifycationTxtNotifycationContent"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="Nội dung thông báo"
-               android:textSize="15sp"
+               android:text="@string/displayNotifycationCardViewContent"
+               android:textSize="@dimen/CardViewDisplayListNotifycationTextSizeOfTextView"
                android:fontFamily="sans-serif-condensed"/>
 
            <TextView
                android:id="@+id/displayNotifycationTxtNotifycationDate"
-               android:layout_marginTop="10dp"
+               android:layout_marginTop="@dimen/CardViewDisplayListNotifycationMarginTopOfTextViewDate"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="01/04/2019"
-               android:textSize="15sp"
+               android:text="@string/displayNotifycationCardViewDate"
+               android:textSize="@dimen/CardViewDisplayListNotifycationTextSizeOfTextView"
                android:fontFamily="sans-serif-condensed"/>
        </LinearLayout>
    </LinearLayout>

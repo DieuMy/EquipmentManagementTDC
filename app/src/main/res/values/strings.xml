@@ -22,10 +22,11 @@
     <string name="ReportMulfuntionScreen_CheckboxKeyBoard">Bàn phím không hoạt động</string>
     <string name="ReportMulfuntionScreen_CheckboxPower">Mất Nguồn</string>
     <string name="ReportMulfuntionScreen_CheckboxScreen">Màn hình không hoạt động</string>
-    <string name="ReportMulfuntionScreen_CheckboxSoftware">Thiếu phần mềm (Vui lòng ghi rõ tên phần mềm)</string>
+    <string name="ReportMulfuntionScreen_CheckboxSoftware">Không có chuột</string>
     <string name="ReportMulfuntionScreen_CheckboxAll">Tất cả</string>
-    <string name="ReportMulfuntionScreen_EdittextHintSoftware">(Vui lòng ghi rõ tên phần mềm)</string>
-    <string name="ReportMulfuntionScreen_EdittextHintOther">Khác...</string>
+    <string name="ReportMulfuntionScreen_EdittextHintOther">Khác (Vui lòng ghi rõ nội dung)...</string>
+    <string name="ReportMulfuntionScreenButtonText">Hoàn tất</string>
+
     <!--........................Personal Screen.............................-->
     <string name="personalScreenFullName">Nguyễn Văn A</string>
     <string name="personalScreenRole">Giảng viên</string>
@@ -55,6 +56,9 @@
 
     <!--.........................Display list notifycation......................-->
     <string name="displayNotifycationScreenName">Thông báo</string>
+    <string name="displayNotifycationCardViewContent">Nội dung thông báo</string>
+    <string name="displayNotifycationCardViewDate">01/04/2019</string>
+
     <!--.........................View Report Malfuntion Screen......................-->
     <string name="viewreportmalfunctionScreenName">Xem phiếu báo cáo sự cố</string>
     <string name="viewreportmalfunctionHolderTextview_Masuco">Mã sự cố : </string>
@@ -82,9 +86,11 @@
 
     <!--.........................Area/Building Screen...........................-->
     <string name="areaBuildingScreenName">Khu vực/ tòa nhà</string>
+    <string name="areaBuildingCardViewTextView">Khu vực</string>
 
     <!--........................List room screen..............................-->
     <string name="listRoomScreenName">Danh sách phòng học</string>
+    <string name="listRoomScreenTextViewOfCardView">Phòng học</string>
 
     <!--.........................List Equipment Screen............................... -->
     <string name="ListEquipmentScreenNameScreen">Danh sách thiết bị</string>

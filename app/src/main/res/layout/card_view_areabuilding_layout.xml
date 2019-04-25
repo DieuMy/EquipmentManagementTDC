@@ -13,24 +13,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:padding="10dp"
+        android:padding="@dimen/CardViewAreaBuildingLinearlayoutPadding"
         android:background="@drawable/home_screen_card_view_selector_background">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/CardViewAreaBuildingCircleImageViewWidth"
+            android:layout_height="@dimen/CardViewAreaBuildingCircleImageViewWidth"
             android:layout_gravity="center"
             android:src="@drawable/ic_building"
             android:elevation="@dimen/homeScreenElevationOfImage"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="@dimen/CardViewAreaBuildingCircleImageViewMarginLeft"/>
 
         <TextView
             android:id="@+id/areaBuildingTxtAreaName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Khu vực"
-            android:layout_marginLeft="30dp"
-            android:textSize="15sp"
+            android:text="@string/areaBuildingCardViewTextView"
+            android:layout_marginLeft="@dimen/CardViewAreaBuildingTextViewMarginLeft"
+            android:textSize="@dimen/CardViewAreaBuildingTextViewTextSize"
             android:fontFamily="sans-serif-condensed"/>
 
     </LinearLayout>

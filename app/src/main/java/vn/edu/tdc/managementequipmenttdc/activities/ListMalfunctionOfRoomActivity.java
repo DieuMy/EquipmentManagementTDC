@@ -31,9 +31,10 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.ListMalfunctionEquipmentAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.ListMalfunctionEquipmentModels;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
+import vn.edu.tdc.managementequipmenttdc.tools.Room_Provider;
 
 public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
-    public static String ROOMID = "";
+    //public static String ROOMID = "";
     private Vector<ListMalfunctionEquipmentModels> list_displayListMalfunctionCardViewModels;
     RecyclerView recycleViewListMalfunction;
 
@@ -52,7 +53,7 @@ public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.malfunction_equipment_layout);
 
-        getSupportActionBar().setTitle("Danh sách sự cố của phòng " + ROOMID);
+        getSupportActionBar().setTitle("Danh sách sự cố của phòng " + Room_Provider.ROOMID);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -99,7 +100,7 @@ public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         btnReport.setVisibility(View.GONE);
-        getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(ROOMID);
+        getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(Room_Provider.ROOMID);
     }
 
     public void getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(String roomID) {

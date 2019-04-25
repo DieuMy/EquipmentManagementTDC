@@ -10,18 +10,6 @@
     <LinearLayout
         style="@style/viewreportmalfunctionLinerlayout">
 
-        <LinearLayout style="@style/viewreportmalfunctionLinerlayout_Textview">
-
-            <TextView
-                style="@style/viewreportmalfunctionTextview"
-                android:text="@string/viewreportmalfunctionHolderTextview_Masuco" />
-
-            <TextView
-                android:id="@+id/viewreportmalfunctiontextview_masuco"
-                style="@style/viewreportmalfunctionTextviewContent"
-                android:hint="@string/viewreportmalfunctionHintTextview_Masuco" />
-        </LinearLayout>
-
         <LinearLayout
             style="@style/viewreportmalfunctionLinerlayout_Textview">
             <TextView
@@ -74,22 +62,23 @@
             style="@style/viewreportmalfunctionLinerlayout_Textview">
             <TextView
                 style="@style/viewreportmalfunctionTextview"
-                android:text="@string/viewreportmalfunctionHolderTextview_Noidung"/>
-            <TextView
-                android:id="@+id/viewreportmalfunctiontextview_noidungsuco"
-                style="@style/viewreportmalfunctionTextviewContent"
-                android:hint="@string/viewreportmalfunctionHintTextview_Noidung"
-                />
-        </LinearLayout>
-        <LinearLayout
-            style="@style/viewreportmalfunctionLinerlayout_Textview">
-            <TextView
-                style="@style/viewreportmalfunctionTextview"
                 android:text="@string/viewreportmalfunctionHolderTextview_Thoigian"/>
             <TextView
                 style="@style/viewreportmalfunctionTextviewContent"
                 android:id="@+id/viewreportmalfunctiontextview_thoigian"
                 android:hint="@string/viewreportmalfunctionHintTextview_Thoigian"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/viewreportmalfunctionLinerlayout_Textview">
+            <TextView
+                style="@style/viewreportmalfunctionTextview"
+                android:text="@string/viewreportmalfunctionHolderTextview_Noidung"/>
+            <TextView
+                android:id="@+id/viewreportmalfunctiontextview_noidungsuco"
+                style="@style/viewreportmalfunctionTextviewContent"
+                android:hint="@string/viewreportmalfunctionHintTextview_Noidung"
                 />
         </LinearLayout>
 

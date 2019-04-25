@@ -28,6 +28,7 @@
     <dimen name="homeScreenHeightOfImage">70dp</dimen>
     <dimen name="homeScreenBorderWidthOfImage">1dp</dimen>
     <dimen name="homeScreenElevationOfImage">10dp</dimen>
+    <dimen name="homeScreenMarginLeftOfImage">10dp</dimen>
     <dimen name="homeScreenCardViewMarginLeftTextView">25dp</dimen>
     <dimen name="homeScreenCardViewMarginTopTextView">10dp</dimen>
     <dimen name="homeScreenCardViewTextSizeOfTextView">15sp</dimen>
@@ -77,7 +78,7 @@
     <dimen name="editProfileTextSizeButtonChangePassword">15sp</dimen>
     <dimen name="editProfileEvelationComponent">10dp</dimen>
 
-    <!--.....................................View report Malfunction Screen............................................-->
+    <!--..........................View report Malfunction Screen...................................-->
     <dimen name="viewreportmalfunctionMarginTopTextView">30dp</dimen>
     <dimen name="viewreportmalfunctionTextsizeTextview">15sp</dimen>
     <dimen name="viewreportmalfunctionMarginLeftTextview_Noidung">100dp</dimen>
@@ -102,7 +103,7 @@
     <dimen name="ListEquipmentScreenPaddingTop">10dp</dimen>
     <dimen name="ListEquipmentScreenPaddingBottom">10dp</dimen>
 
-    <!--.............................Report Malfunction Screen.....................................-->
+    <!--.........................Report Malfunction Screen..............................-->
     <dimen name="ReportMalfunctionScreenMarginBottomCheckbox">35dp</dimen>
     <dimen name="ReportMalfunctionScreenLayoutHeight">0dp</dimen>
     <dimen name="ReportMalfunctionScreenLayoutHeight_EditText">50dp</dimen>
@@ -114,10 +115,42 @@
     <dimen name="ReportMalfunctionScreenCheckbox_LayoutMarginTop">8dp</dimen>
     <dimen name="ReportMalfunctionScreenCheckbox_LayoutMarginEnd">8dp</dimen>
     <dimen name="ReportMalfunctionScreenCheckbox_LayoutMarginBottom">8dp</dimen>
-    <!--..........................Detail Report Screen.........................................-->
+    <dimen name="ReportMalfunctionScreenHeightButton">40dp</dimen>
+    <dimen name="ReportMalfunctionScreenMarginLeftButton">2dp</dimen>
+    <dimen name="ReportMalfunctionScreenMarginRightButton">2dp</dimen>
+    <dimen name="ReportMalfunctionScreenTextSizeOfButton">17sp</dimen>
+    <dimen name="ReportMalfunctionScreenMarginTopOfButtonComplete">20dp</dimen>
+
+    <!--..........................Detail Report Screen.........................-->
     <dimen name="detailreportscreenMarginTop">15dp</dimen>
     <dimen name="detailreportscreenPadding">10dp</dimen>
     <dimen name="detailreportscreenLayoutWidth">120dp</dimen>
     <dimen name="detailreportscreenTextsizeTextview">15sp</dimen>
     <dimen name="detailreportscreenMarginLeft">20dp</dimen>
+
+    <!--..........................CardView AreaBuilding Screen..........................-->
+    <dimen name="CardViewAreaBuildingLinearlayoutPadding">10dp</dimen>
+    <dimen name="CardViewAreaBuildingCircleImageViewHeight">70dp</dimen>
+    <dimen name="CardViewAreaBuildingCircleImageViewWidth">70dp</dimen>
+    <dimen name="CardViewAreaBuildingCircleImageViewMarginLeft">10dp</dimen>
+    <dimen name="CardViewAreaBuildingTextViewMarginLeft">30dp</dimen>
+    <dimen name="CardViewAreaBuildingTextViewTextSize">15sp</dimen>
+
+    <!--..........................CardView DisplayListNotifycation Screen..........................-->
+    <dimen name="CardViewDisplayListNotifycationMargin">5dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationCardCornerRadius">5dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationCardElevation">10dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationLinearlayoutPaddingLeft">15dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationLinearlayoutPaddingTop">5dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationLinearlayoutPaddingBottom">5dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationLinearlayoutContentMarginLeft">20dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationTextSizeOfTextView">15sp</dimen>
+    <dimen name="CardViewDisplayListNotifycationMarginTopOfTextViewDate">10dp</dimen>
+
+    <!--..........................CardView ListRoom Screen..........................-->
+    <dimen name="CardViewListRoomMargin">5dp</dimen>
+    <dimen name="CardViewListRoomCardCornerRadius">5dp</dimen>
+    <dimen name="CardViewListRoomCardElevation">15dp</dimen>
+    <dimen name="CardViewListRoomPaddingLinearlayout">10dp</dimen>
+    <dimen name="CardViewListRoomTextSizeOfTextView">15sp</dimen>
 </resources>
