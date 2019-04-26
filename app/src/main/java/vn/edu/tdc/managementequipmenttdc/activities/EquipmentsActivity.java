@@ -74,7 +74,7 @@ public class EquipmentsActivity extends AppCompatActivity {
         txtReportAll = findViewById(R.id.listComputerTxtReportAll);
         chkAll = findViewById(R.id.listComputerChkAll);
 
-        getSupportActionBar().setTitle("Danh sách " + equipmentName + " phòng " + Room_Provider.ROOMNAME);
+        getSupportActionBar().setTitle("Danh sách " + equipmentName + " phòng " + Room_Provider.room.getRoomName());
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -123,7 +123,7 @@ public class EquipmentsActivity extends AppCompatActivity {
     //Lay danh sach cac may theo id phong
     private void getDataEquipmentOfCorrespondingRoomID() {
         //Lay danh sach thiet bi theo id loai thiet bi va id phong .orderByChild("parentID").equalTo(equipmentID)
-        Query query = databaseReference.child("equipments").orderByChild("roomID").equalTo(Room_Provider.ROOMID);
+        Query query = databaseReference.child("equipments").orderByChild("roomID").equalTo(Room_Provider.room.getRoomID());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

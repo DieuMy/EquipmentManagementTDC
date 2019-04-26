@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +48,11 @@ public class MyWorkActivity extends AppCompatActivity {
 
     private LinearLayout linearLayoutNotifycation;
     private TextView txtNotification;
-    private LinearLayout linearLayoutCheckBox;
+    private RadioGroup radioGroup;
     private ProgressBar progressBarLoading;
+    private RadioButton chkDaTiepNhan, chkChuaTiepNhan;
     private ArrayList<Rooms> listOfRoomsManagedByCurrentUser = new ArrayList<Rooms>();
+    ArrayList<RepairDiary> listRepairDiary = new ArrayList<RepairDiary>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,10 +75,17 @@ public class MyWorkActivity extends AppCompatActivity {
 
         linearLayoutNotifycation = findViewById(R.id.listNotifycationLinearlayoutTextView);
         txtNotification = findViewById(R.id.listNotifycationTxtNotification);
-        linearLayoutCheckBox = findViewById(R.id.displayNotifycationLinnearLayoutCheckBox);
-        linearLayoutCheckBox.setVisibility(View.VISIBLE);
+        radioGroup = findViewById(R.id.displayNotifycationRadioGroup);
+        radioGroup.setVisibility(View.VISIBLE);
+
 
         getDataMyWorkOfCurrentUserWithRoleIsEmployee();
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                checkIsRadioButtonChecked();
+            }
+        });
     }
 
     @Override
@@ -86,6 +98,44 @@ public class MyWorkActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
+    }
+
+    private void checkIsRadioButtonChecked(){
+        Toast.makeText(this, "Yeah", Toast.LENGTH_SHORT).show();
+        int idRadioIsCheck = radioGroup.getCheckedRadioButtonId();//return id of radio is checked
+        list_displayListNotifycationCardViewModels.clear();
+        switch (idRadioIsCheck) {
+            case R.id.displayNotifycationRadDaTiepNhan:
+                for(RepairDiary repairDiary : listRepairDiary){
+                    if(repairDiary.isStatusReceive() == true){
+                        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
+                                "Phòng " + repairDiary.getRoomID() + " - Máy " + repairDiary.getEquipmentID()
+                                        + "\n" + repairDiary.getIncident_content() + "\n",
+                                repairDiary.getDateReport()));
+                    }
+                }
+                if(list_displayListNotifycationCardViewModels.size() == 0){
+                    txtNotification.setText("Hiện tại không có sự cố nào đã tiếp nhận sửa chữa");
+                    return;
+                }
+                displayListMyWorkOfUserIsEmployee();
+                break;
+            case R.id.displayNotifycationRadChuaTiepNhan:
+                for(RepairDiary repairDiary : listRepairDiary){
+                    if(repairDiary.isStatusReceive() == false){
+                        list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
+                                "Phòng " + repairDiary.getRoomID() + " - Máy " + repairDiary.getEquipmentID()
+                                        + "\n" + repairDiary.getIncident_content() + "\n",
+                                repairDiary.getDateReport()));
+                    }
+                }
+                if(list_displayListNotifycationCardViewModels.size() == 0){
+                    txtNotification.setText("Hiện tại không có sự cố nào chưa tiếp nhận sửa chữa");
+                    return;
+                }
+                displayListMyWorkOfUserIsEmployee();
+                break;
+        }
     }
 
     private void getDataMyWorkOfCurrentUserWithRoleIsEmployee() {
@@ -104,7 +154,7 @@ public class MyWorkActivity extends AppCompatActivity {
                 } else {
                     recycleViewDisplayListNotifycation.setVisibility(View.GONE);
                     linearLayoutNotifycation.setVisibility(View.VISIBLE);
-                    linearLayoutCheckBox.setVisibility(View.GONE);
+                    radioGroup.setVisibility(View.GONE);
                     txtNotification.setText("Không có phòng thực hành nào thuộc quyền quản lý của bạn");
                     return;
                 }
@@ -120,7 +170,7 @@ public class MyWorkActivity extends AppCompatActivity {
     private void getDataRepairDiary() {
         progressBarLoading.setVisibility(View.VISIBLE);
         recycleViewDisplayListNotifycation.setVisibility(View.GONE);
-        final ArrayList<RepairDiary> listRepairDiary = new ArrayList<RepairDiary>();
+
         Query query = databaseReference.child("repairDiarys");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -148,7 +198,7 @@ public class MyWorkActivity extends AppCompatActivity {
                     if (list_displayListNotifycationCardViewModels.size() == 0) {
                         recycleViewDisplayListNotifycation.setVisibility(View.GONE);
                         linearLayoutNotifycation.setVisibility(View.VISIBLE);
-                        linearLayoutCheckBox.setVisibility(View.GONE);
+                        radioGroup.setVisibility(View.GONE);
                         txtNotification.setText("Hiện tại bạn không có công việc nào cần xử lý");
                         return;
                     }
@@ -177,6 +227,7 @@ public class MyWorkActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(MyWorkActivity.this, DetailMyWorkActivity.class);
+                DetailMyWorkActivity.REPAIRDIARY = listRepairDiary.get(position);
                 startActivity(intent);
             }
         });

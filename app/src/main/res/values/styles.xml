@@ -454,5 +454,6 @@
         <item name="android:textSize">@dimen/detailreportscreenTextsizeTextview</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:layout_marginLeft">@dimen/detailreportscreenMarginLeft</item>
+        <item name="android:textColor">@color/colorDetailMyWorkScreenTextViewColor</item>
     </style>
 </resources>

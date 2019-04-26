@@ -7,6 +7,7 @@ public class RepairDiary {
     private String userIDReport;//Nguoi bao cao
     private String incident_content;//Noi dung su co
     private String dateReport;//Ngay bao cao
+    private String userIDReceive;//Nhan vien nhan sua chua
     private boolean statusReceive; //Nhan vien tiep nhan xu y su co chua
     private String maintenanceContent; //Loi that su cua thiet bi(nhan vien sua chua cap nhat)
     private String processingDate; //Ngay nhan xu ly su co
@@ -20,13 +21,14 @@ public class RepairDiary {
     public RepairDiary() {
     }
 
-    public RepairDiary(String repairDiaryID, String equipmentID, String roomID, String userIDReport, String incident_content, String dateReport, boolean statusReceive, String maintenanceContent, String processingDate, boolean processingStatus, String dateComplete, String confirmRepaired, int rating, String create_at, String update_at) {
+    public RepairDiary(String repairDiaryID, String equipmentID, String roomID, String userIDReport, String incident_content, String dateReport, String userIDReceive, boolean statusReceive, String maintenanceContent, String processingDate, boolean processingStatus, String dateComplete, String confirmRepaired, int rating, String create_at, String update_at) {
         this.repairDiaryID = repairDiaryID;
         this.equipmentID = equipmentID;
         this.roomID = roomID;
         this.userIDReport = userIDReport;
         this.incident_content = incident_content;
         this.dateReport = dateReport;
+        this.userIDReceive = userIDReceive;
         this.statusReceive = statusReceive;
         this.maintenanceContent = maintenanceContent;
         this.processingDate = processingDate;
@@ -38,20 +40,28 @@ public class RepairDiary {
         this.update_at = update_at;
     }
 
-    public String getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
-    }
-
     public String getRepairDiaryID() {
         return repairDiaryID;
     }
 
     public void setRepairDiaryID(String repairDiaryID) {
         this.repairDiaryID = repairDiaryID;
+    }
+
+    public String getUserIDReceive() {
+        return userIDReceive;
+    }
+
+    public void setUserIDReceive(String userIDReceive) {
+        this.userIDReceive = userIDReceive;
+    }
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
     }
 
     public String getEquipmentID() {

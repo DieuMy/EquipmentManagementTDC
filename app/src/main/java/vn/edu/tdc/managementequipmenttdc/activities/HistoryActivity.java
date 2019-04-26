@@ -27,6 +27,7 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -76,7 +77,7 @@ public class HistoryActivity extends AppCompatActivity {
     private void getDataHistoryManipulationOfUser() {
         progressBarLoading.setVisibility(View.VISIBLE);
         displayListNotifycationRecycleView.setVisibility(View.GONE);
-        Query query = databaseReference.child("repairDiarys").orderByChild("userIDReport").equalTo(firebaseAuth.getCurrentUser().getUid());
+        Query query = databaseReference.child("repairDiarys").orderByChild("userIDReport").equalTo(User_Provider.user.getUserID());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -87,7 +88,7 @@ public class HistoryActivity extends AppCompatActivity {
                         RepairDiary repairDiary = item.getValue(RepairDiary.class);
                         listRepairDiaryArray.add(repairDiary);
                         //Toast.makeText(HistoryActivity.this, repairDiary.getIncident_content(), Toast.LENGTH_LONG).show();
-                        list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(repairDiary.getRepairDiaryID(), repairDiary.getDateReport()));
+                        list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(repairDiary.getEquipmentID() + "\n" + repairDiary.getIncident_content(), repairDiary.getDateReport()));
                     }
                     displayHistoryManipulationOfUser();
                 }

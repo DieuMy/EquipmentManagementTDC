@@ -50,7 +50,7 @@ public class TypeEquipmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_type_equipment_screen_flagment);
 
-        getSupportActionBar().setTitle("Danh sách thiết bị phòng " + Room_Provider.ROOMNAME);
+        getSupportActionBar().setTitle("Danh sách thiết bị phòng " + Room_Provider.room.getRoomName());
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

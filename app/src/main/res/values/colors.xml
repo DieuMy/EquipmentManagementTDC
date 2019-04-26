@@ -16,7 +16,7 @@
     <color name="colorMainBottomNavigationItem">#FFF</color>
     
 
-    <!--...............................Personal Screen..............................-->
+    <!--...............................Personal Screen................................-->
     <color name="colorViewPersonalScreen">#08135A</color>
     <color name="colorTextViewFullNameAndRolePersonalScreen">#FFF</color>
     <color name="colorBackgroundLinearLayoutContainAvatarAndFullNamePersonal">#2C4ADA</color>
@@ -31,6 +31,9 @@
     <!--................................ReportMalfunction Screen..........................-->
     <color name="colorReportMalfunctionButtonComplete">#FFF</color>
 
-    <!--................................View report malfunction screen.........................-->
+    <!--................................View report malfunction screen....................-->
     <color name="colorViewReportMalfunctionTextViewColor">#673AB7</color>
+
+   <!--................................Detail My Work Screen............................. -->
+    <color name="colorDetailMyWorkScreenTextViewColor">#9106A8</color>
 </resources>

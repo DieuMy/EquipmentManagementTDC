@@ -80,7 +80,7 @@
 
     <!--..........................View report Malfunction Screen...................................-->
     <dimen name="viewreportmalfunctionMarginTopTextView">30dp</dimen>
-    <dimen name="viewreportmalfunctionTextsizeTextview">15sp</dimen>
+    <dimen name="viewreportmalfunctionTextsizeTextview">16sp</dimen>
     <dimen name="viewreportmalfunctionMarginLeftTextview_Noidung">100dp</dimen>
     <dimen name="viewreportmalfunctionMarginRightTextview_Noidung">100dp</dimen>
     <dimen name="viewreportmalfunctionLayoutMarginTop">15dp</dimen>

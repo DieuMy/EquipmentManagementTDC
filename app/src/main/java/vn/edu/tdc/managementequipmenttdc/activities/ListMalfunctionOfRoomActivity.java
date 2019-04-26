@@ -53,7 +53,7 @@ public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.malfunction_equipment_layout);
 
-        getSupportActionBar().setTitle("Danh sách sự cố của phòng " + Room_Provider.ROOMID);
+        getSupportActionBar().setTitle("Danh sách sự cố của phòng " + Room_Provider.room.getRoomID());
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -100,7 +100,7 @@ public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         btnReport.setVisibility(View.GONE);
-        getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(Room_Provider.ROOMID);
+        getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(Room_Provider.room.getRoomID());
     }
 
     public void getAllDataMalfunctionOfRoomWithProcessingStatusIsFalse(String roomID) {

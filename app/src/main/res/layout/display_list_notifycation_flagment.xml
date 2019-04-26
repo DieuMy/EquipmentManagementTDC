@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <RadioGroup
-        android:id="@+id/displayNotifycationLinnearLayoutCheckBox"
+        android:id="@+id/displayNotifycationRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
@@ -16,6 +16,7 @@
         android:visibility="gone">
 
         <RadioButton
+            android:id="@+id/displayNotifycationRadDaTiepNhan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -25,6 +26,7 @@
             android:textSize="15sp" />
 
         <RadioButton
+            android:id="@+id/displayNotifycationRadChuaTiepNhan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"

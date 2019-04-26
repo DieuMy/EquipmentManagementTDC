@@ -104,6 +104,7 @@
     <string name="DetailReportLabel_TimeBaoCao">Thời gian báo cáo : </string>
     <string name="DetailReportLabel_Masuco">Mã sự cố : </string>
     <string name="DetailReportLabel_Maphong">Mã phòng : </string>
+    <string name="DetailReportLabel_Tenphong">Tên phòng : </string>
     <string name="DetailReportLabel_Mathietbi">Mã thiết bị : </string>
     <string name="DetailReportLabel_Manhanvien">Mã nhân viên : </string>
     <string name="DetailReportLabel_Tennhanvien">Tên nhân viên : </string>

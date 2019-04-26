@@ -90,7 +90,7 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         txtUserID.setText(User_Provider.user.getUserID());
         txtEmployeeName.setText(User_Provider.user.getFullName());
         txtEquipmentID.setText(EQUIPMENTID);
-        txtRoomID.setText(Room_Provider.ROOMID);
+        txtRoomID.setText(Room_Provider.room.getRoomID());
         txtDateReport.setText(toolUtils.getCurrentTimeString());
         txtMalfunctionContent.setText(contentMalfunction);
     }

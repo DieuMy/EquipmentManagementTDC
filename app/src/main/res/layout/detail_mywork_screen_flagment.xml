@@ -13,6 +13,19 @@
             android:id="@+id/myWWorkLinearlayoutContainContent"
             style="@style/DetailReportScreenLinearlayout">
 
+            <LinearLayout
+                android:id="@+id/myWWorkLinearlayoutContainProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+                <ProgressBar
+                    android:id="@+id/detailMyWorkProgressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
             <LinearLayout style="@style/DetailReportScreen_Textview">
 
                 <TextView
@@ -29,22 +42,22 @@
 
                 <TextView
                     style="@style/DetailReportScreenTextview"
-                    android:text="@string/DetailReportLabel_Masuco" />
+                    android:text="@string/DetailReportLabel_Maphong" />
 
                 <TextView
-                    android:id="@+id/detailMyWork_masuco"
+                    android:id="@+id/ddetailMyWork_maphong"
                     style="@style/DetailReportScreenTextviewContent"
-                    android:hint="@string/DetailReportContent_Masuco" />
+                    android:hint="@string/DetailReportContent_Maphong" />
             </LinearLayout>
 
             <LinearLayout style="@style/DetailReportScreen_Textview">
 
                 <TextView
                     style="@style/DetailReportScreenTextview"
-                    android:text="@string/DetailReportLabel_Maphong" />
+                    android:text="@string/DetailReportLabel_Tenphong" />
 
                 <TextView
-                    android:id="@+id/ddetailMyWork_maphong"
+                    android:id="@+id/ddetailMyWork_tenphong"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_Maphong" />
             </LinearLayout>
@@ -81,8 +94,7 @@
 
                 <TextView
                     android:id="@+id/detailMyWork_tennhanvien"
-                    style="@style/DetailReportScreenTextviewContent"
-                    android:hint="@string/DetailReportContent_Tennhanvien" />
+                    style="@style/DetailReportScreenTextviewContent"/>
             </LinearLayout>
 
             <LinearLayout style="@style/DetailReportScreen_Textview">
