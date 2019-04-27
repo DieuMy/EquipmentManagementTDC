@@ -28,6 +28,8 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
 import vn.edu.tdc.managementequipmenttdc.data_models.Users;
+import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
+import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class DetailMyWorkActivity extends AppCompatActivity {
     public static RepairDiary REPAIRDIARY = null;
@@ -41,6 +43,7 @@ public class DetailMyWorkActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    ToolUtils toolUtils;
 
     private boolean statusReceive = false;
 
@@ -71,6 +74,7 @@ public class DetailMyWorkActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        toolUtils = new ToolUtils();
 
         displayDetailRepairDiary();
 
@@ -197,6 +201,10 @@ public class DetailMyWorkActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("statusReceive").setValue(true);
+                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("userIDReceive").setValue(User_Provider.user.getUserID());
+                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("processingDate").setValue(toolUtils.getCurrentTimeString());
+
+
                 } else{
                     Toast.makeText(DetailMyWorkActivity.this, "Sự cố đã được hủy bởi phòng kỹ thuật", Toast.LENGTH_SHORT).show();
                 }
@@ -217,6 +225,9 @@ public class DetailMyWorkActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("processingStatus").setValue(true);
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("roomID_processingStatus").setValue(REPAIRDIARY.getRoomID()+"&true");
+                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("equipmentID_processingStatus").setValue(REPAIRDIARY.getEquipmentID()+"&true");
+                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("dateComplete").setValue(toolUtils.getCurrentTimeString());
+                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("maintenanceContent").setValue(edtRealError.getText().toString());
                 } else{
                     Toast.makeText(DetailMyWorkActivity.this, "Sự cố đã được hủy bởi phòng kỹ thuật", Toast.LENGTH_SHORT).show();
                 }

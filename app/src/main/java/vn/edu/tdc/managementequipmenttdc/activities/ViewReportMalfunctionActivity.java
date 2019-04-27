@@ -94,4 +94,8 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         txtDateReport.setText(toolUtils.getCurrentTimeString());
         txtMalfunctionContent.setText(contentMalfunction);
     }
+
+    private void sendDataAndSaveDataOnDatabase(){
+
+    }
 }
