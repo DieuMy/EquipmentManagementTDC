@@ -69,15 +69,12 @@ public class Main_Activity extends AppCompatActivity {
         //Check internet
         connectionDetector = new ConnectionDetector(this);
         if (connectionDetector.isConnected()) {
-
             //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
             //Initial
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
             databaseReference = firebaseDatabase.getReference();
-
-            getInformationOfUserCurrentLogin();
 
             setContentView(R.layout.activity_main_layout);
             //Gets view from layout
@@ -86,6 +83,11 @@ public class Main_Activity extends AppCompatActivity {
             //Khoi dong man hinh home
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomePageFragment()).commit();
             getSupportActionBar().setTitle("Trang chủ");
+
+            //Check user login
+            if (firebaseAuth.getCurrentUser() != null) {
+                getInformationOfUserCurrentLogin();
+            }
         } else {
             setContentView(R.layout.login_flagment);
             final Dialog dialog = new Dialog(Main_Activity.this);

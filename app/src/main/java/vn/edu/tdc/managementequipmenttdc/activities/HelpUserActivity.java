@@ -65,6 +65,7 @@ public class HelpUserActivity extends AppCompatActivity {
         listQuestion.add("2. Sự cố đã được báo cáo nhưng chưa sửa chữa tôi có nên tiếp tục báo cáo không?");
         listQuestion.add("3. Làm sao để lấy lại mật khẩu?");
         listQuestion.add("4. Tại sao tài khoản của tôi lại bị khóa?");
+        listQuestion.add("5. Muốn báo cáo sự cố mới phải làm như thế nào?");
 
         List<String> listQuestion_1 = new ArrayList<>();
         listQuestion_1.add("1. Kiểm tra internet đã được kết nối chưa");
@@ -83,10 +84,22 @@ public class HelpUserActivity extends AppCompatActivity {
         listQuestion_4.add("2. Cố ý báo cáo giả");
         listQuestion_4.add("3. Cố ý làm rối loạn thông tin");
 
+        List<String> listQuestion_5 = new ArrayList<>();
+        listQuestion_5.add("1. Chọn chức năng báo cáo sự cố trên màn hình trang chủ");
+        listQuestion_5.add("2. Ở màn hình hiển thị danh sách tất cả các phòng máy bạn hãy chọn phòng mà bạn cần báo cáo.\n " +
+                "Hoặc bạn có thể dùng thanh tìm kiếm ở góc phải màn hình để tìm kiêm snhanh phòng mà bạn cần báo cáo");
+        listQuestion_5.add("3. Chọn loại thiết bị trong phòng bạn cần báo cáo");
+        listQuestion_5.add("4. Chọn thiết bị bạn cần báo cáo");
+        listQuestion_5.add("Hoặc: ");
+        listQuestion_5.add("1. Chọn chức năng tra cứu phòng máy trên màn hình trang chủ");
+        listQuestion_5.add("2. Chọn khu vực/ tòa nhà bạn cần báo cáo");
+        listQuestion_5.add("3. Chọn loại thiết bị trong phòng bạn cần báo cáo");
+        listQuestion_5.add("4. Chọn thiết bị bạn cần báo cáo");
+
         listAnswer.put(listQuestion.get(0), listQuestion_1);
         listAnswer.put(listQuestion.get(1), listQuestion_2);
         listAnswer.put(listQuestion.get(2), listQuestion_3);
         listAnswer.put(listQuestion.get(3), listQuestion_4);
-
+        listAnswer.put(listQuestion.get(4), listQuestion_5);
     }
 }

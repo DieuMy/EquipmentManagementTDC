@@ -76,17 +76,18 @@ public class HomePageFragment extends Fragment {
             intent = new Intent(getActivity(), SplashActivity.class);
             startActivity(intent);
             getActivity().finish();
+        } else {
+
+            //Hien thi trang chu
+            getDataPermissionForCurrentUser();
+
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    refreshList();
+                }
+            });
         }
-
-        //Hien thi trang chu
-        getDataPermissionForCurrentUser();
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshList();
-            }
-        });
 
         return view;
     }

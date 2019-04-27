@@ -50,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_flagment);
 
+        getSupportActionBar().hide();
+
         //Get views from layout
         edtAccount = (EditText) findViewById(R.id.loginScreenEdtAccount);
         edtPasword = (EditText) findViewById(R.id.loginScreenEdtPassword);
