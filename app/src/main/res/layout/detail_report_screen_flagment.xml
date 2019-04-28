@@ -18,17 +18,6 @@
                     android:hint="@string/DetailReportContent_TimeBaoCao" />
             </LinearLayout>
 
-            <LinearLayout style="@style/DetailReportScreen_Textview">
-
-                <TextView
-                    style="@style/DetailReportScreenTextview"
-                    android:text="@string/DetailReportLabel_Masuco" />
-
-                <TextView
-                    android:id="@+id/detailreportscreen_masuco"
-                    style="@style/DetailReportScreenTextviewContent"
-                    android:hint="@string/DetailReportContent_Masuco" />
-            </LinearLayout>
 
             <LinearLayout style="@style/DetailReportScreen_Textview">
 
@@ -88,6 +77,30 @@
                     android:id="@+id/detailreportscreen_noidung"
                     style="@style/DetailReportScreenTextviewContent"
                     android:hint="@string/DetailReportContent_Noidung" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_ManhanvienNhanSuaChua" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_employeeIDRepair"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Manhanvien" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/DetailReportScreen_Textview">
+
+                <TextView
+                    style="@style/DetailReportScreenTextview"
+                    android:text="@string/DetailReportLabel_TennhanvienNhanSuaChua" />
+
+                <TextView
+                    android:id="@+id/detailreportscreen_employeeNameRepair"
+                    style="@style/DetailReportScreenTextviewContent"
+                    android:hint="@string/DetailReportContent_Tennhanvien" />
             </LinearLayout>
 
             <LinearLayout

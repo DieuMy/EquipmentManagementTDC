@@ -107,6 +107,8 @@
     <string name="DetailReportLabel_Tenphong">Tên phòng : </string>
     <string name="DetailReportLabel_Mathietbi">Mã thiết bị : </string>
     <string name="DetailReportLabel_Manhanvien">Mã nhân viên : </string>
+    <string name="DetailReportLabel_TennhanvienNhanSuaChua">Tên nhân viên khắc phục : </string>
+    <string name="DetailReportLabel_ManhanvienNhanSuaChua">Mã nhân viên khắc phục: </string>
     <string name="DetailReportLabel_Tennhanvien">Tên nhân viên : </string>
     <string name="DetailReportLabel_Noidung">Nội dung : </string>
     <string name="DetailReportLabel_TimeSuaChua">Thời gian sửa chữa : </string>

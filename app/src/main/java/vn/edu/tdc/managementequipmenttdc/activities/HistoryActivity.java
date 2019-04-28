@@ -2,6 +2,7 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -57,7 +58,6 @@ public class HistoryActivity extends AppCompatActivity {
         progressBarLoading = findViewById(R.id.listNotifycationProgressBar);
         displayListNotifycationRecycleView = findViewById(R.id.displayNotifycationRecycleView);
 
-
         getDataHistoryManipulationOfUser();
     }
 
@@ -87,7 +87,6 @@ public class HistoryActivity extends AppCompatActivity {
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                         RepairDiary repairDiary = item.getValue(RepairDiary.class);
                         listRepairDiaryArray.add(repairDiary);
-                        //Toast.makeText(HistoryActivity.this, repairDiary.getIncident_content(), Toast.LENGTH_LONG).show();
                         list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(repairDiary.getEquipmentID() + "\n" + repairDiary.getIncident_content(), repairDiary.getDateReport()));
                     }
                     displayHistoryManipulationOfUser();
@@ -115,6 +114,8 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(HistoryActivity.this, DetailMalfunctionActivity.class);
+                //Toast.makeText(HistoryActivity.this, listRepairDiaryArray.get(position).getIncident_content(), Toast.LENGTH_SHORT).show();
+                DetailMalfunctionActivity.REPAIR_DIARY = listRepairDiaryArray.get(position);
                 startActivity(intent);
             }
         });
