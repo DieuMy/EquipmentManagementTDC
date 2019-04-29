@@ -14,7 +14,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/personalScreenImageUsers"
+                android:id="@+id/personalScreenAvatarOfUsers"
                 style="@style/PersonalSceenImageViewAvatar"
                 app:civ_border_color="@color/colorCivBorderImage"
                 app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar"

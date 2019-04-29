@@ -6,7 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +26,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.activities.EditProfileActivity;
@@ -82,7 +89,7 @@ public class PersonalPageFragment extends Fragment {
         btnHelp = (TextView) view.findViewById(R.id.personalScreenTxtHelp);
         btnInformationApp = (TextView) view.findViewById(R.id.personalScreenTxtInformationApp);
         btnLogout = (TextView) view.findViewById(R.id.personalScreenTxtLogout);
-        imgAvatar = view.findViewById(R.id.personalScreenImageUsers);
+        imgAvatar = view.findViewById(R.id.personalScreenAvatarOfUsers);
         txtFullName = view.findViewById(R.id.personalScreenTxtFullName);
         txtRole = view.findViewById(R.id.personalScreenTxtRole);
         progressBarLoading = (ProgressBar) view.findViewById((R.id.personalScreenProgressBar));
@@ -148,7 +155,7 @@ public class PersonalPageFragment extends Fragment {
                 //Update lastaccess for user
                 try {
                     databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("lastAccess").setValue(toolUtils.getCurrentTimeString());
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -163,7 +170,8 @@ public class PersonalPageFragment extends Fragment {
         return view;
     }
 
-    public void getInformationOfUserCurrentLogin() {
+
+    private void getInformationOfUserCurrentLogin() {
         progressBarLoading.setVisibility(View.VISIBLE);
         Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -190,7 +198,7 @@ public class PersonalPageFragment extends Fragment {
         });
     }
 
-    public void getRoleOfUserCurrentLogin(final String roleID) {
+    private void getRoleOfUserCurrentLogin(final String roleID) {
         if (roleID == null) {
             return;
         }

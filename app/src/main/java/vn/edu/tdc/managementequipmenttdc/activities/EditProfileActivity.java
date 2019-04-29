@@ -2,7 +2,12 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,19 +28,30 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.Department;
 import vn.edu.tdc.managementequipmenttdc.data_models.Role;
 import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
+
+import static android.Manifest.permission.CAMERA;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class EditProfileActivity extends AppCompatActivity {
     private Intent intent;
@@ -55,7 +73,11 @@ public class EditProfileActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    FirebaseStorage storage;
     ToolUtils toolUtils;
+
+    private final int REQUEST_CODE_CAMERA = 1;
+    private final int REQUEST_CODE_LIBRARY = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +91,7 @@ public class EditProfileActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        storage = FirebaseStorage.getInstance();
         toolUtils = new ToolUtils();
 
         //Gets view from layout
@@ -87,6 +110,7 @@ public class EditProfileActivity extends AppCompatActivity {
         txtDisplayDepartment = findViewById(R.id.editProfileTxtDepartment);
         txtUserID = findViewById(R.id.EditProfileTxtUserID);
         labelUserID = findViewById(R.id.editProfileTxtLabelUserID);
+        imgAvatar = findViewById(R.id.editProfileScreenImageUsers);
 
         //Set adapter for spinner
         //Set data for spinner gender
@@ -138,6 +162,13 @@ public class EditProfileActivity extends AppCompatActivity {
                 txtDisplayDepartment.setText("");
                 txtDisplayDepartment.setVisibility(View.GONE);
                 spnDepartment.setVisibility(View.VISIBLE);
+            }
+        });
+
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeAvatarOfUserWithPhotoGetFromLibraryCamera();
             }
         });
     }
@@ -415,5 +446,53 @@ public class EditProfileActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            imgAvatar.setImageBitmap(bitmap);
+        } else if(requestCode == REQUEST_CODE_LIBRARY && resultCode == RESULT_OK && data != null){
+            Uri uri = data.getData();
+            imgAvatar.setImageURI(uri);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void changeAvatarOfUserWithPhotoGetFromLibraryCamera() {
+        if (!checkPermission(CAMERA)) {
+            ActivityCompat.requestPermissions(EditProfileActivity.this, new String[]{CAMERA}, 0);
+        }
+
+        final CharSequence[] items = {"Camera", "Thư viện ảnh", "Hủy"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
+        builder.setTitle("Chọn ảnh");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if(items[i].equals("Camera")){
+                    intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CODE_CAMERA);
+                } else if(items[i].equals("Thư viện ảnh")){
+                    intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(intent.createChooser(intent, "Chọn ảnh"), REQUEST_CODE_LIBRARY);
+                } else if(items[i].equals("Hủy")){
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+
+    }
+
+    private boolean checkPermission(String permission) {
+        int permissionCheck = ContextCompat.checkSelfPermission(EditProfileActivity.this, permission);
+        return (permissionCheck == PERMISSION_GRANTED);
+    }
+
+    private void testSaveImageInStorageInFirebase(){
     }
 }
