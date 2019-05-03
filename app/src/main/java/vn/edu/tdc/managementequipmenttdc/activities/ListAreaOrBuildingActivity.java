@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.AreaBuildingRecycleAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuilding;
@@ -40,10 +42,18 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ToolUtils toolUtils;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBarLoading;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.areabuilding_screen_flagment);
+
+        //Get views layout
+        areaBuildingRecycleView = (RecyclerView) findViewById(R.id.areaBuildingRecycleView);
+        progressBarLoading = findViewById(R.id.areaBuildingProgressBar);
+        swipeRefreshLayout = findViewById(R.id.areaBuildingswipeRefresh);
 
         getSupportActionBar().setTitle("Khu vực/ tòa nhà");
         assert getSupportActionBar() != null;
@@ -56,6 +66,20 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
 
         getAllDataOfAreaBuilding();
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBarLoading.setVisibility(View.GONE);
+        areaBuildingRecycleView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -64,12 +88,23 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
         return true;
     }
 
+    private void refreshList() {
+        listAreaBuilding.clear();
+        list_areaBuildingCardviewModels.clear();
+        getAllDataOfAreaBuilding();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
     //Lay danh sach ca khu vuc/ toa nha
     private void getAllDataOfAreaBuilding() {
+        progressBarLoading.setVisibility(View.VISIBLE);
+        areaBuildingRecycleView.setVisibility(View.GONE);
         Query query = databaseReference.child("area_buildings");//Lay toa bo du lieu bang are_buildings
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBarLoading.setVisibility(View.GONE);
+                areaBuildingRecycleView.setVisibility(View.VISIBLE);
                 if ((dataSnapshot.exists())) {
                     //Duyet de lay danh sach
                     for (DataSnapshot area : dataSnapshot.getChildren()) {
@@ -92,9 +127,6 @@ public class ListAreaOrBuildingActivity extends AppCompatActivity {
 
     //Hien thi danh sach cac khu vuc/toa nha
     private void displayListAreaBuilding() {
-        //Get views layout
-        areaBuildingRecycleView = (RecyclerView) findViewById(R.id.areaBuildingRecycleView);
-
         //Setup RecycleView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         areaBuildingRecycleView.setLayoutManager(layoutManager);

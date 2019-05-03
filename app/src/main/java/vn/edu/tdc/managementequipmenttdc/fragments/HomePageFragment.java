@@ -57,7 +57,6 @@ public class HomePageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         //Khoi tao
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -77,10 +76,11 @@ public class HomePageFragment extends Fragment {
             startActivity(intent);
             getActivity().finish();
         } else {
-
+            listFunctions.clear();
+            listPermissions.clear();
+            listFunctionsHomeScreen.clear();
             //Hien thi trang chu
             getDataPermissionForCurrentUser();
-
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {

@@ -5,7 +5,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activities.EquipmentsActivity">
+
     <LinearLayout
+        android:id="@+id/listComputerLinearlayoutContainSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/listComputerEdtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/AreaBuildingMarginTopEditText"
+            android:layout_marginBottom="@dimen/AreaBuildingMarginTopEditText"
+            android:fontFamily="sans-serif-condensed"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/AreaBuildingTextSize" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/listComputerLinearlayoutContainChkAll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -35,10 +56,24 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listComputersRecycleView"
+    <ProgressBar
+        android:id="@+id/listComputerProgressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/listComputerwipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_weight="9">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listComputersRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"></androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

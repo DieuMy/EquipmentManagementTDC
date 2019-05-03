@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ListEquipmentScreenLinearLayout"
     tools:context=".activities.TypeEquipmentActivity">
 
-    <LinearLayout style="@style/ListEquipmentScreenLinearLayout">
+    <LinearLayout
+        android:id="@+id/typeEquipmentLinearlayoutContainSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|top"
+        android:visibility="gone"
+        android:elevation="100dp">
+
+        <EditText
+            android:id="@+id/typeEquipmentEdtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/AreaBuildingMarginTopEditText"
+            android:layout_marginBottom="@dimen/AreaBuildingMarginTopEditText"
+            android:fontFamily="sans-serif-condensed"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/AreaBuildingTextSize" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/typeEquipmentProgressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/typeEquipmentSwipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ListEquipmentScreenRecycleViewFunction"
             style="@style/ListEquipmentScreenRecycleView"
             android:background="@drawable/list_equipment_screen_background"
             tools:itemCount="20" />
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ListEquipmentScreenFloatButtonViewListMalfunction"

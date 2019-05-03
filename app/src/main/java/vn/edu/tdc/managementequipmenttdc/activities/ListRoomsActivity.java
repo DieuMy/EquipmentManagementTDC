@@ -79,7 +79,6 @@ public class ListRoomsActivity extends AppCompatActivity {
         progressBarLoading = findViewById(R.id.listRoomProgressBar);
         swipeRefreshLayout = findViewById(R.id.listRoomswipeRefresh);
         listRoomRecycleView = (RecyclerView) findViewById(R.id.listRoomRecycleView);
-        //Gets view from layout
         linearLayoutContainSearch = findViewById(R.id.listRoomsLinearlayoutContainSearch);
         edtSearch = findViewById(R.id.listRoomsEdtSearch);
 
@@ -128,6 +127,7 @@ public class ListRoomsActivity extends AppCompatActivity {
         switch (indexItem) {
             case R.id.menu_item_search: //Xu ly item xoa
                 linearLayoutContainSearch.setVisibility(View.VISIBLE);
+                listRoomRecycleView.setVisibility(View.GONE);
                 edtSearch.requestFocus();
 
                 //Display softkey
@@ -160,6 +160,7 @@ public class ListRoomsActivity extends AppCompatActivity {
                                 Toast.makeText(ListRoomsActivity.this, "Không tồn tại phòng thực hành bạn đang tìm", Toast.LENGTH_SHORT).show();
                                 return false;
                             }
+                            listRoomRecycleView.setVisibility(View.VISIBLE);
                             displayListRooms();
                             return true;
                         }

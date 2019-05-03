@@ -9,18 +9,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
+
         <EditText
             android:id="@+id/listRoomsEdtSearch"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/AreaBuildingMarginTopEditText"
             android:layout_marginBottom="@dimen/AreaBuildingMarginTopEditText"
             android:fontFamily="sans-serif-condensed"
-            android:textSize="@dimen/AreaBuildingTextSize"/>
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/AreaBuildingTextSize" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/listRoomProgressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/listRoomswipeRefresh"
@@ -33,12 +41,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
-
-        <ProgressBar
-            android:id="@+id/listRoomProgressBar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:visibility="gone" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

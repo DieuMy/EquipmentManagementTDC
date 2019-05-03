@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
@@ -50,6 +51,7 @@ public class MyWorkActivity extends AppCompatActivity {
     private TextView txtNotification;
     private RadioGroup radioGroup;
     private ProgressBar progressBarLoading;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RadioButton chkDaTiepNhan, chkChuaTiepNhan;
     private ArrayList<Rooms> listOfRoomsManagedByCurrentUser = new ArrayList<Rooms>();
     private ArrayList<RepairDiary> listRepairDiary = new ArrayList<RepairDiary>();
@@ -72,6 +74,7 @@ public class MyWorkActivity extends AppCompatActivity {
         //Gets view from layout
         recycleViewDisplayListNotifycation = findViewById(R.id.displayNotifycationRecycleView);
         progressBarLoading = findViewById(R.id.listNotifycationProgressBar);
+        swipeRefreshLayout = findViewById(R.id.listNotifycationSwipeRefresh);
 
         linearLayoutNotifycation = findViewById(R.id.listNotifycationLinearlayoutTextView);
         txtNotification = findViewById(R.id.listNotifycationTxtNotification);
@@ -79,6 +82,13 @@ public class MyWorkActivity extends AppCompatActivity {
         radioGroup.setVisibility(View.VISIBLE);
 
         getDataMyWorkOfCurrentUserWithRoleIsEmployee();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -98,6 +108,15 @@ public class MyWorkActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
+    }
+
+    private void refreshList() {
+        list_displayListNotifycationCardViewModels.clear();
+        listRepairDiary.clear();
+        listOfRoomsManagedByCurrentUser.clear();
+
+        getDataMyWorkOfCurrentUserWithRoleIsEmployee();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void checkIsRadioButtonChecked() {
