@@ -153,4 +153,8 @@
     <dimen name="CardViewListRoomCardElevation">15dp</dimen>
     <dimen name="CardViewListRoomPaddingLinearlayout">10dp</dimen>
     <dimen name="CardViewListRoomTextSizeOfTextView">15sp</dimen>
+
+    <!--..........................Area building screen............................-->
+    <dimen name="AreaBuildingMarginTopEditText">5dp</dimen>
+    <dimen name="AreaBuildingTextSize">16sp</dimen>
 </resources>

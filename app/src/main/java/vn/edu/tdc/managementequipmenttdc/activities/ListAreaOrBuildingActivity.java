@@ -4,7 +4,9 @@ import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +33,6 @@ import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 public class ListAreaOrBuildingActivity extends AppCompatActivity {
     //Display list area
     private Vector<AreaBuildingCardviewModel> list_areaBuildingCardviewModels = new Vector<AreaBuildingCardviewModel>();
-    ;
     RecyclerView areaBuildingRecycleView;
 
     private ArrayList<AreaBuilding> listAreaBuilding = new ArrayList<AreaBuilding>();

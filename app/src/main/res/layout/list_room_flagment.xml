@@ -4,6 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/listRoomsLinearlayoutContainSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <EditText
+            android:id="@+id/listRoomsEdtSearch"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/AreaBuildingMarginTopEditText"
+            android:layout_marginBottom="@dimen/AreaBuildingMarginTopEditText"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="@dimen/AreaBuildingTextSize"/>
+    </LinearLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/listRoomswipeRefresh"
         android:layout_width="match_parent"

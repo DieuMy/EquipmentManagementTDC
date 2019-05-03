@@ -1,15 +1,22 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +60,8 @@ public class ListRoomsActivity extends AppCompatActivity {
     private ArrayList<Rooms> listRooms = new ArrayList<Rooms>();
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBarLoading;
+    private LinearLayout linearLayoutContainSearch;
+    private EditText edtSearch;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +79,9 @@ public class ListRoomsActivity extends AppCompatActivity {
         progressBarLoading = findViewById(R.id.listRoomProgressBar);
         swipeRefreshLayout = findViewById(R.id.listRoomswipeRefresh);
         listRoomRecycleView = (RecyclerView) findViewById(R.id.listRoomRecycleView);
+        //Gets view from layout
+        linearLayoutContainSearch = findViewById(R.id.listRoomsLinearlayoutContainSearch);
+        edtSearch = findViewById(R.id.listRoomsEdtSearch);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -115,10 +127,54 @@ public class ListRoomsActivity extends AppCompatActivity {
         //Kiem tra xem da click vao item nào
         switch (indexItem) {
             case R.id.menu_item_search: //Xu ly item xoa
+                linearLayoutContainSearch.setVisibility(View.VISIBLE);
+                edtSearch.requestFocus();
 
+                //Display softkey
+                InputMethodManager imgr = (InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imgr.showSoftInput(edtSearch, 0);
+                imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+                //Change symbol for softkey
+                edtSearch.setInputType(InputType.TYPE_CLASS_TEXT);
+                edtSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+
+                edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                            performSearch();
+                            String contentSearch = edtSearch.getText().toString().trim();
+                            if(contentSearch.isEmpty()){
+                                Toast.makeText(ListRoomsActivity.this, "Hãy nhập nội dung tìm kiếm", Toast.LENGTH_SHORT).show();
+                                edtSearch.requestFocus();
+                                return false;
+                            }
+                            listRoomCardViewModels.clear();
+                            for (Rooms room : Room_Provider.listAllRoom) {
+                                if (room.getRoomName().contains(contentSearch)) {
+                                    listRoomCardViewModels.add(new ListRoomCardViewModel(room.getRoomName()));
+                                }
+                            }
+                            if(listRoomCardViewModels.size() < 1){
+                                Toast.makeText(ListRoomsActivity.this, "Không tồn tại phòng thực hành bạn đang tìm", Toast.LENGTH_SHORT).show();
+                                return false;
+                            }
+                            displayListRooms();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void performSearch() {
+        edtSearch.clearFocus();
+        InputMethodManager in = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(edtSearch.getWindowToken(), 0);
     }
 
     @Override
@@ -126,9 +182,17 @@ public class ListRoomsActivity extends AppCompatActivity {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
         listRoomRecycleView.setVisibility(View.VISIBLE);
+        linearLayoutContainSearch.setVisibility(View.GONE);
     }
 
     private void refreshList() {
+        listRoomCardViewModels.clear();
+        if(FUNCTIONNAME.equals("ListRoomsActivity")){
+            getDataAllRooms();
+        } else {
+            getDataRoomsOfCorrespondingArea();
+        }
+        linearLayoutContainSearch.setVisibility(View.GONE);
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -150,6 +214,8 @@ public class ListRoomsActivity extends AppCompatActivity {
                         listRooms.add(room);//them room vao danh sach
                         listRoomCardViewModels.add(new ListRoomCardViewModel(room.getRoomName()));
                     }
+
+                    Room_Provider.listAllRoom = listRooms;
                     displayListRooms();
                 } else {
                     final Dialog dialog = new Dialog(ListRoomsActivity.this);
@@ -203,14 +269,7 @@ public class ListRoomsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 intent = new Intent(ListRoomsActivity.this, TypeEquipmentActivity.class);
-                //Truyen du lieu areaID sang listRoom
-//                EquipmentsActivity.ROOMID = listRooms.get(position).getRoomID();
-//                EquipmentsActivity.ROOMNAME = listRooms.get(position).getRoomName();
-//
-//                TypeEquipmentActivity.ROOMNAME = listRooms.get(position).getRoomName();
-//                ListMalfunctionOfRoomActivity.ROOMID = listRooms.get(position).getRoomID();
                 Room_Provider.room = listRooms.get(position);
-
                 startActivity(intent);
             }
         });
@@ -233,6 +292,7 @@ public class ListRoomsActivity extends AppCompatActivity {
                         listRooms.add(room);//them room vao danh sach
                         listRoomCardViewModels.add(new ListRoomCardViewModel(room.getRoomName()));
                     }
+                    Room_Provider.listAllRoom = listRooms;
                     displayListRooms();
                 } else {
                     Toast.makeText(ListRoomsActivity.this, "Không tồn tại phòng thực hành nào!", Toast.LENGTH_SHORT).show();

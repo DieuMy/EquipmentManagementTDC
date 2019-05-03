@@ -105,6 +105,10 @@ public class HomePageFragment extends Fragment {
     }
 
     private void refreshList() {
+        listFunctions.clear();
+        listPermissions.clear();
+        listFunctionsHomeScreen.clear();
+        getDataPermissionForCurrentUser();
         swipeRefreshLayout.setRefreshing(false);
     }
 

@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -78,6 +80,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private final int REQUEST_CODE_CAMERA = 1;
     private final int REQUEST_CODE_LIBRARY = 0;
+    private Bitmap selectBitmap;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -384,6 +387,12 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
 
+//        //đưa bitmap về base64string:
+//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//        selectBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+//        byte[] byteArray = byteArrayOutputStream.toByteArray();
+//        String imageEncoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
         final Users users = new Users(userID, fullName, gender, address, numberPhone, email, roleID, departmentID, "",
                 User_Provider.user.isActive(), User_Provider.user.isLock_account(), User_Provider.user.getCreate_at(),
                 update_at, User_Provider.user.getLast_changePassword(), lastAccess);
@@ -450,12 +459,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imgAvatar.setImageBitmap(bitmap);
-        } else if(requestCode == REQUEST_CODE_LIBRARY && resultCode == RESULT_OK && data != null){
-            Uri uri = data.getData();
-            imgAvatar.setImageURI(uri);
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
+            selectBitmap = (Bitmap) data.getExtras().get("data");
+            imgAvatar.setImageBitmap(selectBitmap);
+        } else if (requestCode == REQUEST_CODE_LIBRARY && resultCode == RESULT_OK && data != null) {
+            try {
+                Uri uri = data.getData();
+                selectBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                imgAvatar.setImageBitmap(selectBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -472,14 +486,14 @@ public class EditProfileActivity extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                if(items[i].equals("Camera")){
+                if (items[i].equals("Camera")) {
                     intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, REQUEST_CODE_CAMERA);
-                } else if(items[i].equals("Thư viện ảnh")){
+                } else if (items[i].equals("Thư viện ảnh")) {
                     intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
                     startActivityForResult(intent.createChooser(intent, "Chọn ảnh"), REQUEST_CODE_LIBRARY);
-                } else if(items[i].equals("Hủy")){
+                } else if (items[i].equals("Hủy")) {
                     dialog.dismiss();
                 }
             }
@@ -491,8 +505,5 @@ public class EditProfileActivity extends AppCompatActivity {
     private boolean checkPermission(String permission) {
         int permissionCheck = ContextCompat.checkSelfPermission(EditProfileActivity.this, permission);
         return (permissionCheck == PERMISSION_GRANTED);
-    }
-
-    private void testSaveImageInStorageInFirebase(){
     }
 }
