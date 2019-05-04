@@ -40,6 +40,7 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.activities.EditProfileActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.HelpUserActivity;
 import vn.edu.tdc.managementequipmenttdc.activities.LoginActivity;
+import vn.edu.tdc.managementequipmenttdc.data_models.Log;
 import vn.edu.tdc.managementequipmenttdc.data_models.Role;
 import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
@@ -161,6 +162,9 @@ public class PersonalPageFragment extends Fragment {
                     e.printStackTrace();
                 }
 
+                //Luu log
+                updateLogOfUser();
+
                 firebaseAuth.signOut();
 
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -241,5 +245,16 @@ public class PersonalPageFragment extends Fragment {
 
             }
         });
+    }
+
+    private void updateLogOfUser(){
+        //Update log
+        String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
+        String userID = firebaseAuth.getCurrentUser().getUid();
+        String manipulation = "Thoát tài khoản khỏi ứng dụng";
+        String dateManipulation = toolUtils.getCurrentTimeString();
+
+        Log log = new Log(logID, userID, manipulation, dateManipulation);
+        databaseReference.child("log").child(logID).setValue(log);
     }
 }

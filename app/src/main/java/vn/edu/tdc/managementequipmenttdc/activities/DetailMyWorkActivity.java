@@ -114,10 +114,6 @@ public class DetailMyWorkActivity extends AppCompatActivity {
 
                     //Thay doi trang thai cua su co thanh da tiep nhan StatusReceive = true
                     updateIsStatusReceiveOfMalfunction();
-
-                    //Update log
-                    updateLogOfUser();
-
                 }
             });
 
@@ -141,7 +137,7 @@ public class DetailMyWorkActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void displayDetailRepairDiary(){
+    public void displayDetailRepairDiary() {
         txtDateReport.setText(REPAIRDIARY.getDateReport());
         txtRoomID.setText(REPAIRDIARY.getRoomID());
 
@@ -152,10 +148,10 @@ public class DetailMyWorkActivity extends AppCompatActivity {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     Rooms room = dataSnapshot.getValue(Rooms.class);
                     txtRoomName.setText(room.getRoomName());
-                } else{
+                } else {
                     txtRoomName.setText("");
                 }
             }
@@ -174,15 +170,15 @@ public class DetailMyWorkActivity extends AppCompatActivity {
         _query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    for(DataSnapshot item : dataSnapshot.getChildren()) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
                         Users user = item.getValue(Users.class);
                         txtEmployeeName.setText(user.getFullName());
                         break;
                     }
                     progressBarLoading.setVisibility(View.GONE);
                     linearLayoutContainProgressBar.setVisibility(View.GONE);
-                } else{
+                } else {
                     txtEmployeeName.setText("");
                 }
                 progressBarLoading.setVisibility(View.GONE);
@@ -198,18 +194,19 @@ public class DetailMyWorkActivity extends AppCompatActivity {
         txtMalfunctionContent.setText(REPAIRDIARY.getIncident_content());
     }
 
-    private void updateIsStatusReceiveOfMalfunction(){
+    private void updateIsStatusReceiveOfMalfunction() {
         Query query = databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("statusReceive").setValue(true);
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("userIDReceive").setValue(User_Provider.user.getUserID());
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("processingDate").setValue(toolUtils.getCurrentTimeString());
 
+                    updateLogOfUser();
 
-                } else{
+                } else {
                     Toast.makeText(DetailMyWorkActivity.this, "Sự cố đã được hủy bởi phòng kỹ thuật", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -221,18 +218,27 @@ public class DetailMyWorkActivity extends AppCompatActivity {
         });
     }
 
-    private void updateIsProcessingStatus(){
+    private void updateIsProcessingStatus() {
         Query query = databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("processingStatus").setValue(true);
-                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("roomID_processingStatus").setValue(REPAIRDIARY.getRoomID()+"&true");
-                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("equipmentID_processingStatus").setValue(REPAIRDIARY.getEquipmentID()+"&true");
+                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("roomID_processingStatus").setValue(REPAIRDIARY.getRoomID() + "&true");
+                    databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("equipmentID_processingStatus").setValue(REPAIRDIARY.getEquipmentID() + "&true");
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("dateComplete").setValue(toolUtils.getCurrentTimeString());
                     databaseReference.child("repairDiarys").child(REPAIRDIARY.getRepairDiaryID()).child("maintenanceContent").setValue(edtRealError.getText().toString());
-                } else{
+
+                    //Save log
+                    String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
+                    String userID = firebaseAuth.getCurrentUser().getUid();
+                    String manipulation = "Xác nhận hoàn thành sửa chữa sự cố mã " + REPAIRDIARY.getRepairDiaryID();
+                    String dateManipulation = toolUtils.getCurrentTimeString();
+
+                    Log log = new Log(logID, userID, manipulation, dateManipulation);
+                    databaseReference.child("log").child(logID).setValue(log);
+                } else {
                     Toast.makeText(DetailMyWorkActivity.this, "Sự cố đã được hủy bởi phòng kỹ thuật", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -244,8 +250,8 @@ public class DetailMyWorkActivity extends AppCompatActivity {
         });
     }
 
-    private void updateLogOfUser(){
-        //Update log
+    private void updateLogOfUser() {
+        //Save log
         String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
         String userID = firebaseAuth.getCurrentUser().getUid();
         String manipulation = "Tiếp nhận sửa chữa sự cố mã " + REPAIRDIARY.getRepairDiaryID();

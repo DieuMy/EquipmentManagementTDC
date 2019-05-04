@@ -122,4 +122,7 @@
     <string name="DetailReportContent_Noidung">(Hiển thị Nội dung )</string>
     <string name="DetailReportContent_TimeSuaChua">(Hiển thị Thời gian sửa chữa)</string>
     <string name="DetailReportContent_Loidakhacphuc">(Hiển thị Lỗi đã khắc phục)</string>
+
+    <!--..........................History Screen.............................-->
+    <string name="HistoryEditTextSearchHint">dd-mm-yy hh:mm:ss</string>
 </resources>

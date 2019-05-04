@@ -416,10 +416,11 @@ public class EditProfileActivity extends AppCompatActivity {
                             //Update log
                             String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
                             String userID = firebaseAuth.getCurrentUser().getUid();
-                            String manipulation = "Chỉnh sửa thông tin cá nhân \n Họ tên: " + User_Provider.user.getFullName() + "\tHọ tên sau khi đổi: " + fullName + "\nGiới tính" +
-                                    User_Provider.user.getGender() + "\tGiới tính sau khi đổi: " + gender + "\nĐịa chỉ: " + User_Provider.user.getAddress() + "\tĐịa chỉ sau khi đổi: " + address
-                                    +"\nSố điện thoại: " + User_Provider.user.getNumberPhone() + "\tSĐT sau khi đổi: " + numberPhone + "\nEmail: " + User_Provider.user.getEmail() + "\tEmail sau khi đổi: " +email
-                                    + "\nChức vụ đổi thành: " + txtDisplayRole.getText().toString() + "\nPhòng ban làm việc: " + txtDisplayDepartment.getText().toString();
+                            String manipulation = "Chỉnh sửa thông tin cá nhân. Họ tên sau khi đổi: " + fullName + " Giới tính sau khi đổi: " + gender + "; Địa chỉ: " + User_Provider.user.getAddress()
+                                    + " Địa chỉ sau khi đổi: " + address + " SĐT sau khi đổi: " + numberPhone
+                                    + " Email sau khi đổi: " + email
+                                    + " Chức vụ: " + txtDisplayRole.getText().toString()
+                                    + " Phòng ban làm việc: " + txtDisplayDepartment.getText().toString();
                             String dateManipulation = toolUtils.getCurrentTimeString();
 
                             Log log = new Log(logID, userID, manipulation, dateManipulation);

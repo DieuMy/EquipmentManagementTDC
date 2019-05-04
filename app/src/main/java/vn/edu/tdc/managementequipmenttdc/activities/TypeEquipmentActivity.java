@@ -177,6 +177,7 @@ public class TypeEquipmentActivity extends AppCompatActivity {
                             }
                             listequipmentrecycleview.setVisibility(View.VISIBLE);
                             linearLayoutContainSearch.setVisibility(View.GONE);
+                            listTypeEquipmentSearch.clear();
                             displayListTypeEquipment();
                             return true;
                         }

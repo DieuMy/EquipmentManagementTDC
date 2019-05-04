@@ -141,8 +141,8 @@
     <dimen name="CardViewDisplayListNotifycationCardCornerRadius">5dp</dimen>
     <dimen name="CardViewDisplayListNotifycationCardElevation">10dp</dimen>
     <dimen name="CardViewDisplayListNotifycationLinearlayoutPaddingLeft">15dp</dimen>
-    <dimen name="CardViewDisplayListNotifycationLinearlayoutPaddingTop">5dp</dimen>
-    <dimen name="CardViewDisplayListNotifycationLinearlayoutPaddingBottom">5dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationLinearlayoutPaddingTop">8dp</dimen>
+    <dimen name="CardViewDisplayListNotifycationLinearlayoutPaddingBottom">8dp</dimen>
     <dimen name="CardViewDisplayListNotifycationLinearlayoutContentMarginLeft">20dp</dimen>
     <dimen name="CardViewDisplayListNotifycationTextSizeOfTextView">15sp</dimen>
     <dimen name="CardViewDisplayListNotifycationMarginTopOfTextViewDate">10dp</dimen>

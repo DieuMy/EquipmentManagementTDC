@@ -108,6 +108,7 @@ public class MyWorkActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
+        recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
     }
 
     private void refreshList() {
