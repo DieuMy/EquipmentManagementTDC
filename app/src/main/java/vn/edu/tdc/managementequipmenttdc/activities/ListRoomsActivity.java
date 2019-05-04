@@ -58,6 +58,7 @@ public class ListRoomsActivity extends AppCompatActivity {
     private String areaID, areaName;
 
     private ArrayList<Rooms> listRooms = new ArrayList<Rooms>();
+    private ArrayList<Rooms> listRoomsSearch = new ArrayList<Rooms>();
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBarLoading;
     private LinearLayout linearLayoutContainSearch;
@@ -86,7 +87,7 @@ public class ListRoomsActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
         listRoomCardViewModels = new Vector<ListRoomCardViewModel>();
 
-        if(FUNCTIONNAME.equals("ListRoomsActivity")){
+        if (FUNCTIONNAME.equals("ListRoomsActivity")) {
             getDataAllRooms();
             getSupportActionBar().setTitle("Danh sách tất cả các phòng thực hành");
         } else {
@@ -131,7 +132,7 @@ public class ListRoomsActivity extends AppCompatActivity {
                 edtSearch.requestFocus();
 
                 //Display softkey
-                InputMethodManager imgr = (InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imgr = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imgr.showSoftInput(edtSearch, 0);
                 imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
@@ -142,21 +143,24 @@ public class ListRoomsActivity extends AppCompatActivity {
                 edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                             performSearch();
                             String contentSearch = edtSearch.getText().toString().trim();
-                            if(contentSearch.isEmpty()){
+                            if (contentSearch.isEmpty()) {
                                 Toast.makeText(ListRoomsActivity.this, "Hãy nhập nội dung tìm kiếm", Toast.LENGTH_SHORT).show();
                                 edtSearch.requestFocus();
                                 return false;
                             }
                             listRoomCardViewModels.clear();
-                            for (Rooms room : Room_Provider.listAllRoom) {
+                            listRooms.clear();
+                            for (Rooms room :  listRoomsSearch) {
                                 if (room.getRoomName().contains(contentSearch)) {
+                                    listRooms.add(room);
                                     listRoomCardViewModels.add(new ListRoomCardViewModel(room.getRoomName()));
                                 }
                             }
-                            if(listRoomCardViewModels.size() < 1){
+
+                            if (listRoomCardViewModels.size() < 1) {
                                 Toast.makeText(ListRoomsActivity.this, "Không tồn tại phòng thực hành bạn đang tìm", Toast.LENGTH_SHORT).show();
                                 return false;
                             }
@@ -174,7 +178,7 @@ public class ListRoomsActivity extends AppCompatActivity {
 
     private void performSearch() {
         edtSearch.clearFocus();
-        InputMethodManager in = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(edtSearch.getWindowToken(), 0);
     }
 
@@ -188,7 +192,7 @@ public class ListRoomsActivity extends AppCompatActivity {
 
     private void refreshList() {
         listRoomCardViewModels.clear();
-        if(FUNCTIONNAME.equals("ListRoomsActivity")){
+        if (FUNCTIONNAME.equals("ListRoomsActivity")) {
             getDataAllRooms();
         } else {
             getDataRoomsOfCorrespondingArea();
@@ -215,8 +219,8 @@ public class ListRoomsActivity extends AppCompatActivity {
                         listRooms.add(room);//them room vao danh sach
                         listRoomCardViewModels.add(new ListRoomCardViewModel(room.getRoomName()));
                     }
-
-                    Room_Provider.listAllRoom = listRooms;
+                    listRoomsSearch.addAll(listRooms);
+                    Room_Provider.listAllRoom.addAll(listRooms);
                     displayListRooms();
                 } else {
                     final Dialog dialog = new Dialog(ListRoomsActivity.this);
@@ -247,7 +251,7 @@ public class ListRoomsActivity extends AppCompatActivity {
 
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialog.show();
-                   // Toast.makeText(ListRoomsActivity.this, "Không có phòng thực hành trong khu vực/ tòa nhà này!", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(ListRoomsActivity.this, "Không có phòng thực hành trong khu vực/ tòa nhà này!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -260,7 +264,7 @@ public class ListRoomsActivity extends AppCompatActivity {
 
     //Hien thi danh sach cac phong
     private void displayListRooms() {
-         //Setup RecycleView
+        //Setup RecycleView
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);//chia recycleview thanh cot
         listRoomRecycleView.setLayoutManager(gridLayoutManager);
         ListRoomRecycleAdapter adapter = new ListRoomRecycleAdapter(R.layout.card_view_list_room_layout, listRoomCardViewModels);
@@ -293,7 +297,8 @@ public class ListRoomsActivity extends AppCompatActivity {
                         listRooms.add(room);//them room vao danh sach
                         listRoomCardViewModels.add(new ListRoomCardViewModel(room.getRoomName()));
                     }
-                    Room_Provider.listAllRoom = listRooms;
+                    listRoomsSearch.addAll(listRooms);
+                    Room_Provider.listAllRoom.addAll(listRooms);
                     displayListRooms();
                 } else {
                     Toast.makeText(ListRoomsActivity.this, "Không tồn tại phòng thực hành nào!", Toast.LENGTH_SHORT).show();

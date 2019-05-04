@@ -52,26 +52,26 @@ public class DetailMalfunctionActivity extends AppCompatActivity {
         return true;
     }
 
-    //Gan layout menu vua tao(menu_layout) vao menu cha
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Gan layout menu vua tao vao menu
-        getMenuInflater().inflate(R.menu.menu_review, menu);//Hien thi ra man hinh co menu tren thanh cong cu
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
-        //Kiem tra xem da click vao item nào
-        switch (indexItem) {
-            case R.id.menu_item_review: //Xu ly item xoa
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    //Gan layout menu vua tao(menu_layout) vao menu cha
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        //Gan layout menu vua tao vao menu
+//        getMenuInflater().inflate(R.menu.menu_review, menu);//Hien thi ra man hinh co menu tren thanh cong cu
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    //Xu ly su kien cho item trong menu khi click vao item nao do trong menu
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int indexItem = item.getItemId();//Tra ve vi tri cua item duoc click
+//        //Kiem tra xem da click vao item nào
+//        switch (indexItem) {
+//            case R.id.menu_item_review: //Xu ly item xoa
+//
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void displayDetailHistory() {
         if(REPAIR_DIARY != null) {

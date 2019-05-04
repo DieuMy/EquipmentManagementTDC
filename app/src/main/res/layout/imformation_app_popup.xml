@@ -98,7 +98,7 @@
                     android:textSize="15sp"
                     android:fontFamily="sans-serif-condensed"
                     android:textStyle="bold"
-                    android:text="Email hỗ trợ: 29thanhhuong@gmail.com"
+                    android:text="Email: equipmentmanagement.tdc@gmail.com"
                     android:textColor="#FFF"/>
 
                 <TextView
@@ -111,7 +111,7 @@
                     android:textSize="15sp"
                     android:fontFamily="sans-serif-condensed"
                     android:textStyle="bold"
-                    android:text="Phiên bản 1.0. Năm phát hành 05/2019"
+                    android:text="Phiên bản beta. Năm phát hành 05/2019"
                     android:textColor="#FFF"/>
 
                 <Button

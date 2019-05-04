@@ -1,9 +1,11 @@
 package vn.edu.tdc.managementequipmenttdc.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -77,6 +79,51 @@ public class ReportMalfunctionActivity extends AppCompatActivity {
                     chkMatNguon.setChecked(false);
                     chkManHinh.setChecked(false);
                     chkThieuPhanMem.setChecked(false);
+                }
+            }
+        });
+
+        chkThieuPhanMem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!chkThieuPhanMem.isChecked()){
+                    chkAll.setChecked(false);
+                }
+            }
+        });
+
+        chkManHinh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!chkManHinh.isChecked()){
+                    chkAll.setChecked(false);
+                }
+            }
+        });
+
+        chkMatNguon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!chkMatNguon.isChecked()){
+                    chkAll.setChecked(false);
+                }
+            }
+        });
+
+        chkHuChuot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!chkHuChuot.isChecked()){
+                    chkAll.setChecked(false);
+                }
+            }
+        });
+
+        chkHuBanPhim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!chkHuBanPhim.isChecked()){
+                    chkAll.setChecked(false);
                 }
             }
         });

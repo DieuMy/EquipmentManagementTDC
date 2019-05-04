@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRecycleViewAdapter;
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
@@ -34,11 +35,11 @@ public class HistoryActivity extends AppCompatActivity {
 
     //Display list notifycation
     private Vector<DisplayListNotifycationCardViewModel> list_displayHistoryCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
-    ;
     RecyclerView displayListNotifycationRecycleView;
     private ArrayList<RepairDiary> listRepairDiaryArray = new ArrayList<RepairDiary>();
 
     private ProgressBar progressBarLoading;
+    private SwipeRefreshLayout swipeRefreshLayout;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -57,8 +58,16 @@ public class HistoryActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
         progressBarLoading = findViewById(R.id.listNotifycationProgressBar);
         displayListNotifycationRecycleView = findViewById(R.id.displayNotifycationRecycleView);
+        swipeRefreshLayout = findViewById(R.id.listNotifycationSwipeRefresh);
 
         getDataHistoryManipulationOfUser();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
     }
 
     @Override
@@ -72,6 +81,12 @@ public class HistoryActivity extends AppCompatActivity {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
         displayListNotifycationRecycleView.setVisibility(View.VISIBLE);
+    }
+
+    private void refreshList() {
+        list_displayHistoryCardViewModels.clear();
+        getDataHistoryManipulationOfUser();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void getDataHistoryManipulationOfUser() {

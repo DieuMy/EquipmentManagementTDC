@@ -55,6 +55,7 @@ public class TypeEquipmentActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     ToolUtils toolUtils;
     ArrayList<Equipment> listTypeEquipments = new ArrayList<Equipment>();
+    ArrayList<Equipment> listTypeEquipmentSearch = new ArrayList<Equipment>();
     private FloatingActionButton floatingActionButtonViewListMalfunction;
 
     @Override
@@ -162,8 +163,10 @@ public class TypeEquipmentActivity extends AppCompatActivity {
                             }
 
                             listTypeEquipmentCardViewModels.clear();
-                            for (Equipment equipment : listTypeEquipments) {
+                            listTypeEquipments.clear();
+                            for (Equipment equipment : listTypeEquipmentSearch) {
                                 if (equipment.getEquipmentName().contains(contentSearch)) {
+                                    listTypeEquipments.add(equipment);
                                     listTypeEquipmentCardViewModels.add(new ListEquipmentCardViewModel(equipment.getEquipmentName()));
                                 }
                             }
@@ -208,6 +211,7 @@ public class TypeEquipmentActivity extends AppCompatActivity {
                         listTypeEquipments.add(equipment);
                         listTypeEquipmentCardViewModels.add(new ListEquipmentCardViewModel(equipment.getEquipmentName()));
                     }
+                    listTypeEquipmentSearch.addAll(listTypeEquipments);
                     displayListTypeEquipment();
                 } else {
                     Toast.makeText(TypeEquipmentActivity.this, "Không tồn tại loại thiết bị nào", Toast.LENGTH_SHORT).show();
