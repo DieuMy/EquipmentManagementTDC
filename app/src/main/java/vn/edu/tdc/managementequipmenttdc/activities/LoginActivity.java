@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuilding;
+import vn.edu.tdc.managementequipmenttdc.data_models.Log;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
 import vn.edu.tdc.managementequipmenttdc.tools.ConnectionDetector;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-
+    private ToolUtils toolUtils;
 
     private EditText edtAccount;
     private EditText edtPasword;
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-        ToolUtils toolUtils = new ToolUtils();
+        toolUtils = new ToolUtils();
 
         //Processing button login
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +136,10 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không trùng khớp!", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_LONG).show();
+
+                    //Update log
+                    updateLogOfUser();
+
                     Intent intent = new Intent(LoginActivity.this, Main_Activity.class);
                     startActivity(intent);
                     finish();
@@ -190,6 +194,16 @@ public class LoginActivity extends AppCompatActivity {
 
         //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+    }
+
+    private void updateLogOfUser(){
+        String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
+        String userID = firebaseAuth.getCurrentUser().getUid();
+        String manipulation = "Đăng nhập ứng dụng";
+        String dateManipulation = toolUtils.getCurrentTimeString();
+
+        vn.edu.tdc.managementequipmenttdc.data_models.Log log = new Log(logID, userID, manipulation, dateManipulation);
+        databaseReference.child("log").child(logID).setValue(log);
     }
 
 }

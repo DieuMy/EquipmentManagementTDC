@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.data_models.Log;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 import vn.edu.tdc.managementequipmenttdc.tools.Room_Provider;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
@@ -30,7 +31,6 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
     public static String EQUIPMENTID = "";
     public static String EQUIPMENTNAME = "";
     public static String contentMalfunction = "";
-    String repairDiaryID = "";
 
     private TextView txtRoomID, txtEquipmentID, txtUserID, txtEmployeeName, txtMalfunctionContent, txtDateReport;
     Intent intent;
@@ -64,9 +64,6 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         txtDateReport = findViewById(R.id.viewreportmalfunctiontextview_thoigian);
 
         viewReportMalfunction();
-
-        getAllDataRepairDiary();
-
     }
 
     @Override
@@ -96,30 +93,6 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getAllDataRepairDiary(){
-        Query query = databaseReference.child("repairDiarys");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for (DataSnapshot item : dataSnapshot.getChildren()){
-                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
-                        repairDiaryID = String.valueOf(Integer.parseInt(repairDiary.getRepairDiaryID()) + 1);
-                    }
-                    //Toast.makeText(ViewReportMalfunctionActivity.this, "Hello " + repairDiaryID, Toast.LENGTH_SHORT).show();
-                } else {
-                    repairDiaryID = "1";
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
     private void viewReportMalfunction() {
         txtUserID.setText(User_Provider.user.getUserID());
         txtEmployeeName.setText(User_Provider.user.getFullName());
@@ -130,6 +103,7 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
     }
 
     private void sendDataAndSaveDataOnDatabase() {
+        String repairDiaryID = FirebaseDatabase.getInstance().getReference().push().getKey();
         String equipmentID = EQUIPMENTID;
         String roomID = Room_Provider.room.getRoomID();
         String userIDReport = User_Provider.user.getUserID();//Nguoi bao cao
@@ -147,6 +121,17 @@ public class ViewReportMalfunctionActivity extends AppCompatActivity {
         databaseReference.child("repairDiarys").child(repairDiaryID).setValue(repairDiary);
         databaseReference.child("repairDiarys").child(repairDiaryID).child("equipmentID_processingStatus").setValue(equipmentID + "&" + processingStatus);
         databaseReference.child("repairDiarys").child(repairDiaryID).child("roomID_processingStatus").setValue(roomID + "&" + processingStatus);
+
+        //Update log
+        String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
+        String userID = firebaseAuth.getCurrentUser().getUid();
+        String manipulation = "Báo cáo sự cố thiết bị mã " + EQUIPMENTID + " phòng " + roomID
+                + "\n" + "Nội dung: " + incident_content ;
+        String dateManipulation = toolUtils.getCurrentTimeString();
+
+        Log log = new Log(logID, userID, manipulation, dateManipulation);
+        databaseReference.child("log").child(logID).setValue(log);
+
         finish();
     }
 }

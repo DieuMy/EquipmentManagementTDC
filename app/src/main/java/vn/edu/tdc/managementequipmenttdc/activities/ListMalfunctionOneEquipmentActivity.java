@@ -124,7 +124,7 @@ public class ListMalfunctionOneEquipmentActivity extends AppCompatActivity {
                     recycleViewListMalfunction.setVisibility(View.GONE);
                     linearLayoutNotification.setVisibility(View.VISIBLE);
                     txtNotification.setText("Thiết bị hiện tại không có sự cố nào");
-                    Toast.makeText(ListMalfunctionOneEquipmentActivity.this, "Thiết bị hiện tại không có sự cố nào", Toast.LENGTH_SHORT).show();
+                  //Toast.makeText(ListMalfunctionOneEquipmentActivity.this, "Thiết bị hiện tại không có sự cố nào", Toast.LENGTH_SHORT).show();
                 }
             }
 

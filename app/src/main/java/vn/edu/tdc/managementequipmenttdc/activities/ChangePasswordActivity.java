@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.data_models.Log;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 
 public class ChangePasswordActivity extends AppCompatActivity {
@@ -159,6 +160,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
 
+                                //Update log
+                                updateLogOfUser();
+
                                 firebaseAuth.signOut();
                                 Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);
@@ -180,5 +184,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void updateLogOfUser(){
+        String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
+        String userID = firebaseAuth.getCurrentUser().getUid();
+        String manipulation = "Thay đổi mật khẩu";
+        String dateManipulation = toolUtils.getCurrentTimeString();
+
+        Log log = new Log(logID, userID, manipulation, dateManipulation);
+        databaseReference.child("log").child(logID).setValue(log);
     }
 }

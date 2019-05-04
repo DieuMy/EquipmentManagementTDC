@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
+import vn.edu.tdc.managementequipmenttdc.data_models.Log;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
 import vn.edu.tdc.managementequipmenttdc.data_models.Users;
@@ -113,6 +114,9 @@ public class DetailMyWorkActivity extends AppCompatActivity {
 
                     //Thay doi trang thai cua su co thanh da tiep nhan StatusReceive = true
                     updateIsStatusReceiveOfMalfunction();
+
+                    //Update log
+                    updateLogOfUser();
 
                 }
             });
@@ -238,5 +242,16 @@ public class DetailMyWorkActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void updateLogOfUser(){
+        //Update log
+        String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
+        String userID = firebaseAuth.getCurrentUser().getUid();
+        String manipulation = "Tiếp nhận sửa chữa sự cố mã " + REPAIRDIARY.getRepairDiaryID();
+        String dateManipulation = toolUtils.getCurrentTimeString();
+
+        Log log = new Log(logID, userID, manipulation, dateManipulation);
+        databaseReference.child("log").child(logID).setValue(log);
     }
 }

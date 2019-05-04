@@ -47,6 +47,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.Department;
+import vn.edu.tdc.managementequipmenttdc.data_models.Log;
 import vn.edu.tdc.managementequipmenttdc.data_models.Role;
 import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
@@ -331,11 +332,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void saveNewProfile() {
         String userID = txtUserID.getText().toString();
-        String fullName = edtFullName.getText().toString().trim();
-        String gender = spnGender.getSelectedItem().toString().trim();
-        String address = edtAddress.getText().toString().trim();
-        String numberPhone = edtNumberPhone.getText().toString().trim();
-        String email = edtEmail.getText().toString().trim();
+        final String fullName = edtFullName.getText().toString().trim();
+        final String gender = spnGender.getSelectedItem().toString().trim();
+        final String address = edtAddress.getText().toString().trim();
+        final String numberPhone = edtNumberPhone.getText().toString().trim();
+        final String email = edtEmail.getText().toString().trim();
         String update_at = toolUtils.getCurrentTimeString();
         String lastAccess = User_Provider.user.getLastAccess();
 
@@ -411,6 +412,20 @@ public class EditProfileActivity extends AppCompatActivity {
                         if (dataSnapshot.exists()) {
                             databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(users);
                             Toast.makeText(EditProfileActivity.this, "Thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+
+                            //Update log
+                            String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
+                            String userID = firebaseAuth.getCurrentUser().getUid();
+                            String manipulation = "Chỉnh sửa thông tin cá nhân \n Họ tên: " + User_Provider.user.getFullName() + "\tHọ tên sau khi đổi: " + fullName + "\nGiới tính" +
+                                    User_Provider.user.getGender() + "\tGiới tính sau khi đổi: " + gender + "\nĐịa chỉ: " + User_Provider.user.getAddress() + "\tĐịa chỉ sau khi đổi: " + address
+                                    +"\nSố điện thoại: " + User_Provider.user.getNumberPhone() + "\tSĐT sau khi đổi: " + numberPhone + "\nEmail: " + User_Provider.user.getEmail() + "\tEmail sau khi đổi: " +email
+                                    + "\nChức vụ đổi thành: " + txtDisplayRole.getText().toString() + "\nPhòng ban làm việc: " + txtDisplayDepartment.getText().toString();
+                            String dateManipulation = toolUtils.getCurrentTimeString();
+
+                            Log log = new Log(logID, userID, manipulation, dateManipulation);
+                            databaseReference.child("log").child(logID).setValue(log);
+
+                            //hien thi lai thong tin ca nhan
                             getInformationOfUserCurrentLogin();
                         } else {
                             Toast.makeText(EditProfileActivity.this, "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
