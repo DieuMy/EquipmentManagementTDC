@@ -164,7 +164,7 @@ public class HistoryActivity extends AppCompatActivity {
                             }
                             historyRecycleView.setVisibility(View.VISIBLE);
                             linearLayoutContainSearch.setVisibility(View.GONE);
-                            listHistorySearchOfUser.clear();
+                            edtSearch.setText("");
                             displayHistoryManipulationOfUser();
                             return true;
                         }

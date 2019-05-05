@@ -55,6 +55,7 @@ public class MyWorkActivity extends AppCompatActivity {
     private RadioButton chkDaTiepNhan, chkChuaTiepNhan;
     private ArrayList<Rooms> listOfRoomsManagedByCurrentUser = new ArrayList<Rooms>();
     private ArrayList<RepairDiary> listRepairDiary = new ArrayList<RepairDiary>();
+    private ArrayList<RepairDiary> listRepairDiarySplit = new ArrayList<RepairDiary>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,9 +89,14 @@ public class MyWorkActivity extends AppCompatActivity {
             }
         });
 
+        radioGroup.check(R.id.displayNotifycationRadChuaTiepNhan);
+
+        getDataMyWorkChuaTiepNhan();
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                list_displayListNotifycationCardViewModels.clear();
                 checkIsRadioButtonChecked();
             }
         });
@@ -107,33 +113,34 @@ public class MyWorkActivity extends AppCompatActivity {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
         recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
-
-        list_displayListNotifycationCardViewModels.clear();
-        listRepairDiary.clear();
-        listOfRoomsManagedByCurrentUser.clear();
-        getDataMyWorkOfCurrentUserWithRoleIsEmployee();
     }
 
     private void refreshList() {
         list_displayListNotifycationCardViewModels.clear();
         listRepairDiary.clear();
+        listRepairDiarySplit.clear();
         listOfRoomsManagedByCurrentUser.clear();
+        checkIsRadioButtonChecked();
+        radioGroup.check(R.id.displayNotifycationRadChuaTiepNhan);
+        getDataMyWorkChuaTiepNhan();
 
-        getDataMyWorkOfCurrentUserWithRoleIsEmployee();
         swipeRefreshLayout.setRefreshing(false);
     }
 
     private void checkIsRadioButtonChecked() {
         int idRadioIsCheck = radioGroup.getCheckedRadioButtonId();//return id of radio is checked
         list_displayListNotifycationCardViewModels.clear();
+        listRepairDiary.clear();
         switch (idRadioIsCheck) {
             case R.id.displayNotifycationRadDaTiepNhan:
-                for (RepairDiary repairDiary : listRepairDiary) {
+                for (RepairDiary repairDiary : listRepairDiarySplit) {
                     if (repairDiary.isStatusReceive() == true) {
                         list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
                                 "Phòng " + repairDiary.getRoomID() + " - Máy " + repairDiary.getEquipmentID()
                                         + "\n" + repairDiary.getIncident_content() + "\n",
                                 repairDiary.getDateReport()));
+
+                        listRepairDiary.add(repairDiary);
                     }
                 }
                 if (list_displayListNotifycationCardViewModels.size() < 1) {
@@ -147,12 +154,13 @@ public class MyWorkActivity extends AppCompatActivity {
                 displayListMyWorkOfUserIsEmployee();
                 break;
             case R.id.displayNotifycationRadChuaTiepNhan:
-                for (RepairDiary repairDiary : listRepairDiary) {
+                for (RepairDiary repairDiary : listRepairDiarySplit) {
                     if (repairDiary.isStatusReceive() == false) {
                         list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
                                 "Phòng " + repairDiary.getRoomID() + " - Máy " + repairDiary.getEquipmentID()
                                         + "\n" + repairDiary.getIncident_content() + "\n",
                                 repairDiary.getDateReport()));
+                        listRepairDiary.add(repairDiary);
                     }
                 }
                 if (list_displayListNotifycationCardViewModels.size() == 0) {
@@ -167,81 +175,6 @@ public class MyWorkActivity extends AppCompatActivity {
                 displayListMyWorkOfUserIsEmployee();
                 break;
         }
-    }
-
-    private void getDataMyWorkOfCurrentUserWithRoleIsEmployee() {
-        Query query = databaseReference.child("rooms").orderByChild("userID").equalTo(firebaseAuth.getCurrentUser().getUid());
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot item : dataSnapshot.getChildren()) {
-                        Rooms rooms = item.getValue(Rooms.class);
-                        listOfRoomsManagedByCurrentUser.add(rooms);
-                    }
-
-                    getDataRepairDiary();
-
-                } else {
-                    recycleViewDisplayListNotifycation.setVisibility(View.GONE);
-                    linearLayoutNotifycation.setVisibility(View.VISIBLE);
-                    radioGroup.setVisibility(View.GONE);
-                    txtNotification.setText("Không có phòng thực hành nào thuộc quyền quản lý của bạn");
-                    return;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void getDataRepairDiary() {
-        progressBarLoading.setVisibility(View.VISIBLE);
-        recycleViewDisplayListNotifycation.setVisibility(View.GONE);
-
-        Query query = databaseReference.child("repairDiarys").orderByChild("processingStatus").equalTo(false);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                progressBarLoading.setVisibility(View.GONE);
-                recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot item : dataSnapshot.getChildren()) {
-                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
-                        listRepairDiary.add(repairDiary);
-                    }
-
-                    //Duyet de lay danh sach cong viec
-                    for (Rooms room : listOfRoomsManagedByCurrentUser) {
-                        for (RepairDiary repairDiary : listRepairDiary) {
-                            if (room.getRoomID().equals(repairDiary.getRoomID())) {
-                                list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
-                                        "Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
-                                                + "\n" + repairDiary.getIncident_content() + "\n",
-                                        repairDiary.getDateReport()));
-                            }
-                        }
-                    }
-
-                    displayListMyWorkOfUserIsEmployee();
-                } else {
-                    Log.d(TAG, "Không lấy được dữ liệu của repairDiary");
-                    recycleViewDisplayListNotifycation.setVisibility(View.GONE);
-                    linearLayoutNotifycation.setVisibility(View.VISIBLE);
-                    radioGroup.setVisibility(View.GONE);
-                    txtNotification.setText("Hiện tại bạn không có công việc nào cần xử lý");
-                    return;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     private void displayListMyWorkOfUserIsEmployee() {
@@ -261,4 +194,90 @@ public class MyWorkActivity extends AppCompatActivity {
         });
 
     }
+
+    private void displayListMyWorkChuaNhan() {
+        progressBarLoading.setVisibility(View.VISIBLE);
+        recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+
+        Query query = databaseReference.child("repairDiarys").orderByChild("processingStatus").equalTo(false);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBarLoading.setVisibility(View.GONE);
+                recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
+                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
+                        listRepairDiary.add(repairDiary);
+                    }
+
+                    listRepairDiarySplit.addAll(listRepairDiary);
+
+                    //Duyet de lay danh sach cong viec
+                    for (Rooms room : listOfRoomsManagedByCurrentUser) {
+                        for (RepairDiary repairDiary : listRepairDiary) {
+                            if (room.getRoomID().equals(repairDiary.getRoomID()) && repairDiary.isStatusReceive() == false) {
+                                list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
+                                        "Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
+                                                + "\n" + repairDiary.getIncident_content() + "\n",
+                                        repairDiary.getDateReport()));
+                            }
+                        }
+                    }
+                    if (list_displayListNotifycationCardViewModels.size() == 0) {
+                        recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+                        linearLayoutNotifycation.setVisibility(View.VISIBLE);
+                        txtNotification.setText("Hiện tại không có sự cố nào chưa tiếp nhận sửa chữa");
+                        return;
+                    }
+
+                    recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
+                    linearLayoutNotifycation.setVisibility(View.GONE);
+                    displayListMyWorkOfUserIsEmployee();
+                } else {
+                    Log.d(TAG, "Không lấy được dữ liệu của repairDiary");
+                    recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+                    linearLayoutNotifycation.setVisibility(View.VISIBLE);
+                    radioGroup.setVisibility(View.GONE);
+                    txtNotification.setText("Hiện tại bạn không có công việc nào cần xử lý");
+                    return;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getDataMyWorkChuaTiepNhan() {
+        Query query = databaseReference.child("rooms").orderByChild("userID").equalTo(firebaseAuth.getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
+                        Rooms rooms = item.getValue(Rooms.class);
+                        listOfRoomsManagedByCurrentUser.add(rooms);
+                    }
+
+                    displayListMyWorkChuaNhan();
+
+                } else {
+                    recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+                    linearLayoutNotifycation.setVisibility(View.VISIBLE);
+                    radioGroup.setVisibility(View.GONE);
+                    txtNotification.setText("Không có phòng thực hành nào thuộc quyền quản lý của bạn");
+                    return;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

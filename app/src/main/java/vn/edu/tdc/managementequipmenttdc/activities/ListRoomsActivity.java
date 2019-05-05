@@ -165,7 +165,7 @@ public class ListRoomsActivity extends AppCompatActivity {
                                 return false;
                             }
                             listRoomRecycleView.setVisibility(View.VISIBLE);
-                            listRoomsSearch.clear();
+                            edtSearch.setText("");
                             displayListRooms();
                             return true;
                         }

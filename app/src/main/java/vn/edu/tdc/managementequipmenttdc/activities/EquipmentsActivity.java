@@ -198,6 +198,7 @@ public class EquipmentsActivity extends AppCompatActivity {
                                 return false;
                             }
                             listequipmentrecycleview.setVisibility(View.VISIBLE);
+                            edtSearch.setText("");
                             displayListEquipments();
                             return true;
                         }

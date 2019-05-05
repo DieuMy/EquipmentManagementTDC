@@ -33,7 +33,7 @@ import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class DetailMyWorkActivity extends AppCompatActivity {
-    public static RepairDiary REPAIRDIARY = null;
+    public static RepairDiary REPAIRDIARY ;
     private LinearLayout detailReportLinnearLayoutLoiDaKhacPhuc, linearLayoutContainProgressBar;
     private FloatingActionButton floatingActionButtonTiepNhan;
     private ProgressBar progressBarLoading;
