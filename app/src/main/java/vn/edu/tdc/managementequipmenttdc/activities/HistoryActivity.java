@@ -221,42 +221,5 @@ public class HistoryActivity extends AppCompatActivity {
 
         HistoryRecycleViewAdapter adapter = new HistoryRecycleViewAdapter(R.layout.card_view_history_layout, list_displayHistoryCardViewModels);
         historyRecycleView.setAdapter(adapter);
-
-//        adapter.setOnItemClickListener(new HistoryRecycleViewAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                Intent intent = new Intent(HistoryActivity.this, DetailHistoryActivity.class);
-//                DetailMalfunctionActivity.REPAIR_DIARY = listRepairDiaryArray.get(position);
-//                DetailHistoryActivity.LOGOFUSER = listHistoryOfUser.get(position);
-//                startActivity(intent);
-//            }
-//        });
     }
-
-//    private void getDataHistoryManipulationOfUser() {
-//        progressBarLoading.setVisibility(View.VISIBLE);
-//        displayListNotifycationRecycleView.setVisibility(View.GONE);
-//        Query query = databaseReference.child("repairDiarys").orderByChild("userIDReport").equalTo(User_Provider.user.getUserID());
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                progressBarLoading.setVisibility(View.GONE);
-//                displayListNotifycationRecycleView.setVisibility(View.VISIBLE);
-//                if (dataSnapshot.exists()) {
-//                    for (DataSnapshot item : dataSnapshot.getChildren()) {
-//                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
-//                        listRepairDiaryArray.add(repairDiary);
-//                        list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(repairDiary.getEquipmentID() + "\n" + repairDiary.getIncident_content(), repairDiary.getDateReport()));
-//                    }
-//                    displayHistoryManipulationOfUser();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
 }

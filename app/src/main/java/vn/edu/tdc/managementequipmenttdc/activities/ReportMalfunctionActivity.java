@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
 
 public class ReportMalfunctionActivity extends AppCompatActivity {
-
     private final String TAG = "ReportMalfunction";
     private Button btnOK;
     private CheckBox chkAll, chkHuChuot, chkHuBanPhim, chkMatNguon, chkManHinh, chkThieuPhanMem;

@@ -72,7 +72,7 @@ public class MyWorkActivity extends AppCompatActivity {
         list_displayListNotifycationCardViewModels = new Vector<DisplayListNotifycationCardViewModel>();
 
         //Gets view from layout
-        recycleViewDisplayListNotifycation = findViewById(R.id.displayNotifycationRecycleView);
+        recycleViewDisplayListNotifycation = findViewById(R.id.listNotifycationRecycleView);
         progressBarLoading = findViewById(R.id.listNotifycationProgressBar);
         swipeRefreshLayout = findViewById(R.id.listNotifycationSwipeRefresh);
 
@@ -80,8 +80,6 @@ public class MyWorkActivity extends AppCompatActivity {
         txtNotification = findViewById(R.id.listNotifycationTxtNotification);
         radioGroup = findViewById(R.id.displayNotifycationRadioGroup);
         radioGroup.setVisibility(View.VISIBLE);
-
-        getDataMyWorkOfCurrentUserWithRoleIsEmployee();
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -109,6 +107,11 @@ public class MyWorkActivity extends AppCompatActivity {
         super.onResume();
         progressBarLoading.setVisibility(View.GONE);
         recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
+
+        list_displayListNotifycationCardViewModels.clear();
+        listRepairDiary.clear();
+        listOfRoomsManagedByCurrentUser.clear();
+        getDataMyWorkOfCurrentUserWithRoleIsEmployee();
     }
 
     private void refreshList() {
