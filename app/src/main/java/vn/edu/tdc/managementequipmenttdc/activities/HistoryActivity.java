@@ -151,10 +151,11 @@ public class HistoryActivity extends AppCompatActivity {
                             list_displayHistoryCardViewModels.clear();
                             listHistoryOfUser.clear();
 
+                            int soThuTu = 1;
                             for (Log log : listHistorySearchOfUser) {
                                 if (log.getDateManipulation().contains(contentSearch)) {
                                     listHistoryOfUser.add(log);
-                                    list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(log.getManipulation(), log.getDateManipulation()));
+                                    list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(soThuTu++ + ". " + log.getManipulation(), log.getDateManipulation()));
                                 }
                             }
 
@@ -192,9 +193,10 @@ public class HistoryActivity extends AppCompatActivity {
                 progressBarLoading.setVisibility(View.GONE);
                 historyRecycleView.setVisibility(View.VISIBLE);
                 if (dataSnapshot.exists()) {
+                    int soThuTu = 1;
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                         Log log = item.getValue(Log.class);
-                        list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(log.getManipulation(), log.getDateManipulation()));
+                        list_displayHistoryCardViewModels.add(new DisplayListNotifycationCardViewModel(soThuTu ++ + ". " + log.getManipulation(), log.getDateManipulation()));
                         listHistoryOfUser.add(log);
                     }
 

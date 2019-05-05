@@ -110,9 +110,10 @@ public class ListMalfunctionOfRoomActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    int soThuTu = 1;
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                         RepairDiary repairDiary = item.getValue(RepairDiary.class);
-                        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels("Máy " +
+                        list_displayListMalfunctionCardViewModels.add(new ListMalfunctionEquipmentModels(soThuTu++ + ". Máy " +
                                 repairDiary.getEquipmentID() + "\n" + repairDiary.getIncident_content(), repairDiary.getDateReport()));
                     }
 

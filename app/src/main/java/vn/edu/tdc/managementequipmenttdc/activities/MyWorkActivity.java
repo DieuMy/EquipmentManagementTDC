@@ -131,12 +131,14 @@ public class MyWorkActivity extends AppCompatActivity {
         int idRadioIsCheck = radioGroup.getCheckedRadioButtonId();//return id of radio is checked
         list_displayListNotifycationCardViewModels.clear();
         listRepairDiary.clear();
+        int soThuTuTiepNhan = 1;
+        int soThuTuChuaTiepNhan = 1;
         switch (idRadioIsCheck) {
             case R.id.displayNotifycationRadDaTiepNhan:
                 for (RepairDiary repairDiary : listRepairDiarySplit) {
                     if (repairDiary.isStatusReceive() == true) {
                         list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
-                                "Phòng " + repairDiary.getRoomID() + " - Máy " + repairDiary.getEquipmentID()
+                                soThuTuTiepNhan++ + ". Phòng " + repairDiary.getRoomID() + " - Máy " + repairDiary.getEquipmentID()
                                         + "\n" + repairDiary.getIncident_content() + "\n",
                                 repairDiary.getDateReport()));
 
@@ -157,7 +159,7 @@ public class MyWorkActivity extends AppCompatActivity {
                 for (RepairDiary repairDiary : listRepairDiarySplit) {
                     if (repairDiary.isStatusReceive() == false) {
                         list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
-                                "Phòng " + repairDiary.getRoomID() + " - Máy " + repairDiary.getEquipmentID()
+                                soThuTuChuaTiepNhan++ + ". Phòng " + repairDiary.getRoomID() + " - Máy " + repairDiary.getEquipmentID()
                                         + "\n" + repairDiary.getIncident_content() + "\n",
                                 repairDiary.getDateReport()));
                         listRepairDiary.add(repairDiary);
@@ -213,12 +215,13 @@ public class MyWorkActivity extends AppCompatActivity {
 
                     listRepairDiarySplit.addAll(listRepairDiary);
 
+                    int soThuTu = 1;
                     //Duyet de lay danh sach cong viec
                     for (Rooms room : listOfRoomsManagedByCurrentUser) {
                         for (RepairDiary repairDiary : listRepairDiary) {
                             if (room.getRoomID().equals(repairDiary.getRoomID()) && repairDiary.isStatusReceive() == false) {
                                 list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
-                                        "Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
+                                        soThuTu++ + ". Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
                                                 + "\n" + repairDiary.getIncident_content() + "\n",
                                         repairDiary.getDateReport()));
                             }
