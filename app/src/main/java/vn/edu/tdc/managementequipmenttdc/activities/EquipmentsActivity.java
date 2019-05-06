@@ -52,7 +52,7 @@ public class EquipmentsActivity extends AppCompatActivity {
     RecyclerView listequipmentrecycleview;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBarLoading;
-    private LinearLayout linearLayoutContainSearch, linearLayoutContainChkAll;
+    private LinearLayout linearLayoutContainSearch, linearLayoutContainChkAll, linearLayoutContainNotification;
     private EditText edtSearch;
 
     FirebaseDatabase firebaseDatabase;
@@ -64,7 +64,7 @@ public class EquipmentsActivity extends AppCompatActivity {
     ArrayList<Equipment> listEquipmentArcodingType = new ArrayList<Equipment>();
     String roomID;
 
-    private TextView txtReportAll;
+    private TextView txtReportAll, txtNotification;
     private CheckBox chkAll;
     private String equipmentID = "", equipmentName = "";
 
@@ -80,6 +80,8 @@ public class EquipmentsActivity extends AppCompatActivity {
         linearLayoutContainSearch = findViewById(R.id.listComputerLinearlayoutContainSearch);
         edtSearch = findViewById(R.id.listComputerEdtSearch);
         linearLayoutContainChkAll = findViewById(R.id.listComputerLinearlayoutContainChkAll);
+        linearLayoutContainNotification = findViewById(R.id.listComputerLinearlayoutContainNotification);
+        txtNotification = findViewById(R.id.listComputerTxtNotification);
 
         //Khoi tao
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -103,17 +105,6 @@ public class EquipmentsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getDataEquipmentOfCorrespondingRoomID();
-
-//        chkAll.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (chkAll.isChecked()) {
-//                    txtReportAll.setVisibility(View.VISIBLE);
-//                } else {
-//                    txtReportAll.setVisibility(View.GONE);
-//                }
-//            }
-//        });
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -241,34 +232,10 @@ public class EquipmentsActivity extends AppCompatActivity {
                             listEquipmentsModels.add(new ListRoomCardViewModel(equipment.getEquipmentName()));
                             listEquipmentArcodingType.add(equipment);
                         } else {
-                            final Dialog dialog = new Dialog(EquipmentsActivity.this);
-                            dialog.setContentView(R.layout.popup_notifycation_layout);
-
-                            ImageView imgCloseDialog = dialog.findViewById(R.id.popup_close_dialog);
-                            Button btnOKDialog = dialog.findViewById(R.id.popup_dialog_buttonOK);
-                            TextView txtNofication = dialog.findViewById(R.id.popup_dialog_notification);
-
-                            txtNofication.setText("Không có thiết bị thuộc loại " + equipmentName + " trong phòng này!");
-
-                            //Processing event for close dialog
-                            imgCloseDialog.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                    finish();
-                                }
-                            });
-
-                            btnOKDialog.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                    finish();
-                                }
-                            });
-
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            dialog.show();
+                            linearLayoutContainNotification.setVisibility(View.VISIBLE);
+                            listequipmentrecycleview.setVisibility(View.GONE);
+                            txtNotification.setText("Không có thiết bị thuộc loại " + equipmentName + " trong phòng này!");
+                            return;
                         }
                     }
 

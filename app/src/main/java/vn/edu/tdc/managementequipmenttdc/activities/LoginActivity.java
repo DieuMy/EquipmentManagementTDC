@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuilding;
+import vn.edu.tdc.managementequipmenttdc.data_models.Equipment;
 import vn.edu.tdc.managementequipmenttdc.data_models.Log;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
 import vn.edu.tdc.managementequipmenttdc.tools.ConnectionDetector;
@@ -97,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 processingForgetPassword();
             }
         });
+
     }
 
     @Override
@@ -206,4 +208,31 @@ public class LoginActivity extends AppCompatActivity {
         databaseReference.child("log").child(logID).setValue(log);
     }
 
+
+//    private void createEquipment(){
+//        String equipmentID;
+//        String equipmentName;
+//        boolean status = true;
+//        String datePurchase = "01-01-2019";
+//        String parentID="MT";
+//        String roomID = "B002C";
+//        String create_at = toolUtils.getCurrentTimeString();
+//        String update_at = toolUtils.getCurrentTimeString();
+//
+//        for(int i = 1 ; i <= 9 ; i++){
+//            if(i<10){
+//                equipmentID = "B002C_MT0"+i;
+//                equipmentName = "Máy 0"+i;
+//            } else {
+//                equipmentID = "B002C_MT" + i;
+//                equipmentName = "Máy " + i;
+//            }
+//
+//            Equipment equipment = new Equipment(equipmentID, equipmentName, status, datePurchase, parentID, roomID, create_at, update_at);
+//            databaseReference.child("equipments").child(equipment.getEquipmentID()).setValue(equipment);
+//        }
+//
+//
+//
+//    }
 }

@@ -63,6 +63,20 @@
         android:layout_gravity="center"
         android:visibility="gone" />
 
+    <LinearLayout
+        android:id="@+id/listComputerLinearlayoutContainNotification"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/listComputerTxtNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center" />
+    </LinearLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/listComputerwipeRefresh"
         android:layout_width="match_parent"
