@@ -139,6 +139,10 @@ public class NotificationPageFragment extends Fragment {
 
                 } else {
                     Log.d(TAG, "Không có phòng thực hành thuộc quyền quản lý của user này");
+                    displayListNotifycationRecycleView.setVisibility(View.GONE);
+                    linearLayoutContainTxtNotification.setVisibility(View.VISIBLE);
+                    txtNofication.setText("Hiện tại bạn không có thông báo nào");
+                    return;
                 }
             }
 
@@ -152,45 +156,46 @@ public class NotificationPageFragment extends Fragment {
     private void getDataHistoryManipulationOfUser() {
         progressBarLoading.setVisibility(View.VISIBLE);
         displayListNotifycationRecycleView.setVisibility(View.GONE);
+        for (Rooms rooms :listOfRoomsManagedByCurrentUser) {
+            Query query = databaseReference.child("repairDiarys").orderByChild("roomID").equalTo(rooms.getRoomID());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    progressBarLoading.setVisibility(View.GONE);
+                    displayListNotifycationRecycleView.setVisibility(View.VISIBLE);
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot item : dataSnapshot.getChildren()) {
+                            RepairDiary repairDiary = item.getValue(RepairDiary.class);
+                            listNotifications.add(repairDiary);
+                        }
 
-        Query query = databaseReference.child("repairDiarys").orderByChild("processingStatus").equalTo(false);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                progressBarLoading.setVisibility(View.GONE);
-                displayListNotifycationRecycleView.setVisibility(View.VISIBLE);
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot item : dataSnapshot.getChildren()) {
-                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
-                        listNotifications.add(repairDiary);
-                    }
-
-                    //Duyet de lay danh sach cong viec
-                    for (Rooms room : listOfRoomsManagedByCurrentUser) {
-                        for (RepairDiary repairDiary : listNotifications) {
-                            if (room.getRoomID().equals(repairDiary.getRoomID())) {
-                                list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
-                                        "Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
-                                                + "\n" + repairDiary.getIncident_content() + "\n",
-                                        repairDiary.getDateReport()));
+                        //Duyet de lay danh sach cong viec
+                        for (Rooms room : listOfRoomsManagedByCurrentUser) {
+                            for (RepairDiary repairDiary : listNotifications) {
+                                if (room.getRoomID().equals(repairDiary.getRoomID())) {
+                                    list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
+                                            "Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
+                                                    + "\n" + repairDiary.getIncident_content() + "\n",
+                                            repairDiary.getDateReport()));
+                                }
                             }
                         }
+
+                        displayListNotifycationOfDispayListNotifycationScreen();
+                    } else {
+                        Log.d(TAG, "Không lấy được dữ liệu của repairDiary");
+                        displayListNotifycationRecycleView.setVisibility(View.GONE);
+                        linearLayoutContainTxtNotification.setVisibility(View.VISIBLE);
+                        txtNofication.setText("Hiện tại bạn không có thông báo nào");
+                        return;
                     }
-
-                    displayListNotifycationOfDispayListNotifycationScreen();
-                } else {
-                    Log.d(TAG, "Không lấy được dữ liệu của repairDiary");
-                    displayListNotifycationRecycleView.setVisibility(View.GONE);
-                    linearLayoutContainTxtNotification.setVisibility(View.VISIBLE);
-                    txtNofication.setText("Hiện tại bạn không có thông báo nào");
-                    return;
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 }

@@ -34,6 +34,7 @@ import vn.edu.tdc.managementequipmenttdc.data_adapter.DisplayListNotifycationRec
 import vn.edu.tdc.managementequipmenttdc.data_models.DisplayListNotifycationCardViewModel;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
+import vn.edu.tdc.managementequipmenttdc.tools.Room_Provider;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 public class MyWorkActivity extends AppCompatActivity {
@@ -200,58 +201,59 @@ public class MyWorkActivity extends AppCompatActivity {
     private void displayListMyWorkChuaNhan() {
         progressBarLoading.setVisibility(View.VISIBLE);
         recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+        for(Rooms rooms : listOfRoomsManagedByCurrentUser) {
+            Query query = databaseReference.child("repairDiarys").orderByChild("roomID_processingStatus").equalTo(rooms.getRoomID() + "&" + false);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    progressBarLoading.setVisibility(View.GONE);
+                    recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot item : dataSnapshot.getChildren()) {
+                            RepairDiary repairDiary = item.getValue(RepairDiary.class);
+                            listRepairDiary.add(repairDiary);
+                        }
 
-        Query query = databaseReference.child("repairDiarys").orderByChild("processingStatus").equalTo(false);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                progressBarLoading.setVisibility(View.GONE);
-                recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot item : dataSnapshot.getChildren()) {
-                        RepairDiary repairDiary = item.getValue(RepairDiary.class);
-                        listRepairDiary.add(repairDiary);
-                    }
+                        listRepairDiarySplit.addAll(listRepairDiary);
 
-                    listRepairDiarySplit.addAll(listRepairDiary);
-
-                    int soThuTu = 1;
-                    //Duyet de lay danh sach cong viec
-                    for (Rooms room : listOfRoomsManagedByCurrentUser) {
-                        for (RepairDiary repairDiary : listRepairDiary) {
-                            if (room.getRoomID().equals(repairDiary.getRoomID()) && repairDiary.isStatusReceive() == false) {
-                                list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
-                                        soThuTu++ + ". Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
-                                                + "\n" + repairDiary.getIncident_content() + "\n",
-                                        repairDiary.getDateReport()));
+                        int soThuTu = 1;
+                        //Duyet de lay danh sach cong viec
+                        for (Rooms room : listOfRoomsManagedByCurrentUser) {
+                            for (RepairDiary repairDiary : listRepairDiary) {
+                                if (room.getRoomID().equals(repairDiary.getRoomID()) && repairDiary.isStatusReceive() == false) {
+                                    list_displayListNotifycationCardViewModels.add(new DisplayListNotifycationCardViewModel(
+                                            soThuTu++ + ". Phòng " + room.getRoomName() + " - Máy " + repairDiary.getEquipmentID()
+                                                    + "\n" + repairDiary.getIncident_content() + "\n",
+                                            repairDiary.getDateReport()));
+                                }
                             }
                         }
-                    }
-                    if (list_displayListNotifycationCardViewModels.size() == 0) {
+                        if (list_displayListNotifycationCardViewModels.size() == 0) {
+                            recycleViewDisplayListNotifycation.setVisibility(View.GONE);
+                            linearLayoutNotifycation.setVisibility(View.VISIBLE);
+                            txtNotification.setText("Hiện tại không có sự cố nào chưa tiếp nhận sửa chữa");
+                            return;
+                        }
+
+                        recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
+                        linearLayoutNotifycation.setVisibility(View.GONE);
+                        displayListMyWorkOfUserIsEmployee();
+                    } else {
+                        Log.d(TAG, "Không lấy được dữ liệu của repairDiary");
                         recycleViewDisplayListNotifycation.setVisibility(View.GONE);
                         linearLayoutNotifycation.setVisibility(View.VISIBLE);
-                        txtNotification.setText("Hiện tại không có sự cố nào chưa tiếp nhận sửa chữa");
+                        radioGroup.setVisibility(View.GONE);
+                        txtNotification.setText("Hiện tại bạn không có công việc nào cần xử lý");
                         return;
                     }
-
-                    recycleViewDisplayListNotifycation.setVisibility(View.VISIBLE);
-                    linearLayoutNotifycation.setVisibility(View.GONE);
-                    displayListMyWorkOfUserIsEmployee();
-                } else {
-                    Log.d(TAG, "Không lấy được dữ liệu của repairDiary");
-                    recycleViewDisplayListNotifycation.setVisibility(View.GONE);
-                    linearLayoutNotifycation.setVisibility(View.VISIBLE);
-                    radioGroup.setVisibility(View.GONE);
-                    txtNotification.setText("Hiện tại bạn không có công việc nào cần xử lý");
-                    return;
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     private void getDataMyWorkChuaTiepNhan() {
