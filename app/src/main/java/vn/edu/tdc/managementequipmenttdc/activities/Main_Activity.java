@@ -13,6 +13,7 @@ import vn.edu.tdc.managementequipmenttdc.tools.ConnectionDetector;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -86,7 +87,30 @@ public class Main_Activity extends AppCompatActivity {
 
             //Check user login
             if (firebaseAuth.getCurrentUser() != null) {
-                getInformationOfUserCurrentLogin();
+                //Kiem tra tai khoan co bi khoa hay khong
+                Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            Users users = dataSnapshot.getValue(Users.class);
+                            if(users.isLock_account() == true) {
+                                Toast.makeText(Main_Activity.this, "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ phòng kỹ thuật để được cấp lại!", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(Main_Activity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                                return;
+                            } else{
+                                getInformationOfUserCurrentLogin();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         } else {
             setContentView(R.layout.login_flagment);

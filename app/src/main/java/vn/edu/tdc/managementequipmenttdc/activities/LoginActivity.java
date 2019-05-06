@@ -16,8 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +30,10 @@ import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.AreaBuilding;
 import vn.edu.tdc.managementequipmenttdc.data_models.Equipment;
 import vn.edu.tdc.managementequipmenttdc.data_models.Log;
+import vn.edu.tdc.managementequipmenttdc.data_models.Permissions;
+import vn.edu.tdc.managementequipmenttdc.data_models.Role_Group;
 import vn.edu.tdc.managementequipmenttdc.data_models.Rooms;
+import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 import vn.edu.tdc.managementequipmenttdc.tools.ConnectionDetector;
 import vn.edu.tdc.managementequipmenttdc.tools.ToolUtils;
 import vn.edu.tdc.managementequipmenttdc.tools.User_Provider;
@@ -137,14 +144,34 @@ public class LoginActivity extends AppCompatActivity {
                 if (!task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không trùng khớp!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_LONG).show();
+                    //Kiem tra tai khoan co bi khoa hay khong
+                    Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                Users users = dataSnapshot.getValue(Users.class);
+                                if(users.isLock_account() == true) {
+                                    Toast.makeText(LoginActivity.this, "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ phòng kỹ thuật để được cấp lại!", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
 
-                    //Update log
-                    updateLogOfUser();
+                                //Update log
+                                updateLogOfUser();
 
-                    Intent intent = new Intent(LoginActivity.this, Main_Activity.class);
-                    startActivity(intent);
-                    finish();
+                                Intent intent = new Intent(LoginActivity.this, Main_Activity.class);
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
                 }
             }
         });
@@ -198,7 +225,7 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void updateLogOfUser(){
+    private void updateLogOfUser() {
         String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
         String userID = firebaseAuth.getCurrentUser().getUid();
         String manipulation = "Đăng nhập ứng dụng";
@@ -232,7 +259,27 @@ public class LoginActivity extends AppCompatActivity {
 //            databaseReference.child("equipments").child(equipment.getEquipmentID()).setValue(equipment);
 //        }
 //
+//    }
+
+//    private void createPremissionForUser() {
+////        String roleGroupID = FirebaseDatabase.getInstance().getReference().push().getKey();;
+////        String roleID = "NV";
+////        String functionID = "BCSC";
+////        String permiss = "F";
+////        String create_at = toolUtils.getCurrentTimeString();
+////        String update_at = toolUtils.getCurrentTimeString();
+////
+////        Role_Group role_group = new Role_Group(roleGroupID, roleID, functionID, permiss, create_at, update_at);
+////        databaseReference.child("role_groups").child(roleGroupID).setValue(role_group);
 //
-//
+////        String permissionID = FirebaseDatabase.getInstance().getReference().push().getKey();
+////        String userID = "SdMyQrIp2mNzLzAZcDhatPHwGmi2";
+////        String functionID = "BCSC";
+////        String permiss = "V";
+////        String create_at = toolUtils.getCurrentTimeString();
+////        String update_at = toolUtils.getCurrentTimeString();
+////
+////        Permissions permissions = new Permissions(userID, functionID, permiss, create_at, update_at);
+////        databaseReference.child("permissions").child(permissionID).setValue(permissions);
 //    }
 }
