@@ -9,10 +9,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.data_models.RepairDiary;
+import vn.edu.tdc.managementequipmenttdc.data_models.Users;
 
 public class DetailMalfunctionActivity extends AppCompatActivity {
     public static RepairDiary REPAIR_DIARY;
@@ -21,6 +31,9 @@ public class DetailMalfunctionActivity extends AppCompatActivity {
             txtUserNameReport, txtUserIDReceiver, txtUserNameReceiver,
             txtMalfunctionContent, txtDateRepair, txtLoiDaKhacPhuc;
 
+    FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +54,11 @@ public class DetailMalfunctionActivity extends AppCompatActivity {
         txtMalfunctionContent = findViewById(R.id.detailreportscreen_noidung);
         txtDateRepair = findViewById(R.id.detailreportscreen_timesuachua);
         txtLoiDaKhacPhuc = findViewById(R.id.detailreportscreen_loikhacphuc);
+
+        //Initial
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
 
         displayDetailHistory();
 
@@ -83,6 +101,50 @@ public class DetailMalfunctionActivity extends AppCompatActivity {
             txtMalfunctionContent.setText(REPAIR_DIARY.getIncident_content());
             txtDateRepair.setText(REPAIR_DIARY.getDateComplete());
             txtLoiDaKhacPhuc.setText(REPAIR_DIARY.getMaintenanceContent());
+
+            //Get user name report
+            Query _query = databaseReference.child("users").orderByChild("userID").equalTo(REPAIR_DIARY.getUserIDReport());
+            _query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot item : dataSnapshot.getChildren()) {
+                            Users user = item.getValue(Users.class);
+                            txtUserNameReport.setText(user.getFullName());
+                            break;
+                        }
+                    } else {
+                        txtUserIDReport.setText("");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            //Get user name nhan
+            Query query = databaseReference.child("users").orderByChild("userID").equalTo(REPAIR_DIARY.getUserIDReceive());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot item : dataSnapshot.getChildren()) {
+                            Users user = item.getValue(Users.class);
+                            txtUserNameReceiver.setText(user.getFullName());
+                            break;
+                        }
+                    } else {
+                        txtUserNameReceiver.setText("");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 }
