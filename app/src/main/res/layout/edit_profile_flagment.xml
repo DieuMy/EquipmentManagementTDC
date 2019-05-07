@@ -21,8 +21,7 @@
             style="@style/EditProfileScreenImageViewAvatar"
             app:civ_border_color="@color/colorCivBorderImage"
             app:civ_border_width="@dimen/personalScreenBorderWidthOfAvartar"
-            android:layout_marginLeft="30dp"
-            android:src="@drawable/ic_login"/>
+            android:layout_marginLeft="30dp"/>
 
         <EditText
             android:id="@+id/editProfileTxtFullName"

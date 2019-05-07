@@ -3,12 +3,10 @@ package vn.edu.tdc.managementequipmenttdc.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +18,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,13 +34,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -79,9 +82,20 @@ public class EditProfileActivity extends AppCompatActivity {
     FirebaseStorage storage;
     ToolUtils toolUtils;
 
+    Bitmap selectBitmap;
     private final int REQUEST_CODE_CAMERA = 1;
     private final int REQUEST_CODE_LIBRARY = 0;
-    private Bitmap selectBitmap;
+
+    FirebaseUser firebaseUser;
+
+    private Uri mImageUri;
+    private StorageTask uploadTask;
+    StorageReference storageRef;
+    StorageReference mountainsRef;
+    StorageReference mountainImagesRef;
+    String imgUrl = "";
+    String roleID = "";
+    String departmentID = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +111,9 @@ public class EditProfileActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
         storage = FirebaseStorage.getInstance();
         toolUtils = new ToolUtils();
+
+        storageRef = storage.getReferenceFromUrl("gs://mn-tdc.appspot.com/");
+
 
         //Gets view from layout
         btnChangePassword = (Button) findViewById(R.id.editProfileBtnChangePassword);
@@ -192,6 +209,11 @@ public class EditProfileActivity extends AppCompatActivity {
         edtEmail.setText(User_Provider.user.getEmail());
         txtAccount.setText(firebaseAuth.getCurrentUser().getEmail());
         txtLastAccess.setText(User_Provider.user.getLastAccess());
+        if (User_Provider.user.getAvartaUser() == "") {
+            imgAvatar.setImageResource(R.drawable.ic_login);
+            return;
+        }
+        Glide.with(getApplicationContext()).load(User_Provider.user.getAvartaUser()).into(imgAvatar);
     }
 
     public void getInformationOfUserCurrentLogin() {
@@ -211,6 +233,13 @@ public class EditProfileActivity extends AppCompatActivity {
                     txtUserID.setText(user.getUserID());
                     getRoleOfUserCurrentLogin(user.getRoleID());
                     getDepartmentOfUserCurrentLogin(user.getDepartmentID());
+
+                    if (User_Provider.user.getAvartaUser().isEmpty()) {
+                        imgAvatar.setImageResource(R.drawable.ic_login);
+                        return;
+                    }
+                    Glide.with(getApplicationContext()).load(user.getAvartaUser()).into(imgAvatar);
+
                 } else {
 
                 }
@@ -331,14 +360,14 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void saveNewProfile() {
-        String userID = txtUserID.getText().toString();
+        final String userID = txtUserID.getText().toString();
         final String fullName = edtFullName.getText().toString().trim();
         final String gender = spnGender.getSelectedItem().toString().trim();
         final String address = edtAddress.getText().toString().trim();
         final String numberPhone = edtNumberPhone.getText().toString().trim();
         final String email = edtEmail.getText().toString().trim();
-        String update_at = toolUtils.getCurrentTimeString();
-        String lastAccess = User_Provider.user.getLastAccess();
+        final String update_at = toolUtils.getCurrentTimeString();
+        final String lastAccess = User_Provider.user.getLastAccess();
 
         if (fullName.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập họ và tên", Toast.LENGTH_SHORT).show();
@@ -355,10 +384,6 @@ public class EditProfileActivity extends AppCompatActivity {
             return;
         }
 
-        //Lay du lieu role_id va department_id
-        // Toast.makeText(this, "size: " + listRole.size(), Toast.LENGTH_SHORT).show();
-
-        String roleID = "";
         for (int i = 0; i < listRole.size(); i++) {
             if (txtDisplayRole.getText() == "") {
                 if (spnRole.getSelectedItem().equals(listRole.get(i).getRoleName())) {
@@ -373,7 +398,6 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
 
-        String departmentID = "";
         for (Department department : listDepartment) {
             if (txtDisplayDepartment.getText() == "") {
                 if (spnDepartment.getSelectedItem().equals(department.getDepartmentName())) {
@@ -388,68 +412,114 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
 
-//        //đưa bitmap về base64string:
-//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//        selectBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-//        byte[] byteArray = byteArrayOutputStream.toByteArray();
-//        String imageEncoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        //Upload avatar
+        Calendar calendar = Calendar.getInstance();
+        mountainsRef = storageRef.child("image" + calendar.getTimeInMillis() + ".png");
 
-        final Users users = new Users(userID, fullName, gender, address, numberPhone, email, roleID, departmentID, "",
-                User_Provider.user.isActive(), User_Provider.user.isLock_account(), User_Provider.user.getCreate_at(),
-                update_at, User_Provider.user.getLast_changePassword(), lastAccess);
+        // Get the data from an ImageView as bytes
+        imgAvatar.setDrawingCacheEnabled(true);
+        imgAvatar.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imgAvatar.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
-        builder.setTitle("Xác nhận");
-        builder.setMessage("Bạn chắc chắn muốn thay đổi thông tin ?");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+        final UploadTask uploadTask = mountainsRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(EditProfileActivity.this, "Không thể lưu ảnh", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.;
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(users);
-                            Toast.makeText(EditProfileActivity.this, "Thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
 
-                            //Update log
-                            String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
-                            String userID = firebaseAuth.getCurrentUser().getUid();
-                            String manipulation = "Chỉnh sửa thông tin cá nhân. Họ tên sau khi đổi: " + fullName + " Giới tính sau khi đổi: " + gender + "; Địa chỉ: " + User_Provider.user.getAddress()
-                                    + " Địa chỉ sau khi đổi: " + address + " SĐT sau khi đổi: " + numberPhone
-                                    + " Email sau khi đổi: " + email
-                                    + " Chức vụ: " + txtDisplayRole.getText().toString()
-                                    + " Phòng ban làm việc: " + txtDisplayDepartment.getText().toString();
-                            String dateManipulation = toolUtils.getCurrentTimeString();
+                        // Continue with the task to get the download URL
+                        return mountainsRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            imgUrl = String.valueOf(downloadUri);
+                            android.util.Log.d("AAAAAAAAAA", downloadUri + "");
+//                            Toast.makeText(EditProfileActivity.this, imgUrl, Toast.LENGTH_SHORT).show();
 
-                            Log log = new Log(logID, userID, manipulation, dateManipulation);
-                            databaseReference.child("log").child(logID).setValue(log);
+                            final Users users = new Users(userID, fullName, gender, address, numberPhone, email, roleID, departmentID, imgUrl,
+                                    User_Provider.user.isActive(), User_Provider.user.isLock_account(), User_Provider.user.getCreate_at(),
+                                    update_at, User_Provider.user.getLast_changePassword(), lastAccess);
 
-                            //hien thi lai thong tin ca nhan
-                            getInformationOfUserCurrentLogin();
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
+                            builder.setTitle("Xác nhận");
+                            builder.setMessage("Bạn chắc chắn muốn thay đổi thông tin ?");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Query query = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid());
+                                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.exists()) {
+                                                databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(users);
+                                                Toast.makeText(EditProfileActivity.this, "Thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+
+                                                //Update log
+                                                String logID = FirebaseDatabase.getInstance().getReference().push().getKey();
+                                                String userID = firebaseAuth.getCurrentUser().getUid();
+                                                String manipulation = "Chỉnh sửa thông tin cá nhân. Họ tên sau khi đổi: " + fullName + " Giới tính sau khi đổi: " + gender + "; Địa chỉ: " + User_Provider.user.getAddress()
+                                                        + " Địa chỉ sau khi đổi: " + address + " SĐT sau khi đổi: " + numberPhone
+                                                        + " Email sau khi đổi: " + email
+                                                        + " Chức vụ: " + txtDisplayRole.getText().toString()
+                                                        + " Phòng ban làm việc: " + txtDisplayDepartment.getText().toString();
+                                                String dateManipulation = toolUtils.getCurrentTimeString();
+
+                                                Log log = new Log(logID, userID, manipulation, dateManipulation);
+                                                databaseReference.child("log").child(logID).setValue(log);
+
+                                                //hien thi lai thong tin ca nhan
+                                                getInformationOfUserCurrentLogin();
+                                            } else {
+                                                Toast.makeText(EditProfileActivity.this, "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                }
+                            });
+
+                            builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    displayInformationCurrentUserOnActivity();
+                                }
+                            });
+
+                            builder.show();
+
+
+
                         } else {
-                            Toast.makeText(EditProfileActivity.this, "Không lấy được dữ liệu vị trí làm việc", Toast.LENGTH_SHORT).show();
+                            // Handle failures
+                            // ...
                         }
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
                 });
+
             }
         });
-
-        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                displayInformationCurrentUserOnActivity();
-            }
-        });
-
-        builder.show();
-
     }
 
     //Gan layout menu vua tao(menu_layout) vao menu cha
@@ -475,6 +545,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
             selectBitmap = (Bitmap) data.getExtras().get("data");
             imgAvatar.setImageBitmap(selectBitmap);
@@ -488,6 +559,11 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private boolean checkPermission(String permission) {
+        int permissionCheck = ContextCompat.checkSelfPermission(EditProfileActivity.this, permission);
+        return (permissionCheck == PERMISSION_GRANTED);
     }
 
     private void changeAvatarOfUserWithPhotoGetFromLibraryCamera() {
@@ -518,8 +594,55 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
-    private boolean checkPermission(String permission) {
-        int permissionCheck = ContextCompat.checkSelfPermission(EditProfileActivity.this, permission);
-        return (permissionCheck == PERMISSION_GRANTED);
+    private void uploadImageStorageFirebase() {
+        Calendar calendar = Calendar.getInstance();
+        mountainsRef = storageRef.child("image" + calendar.getTimeInMillis() + ".png");
+
+        // Get the data from an ImageView as bytes
+        imgAvatar.setDrawingCacheEnabled(true);
+        imgAvatar.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imgAvatar.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        final UploadTask uploadTask = mountainsRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(EditProfileActivity.this, "Không thể lưu ảnh", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.;
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+
+                        // Continue with the task to get the download URL
+                        return mountainsRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            imgUrl = String.valueOf(downloadUri);
+                            android.util.Log.d("AAAAAAAAAA", downloadUri + "");
+                        } else {
+                            // Handle failures
+                            // ...
+                        }
+                    }
+                });
+
+            }
+        });
     }
+
+
 }

@@ -19,31 +19,70 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.DetailHistoryActivity"></activity>
-        <activity android:name=".activities.Main_Activity">
+        <activity android:name=".activities.ManageAccountActivity"></activity>
+        <activity
+            android:name=".activities.DetailHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.Main_Activity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SplashActivity" />
-        <activity android:name=".activities.EditProfileActivity" />
-        <activity android:name=".activities.ChangePasswordActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.ListAreaOrBuildingActivity" />
-        <activity android:name=".activities.TypeEquipmentActivity" />
-        <activity android:name=".activities.EquipmentsActivity" />
-        <activity android:name=".activities.ReportMalfunctionActivity" />
-        <activity android:name=".activities.HistoryActivity" />
-        <activity android:name=".activities.MyWorkActivity" />
-        <activity android:name=".activities.ListRoomsActivity" />
-        <activity android:name=".activities.DetailMyWorkActivity" />
-        <activity android:name=".activities.HelpUserActivity" />
-        <activity android:name=".activities.ListMalfunctionOneEquipmentActivity" />
-        <activity android:name=".activities.ViewReportMalfunctionActivity" />
-        <activity android:name=".activities.DetailMalfunctionActivity" />
-        <activity android:name=".activities.ListMalfunctionOfRoomActivity" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.EditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ListAreaOrBuildingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.TypeEquipmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.EquipmentsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ReportMalfunctionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.HistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MyWorkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ListRoomsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DetailMyWorkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.HelpUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ListMalfunctionOneEquipmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ViewReportMalfunctionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DetailMalfunctionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ListMalfunctionOfRoomActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -3,13 +3,9 @@ package vn.edu.tdc.managementequipmenttdc.fragments;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,14 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import vn.edu.tdc.managementequipmenttdc.R;
 import vn.edu.tdc.managementequipmenttdc.activities.EditProfileActivity;
@@ -210,6 +202,11 @@ public class PersonalPageFragment extends Fragment {
                     User_Provider.user = users;//Luu thong tin cua user de su dung
                     roleID = users.getRoleID();
                     getRoleOfUserCurrentLogin(roleID);
+                    if (User_Provider.user.getAvartaUser().isEmpty()) {
+                        imgAvatar.setImageResource(R.drawable.ic_login);
+                    } else {
+                        Glide.with(getContext()).load(User_Provider.user.getAvartaUser()).into(imgAvatar);
+                    }
                 } else {
 
                 }
